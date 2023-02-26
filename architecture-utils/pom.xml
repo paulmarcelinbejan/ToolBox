@@ -18,6 +18,10 @@
         	<groupId>com.paulmarcelinbejan</groupId>
         	<artifactId>architecture-constants</artifactId>
         </dependency>
+        <dependency>
+        	<groupId>com.paulmarcelinbejan</groupId>
+        	<artifactId>architecture-annotations</artifactId>
+        </dependency>
         
         <!-- Jackson -->
         <dependency>
