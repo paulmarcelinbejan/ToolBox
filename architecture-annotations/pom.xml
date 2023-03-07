@@ -14,13 +14,16 @@
     <version>1.0.0</version>
     <packaging>jar</packaging>
 
+	<properties>
+		<hibernate-validator.version>8.0.0.Final</hibernate-validator.version>
+	</properties>
+
 	<dependencies>
-		
 		<dependency>
-		    <groupId>jakarta.validation</groupId>
-		    <artifactId>jakarta.validation-api</artifactId>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-validation</artifactId>
+			<version>${spring-boot.version}</version>
 		</dependency>
-		
 	</dependencies>
 	
 </project>

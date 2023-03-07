@@ -23,16 +23,6 @@ public enum NumberFormatPattern {
 	DECIMALS_IF_PRESENT,
 	
 	/**
-	 * DECIMALS_NEVER
-	 * show only integer value
-	 * 
-	 * Example:
-	 * <br>scale 6: 24.102030 -> 24
-	 * <br>scale 4: 24.102030 -> 24
-	 */
-	DECIMALS_NEVER,
-	
-	/**
 	 * DECIMALS_FIRST_PART_ALWAYS_SECOND_PART_IF_PRESENT
 	 * show first part of decimals in any case, then show decimals until the last valorized decimal
 	 * 

@@ -4,33 +4,36 @@ import static com.paulmarcelinbejan.architecture.constants.Symbols.DOT;
 import static com.paulmarcelinbejan.architecture.utils.math.enums.NumberFormatPattern.DECIMALS_ALWAYS;
 import static com.paulmarcelinbejan.architecture.utils.math.enums.NumberFormatPattern.DECIMALS_FIRST_PART_ALWAYS_SECOND_PART_IF_PRESENT;
 import static com.paulmarcelinbejan.architecture.utils.math.enums.NumberFormatPattern.DECIMALS_IF_PRESENT;
-import static com.paulmarcelinbejan.architecture.utils.math.enums.NumberFormatPattern.DECIMALS_NEVER;
 import static org.apache.commons.lang3.StringUtils.EMPTY;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
-import java.util.Map;
-import java.util.function.Function;
 
+import com.paulmarcelinbejan.architecture.constants.SymbolsAsChar;
 import com.paulmarcelinbejan.architecture.utils.math.enums.NumberFormatPattern;
 
-import jakarta.validation.constraints.Positive;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
+import lombok.NonNull;
 
+/**
+ * BigDecimal default representation consist of:
+ * <br> decimalSeprator: DOT
+ * <br> groupingSeparator: NONE
+ * <br> example: 123456789.123456
+ * 
+ * <p>With this utility class, you can transform:
+ * <br> BigDecimal into String
+ * <br> String into BigDecimal
+ * <br> using the format you prefer.
+ */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class NumberFormatUtils {
 	
-	private static final String INTEGER_PATTERN = "#0";
-	
-	private static final String SCALE_SHOW_ALWAYS_CAN_NOT_BE_GREATER_THAN_SCALE = "scaleShowAlways can't be greater than scale.";
-	
-	private static final Map<NumberFormatPattern, Function<Integer, String>> NUMBER_FORMAT_PATTERN_MAP = Map.of(
-			DECIMALS_ALWAYS, NumberFormatUtils::buildPatternDecimalsAlways,
-			DECIMALS_IF_PRESENT, NumberFormatUtils::buildPatternDecimalsIfPresent,
-			DECIMALS_NEVER, NumberFormatUtils::buildPatternDecimalsNever
-	);
+	// Constants
+	public static final String INTEGER_PATTERN = "###,##0";
 	
 	// FROM String TO BigDecimal
 	
@@ -38,17 +41,18 @@ public class NumberFormatUtils {
 	 * @throws NumberFormatException if {@code numberToFormat} is not a valid
      *         representation of a {@code BigDecimal}.
 	 */
-	public static BigDecimal toBigDecimal(final String numberToFormat) {
+	public static BigDecimal toBigDecimal(@NonNull final String numberToFormat) {
 		return NumberUtils.toBigDecimal(numberToFormat);
 	}
 	
-	public static BigDecimal toBigDecimal(String numberToFormat, final char decimalSeparator) {
+	public static BigDecimal toBigDecimal(@NonNull String numberToFormat, final char decimalSeparator) {
 		numberToFormat = replaceDecimalSeparator(numberToFormat, decimalSeparator);
 		return NumberUtils.toBigDecimal(numberToFormat);
 	}
 	
-	public static BigDecimal toBigDecimal(String numberToFormat, final char decimalSeparator, final char groupingSeparator) {
-		if (decimalSeparator == groupingSeparator) throw new IllegalArgumentException("decimalSeparator and groupingSeparator can't have the same value.");
+	public static BigDecimal toBigDecimal(@NonNull String numberToFormat, final char decimalSeparator, final char groupingSeparator) {
+		validateSeparators(decimalSeparator, groupingSeparator);
+		
 		numberToFormat = replaceDecimalSeparator(numberToFormat, decimalSeparator);
 		numberToFormat = replaceGroupingSeparator(numberToFormat, groupingSeparator);
 		return NumberUtils.toBigDecimal(numberToFormat);
@@ -56,114 +60,95 @@ public class NumberFormatUtils {
 	
 	// FROM BigDecimal TO String
 	
-	public static String toString(final BigDecimal numberToFormat, @Positive final int scale, final NumberFormatPattern numberFormatPattern) {
-		return format(numberToFormat, scale, numberFormatPattern);
+	public static String toString(final BigDecimal numberToFormat) {
+		return numberToFormat.toString();
+	}
+	
+	public static String toString(@NonNull final BigDecimal numberToFormat, final int scale, @NonNull final NumberFormatPattern numberFormatPattern) {
+		validateScale(scale);
+		
+		return toString(numberToFormat, scale, SymbolsAsChar.DOT, numberFormatPattern);
+	}
+	
+	public static String toString(@NonNull final BigDecimal numberToFormat, final int scale, final char decimalSeparator, @NonNull final NumberFormatPattern numberFormatPattern) {
+		validateScale(scale);
+		
+		String pattern = getPattern(scale, numberFormatPattern);
+		return format(numberToFormat, pattern, decimalSeparator);
+	}
+	
+	public static String toString(@NonNull final BigDecimal numberToFormat, final int scale, final char decimalSeparator, final char groupingSeparator, @NonNull final NumberFormatPattern numberFormatPattern) {
+		validateScale(scale);
+		validateSeparators(decimalSeparator, groupingSeparator);
+		
+		String pattern = getPattern(scale, numberFormatPattern);
+		return format(numberToFormat, pattern, decimalSeparator, groupingSeparator);
 	}
 	
 	/**
-	 * Use this method for {@link NumberFormatPattern#DECIMALS_FIRST_PART_ALWAYS_SECOND_PART_IF_PRESENT}
+	 * Method for {@link NumberFormatPattern#DECIMALS_FIRST_PART_ALWAYS_SECOND_PART_IF_PRESENT}
+	 * 
+	 * scaleTot = the total number of decimal places
+	 * scaleToShowAlways = the number of decimal places that must be showed in any case.
+	 */
+	public static String toString(@NonNull final BigDecimal numberToFormat, final int scaleTot, final int scaleToShowAlways, @NonNull final NumberFormatPattern numberFormatPattern) {
+		validate_toString_for_DECIMALS_FIRST_PART_ALWAYS_SECOND_PART_IF_PRESENT(scaleTot, scaleToShowAlways, numberFormatPattern);
+		
+		String pattern = getPattern(scaleTot, scaleToShowAlways, DECIMALS_FIRST_PART_ALWAYS_SECOND_PART_IF_PRESENT);
+		return format(numberToFormat, pattern, SymbolsAsChar.DOT);
+	}
+	
+	/**
+	 * Method for {@link NumberFormatPattern#DECIMALS_FIRST_PART_ALWAYS_SECOND_PART_IF_PRESENT}
 	 * 
 	 * scale = the total number of decimal places
 	 * scaleShowAlways = the number of decimal places that must be showed in any case.
 	 */
-	public static String toString(final BigDecimal numberToFormat, @Positive final int scale, @Positive final int scaleShowAlways) {
-		if(scale < scaleShowAlways) throw new IllegalArgumentException(SCALE_SHOW_ALWAYS_CAN_NOT_BE_GREATER_THAN_SCALE);
-		return format(numberToFormat, scale, scaleShowAlways);
-	}
-	
-	public static String toString(final BigDecimal numberToFormat, @Positive final int scale, final char decimalSeparator, final NumberFormatPattern numberFormatPattern) {
-		return format(numberToFormat, scale, decimalSeparator, numberFormatPattern);
+	public static String toString(@NonNull final BigDecimal numberToFormat, final int scaleTot, final int scaleToShowAlways, final char decimalSeparator, @NonNull final NumberFormatPattern numberFormatPattern) {
+		validate_toString_for_DECIMALS_FIRST_PART_ALWAYS_SECOND_PART_IF_PRESENT(scaleTot, scaleToShowAlways, numberFormatPattern);
+		
+		String pattern = getPattern(scaleTot, scaleToShowAlways, DECIMALS_FIRST_PART_ALWAYS_SECOND_PART_IF_PRESENT);
+		return format(numberToFormat, pattern, decimalSeparator);
 	}
 	
 	/**
-	 * Use this method for {@link NumberFormatPattern#DECIMALS_FIRST_PART_ALWAYS_SECOND_PART_IF_PRESENT}
+	 * Method for {@link NumberFormatPattern#DECIMALS_FIRST_PART_ALWAYS_SECOND_PART_IF_PRESENT}
 	 * 
 	 * scale = the total number of decimal places
 	 * scaleShowAlways = the number of decimal places that must be showed in any case.
 	 */
-	public static String toString(final BigDecimal numberToFormat, @Positive final int scale, @Positive final int scaleShowAlways, final char decimalSeparator) {
-		if(scale < scaleShowAlways) throw new IllegalArgumentException(SCALE_SHOW_ALWAYS_CAN_NOT_BE_GREATER_THAN_SCALE);
-		return format(numberToFormat, scale, scaleShowAlways, decimalSeparator);
-	}
-	
-	public static String toString(final BigDecimal numberToFormat, @Positive final int scale, final char decimalSeparator, final char groupingSeparator, final NumberFormatPattern numberFormatPattern) {
-		return format(numberToFormat, scale, decimalSeparator, groupingSeparator, numberFormatPattern);
-	}
-	
-	/**
-	 * Use this method for {@link NumberFormatPattern#DECIMALS_FIRST_PART_ALWAYS_SECOND_PART_IF_PRESENT}
-	 * 
-	 * scale = the total number of decimal places
-	 * scaleShowAlways = the number of decimal places that must be showed in any case.
-	 */
-	public static String toString(final BigDecimal numberToFormat, @Positive final int scale, @Positive final int scaleShowAlways, final char decimalSeparator, final char groupingSeparator) {
-		if(scale < scaleShowAlways) throw new IllegalArgumentException(SCALE_SHOW_ALWAYS_CAN_NOT_BE_GREATER_THAN_SCALE);
-		return format(numberToFormat, scale, scaleShowAlways, decimalSeparator, groupingSeparator);
+	public static String toString(@NonNull final BigDecimal numberToFormat, final int scaleTot, final int scaleToShowAlways, final char decimalSeparator, final char groupingSeparator, @NonNull final NumberFormatPattern numberFormatPattern) {
+		validate_toString_for_DECIMALS_FIRST_PART_ALWAYS_SECOND_PART_IF_PRESENT(scaleTot, scaleToShowAlways, numberFormatPattern);
+		validateSeparators(decimalSeparator, groupingSeparator);
+		
+		String pattern = getPattern(scaleTot, scaleToShowAlways, DECIMALS_FIRST_PART_ALWAYS_SECOND_PART_IF_PRESENT);
+		return format(numberToFormat, pattern, decimalSeparator, groupingSeparator);
 	}
 	
 	// Format
 	
-	private static void invalidNumberFormatPattern(final NumberFormatPattern numberFormatPattern) {
-		if(numberFormatPattern == DECIMALS_FIRST_PART_ALWAYS_SECOND_PART_IF_PRESENT) {
-			throw new IllegalArgumentException("DECIMALS_FIRST_PART_ALWAYS_SECOND_PART_IF_PRESENT can't be used in this method. An additional parameter (int scaleShowAlways) is needed.");
-		}
-	}
-	
-	private static String format(final BigDecimal numberToFormat, final int scale, final NumberFormatPattern numberFormatPattern) {
-		invalidNumberFormatPattern(numberFormatPattern);
-		
-		String pattern = getPattern(scale, numberFormatPattern);
-		
-		return getDecimalFormat(pattern).format(numberToFormat);
-	}
-	
-	private static String format(final BigDecimal numberToFormat, final int scale, final int scaleShowAlways) {
-		String pattern = getPattern(scale, scaleShowAlways);
-		
-		return getDecimalFormat(pattern).format(numberToFormat);
-	}
-	
-	private static String format(final BigDecimal numberToFormat, final int scale, final char decimalSeparator, final NumberFormatPattern numberFormatPattern) {
-		invalidNumberFormatPattern(numberFormatPattern);
-		
-		String pattern = getPattern(scale, numberFormatPattern);
+	private static String format(final BigDecimal numberToFormat, final String pattern, final char decimalSeparator) {
 		DecimalFormatSymbols symbols = getDecimalFormatSymbols(decimalSeparator);
-		
-		return getDecimalFormat(pattern, symbols).format(numberToFormat);
+		DecimalFormat decimalFormat = getDecimalFormat(pattern, symbols);
+		decimalFormat.setGroupingUsed(false);
+		return decimalFormat.format(numberToFormat);
 	}
 	
-	private static String format(final BigDecimal numberToFormat, final int scale, final int scaleShowAlways, final char decimalSeparator) {
-		String pattern = getPattern(scale, scaleShowAlways);
-		DecimalFormatSymbols symbols = getDecimalFormatSymbols(decimalSeparator);
-		
-		return getDecimalFormat(pattern, symbols).format(numberToFormat);
-	}
-	
-	private static String format(final BigDecimal numberToFormat, final int scale, final char decimalSeparator, final char groupingSeparator, final NumberFormatPattern numberFormatPattern) {
-		invalidNumberFormatPattern(numberFormatPattern);
-		
-		String pattern = getPattern(scale, numberFormatPattern);
+	private static String format(final BigDecimal numberToFormat, final String pattern, final char decimalSeparator, final char groupingSeparator) {
 		DecimalFormatSymbols symbols = getDecimalFormatSymbols(decimalSeparator, groupingSeparator);
-		
-		return getDecimalFormat(pattern, symbols).format(numberToFormat);
-	}
-	
-	private static String format(final BigDecimal numberToFormat, final int scale, final int scaleShowAlways, final char decimalSeparator, final char groupingSeparator) {
-		String pattern = getPattern(scale, scaleShowAlways);
-		DecimalFormatSymbols symbols = getDecimalFormatSymbols(decimalSeparator, groupingSeparator);
-
-		return getDecimalFormat(pattern, symbols).format(numberToFormat);
+		DecimalFormat decimalFormat = getDecimalFormat(pattern, symbols);
+		return decimalFormat.format(numberToFormat);
 	}
 	
 	// DecimalFormat
 	
-	private static DecimalFormat getDecimalFormat(final String pattern) {
-		return new DecimalFormat(pattern);
+	private static DecimalFormat getDecimalFormat(final String pattern, final DecimalFormatSymbols decimalFormatSymbols) {
+		DecimalFormat df = new DecimalFormat(pattern, decimalFormatSymbols);
+		df.setRoundingMode(RoundingMode.DOWN);
+		return df;
 	}
 	
-	private static DecimalFormat getDecimalFormat(final String pattern, final DecimalFormatSymbols decimalFormatSymbols) {
-		return new DecimalFormat(pattern, decimalFormatSymbols);
-	}
+	// DecimalFormatSymbols
 	
 	private static DecimalFormatSymbols getDecimalFormatSymbols(final char decimalSeparator) {
 		DecimalFormatSymbols symbols = new DecimalFormatSymbols();
@@ -181,11 +166,23 @@ public class NumberFormatUtils {
 	// Pattern 
 	
 	private static String getPattern(final int scale, final NumberFormatPattern numberFormatPattern) {
-		return NUMBER_FORMAT_PATTERN_MAP.get(numberFormatPattern).apply(scale);
+		validateNumberFormatPatternWhenOnlyScaleAvailable(numberFormatPattern);
+		
+		if(DECIMALS_ALWAYS == numberFormatPattern) {
+			return buildPatternDecimalsAlways(scale);
+		} else if (DECIMALS_IF_PRESENT == numberFormatPattern) {
+			return buildPatternDecimalsIfPresent(scale);
+		}
+		
+		throw new IllegalArgumentException(numberFormatPattern.toString() + " is not valid!");
 	}
 	
-	private static String getPattern(final int scale, final int scaleShowAlways) {
-		return buildPatternDecimalsFirstPartAlwaysSecondPartIfPresent(scale, scaleShowAlways);
+	private static String getPattern(final int scale, final int scaleToShowAlways, final NumberFormatPattern numberFormatPattern) {
+		if(DECIMALS_FIRST_PART_ALWAYS_SECOND_PART_IF_PRESENT == numberFormatPattern) {
+			return buildPatternDecimalsFirstPartAlwaysSecondPartIfPresent(scale, scaleToShowAlways);
+		}
+		
+		throw new IllegalArgumentException(numberFormatPattern.toString() + " is not valid!");
 	}
 	
 	/**
@@ -200,7 +197,7 @@ public class NumberFormatUtils {
 		if(scale == 0) {
 			return INTEGER_PATTERN;
 		}
-		return "#0." + "0".repeat(scale);
+		return INTEGER_PATTERN+"." + "0".repeat(scale);
 	}
 	
 	/**
@@ -215,19 +212,7 @@ public class NumberFormatUtils {
 		if(scale == 0) {
 			return INTEGER_PATTERN;
 		}
-		return "#0." + "#".repeat(scale);
-	}
-	
-	/**
-	 * DECIMALS_NEVER
-	 * show only integer value
-	 * 
-	 * Example:
-	 * <br>scale 6: 24.102030 -> 24
-	 * <br>scale 4: 24.102030 -> 24
-	 */
-	private static String buildPatternDecimalsNever(final int scale) {
-		return INTEGER_PATTERN;
+		return INTEGER_PATTERN+"." + "#".repeat(scale);
 	}
 	
 	/**
@@ -242,14 +227,11 @@ public class NumberFormatUtils {
 		if(scale == 0) {
 			return INTEGER_PATTERN;
 		}
-		
-		String pattern = "#0.";
-		
+		String pattern = INTEGER_PATTERN+".";
 		pattern = pattern + "0".repeat(scaleShowAlways);
 		pattern = pattern + "#".repeat(scale - scaleShowAlways);
-		
 		return pattern;
-	}
+	}	
 	
 	private static String replaceDecimalSeparator(final String toFormat, final char decimalSeparator) {
 		return toFormat.replace(String.valueOf(decimalSeparator), DOT);
@@ -257,6 +239,29 @@ public class NumberFormatUtils {
 	
 	private static String replaceGroupingSeparator(final String toFormat, final char groupingSeparator) {
 		return toFormat.replace(String.valueOf(groupingSeparator), EMPTY);
+	}
+	
+	// Validators
+	private static void validateScale(final int scale) {
+		if(scale < 0) throw new IllegalArgumentException("scale can't be less than 0.");
+	}
+	
+	private static void validateSeparators(final char decimalSeparator, final char groupingSeparator) {
+		if (decimalSeparator == groupingSeparator) throw new IllegalArgumentException("decimalSeparator and groupingSeparator can't be equals.");
+	}
+	
+	private static void validateNumberFormatPatternWhenOnlyScaleAvailable(final NumberFormatPattern numberFormatPattern) {
+		if(numberFormatPattern == DECIMALS_FIRST_PART_ALWAYS_SECOND_PART_IF_PRESENT) throw new IllegalArgumentException("DECIMALS_FIRST_PART_ALWAYS_SECOND_PART_IF_PRESENT can't be used with only scale value. An additional parameter (int scaleToShowAlways) is needed.");
+	}
+	
+	/**
+	 * Validate methods for DECIMALS_FIRST_PART_ALWAYS_SECOND_PART_IF_PRESENT
+	 */
+	private static void validate_toString_for_DECIMALS_FIRST_PART_ALWAYS_SECOND_PART_IF_PRESENT(final int scaleTot, final int scaleToShowAlways, final NumberFormatPattern numberFormatPattern) {
+		if(DECIMALS_FIRST_PART_ALWAYS_SECOND_PART_IF_PRESENT != numberFormatPattern) throw new IllegalArgumentException("Invalid NumberFormatPattern. This method can only be used for: " + DECIMALS_FIRST_PART_ALWAYS_SECOND_PART_IF_PRESENT);
+		validateScale(scaleTot);
+		validateScale(scaleToShowAlways);
+		if(scaleTot < scaleToShowAlways) throw new IllegalArgumentException("scaleToShowAlways can't be greater than scaleTot.");
 	}
 	
 }

@@ -12,8 +12,17 @@
 
     <artifactId>architecture-utils</artifactId>
 
+	<properties>
+		<easyrules.version>4.1.0</easyrules.version>
+		<msgpack.version>0.9.3</msgpack.version>
+	</properties>
+
     <dependencies>
 
+        <dependency>
+        	<groupId>com.paulmarcelinbejan</groupId>
+        	<artifactId>architecture-base</artifactId>
+        </dependency>
         <dependency>
         	<groupId>com.paulmarcelinbejan</groupId>
         	<artifactId>architecture-constants</artifactId>
@@ -27,11 +36,45 @@
         <dependency>
             <groupId>com.fasterxml.jackson.dataformat</groupId>
             <artifactId>jackson-dataformat-csv</artifactId>
+            <version>${jackson.version}</version>
         </dependency>
         <dependency>
             <groupId>com.fasterxml.jackson.dataformat</groupId>
             <artifactId>jackson-dataformat-yaml</artifactId>
+            <version>${jackson.version}</version>
         </dependency>
+        
+        <!-- Apache dependencies -->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+        </dependency>
+        <dependency>
+			<groupId>commons-collections</groupId>
+			<artifactId>commons-collections</artifactId>
+		</dependency>
+        
+        <!-- Easy Rules -->
+		<dependency>
+		    <groupId>org.jeasy</groupId>
+		    <artifactId>easy-rules-core</artifactId>
+		    <version>${easyrules.version}</version>
+		    <exclusions>
+				<exclusion>
+				    <groupId>org.slf4j</groupId>
+				    <artifactId>slf4j-api</artifactId>
+		        </exclusion>
+		        <exclusion>
+				    <groupId>org.slf4j</groupId>
+				    <artifactId>slf4j-simple</artifactId>
+		        </exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+		    <groupId>org.jeasy</groupId>
+		    <artifactId>easy-rules-support</artifactId>
+		    <version>${easyrules.version}</version>
+		</dependency>
 
     </dependencies>
 
