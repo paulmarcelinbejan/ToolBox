@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class SymbolsAsChar {
 	
+	public static final char EMPTY = ' ';
 	public static final char DOT = '.';
 	public static final char COMMA = ',';
 	public static final char COLON = ':';

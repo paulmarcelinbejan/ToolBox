@@ -24,10 +24,6 @@
             <artifactId>architecture-base</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.paulmarcelinbejan</groupId>
-            <artifactId>architecture-utils</artifactId>
-        </dependency>
-        <dependency>
 			<groupId>com.paulmarcelinbejan</groupId>
             <artifactId>validator</artifactId>
             <version>${paulmarcelinbejan-validator.version}</version>

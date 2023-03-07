@@ -44,7 +44,9 @@
         <module>architecture-configuration</module>
         <module>architecture-constants</module>
         <module>architecture-test</module>
-        <module>architecture-utils</module>
+        <module>architecture-utils-io</module>
+        <module>architecture-utils-math</module>
+        <module>architecture-utils-time</module>
     </modules>
 
     <dependencyManagement>
@@ -93,7 +95,17 @@
             </dependency>
             <dependency>
                 <groupId>com.paulmarcelinbejan</groupId>
-                <artifactId>architecture-utils</artifactId>
+                <artifactId>architecture-utils-io</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.paulmarcelinbejan</groupId>
+                <artifactId>architecture-utils-math</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.paulmarcelinbejan</groupId>
+                <artifactId>architecture-utils-time</artifactId>
                 <version>${project.version}</version>
             </dependency>
 

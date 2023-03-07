@@ -1,10 +1,10 @@
 package com.paulmarcelinbejan.architecture.utils.math;
 
 import static com.paulmarcelinbejan.architecture.constants.Symbols.DOT;
+import static com.paulmarcelinbejan.architecture.constants.Symbols.EMPTY;
 import static com.paulmarcelinbejan.architecture.utils.math.enums.NumberFormatPattern.DECIMALS_ALWAYS;
 import static com.paulmarcelinbejan.architecture.utils.math.enums.NumberFormatPattern.DECIMALS_FIRST_PART_ALWAYS_SECOND_PART_IF_PRESENT;
 import static com.paulmarcelinbejan.architecture.utils.math.enums.NumberFormatPattern.DECIMALS_IF_PRESENT;
-import static org.apache.commons.lang3.StringUtils.EMPTY;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -34,6 +34,7 @@ public class NumberFormatUtils {
 	
 	// Constants
 	public static final String INTEGER_PATTERN = "###,##0";
+	public static final String INTEGER_PATTERN_DOT = INTEGER_PATTERN+".";
 	
 	// FROM String TO BigDecimal
 	
@@ -92,7 +93,7 @@ public class NumberFormatUtils {
 	 * scaleToShowAlways = the number of decimal places that must be showed in any case.
 	 */
 	public static String toString(@NonNull final BigDecimal numberToFormat, final int scaleTot, final int scaleToShowAlways, @NonNull final NumberFormatPattern numberFormatPattern) {
-		validate_toString_for_DECIMALS_FIRST_PART_ALWAYS_SECOND_PART_IF_PRESENT(scaleTot, scaleToShowAlways, numberFormatPattern);
+		validate_toString(scaleTot, scaleToShowAlways, numberFormatPattern);
 		
 		String pattern = getPattern(scaleTot, scaleToShowAlways, DECIMALS_FIRST_PART_ALWAYS_SECOND_PART_IF_PRESENT);
 		return format(numberToFormat, pattern, SymbolsAsChar.DOT);
@@ -105,7 +106,7 @@ public class NumberFormatUtils {
 	 * scaleShowAlways = the number of decimal places that must be showed in any case.
 	 */
 	public static String toString(@NonNull final BigDecimal numberToFormat, final int scaleTot, final int scaleToShowAlways, final char decimalSeparator, @NonNull final NumberFormatPattern numberFormatPattern) {
-		validate_toString_for_DECIMALS_FIRST_PART_ALWAYS_SECOND_PART_IF_PRESENT(scaleTot, scaleToShowAlways, numberFormatPattern);
+		validate_toString(scaleTot, scaleToShowAlways, numberFormatPattern);
 		
 		String pattern = getPattern(scaleTot, scaleToShowAlways, DECIMALS_FIRST_PART_ALWAYS_SECOND_PART_IF_PRESENT);
 		return format(numberToFormat, pattern, decimalSeparator);
@@ -118,7 +119,7 @@ public class NumberFormatUtils {
 	 * scaleShowAlways = the number of decimal places that must be showed in any case.
 	 */
 	public static String toString(@NonNull final BigDecimal numberToFormat, final int scaleTot, final int scaleToShowAlways, final char decimalSeparator, final char groupingSeparator, @NonNull final NumberFormatPattern numberFormatPattern) {
-		validate_toString_for_DECIMALS_FIRST_PART_ALWAYS_SECOND_PART_IF_PRESENT(scaleTot, scaleToShowAlways, numberFormatPattern);
+		validate_toString(scaleTot, scaleToShowAlways, numberFormatPattern);
 		validateSeparators(decimalSeparator, groupingSeparator);
 		
 		String pattern = getPattern(scaleTot, scaleToShowAlways, DECIMALS_FIRST_PART_ALWAYS_SECOND_PART_IF_PRESENT);
@@ -197,7 +198,7 @@ public class NumberFormatUtils {
 		if(scale == 0) {
 			return INTEGER_PATTERN;
 		}
-		return INTEGER_PATTERN+"." + "0".repeat(scale);
+		return INTEGER_PATTERN_DOT + "0".repeat(scale);
 	}
 	
 	/**
@@ -212,7 +213,7 @@ public class NumberFormatUtils {
 		if(scale == 0) {
 			return INTEGER_PATTERN;
 		}
-		return INTEGER_PATTERN+"." + "#".repeat(scale);
+		return INTEGER_PATTERN_DOT + "#".repeat(scale);
 	}
 	
 	/**
@@ -227,7 +228,7 @@ public class NumberFormatUtils {
 		if(scale == 0) {
 			return INTEGER_PATTERN;
 		}
-		String pattern = INTEGER_PATTERN+".";
+		String pattern = INTEGER_PATTERN_DOT;
 		pattern = pattern + "0".repeat(scaleShowAlways);
 		pattern = pattern + "#".repeat(scale - scaleShowAlways);
 		return pattern;
@@ -257,7 +258,7 @@ public class NumberFormatUtils {
 	/**
 	 * Validate methods for DECIMALS_FIRST_PART_ALWAYS_SECOND_PART_IF_PRESENT
 	 */
-	private static void validate_toString_for_DECIMALS_FIRST_PART_ALWAYS_SECOND_PART_IF_PRESENT(final int scaleTot, final int scaleToShowAlways, final NumberFormatPattern numberFormatPattern) {
+	private static void validate_toString(final int scaleTot, final int scaleToShowAlways, final NumberFormatPattern numberFormatPattern) {
 		if(DECIMALS_FIRST_PART_ALWAYS_SECOND_PART_IF_PRESENT != numberFormatPattern) throw new IllegalArgumentException("Invalid NumberFormatPattern. This method can only be used for: " + DECIMALS_FIRST_PART_ALWAYS_SECOND_PART_IF_PRESENT);
 		validateScale(scaleTot);
 		validateScale(scaleToShowAlways);
