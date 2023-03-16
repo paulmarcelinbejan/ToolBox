@@ -198,27 +198,27 @@ class QuadrimesterUtils {
 	}
 	
 	private static final LocalDate firstDayOfFirstQuadrimester(final int year) {
-		return buildLocalDate(1, 1, year);
+		return buildLocalDate(year, 1, 1);
 	}
 	
 	private static final LocalDate firstDayOfSecondQuadrimester(final int year) {
-		return buildLocalDate(1, 5, year);
+		return buildLocalDate(year, 5, 1);
 	}
 	
 	private static final LocalDate firstDayOfThirdQuadrimester(final int year) {
-		return buildLocalDate(1, 9, year);
+		return buildLocalDate(year, 9, 1);
 	}
 	
 	private static final LocalDate lastDayOfFirstQuadrimester(final int year) {
-		return buildLocalDate(30, 4, year);
+		return buildLocalDate(year, 4, 30);
 	}
 	
 	private static final LocalDate lastDayOfSecondQuadrimester(final int year) {
-		return buildLocalDate(31, 8, year);
+		return buildLocalDate(year, 8, 31);
 	}
 	
 	private static final LocalDate lastDayOfThirdQuadrimester(final int year) {
-		return buildLocalDate(31, 12, year);
+		return buildLocalDate(year, 12, 31);
 	}
 	
 	private static final void throwExceptionIfIsNotTheFirstQuadrimester(final LocalDate localDate) {

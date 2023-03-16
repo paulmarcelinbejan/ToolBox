@@ -3,9 +3,9 @@ package com.paulmarcelinbejan.architecture.utils.io.csv;
 import static com.paulmarcelinbejan.architecture.constants.Symbols.UNDERSCORE;
 
 import java.io.File;
-import java.io.FileInputStream;
+import java.io.FileReader;
 import java.io.IOException;
-import java.io.InputStream;
+import java.io.Reader;
 import java.util.List;
 import java.util.Map;
 
@@ -59,25 +59,43 @@ public class CsvUtils<T> {
 	 * <pre> {@code
 	 * 
 	 * CsvUtils<MyClass> myClassCSV = new CsvUtils<>(MyClass.class);
-	 * List<MyClass> listOfMyClass = myClassCSV.read("directoryPathOfTheFile", "fileNameWithoutExtension");
+	 * MappingIterator<MyClass> iterator = myClassCSV.readIterator("directoryPathOfTheFile", "fileNameWithoutExtension");
 	 * 
 	 * } </pre>
 	 *  
+	 * Remember to close the Reader usign <b>iterator.close()</b> in order to release any resources associated with it.
+	 * 
 	 */
-	public List<T> read(@NonNull final String directoryPath, @NonNull final String fileNameWithoutExtension) throws IOException {
-		InputStream inputStream = new FileInputStream(new File(directoryPath + fileNameWithoutExtension + CSV_EXTENSION));
-
+	public MappingIterator<T> readIterator(@NonNull final String directoryPath, @NonNull final String fileNameWithoutExtension) throws IOException {
+		Reader reader = new FileReader(directoryPath + fileNameWithoutExtension + CSV_EXTENSION);
+		
 		CsvMapper mapper = buildReaderCsvMapper();
 		
 		CsvSchema schema = CsvSchema.emptySchema()
 									.withColumnSeparator(csvReaderConfig.getSeparator())
 									.withHeader();
 
-		MappingIterator<T> iterator = mapper.readerFor(typeParameterClass)
-											.with(schema)
-											.readValues(inputStream);
-		
-		return iterator.readAll();
+		return mapper.readerFor(typeParameterClass)
+					 .with(schema)
+					 .readValues(reader);
+	}
+	
+	/**
+	 * 
+	 * How to use:
+	 * <pre> {@code
+	 * 
+	 * CsvUtils<MyClass> myClassCSV = new CsvUtils<>(MyClass.class);
+	 * List<MyClass> listOfMyClass = myClassCSV.read("directoryPathOfTheFile", "fileNameWithoutExtension");
+	 * 
+	 * } </pre>
+	 *  
+	 */
+	public List<T> read(@NonNull final String directoryPath, @NonNull final String fileNameWithoutExtension) throws IOException {
+		MappingIterator<T> iterator = readIterator(directoryPath, fileNameWithoutExtension);
+		List<T> list = iterator.readAll();
+		iterator.close();
+		return list;
 	}
 	
 	/**
@@ -191,14 +209,12 @@ public class CsvUtils<T> {
 	
 	@SuppressWarnings("unchecked")
 	private <X> void addSerializers(final SimpleModule module, final Map<Class<?>, JsonSerializer<?>> serializers) {
-		serializers.forEach((type, serializer) ->
-				module.addSerializer((Class<? extends X>) type, (JsonSerializer<X>) serializer));
+		serializers.forEach((type, serializer) -> module.addSerializer((Class<? extends X>) type, (JsonSerializer<X>) serializer));
 	}
 
 	@SuppressWarnings("unchecked")
 	private <X> void addDeserializers(final SimpleModule module, final Map<Class<?>, JsonDeserializer<?>> deserializers) {
-		deserializers.forEach((type, deserializer) ->
-				module.addDeserializer((Class<X>) type, (JsonDeserializer<? extends X>) deserializer));
+		deserializers.forEach((type, deserializer) -> module.addDeserializer((Class<X>) type, (JsonDeserializer<? extends X>) deserializer));
 	}
 
 }

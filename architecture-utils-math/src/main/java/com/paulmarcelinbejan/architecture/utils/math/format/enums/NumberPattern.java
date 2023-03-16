@@ -1,6 +1,6 @@
-package com.paulmarcelinbejan.architecture.utils.math.enums;
+package com.paulmarcelinbejan.architecture.utils.math.format.enums;
 
-public enum NumberFormatPattern {
+public enum NumberPattern {
 
 	/**
 	 * DECIMALS_ALWAYS

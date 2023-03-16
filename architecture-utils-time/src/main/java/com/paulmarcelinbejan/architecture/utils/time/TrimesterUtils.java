@@ -211,35 +211,35 @@ class TrimesterUtils {
 	}
 	
 	private static final LocalDate firstDayOfFirstTrimester(final int year) {
-		return buildLocalDate(1, 1, year);
+		return buildLocalDate(year, 1, 1);
 	}
 	
 	private static final LocalDate firstDayOfSecondTrimester(final int year) {
-		return buildLocalDate(1, 4, year);
+		return buildLocalDate(year, 4, 1);
 	}
 	
 	private static final LocalDate firstDayOfThirdTrimester(final int year) {
-		return buildLocalDate(1, 7, year);
+		return buildLocalDate(year, 7, 1);
 	}
 	
 	private static final LocalDate firstDayOfFourthTrimester(final int year) {
-		return buildLocalDate(1, 10, year);
+		return buildLocalDate(year, 10, 1);
 	}
 	
 	private static final LocalDate lastDayOfFirstTrimester(final int year) {
-		return buildLocalDate(31, 3, year);
+		return buildLocalDate(year, 3, 31);
 	}
 	
 	private static final LocalDate lastDayOfSecondTrimester(final int year) {
-		return buildLocalDate(30, 6, year);
+		return buildLocalDate(year, 6, 30);
 	}
 	
 	private static final LocalDate lastDayOfThirdTrimester(final int year) {
-		return buildLocalDate(30, 9, year);
+		return buildLocalDate(year, 9, 30);
 	}
 	
 	private static final LocalDate lastDayOfFourthTrimester(final int year) {
-		return buildLocalDate(31, 12, year);
+		return buildLocalDate(year, 12, 31);
 	}
 	
 	private static final void throwExceptionIfIsNotTheFirstTrimester(final LocalDate localDate) {

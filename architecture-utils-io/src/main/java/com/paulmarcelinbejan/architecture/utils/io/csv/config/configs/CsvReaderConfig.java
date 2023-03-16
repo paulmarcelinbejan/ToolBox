@@ -14,7 +14,7 @@ public class CsvReaderConfig {
 
 	public static final CsvReaderConfig DEFAULT = new CsvReaderConfig(new HashMap<>(), ',');
 	
-	final Map<Class<?>, JsonDeserializer<?>> deserializers;
+	private final Map<Class<?>, JsonDeserializer<?>> deserializers;
 	private final char separator;
 	
 }

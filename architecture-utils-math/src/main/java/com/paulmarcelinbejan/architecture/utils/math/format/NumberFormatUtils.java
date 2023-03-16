@@ -1,10 +1,10 @@
-package com.paulmarcelinbejan.architecture.utils.math;
+package com.paulmarcelinbejan.architecture.utils.math.format;
 
 import static com.paulmarcelinbejan.architecture.constants.Symbols.DOT;
 import static com.paulmarcelinbejan.architecture.constants.Symbols.EMPTY;
-import static com.paulmarcelinbejan.architecture.utils.math.enums.NumberFormatPattern.DECIMALS_ALWAYS;
-import static com.paulmarcelinbejan.architecture.utils.math.enums.NumberFormatPattern.DECIMALS_FIRST_PART_ALWAYS_SECOND_PART_IF_PRESENT;
-import static com.paulmarcelinbejan.architecture.utils.math.enums.NumberFormatPattern.DECIMALS_IF_PRESENT;
+import static com.paulmarcelinbejan.architecture.utils.math.format.enums.NumberPattern.DECIMALS_ALWAYS;
+import static com.paulmarcelinbejan.architecture.utils.math.format.enums.NumberPattern.DECIMALS_FIRST_PART_ALWAYS_SECOND_PART_IF_PRESENT;
+import static com.paulmarcelinbejan.architecture.utils.math.format.enums.NumberPattern.DECIMALS_IF_PRESENT;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -12,7 +12,8 @@ import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 
 import com.paulmarcelinbejan.architecture.constants.SymbolsAsChar;
-import com.paulmarcelinbejan.architecture.utils.math.enums.NumberFormatPattern;
+import com.paulmarcelinbejan.architecture.utils.math.NumberUtils;
+import com.paulmarcelinbejan.architecture.utils.math.format.enums.NumberPattern;
 
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
@@ -65,20 +66,20 @@ public class NumberFormatUtils {
 		return numberToFormat.toString();
 	}
 	
-	public static String toString(@NonNull final BigDecimal numberToFormat, final int scale, @NonNull final NumberFormatPattern numberFormatPattern) {
+	public static String toString(@NonNull final BigDecimal numberToFormat, final int scale, @NonNull final NumberPattern numberFormatPattern) {
 		validateScale(scale);
 		
 		return toString(numberToFormat, scale, SymbolsAsChar.DOT, numberFormatPattern);
 	}
 	
-	public static String toString(@NonNull final BigDecimal numberToFormat, final int scale, final char decimalSeparator, @NonNull final NumberFormatPattern numberFormatPattern) {
+	public static String toString(@NonNull final BigDecimal numberToFormat, final int scale, final char decimalSeparator, @NonNull final NumberPattern numberFormatPattern) {
 		validateScale(scale);
 		
 		String pattern = getPattern(scale, numberFormatPattern);
 		return format(numberToFormat, pattern, decimalSeparator);
 	}
 	
-	public static String toString(@NonNull final BigDecimal numberToFormat, final int scale, final char decimalSeparator, final char groupingSeparator, @NonNull final NumberFormatPattern numberFormatPattern) {
+	public static String toString(@NonNull final BigDecimal numberToFormat, final int scale, final char decimalSeparator, final char groupingSeparator, @NonNull final NumberPattern numberFormatPattern) {
 		validateScale(scale);
 		validateSeparators(decimalSeparator, groupingSeparator);
 		
@@ -87,12 +88,12 @@ public class NumberFormatUtils {
 	}
 	
 	/**
-	 * Method for {@link NumberFormatPattern#DECIMALS_FIRST_PART_ALWAYS_SECOND_PART_IF_PRESENT}
+	 * Method for {@link NumberPattern#DECIMALS_FIRST_PART_ALWAYS_SECOND_PART_IF_PRESENT}
 	 * 
 	 * scaleTot = the total number of decimal places
 	 * scaleToShowAlways = the number of decimal places that must be showed in any case.
 	 */
-	public static String toString(@NonNull final BigDecimal numberToFormat, final int scaleTot, final int scaleToShowAlways, @NonNull final NumberFormatPattern numberFormatPattern) {
+	public static String toString(@NonNull final BigDecimal numberToFormat, final int scaleTot, final int scaleToShowAlways, @NonNull final NumberPattern numberFormatPattern) {
 		validate_toString(scaleTot, scaleToShowAlways, numberFormatPattern);
 		
 		String pattern = getPattern(scaleTot, scaleToShowAlways, DECIMALS_FIRST_PART_ALWAYS_SECOND_PART_IF_PRESENT);
@@ -100,12 +101,12 @@ public class NumberFormatUtils {
 	}
 	
 	/**
-	 * Method for {@link NumberFormatPattern#DECIMALS_FIRST_PART_ALWAYS_SECOND_PART_IF_PRESENT}
+	 * Method for {@link NumberPattern#DECIMALS_FIRST_PART_ALWAYS_SECOND_PART_IF_PRESENT}
 	 * 
 	 * scale = the total number of decimal places
 	 * scaleShowAlways = the number of decimal places that must be showed in any case.
 	 */
-	public static String toString(@NonNull final BigDecimal numberToFormat, final int scaleTot, final int scaleToShowAlways, final char decimalSeparator, @NonNull final NumberFormatPattern numberFormatPattern) {
+	public static String toString(@NonNull final BigDecimal numberToFormat, final int scaleTot, final int scaleToShowAlways, final char decimalSeparator, @NonNull final NumberPattern numberFormatPattern) {
 		validate_toString(scaleTot, scaleToShowAlways, numberFormatPattern);
 		
 		String pattern = getPattern(scaleTot, scaleToShowAlways, DECIMALS_FIRST_PART_ALWAYS_SECOND_PART_IF_PRESENT);
@@ -113,12 +114,12 @@ public class NumberFormatUtils {
 	}
 	
 	/**
-	 * Method for {@link NumberFormatPattern#DECIMALS_FIRST_PART_ALWAYS_SECOND_PART_IF_PRESENT}
+	 * Method for {@link NumberPattern#DECIMALS_FIRST_PART_ALWAYS_SECOND_PART_IF_PRESENT}
 	 * 
 	 * scale = the total number of decimal places
 	 * scaleShowAlways = the number of decimal places that must be showed in any case.
 	 */
-	public static String toString(@NonNull final BigDecimal numberToFormat, final int scaleTot, final int scaleToShowAlways, final char decimalSeparator, final char groupingSeparator, @NonNull final NumberFormatPattern numberFormatPattern) {
+	public static String toString(@NonNull final BigDecimal numberToFormat, final int scaleTot, final int scaleToShowAlways, final char decimalSeparator, final char groupingSeparator, @NonNull final NumberPattern numberFormatPattern) {
 		validate_toString(scaleTot, scaleToShowAlways, numberFormatPattern);
 		validateSeparators(decimalSeparator, groupingSeparator);
 		
@@ -166,7 +167,7 @@ public class NumberFormatUtils {
 	
 	// Pattern 
 	
-	private static String getPattern(final int scale, final NumberFormatPattern numberFormatPattern) {
+	private static String getPattern(final int scale, final NumberPattern numberFormatPattern) {
 		validateNumberFormatPatternWhenOnlyScaleAvailable(numberFormatPattern);
 		
 		if(DECIMALS_ALWAYS == numberFormatPattern) {
@@ -178,7 +179,7 @@ public class NumberFormatUtils {
 		throw new IllegalArgumentException(numberFormatPattern.toString() + " is not valid!");
 	}
 	
-	private static String getPattern(final int scale, final int scaleToShowAlways, final NumberFormatPattern numberFormatPattern) {
+	private static String getPattern(final int scale, final int scaleToShowAlways, final NumberPattern numberFormatPattern) {
 		if(DECIMALS_FIRST_PART_ALWAYS_SECOND_PART_IF_PRESENT == numberFormatPattern) {
 			return buildPatternDecimalsFirstPartAlwaysSecondPartIfPresent(scale, scaleToShowAlways);
 		}
@@ -251,14 +252,14 @@ public class NumberFormatUtils {
 		if (decimalSeparator == groupingSeparator) throw new IllegalArgumentException("decimalSeparator and groupingSeparator can't be equals.");
 	}
 	
-	private static void validateNumberFormatPatternWhenOnlyScaleAvailable(final NumberFormatPattern numberFormatPattern) {
+	private static void validateNumberFormatPatternWhenOnlyScaleAvailable(final NumberPattern numberFormatPattern) {
 		if(numberFormatPattern == DECIMALS_FIRST_PART_ALWAYS_SECOND_PART_IF_PRESENT) throw new IllegalArgumentException("DECIMALS_FIRST_PART_ALWAYS_SECOND_PART_IF_PRESENT can't be used with only scale value. An additional parameter (int scaleToShowAlways) is needed.");
 	}
 	
 	/**
 	 * Validate methods for DECIMALS_FIRST_PART_ALWAYS_SECOND_PART_IF_PRESENT
 	 */
-	private static void validate_toString(final int scaleTot, final int scaleToShowAlways, final NumberFormatPattern numberFormatPattern) {
+	private static void validate_toString(final int scaleTot, final int scaleToShowAlways, final NumberPattern numberFormatPattern) {
 		if(DECIMALS_FIRST_PART_ALWAYS_SECOND_PART_IF_PRESENT != numberFormatPattern) throw new IllegalArgumentException("Invalid NumberFormatPattern. This method can only be used for: " + DECIMALS_FIRST_PART_ALWAYS_SECOND_PART_IF_PRESENT);
 		validateScale(scaleTot);
 		validateScale(scaleToShowAlways);
