@@ -1,10 +1,10 @@
-package com.paulmarcelinbejan.architecture.utils.time;
+package com.paulmarcelinbejan.architecture.utils.time.period;
 
-import static com.paulmarcelinbejan.architecture.utils.time.LocalDateUtils.buildLocalDate;
-import static com.paulmarcelinbejan.architecture.utils.time.LocalDateUtils.isFirstTrimester;
-import static com.paulmarcelinbejan.architecture.utils.time.LocalDateUtils.isFourthTrimester;
-import static com.paulmarcelinbejan.architecture.utils.time.LocalDateUtils.isSecondTrimester;
-import static com.paulmarcelinbejan.architecture.utils.time.LocalDateUtils.isThirdTrimester;
+import static com.paulmarcelinbejan.architecture.utils.time.DateUtils.buildLocalDate;
+import static com.paulmarcelinbejan.architecture.utils.time.DateUtils.isFirstTrimester;
+import static com.paulmarcelinbejan.architecture.utils.time.DateUtils.isFourthTrimester;
+import static com.paulmarcelinbejan.architecture.utils.time.DateUtils.isSecondTrimester;
+import static com.paulmarcelinbejan.architecture.utils.time.DateUtils.isThirdTrimester;
 import static java.time.Month.APRIL;
 import static java.time.Month.AUGUST;
 import static java.time.Month.DECEMBER;
@@ -27,20 +27,55 @@ import java.util.function.Function;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
+/**
+ * A trimester is a period of three months. <br>
+ * From latin trimestris: tri (three) mensis (month).
+ * 
+ * <p>
+ * A year can be divided into four TRIMESTER (also known as Q1, Q2, Q3, Q4): <br>
+ * 
+ * <table>
+ * 	<tr>
+ * 		<th></th>
+ * 		<th>First Day</th>
+ * 		<th>Last Day</th>
+ * 	</tr>
+ * 	<tr>
+ *  	<th>FIRST</td>
+ *  	<td>1st January</td>
+ *  	<td>31st March</td>
+ *  </tr>
+ *  <tr>
+ *  	<th>SECOND</td>
+ *  	<td>1st April</td>
+ *  	<td>30th June</td>
+ *  </tr>
+ *  <tr>
+ *  	<th>THIRD</td>
+ *  	<td>1st July</td>
+ *  	<td>30th September</td>
+ *  </tr>
+ *  <tr>
+ *  	<th>FOURTH</td>
+ *  	<td>1st October</td>
+ *  	<td>31st December</td>
+ *  </tr>
+ * </table>
+ */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-class TrimesterUtils {
+public class TrimesterUtils {
 
-	protected static final Map<Month, Function<LocalDate, LocalDate>> FIRST_DAY_OF_CURRENT_TRIMESTER = initializeFirstDayOfCurrentTrimesterMap();
+	public static final Map<Month, Function<LocalDate, LocalDate>> FIRST_DAY_OF_CURRENT_TRIMESTER = initializeFirstDayOfCurrentTrimesterMap();
 	
-	protected static final Map<Month, Function<LocalDate, LocalDate>> LAST_DAY_OF_CURRENT_TRIMESTER = initializeLastDayOfCurrentTrimesterMap();
+	public static final Map<Month, Function<LocalDate, LocalDate>> LAST_DAY_OF_CURRENT_TRIMESTER = initializeLastDayOfCurrentTrimesterMap();
 	
-	protected static final Map<Month, Function<LocalDate, LocalDate>> FIRST_DAY_OF_NEXT_TRIMESTER = initializeFirstDayOfNextTrimesterMap();
+	public static final Map<Month, Function<LocalDate, LocalDate>> FIRST_DAY_OF_NEXT_TRIMESTER = initializeFirstDayOfNextTrimesterMap();
 	
-	protected static final Map<Month, Function<LocalDate, LocalDate>> LAST_DAY_OF_NEXT_TRIMESTER = initializeLastDayOfNextTrimesterMap();
+	public static final Map<Month, Function<LocalDate, LocalDate>> LAST_DAY_OF_NEXT_TRIMESTER = initializeLastDayOfNextTrimesterMap();
 	
-	protected static final Map<Month, Function<LocalDate, LocalDate>> FIRST_DAY_OF_PREVIOUS_TRIMESTER = initializeFirstDayOfPreviousTrimesterMap();
+	public static final Map<Month, Function<LocalDate, LocalDate>> FIRST_DAY_OF_PREVIOUS_TRIMESTER = initializeFirstDayOfPreviousTrimesterMap();
 	
-	protected static final Map<Month, Function<LocalDate, LocalDate>> LAST_DAY_OF_PREVIOUS_TRIMESTER = initializeLastDayOfPreviousTrimesterMap();
+	public static final Map<Month, Function<LocalDate, LocalDate>> LAST_DAY_OF_PREVIOUS_TRIMESTER = initializeLastDayOfPreviousTrimesterMap();
 	
 	// FIRST DAY of CURRENT TRIMESTER
 	

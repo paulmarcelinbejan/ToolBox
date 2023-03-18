@@ -1,9 +1,9 @@
-package com.paulmarcelinbejan.architecture.utils.time;
+package com.paulmarcelinbejan.architecture.utils.time.period;
 
-import static com.paulmarcelinbejan.architecture.utils.time.LocalDateUtils.buildLocalDate;
-import static com.paulmarcelinbejan.architecture.utils.time.LocalDateUtils.isFirstQuadrimester;
-import static com.paulmarcelinbejan.architecture.utils.time.LocalDateUtils.isSecondQuadrimester;
-import static com.paulmarcelinbejan.architecture.utils.time.LocalDateUtils.isThirdQuadrimester;
+import static com.paulmarcelinbejan.architecture.utils.time.DateUtils.buildLocalDate;
+import static com.paulmarcelinbejan.architecture.utils.time.DateUtils.isFirstQuadrimester;
+import static com.paulmarcelinbejan.architecture.utils.time.DateUtils.isSecondQuadrimester;
+import static com.paulmarcelinbejan.architecture.utils.time.DateUtils.isThirdQuadrimester;
 import static java.time.Month.APRIL;
 import static java.time.Month.AUGUST;
 import static java.time.Month.DECEMBER;
@@ -26,20 +26,51 @@ import java.util.function.Function;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
+/**
+ * A quadrimester is a period of four months. <br>
+ * From latin quadri (four) mensis (month).
+ * 
+ * <p>
+ * 
+ * A year can be divided into three QUADRIMESTER: <br>
+ * 
+ * <table>
+ * 	<tr>
+ * 		<th></th>
+ * 		<th>First Day</th>
+ * 		<th>Last Day</th>
+ * 	</tr>
+ * 	<tr>
+ *  	<th>FIRST</td>
+ *  	<td>1st January</td>
+ *  	<td>30th April</td>
+ *  </tr>
+ *  <tr>
+ *  	<th>SECOND</td>
+ *  	<td>1st May</td>
+ *  	<td>31st August</td>
+ *  </tr>
+ *  <tr>
+ *  	<th>THIRD</td>
+ *  	<td>1st September</td>
+ *  	<td>31st December</td>
+ *  </tr>
+ * </table>
+ */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-class QuadrimesterUtils {
+public class QuadrimesterUtils {
 
-	protected static final Map<Month, Function<LocalDate, LocalDate>> FIRST_DAY_OF_CURRENT_QUADRIMESTER = initializeFirstDayOfCurrentQuadrimesterMap();
+	public static final Map<Month, Function<LocalDate, LocalDate>> FIRST_DAY_OF_CURRENT_QUADRIMESTER = initializeFirstDayOfCurrentQuadrimesterMap();
 	
-	protected static final Map<Month, Function<LocalDate, LocalDate>> LAST_DAY_OF_CURRENT_QUADRIMESTER = initializeLastDayOfCurrentQuadrimesterMap();
+	public static final Map<Month, Function<LocalDate, LocalDate>> LAST_DAY_OF_CURRENT_QUADRIMESTER = initializeLastDayOfCurrentQuadrimesterMap();
 	
-	protected static final Map<Month, Function<LocalDate, LocalDate>> FIRST_DAY_OF_NEXT_QUADRIMESTER = initializeFirstDayOfNextQuadrimesterMap();
+	public static final Map<Month, Function<LocalDate, LocalDate>> FIRST_DAY_OF_NEXT_QUADRIMESTER = initializeFirstDayOfNextQuadrimesterMap();
 	
-	protected static final Map<Month, Function<LocalDate, LocalDate>> LAST_DAY_OF_NEXT_QUADRIMESTER = initializeLastDayOfNextQuadrimesterMap();
+	public static final Map<Month, Function<LocalDate, LocalDate>> LAST_DAY_OF_NEXT_QUADRIMESTER = initializeLastDayOfNextQuadrimesterMap();
 	
-	protected static final Map<Month, Function<LocalDate, LocalDate>> FIRST_DAY_OF_PREVIOUS_QUADRIMESTER = initializeFirstDayOfPreviousQuadrimesterMap();
+	public static final Map<Month, Function<LocalDate, LocalDate>> FIRST_DAY_OF_PREVIOUS_QUADRIMESTER = initializeFirstDayOfPreviousQuadrimesterMap();
 	
-	protected static final Map<Month, Function<LocalDate, LocalDate>> LAST_DAY_OF_PREVIOUS_QUADRIMESTER = initializeLastDayOfPreviousQuadrimesterMap();
+	public static final Map<Month, Function<LocalDate, LocalDate>> LAST_DAY_OF_PREVIOUS_QUADRIMESTER = initializeLastDayOfPreviousQuadrimesterMap();
 	
 	// FIRST DAY of CURRENT QUADRIMESTER
 	

@@ -1,8 +1,8 @@
-package com.paulmarcelinbejan.architecture.utils.time;
+package com.paulmarcelinbejan.architecture.utils.time.period;
 
-import static com.paulmarcelinbejan.architecture.utils.time.LocalDateUtils.buildLocalDate;
-import static com.paulmarcelinbejan.architecture.utils.time.LocalDateUtils.isFirstSemester;
-import static com.paulmarcelinbejan.architecture.utils.time.LocalDateUtils.isSecondSemester;
+import static com.paulmarcelinbejan.architecture.utils.time.DateUtils.buildLocalDate;
+import static com.paulmarcelinbejan.architecture.utils.time.DateUtils.isFirstSemester;
+import static com.paulmarcelinbejan.architecture.utils.time.DateUtils.isSecondSemester;
 import static java.time.Month.APRIL;
 import static java.time.Month.AUGUST;
 import static java.time.Month.DECEMBER;
@@ -25,20 +25,45 @@ import java.util.function.Function;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
+/**
+ * A semester is a period of six months. <br>
+ * From latin semestris: sex (six) mensis (month).
+ * 
+ * <p>
+ * A year can be divided into two SEMESTER: <br>
+ * 
+ * <table>
+ * 	<tr>
+ * 		<th></th>
+ * 		<th>First Day</th>
+ * 		<th>Last Day</th>
+ * 	</tr>
+ * 	<tr>
+ *  	<th>FIRST</td>
+ *  	<td>1st January</td>
+ *  	<td>30th June</td>
+ *  </tr>
+ *  <tr>
+ *  	<th>SECOND</td>
+ *  	<td>1st July</td>
+ *  	<td>31st December</td>
+ *  </tr>
+ * </table>
+ */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-class SemesterUtils {
+public class SemesterUtils {
 
-	protected static final Map<Month, Function<LocalDate, LocalDate>> FIRST_DAY_OF_CURRENT_SEMESTER = initializeFirstDayOfCurrentSemesterMap();
+	public static final Map<Month, Function<LocalDate, LocalDate>> FIRST_DAY_OF_CURRENT_SEMESTER = initializeFirstDayOfCurrentSemesterMap();
 	
-	protected static final Map<Month, Function<LocalDate, LocalDate>> LAST_DAY_OF_CURRENT_SEMESTER = initializeLastDayOfCurrentSemesterMap();
+	public static final Map<Month, Function<LocalDate, LocalDate>> LAST_DAY_OF_CURRENT_SEMESTER = initializeLastDayOfCurrentSemesterMap();
 	
-	protected static final Map<Month, Function<LocalDate, LocalDate>> FIRST_DAY_OF_NEXT_SEMESTER = initializeFirstDayOfNextSemesterMap();
+	public static final Map<Month, Function<LocalDate, LocalDate>> FIRST_DAY_OF_NEXT_SEMESTER = initializeFirstDayOfNextSemesterMap();
 	
-	protected static final Map<Month, Function<LocalDate, LocalDate>> LAST_DAY_OF_NEXT_SEMESTER = initializeLastDayOfNextSemesterMap();
+	public static final Map<Month, Function<LocalDate, LocalDate>> LAST_DAY_OF_NEXT_SEMESTER = initializeLastDayOfNextSemesterMap();
 	
-	protected static final Map<Month, Function<LocalDate, LocalDate>> FIRST_DAY_OF_PREVIOUS_SEMESTER = initializeFirstDayOfPreviousSemesterMap();
+	public static final Map<Month, Function<LocalDate, LocalDate>> FIRST_DAY_OF_PREVIOUS_SEMESTER = initializeFirstDayOfPreviousSemesterMap();
 	
-	protected static final Map<Month, Function<LocalDate, LocalDate>> LAST_DAY_OF_PREVIOUS_SEMESTER = initializeLastDayOfPreviousSemesterMap();
+	public static final Map<Month, Function<LocalDate, LocalDate>> LAST_DAY_OF_PREVIOUS_SEMESTER = initializeLastDayOfPreviousSemesterMap();
 	
 	// FIRST DAY of CURRENT SEMESTER
 	
