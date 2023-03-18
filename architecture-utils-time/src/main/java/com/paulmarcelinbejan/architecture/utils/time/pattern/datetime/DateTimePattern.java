@@ -39,9 +39,16 @@ public enum DateTimePattern implements DateTimePatternBase {
 	 */
 	MMMddyyyyHHmmss("MMM dd yyyy HH:mm:ss");
 	
+	/**
+	 * The pattern value of the enum;
+	 */
 	@Getter
 	public final String value;
 
+	/**
+     * Configured formatter for the specified pattern.
+     * The formatter is not localized!
+     */
 	@Getter
 	public final DateTimeFormatter formatter;
 	

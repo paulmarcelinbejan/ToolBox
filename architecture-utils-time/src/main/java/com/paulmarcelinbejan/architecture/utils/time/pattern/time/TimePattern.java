@@ -54,8 +54,9 @@ public enum TimePattern {
 		@Getter
 	    public final String value;
 
-	    /**
-	     * Configured formatter for the specified pattern
+		/**
+	     * Configured formatter for the specified pattern.
+	     * The formatter is not localized!
 	     */
 		@Getter
 	    public final DateTimeFormatter formatter;
@@ -108,8 +109,9 @@ public enum TimePattern {
 		@Getter
 	    public final String value;
 
-	    /**
-	     * Configured formatter for the specified pattern
+		/**
+	     * Configured formatter for the specified pattern.
+	     * The formatter is not localized!
 	     */
 		@Getter
 	    public final DateTimeFormatter formatter;
