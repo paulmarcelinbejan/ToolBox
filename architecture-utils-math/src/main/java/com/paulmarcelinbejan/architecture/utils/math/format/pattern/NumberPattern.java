@@ -1,4 +1,4 @@
-package com.paulmarcelinbejan.architecture.utils.math.format.enums;
+package com.paulmarcelinbejan.architecture.utils.math.format.pattern;
 
 public enum NumberPattern {
 

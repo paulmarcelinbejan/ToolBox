@@ -10,4 +10,13 @@
     
     <artifactId>architecture-utils-time</artifactId>
     
+	<dependencies>
+		
+		<dependency>
+			<groupId>com.paulmarcelinbejan</groupId>
+			<artifactId>architecture-base</artifactId>
+		</dependency>
+		
+	</dependencies>
+	
 </project>

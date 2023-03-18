@@ -1,6 +1,6 @@
 package com.paulmarcelinbejan.architecture.base.builder;
 
-public interface BaseBuilder<CLASS, BUILDER extends BaseBuilder<CLASS, BUILDER>> {
+public interface BuilderBase<CLASS, BUILDER extends BuilderBase<CLASS, BUILDER>> {
 	
 	/**
 	 * Initialize with default values.

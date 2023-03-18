@@ -2,9 +2,9 @@ package com.paulmarcelinbejan.architecture.utils.math.format;
 
 import static com.paulmarcelinbejan.architecture.constants.Symbols.DOT;
 import static com.paulmarcelinbejan.architecture.constants.Symbols.EMPTY;
-import static com.paulmarcelinbejan.architecture.utils.math.format.enums.NumberPattern.DECIMALS_ALWAYS;
-import static com.paulmarcelinbejan.architecture.utils.math.format.enums.NumberPattern.DECIMALS_FIRST_PART_ALWAYS_SECOND_PART_IF_PRESENT;
-import static com.paulmarcelinbejan.architecture.utils.math.format.enums.NumberPattern.DECIMALS_IF_PRESENT;
+import static com.paulmarcelinbejan.architecture.utils.math.format.pattern.NumberPattern.DECIMALS_ALWAYS;
+import static com.paulmarcelinbejan.architecture.utils.math.format.pattern.NumberPattern.DECIMALS_FIRST_PART_ALWAYS_SECOND_PART_IF_PRESENT;
+import static com.paulmarcelinbejan.architecture.utils.math.format.pattern.NumberPattern.DECIMALS_IF_PRESENT;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -13,7 +13,7 @@ import java.text.DecimalFormatSymbols;
 
 import com.paulmarcelinbejan.architecture.constants.SymbolsAsChar;
 import com.paulmarcelinbejan.architecture.utils.math.NumberUtils;
-import com.paulmarcelinbejan.architecture.utils.math.format.enums.NumberPattern;
+import com.paulmarcelinbejan.architecture.utils.math.format.pattern.NumberPattern;
 
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
