@@ -18,10 +18,6 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.temporal.TemporalAdjusters;
 
-import com.paulmarcelinbejan.architecture.utils.time.period.QuadrimesterUtils;
-import com.paulmarcelinbejan.architecture.utils.time.period.SemesterUtils;
-import com.paulmarcelinbejan.architecture.utils.time.period.TrimesterUtils;
-
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 

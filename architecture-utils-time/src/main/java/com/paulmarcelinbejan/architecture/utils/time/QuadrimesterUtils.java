@@ -1,4 +1,4 @@
-package com.paulmarcelinbejan.architecture.utils.time.period;
+package com.paulmarcelinbejan.architecture.utils.time;
 
 import static com.paulmarcelinbejan.architecture.utils.time.DateUtils.buildLocalDate;
 import static com.paulmarcelinbejan.architecture.utils.time.DateUtils.isFirstQuadrimester;
@@ -58,19 +58,19 @@ import lombok.NoArgsConstructor;
  * </table>
  */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-public class QuadrimesterUtils {
+class QuadrimesterUtils {
 
-	public static final Map<Month, Function<LocalDate, LocalDate>> FIRST_DAY_OF_CURRENT_QUADRIMESTER = initializeFirstDayOfCurrentQuadrimesterMap();
+	static final Map<Month, Function<LocalDate, LocalDate>> FIRST_DAY_OF_CURRENT_QUADRIMESTER = initializeFirstDayOfCurrentQuadrimesterMap();
 	
-	public static final Map<Month, Function<LocalDate, LocalDate>> LAST_DAY_OF_CURRENT_QUADRIMESTER = initializeLastDayOfCurrentQuadrimesterMap();
+	static final Map<Month, Function<LocalDate, LocalDate>> LAST_DAY_OF_CURRENT_QUADRIMESTER = initializeLastDayOfCurrentQuadrimesterMap();
 	
-	public static final Map<Month, Function<LocalDate, LocalDate>> FIRST_DAY_OF_NEXT_QUADRIMESTER = initializeFirstDayOfNextQuadrimesterMap();
+	static final Map<Month, Function<LocalDate, LocalDate>> FIRST_DAY_OF_NEXT_QUADRIMESTER = initializeFirstDayOfNextQuadrimesterMap();
 	
-	public static final Map<Month, Function<LocalDate, LocalDate>> LAST_DAY_OF_NEXT_QUADRIMESTER = initializeLastDayOfNextQuadrimesterMap();
+	static final Map<Month, Function<LocalDate, LocalDate>> LAST_DAY_OF_NEXT_QUADRIMESTER = initializeLastDayOfNextQuadrimesterMap();
 	
-	public static final Map<Month, Function<LocalDate, LocalDate>> FIRST_DAY_OF_PREVIOUS_QUADRIMESTER = initializeFirstDayOfPreviousQuadrimesterMap();
+	static final Map<Month, Function<LocalDate, LocalDate>> FIRST_DAY_OF_PREVIOUS_QUADRIMESTER = initializeFirstDayOfPreviousQuadrimesterMap();
 	
-	public static final Map<Month, Function<LocalDate, LocalDate>> LAST_DAY_OF_PREVIOUS_QUADRIMESTER = initializeLastDayOfPreviousQuadrimesterMap();
+	static final Map<Month, Function<LocalDate, LocalDate>> LAST_DAY_OF_PREVIOUS_QUADRIMESTER = initializeLastDayOfPreviousQuadrimesterMap();
 	
 	// FIRST DAY of CURRENT QUADRIMESTER
 	

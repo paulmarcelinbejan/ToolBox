@@ -1,4 +1,4 @@
-package com.paulmarcelinbejan.architecture.utils.time.period;
+package com.paulmarcelinbejan.architecture.utils.time;
 
 import static com.paulmarcelinbejan.architecture.utils.time.DateUtils.buildLocalDate;
 import static com.paulmarcelinbejan.architecture.utils.time.DateUtils.isFirstSemester;
