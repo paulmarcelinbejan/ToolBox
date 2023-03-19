@@ -13,95 +13,95 @@ public class NumberUtils {
 
 	// Positive
 	
-	public static boolean isPositive(final int value) {
+	public static boolean isPositive(int value) {
 		return value > 0;
 	}
 	
-	public static boolean isPositive(final long value) {
+	public static boolean isPositive(long value) {
 		return value > 0;
 	}
 	
-	public static boolean isPositive(final BigDecimal value) {
+	public static boolean isPositive(BigDecimal value) {
 		return isGreaterThanZERO(value);
 	}
 	
-	public static boolean isPositiveOrZERO(final int value) {
+	public static boolean isPositiveOrZERO(int value) {
 		return value >= 0;
 	}
 	
-	public static boolean isPositiveOrZERO(final long value) {
+	public static boolean isPositiveOrZERO(long value) {
 		return value >= 0;
 	}
 	
-	public static boolean isPositiveOrZERO(final BigDecimal value) {
-		return isGreaterOrEqualThanZERO(value);
+	public static boolean isPositiveOrZERO(BigDecimal value) {
+		return isGreaterThanOrEqualToZERO(value);
 	}
 
 	// Negative
 	
-	public static boolean isNegative(final int value) {
+	public static boolean isNegative(int value) {
 		return value < 0;
 	}
 	
-	public static boolean isNegative(final long value) {
+	public static boolean isNegative(long value) {
 		return value < 0;
 	}
 	
-	public static boolean isNegative(final BigDecimal value) {
+	public static boolean isNegative(BigDecimal value) {
 		return isLessThanZERO(value);
 	}
 	
-	public static boolean isNegativeOrZERO(final int value) {
+	public static boolean isNegativeOrZERO(int value) {
 		return value <= 0;
 	}
 	
-	public static boolean isNegativeOrZERO(final long value) {
+	public static boolean isNegativeOrZERO(long value) {
 		return value <= 0;
 	}
 	
-	public static boolean isNegativeOrZERO(final BigDecimal value) {
-		return isLessOrEqualThanZERO(value);
+	public static boolean isNegativeOrZERO(BigDecimal value) {
+		return isLessThanOrEqualToZERO(value);
 	}
 
 	// To Positive
 	
-	public static int toPositive(final int value) {
+	public static int toPositive(int value) {
 		return isNegative(value) ? 0 - value : value;
 	}
 	
-	public static long toPositive(final long value) {
+	public static long toPositive(long value) {
 		return isNegative(value) ? 0 - value : value;
 	}
 	
-	public static BigDecimal toPositive(final BigDecimal value) {
+	public static BigDecimal toPositive(BigDecimal value) {
 		return isNegative(value) ? subtraction(ZERO, value) : value;
 	}
 	
 	// To Negative 
 	
-	public static int toNegative(final int value) {
+	public static int toNegative(int value) {
 		return isPositive(value) ? 0 - value : value;
 	}
 	
-	public static long toNegative(final long value) {
+	public static long toNegative(long value) {
 		return isPositive(value) ? 0 - value : value;
 	}
 
-	public static BigDecimal toNegative(final BigDecimal value) {
+	public static BigDecimal toNegative(BigDecimal value) {
 		return isPositive(value) ? subtraction(ZERO, value) : value;
 	}
 
 	// To BigDecimal
 
-	public static BigDecimal toBigDecimal(final int value) {
+	public static BigDecimal toBigDecimal(int value) {
 		return BigDecimal.valueOf(value);
 	}
 
-	public static BigDecimal toBigDecimal(final long value) {
+	public static BigDecimal toBigDecimal(long value) {
 		return BigDecimal.valueOf(value);
 	}
 
-	public static BigDecimal toBigDecimal(final String value) {
+	public static BigDecimal toBigDecimal(String value) {
 		return new BigDecimal(value);
 	}
 	
@@ -125,63 +125,60 @@ public class NumberUtils {
 	/**
 	 * The truncate function use {@link RoundingMode#DOWN} to truncate the number.
 	 */
-	public static BigDecimal truncate(final BigDecimal value, final int scale) {
-		return value.setScale(scale, RoundingMode.DOWN);
+	public static BigDecimal truncate(BigDecimal value, int decimalPlaces) {
+		return value.setScale(decimalPlaces, RoundingMode.DOWN);
 	}
 
-	public static BigDecimal truncateToZeroDecimal(final BigDecimal value) {
+	public static BigDecimal truncateToZeroDecimalPlaces(BigDecimal value) {
 		return truncate(value, 0);
 	}
 
 	// Round
-
-	public static BigDecimal round(final BigDecimal value, final int scale, final RoundingMode roundingMode) {
-		return value.setScale(scale, roundingMode);
+	
+	public static BigDecimal round(BigDecimal value, int decimalPlaces, RoundingMode roundingMode) {
+		return value.setScale(decimalPlaces, roundingMode);
 	}
 
 	/**
 	 * {@link Math#round()} adaptation for BigDecimal
 	 */
-	public static long mathRound(final BigDecimal value) {
-		if(isPositive(value)) {
-			return round(value, 0, RoundingMode.HALF_UP).longValue();
-		}
-		return round(value, 0, RoundingMode.HALF_DOWN).longValue();
+	public static long mathRound(BigDecimal value) {
+		return mathRound(value, 0).longValue();
 	}
 
 	/**
 	 * {@link Math#round()} adaptation for BigDecimal
 	 */
-	public static BigDecimal mathRound(final BigDecimal value, final int scale) {
+	public static BigDecimal mathRound(BigDecimal value, int decimalPlaces) {
 		if(isPositive(value)) {
-			return round(value, scale, RoundingMode.HALF_UP);
+			return round(value, decimalPlaces, RoundingMode.HALF_UP);
 		}
-		return round(value, scale, RoundingMode.HALF_DOWN);
+		return round(value, decimalPlaces, RoundingMode.HALF_DOWN);
 	}
 
 	// Addition
 
-	public static BigDecimal addition(final BigDecimal value1, final BigDecimal value2) {
+	public static BigDecimal addition(BigDecimal value1, BigDecimal value2) {
 		return value1.add(value2);
 	}
 
-	public static BigDecimal addition(final BigDecimal value1, final int value2) {
+	public static BigDecimal addition(BigDecimal value1, int value2) {
 		return addition(value1, toBigDecimal(value2));
 	}
 
-	public static BigDecimal addition(final int value1, final BigDecimal value2) {
+	public static BigDecimal addition(int value1, BigDecimal value2) {
 		return addition(toBigDecimal(value1), value2);
 	}
 
-	public static BigDecimal addition(final BigDecimal value1, final long value2) {
+	public static BigDecimal addition(BigDecimal value1, long value2) {
 		return addition(value1, toBigDecimal(value2));
 	}
 
-	public static BigDecimal addition(final long value1, final BigDecimal value2) {
+	public static BigDecimal addition(long value1, BigDecimal value2) {
 		return addition(toBigDecimal(value1), value2);
 	}
 
-	public static BigDecimal addition(final BigDecimal value1, final BigDecimal... values) {
+	public static BigDecimal addition(BigDecimal value1, BigDecimal... values) {
 		BigDecimal result = value1;
 		for (BigDecimal value : values) {
 			result = addition(result, value);
@@ -191,27 +188,27 @@ public class NumberUtils {
 
 	// Subtraction
 
-	public static BigDecimal subtraction(final BigDecimal value1, final BigDecimal value2) {
+	public static BigDecimal subtraction(BigDecimal value1, BigDecimal value2) {
 		return value1.subtract(value2);
 	}
 
-	public static BigDecimal subtraction(final BigDecimal value1, final int value2) {
+	public static BigDecimal subtraction(BigDecimal value1, int value2) {
 		return subtraction(value1, toBigDecimal(value2));
 	}
 
-	public static BigDecimal subtraction(final int value1, final BigDecimal value2) {
+	public static BigDecimal subtraction(int value1, BigDecimal value2) {
 		return subtraction(toBigDecimal(value1), value2);
 	}
 
-	public static BigDecimal subtraction(final BigDecimal value1, final long value2) {
+	public static BigDecimal subtraction(BigDecimal value1, long value2) {
 		return subtraction(value1, toBigDecimal(value2));
 	}
 
-	public static BigDecimal subtraction(final long value1, final BigDecimal value2) {
+	public static BigDecimal subtraction(long value1, BigDecimal value2) {
 		return subtraction(toBigDecimal(value1), value2);
 	}
 
-	public static BigDecimal subtraction(final BigDecimal value1, final BigDecimal... values) {
+	public static BigDecimal subtraction(BigDecimal value1, BigDecimal... values) {
 		BigDecimal result = value1;
 		for (BigDecimal value : values) {
 			result = subtraction(result, value);
@@ -221,27 +218,27 @@ public class NumberUtils {
 
 	// Multiplication
 
-	public static BigDecimal multiplication(final BigDecimal value1, final BigDecimal value2) {
+	public static BigDecimal multiplication(BigDecimal value1, BigDecimal value2) {
 		return value1.multiply(value2);
 	}
 
-	public static BigDecimal multiplication(final BigDecimal value1, final int value2) {
+	public static BigDecimal multiplication(BigDecimal value1, int value2) {
 		return multiplication(value1, toBigDecimal(value2));
 	}
 
-	public static BigDecimal multiplication(final int value1, final BigDecimal value2) {
+	public static BigDecimal multiplication(int value1, BigDecimal value2) {
 		return multiplication(toBigDecimal(value1), value2);
 	}
 
-	public static BigDecimal multiplication(final BigDecimal value1, final long value2) {
+	public static BigDecimal multiplication(BigDecimal value1, long value2) {
 		return multiplication(value1, toBigDecimal(value2));
 	}
 
-	public static BigDecimal multiplication(final long value1, final BigDecimal value2) {
+	public static BigDecimal multiplication(long value1, BigDecimal value2) {
 		return multiplication(toBigDecimal(value1), value2);
 	}
 
-	public static BigDecimal multiplication(final BigDecimal value1, final BigDecimal... values) {
+	public static BigDecimal multiplication(BigDecimal value1, BigDecimal... values) {
 		BigDecimal result = value1;
 		for (BigDecimal value : values) {
 			result = multiplication(result, value);
@@ -253,330 +250,321 @@ public class NumberUtils {
 
 	/**
 	 * In order to avoid <b>ArithmeticException</b> caused by quotient with a nonterminating decimal expansion
-	 * please provide a scale (number of decimals places) and a RoundingMode
+	 * please provide decimalPlaces and a RoundingMode.
 	 */
-	public static BigDecimal division(final BigDecimal value1, final BigDecimal value2, final int scale, final RoundingMode roundingMode) {
-		return value1.divide(value2, scale, roundingMode);
+	public static BigDecimal division(BigDecimal value1, BigDecimal value2, int decimalPlaces, RoundingMode roundingMode) {
+		return value1.divide(value2, decimalPlaces, roundingMode);
 	}
 
 	/**
 	 * In order to avoid <b>ArithmeticException</b> caused by quotient with a nonterminating decimal expansion
-	 * please provide a scale (number of decimals places) and a RoundingMode
+	 * please provide decimalPlaces and a RoundingMode.
 	 */
-	public static BigDecimal division(final BigDecimal value1, final int value2, final int scale, final RoundingMode roundingMode) {
-		return division(value1, toBigDecimal(value2), scale, roundingMode);
+	public static BigDecimal division(BigDecimal value1, int value2, int decimalPlaces, RoundingMode roundingMode) {
+		return division(value1, toBigDecimal(value2), decimalPlaces, roundingMode);
 	}
 
 	/**
 	 * In order to avoid <b>ArithmeticException</b> caused by quotient with a nonterminating decimal expansion
-	 * please provide a scale (number of decimals places) and a RoundingMode
+	 * please provide decimalPlaces and a RoundingMode.
 	 */
-	public static BigDecimal division(final int value1, final BigDecimal value2, final int scale, final RoundingMode roundingMode) {
-		return division(toBigDecimal(value1), value2, scale, roundingMode);
+	public static BigDecimal division(int value1, BigDecimal value2, int decimalPlaces, RoundingMode roundingMode) {
+		return division(toBigDecimal(value1), value2, decimalPlaces, roundingMode);
 	}
 
 	/**
 	 * In order to avoid <b>ArithmeticException</b> caused by quotient with a nonterminating decimal expansion
-	 * please provide a scale (number of decimals places) and a RoundingMode
+	 * please provide decimalPlaces and a RoundingMode.
 	 */
-	public static BigDecimal division(final BigDecimal value1, final long value2, final int scale, final RoundingMode roundingMode) {
-		return division(value1, toBigDecimal(value2), scale, roundingMode);
+	public static BigDecimal division(BigDecimal value1, long value2, int decimalPlaces, RoundingMode roundingMode) {
+		return division(value1, toBigDecimal(value2), decimalPlaces, roundingMode);
 	}
 
 	/**
 	 * In order to avoid <b>ArithmeticException</b> caused by quotient with a nonterminating decimal expansion
-	 * please provide a scale (number of decimals places) and a RoundingMode
+	 * please provide decimalPlaces and a RoundingMode.
 	 */
-	public static BigDecimal division(final long value1, final BigDecimal value2, final int scale, final RoundingMode roundingMode) {
-		return division(toBigDecimal(value1), value2, scale, roundingMode);
+	public static BigDecimal division(long value1, BigDecimal value2, int decimalPlaces, RoundingMode roundingMode) {
+		return division(toBigDecimal(value1), value2, decimalPlaces, roundingMode);
 	}
 
 	/**
 	 * In order to avoid <b>ArithmeticException</b> caused by quotient with a nonterminating decimal expansion
-	 * please provide a scale (number of decimals places) and a RoundingMode
+	 * please provide decimalPlaces and a RoundingMode.
 	 */
-	public static BigDecimal division(final int value1, final long value2, final int scale, final RoundingMode roundingMode) {
-		return division(toBigDecimal(value1), toBigDecimal(value2), scale, roundingMode);
+	public static BigDecimal division(int value1, long value2, int decimalPlaces, RoundingMode roundingMode) {
+		return division(toBigDecimal(value1), toBigDecimal(value2), decimalPlaces, roundingMode);
 	}
 
 	/**
 	 * In order to avoid <b>ArithmeticException</b> caused by quotient with a nonterminating decimal expansion
-	 * please provide a scale (number of decimals places) and a RoundingMode
+	 * please provide decimalPlaces and a RoundingMode.
 	 */
-	public static BigDecimal division(final long value1, final int value2, final int scale, final RoundingMode roundingMode) {
-		return division(toBigDecimal(value1), toBigDecimal(value2), scale, roundingMode);
+	public static BigDecimal division(long value1, int value2, int decimalPlaces, RoundingMode roundingMode) {
+		return division(toBigDecimal(value1), toBigDecimal(value2), decimalPlaces, roundingMode);
 	}
 
 	/**
 	 * In order to avoid <b>ArithmeticException</b> caused by quotient with a nonterminating decimal expansion
-	 * please provide a scale (number of decimals places) and a RoundingMode
+	 * please provide decimalPlaces and a RoundingMode.
 	 */
-	public static BigDecimal division(final long value1, final long value2, final int scale, final RoundingMode roundingMode) {
-		return division(toBigDecimal(value1), toBigDecimal(value2), scale, roundingMode);
+	public static BigDecimal division(int value1, int value2, int decimalPlaces, RoundingMode roundingMode) {
+		return division(toBigDecimal(value1), toBigDecimal(value2), decimalPlaces, roundingMode);
+	}
+	
+	/**
+	 * In order to avoid <b>ArithmeticException</b> caused by quotient with a nonterminating decimal expansion
+	 * please provide decimalPlaces and a RoundingMode.
+	 */
+	public static BigDecimal division(long value1, long value2, int decimalPlaces, RoundingMode roundingMode) {
+		return division(toBigDecimal(value1), toBigDecimal(value2), decimalPlaces, roundingMode);
 	}
 
 	/**
 	 * In order to avoid <b>ArithmeticException</b> caused by quotient with a nonterminating decimal expansion
-	 * please provide a scale (number of decimals places) and a RoundingMode
+	 * the result will be truncated using {@link RoundingMode#DOWN}.
 	 */
-	public static BigDecimal division(final int value1, final int value2, final int scale, final RoundingMode roundingMode) {
-		return division(toBigDecimal(value1), toBigDecimal(value2), scale, roundingMode);
+	public static BigDecimal division(BigDecimal value1, BigDecimal value2, int decimalPlaces) {
+		return division(value1, value2, decimalPlaces, RoundingMode.DOWN);
 	}
 
 	/**
 	 * In order to avoid <b>ArithmeticException</b> caused by quotient with a nonterminating decimal expansion
-	 * please provide a scale (number of decimals places).
-	 * The result will be truncated using {@link NumberUtils#truncate()}
+	 * the result will be truncated using {@link RoundingMode#DOWN}.
 	 */
-	public static BigDecimal division(final BigDecimal value1, final BigDecimal value2, final int scale) {
-		return division(value1, value2, scale, RoundingMode.DOWN);
+	public static BigDecimal division(BigDecimal value1, int value2, int decimalPlaces) {
+		return division(value1, toBigDecimal(value2), decimalPlaces);
 	}
 
 	/**
 	 * In order to avoid <b>ArithmeticException</b> caused by quotient with a nonterminating decimal expansion
-	 * please provide a scale (number of decimals places).
-	 * The result will be truncated using {@link NumberUtils#truncate()}
+	 * the result will be truncated using {@link RoundingMode#DOWN}.
 	 */
-	public static BigDecimal division(final BigDecimal value1, final int value2, final int scale) {
-		return division(value1, toBigDecimal(value2), scale);
+	public static BigDecimal division(int value1, BigDecimal value2, int decimalPlaces) {
+		return division(toBigDecimal(value1), value2, decimalPlaces);
 	}
 
 	/**
 	 * In order to avoid <b>ArithmeticException</b> caused by quotient with a nonterminating decimal expansion
-	 * please provide a scale (number of decimals places).
-	 * The result will be truncated using {@link NumberUtils#truncate()}
+	 * the result will be truncated using {@link RoundingMode#DOWN}.
 	 */
-	public static BigDecimal division(final int value1, final BigDecimal value2, final int scale) {
-		return division(toBigDecimal(value1), value2, scale);
+	public static BigDecimal division(BigDecimal value1, long value2, int decimalPlaces) {
+		return division(value1, toBigDecimal(value2), decimalPlaces);
 	}
 
 	/**
 	 * In order to avoid <b>ArithmeticException</b> caused by quotient with a nonterminating decimal expansion
-	 * please provide a scale (number of decimals places).
-	 * The result will be truncated using {@link NumberUtils#truncate()}
+	 * the result will be truncated using {@link RoundingMode#DOWN}.
 	 */
-	public static BigDecimal division(final BigDecimal value1, final long value2, final int scale) {
-		return division(value1, toBigDecimal(value2), scale);
+	public static BigDecimal division(long value1, BigDecimal value2, int decimalPlaces) {
+		return division(toBigDecimal(value1), value2, decimalPlaces);
 	}
 
 	/**
 	 * In order to avoid <b>ArithmeticException</b> caused by quotient with a nonterminating decimal expansion
-	 * please provide a scale (number of decimals places).
-	 * The result will be truncated using {@link NumberUtils#truncate()}
+	 * the result will be truncated using {@link RoundingMode#DOWN}.
 	 */
-	public static BigDecimal division(final long value1, final BigDecimal value2, final int scale) {
-		return division(toBigDecimal(value1), value2, scale);
+	public static BigDecimal division(int value1, long value2, int decimalPlaces) {
+		return division(toBigDecimal(value1), toBigDecimal(value2), decimalPlaces);
 	}
 
 	/**
 	 * In order to avoid <b>ArithmeticException</b> caused by quotient with a nonterminating decimal expansion
-	 * please provide a scale (number of decimals places).
-	 * The result will be truncated using {@link NumberUtils#truncate()}
+	 * the result will be truncated using {@link RoundingMode#DOWN}.
 	 */
-	public static BigDecimal division(final int value1, final long value2, final int scale) {
-		return division(toBigDecimal(value1), toBigDecimal(value2), scale);
+	public static BigDecimal division(long value1, int value2, int decimalPlaces) {
+		return division(toBigDecimal(value1), toBigDecimal(value2), decimalPlaces);
 	}
 
 	/**
 	 * In order to avoid <b>ArithmeticException</b> caused by quotient with a nonterminating decimal expansion
-	 * please provide a scale (number of decimals places).
-	 * The result will be truncated using {@link NumberUtils#truncate()}
+	 * the result will be truncated using {@link RoundingMode#DOWN}.
 	 */
-	public static BigDecimal division(final long value1, final int value2, final int scale) {
-		return division(toBigDecimal(value1), toBigDecimal(value2), scale);
+	public static BigDecimal division(int value1, int value2, int decimalPlaces) {
+		return division(toBigDecimal(value1), toBigDecimal(value2), decimalPlaces);
 	}
-
+	
 	/**
 	 * In order to avoid <b>ArithmeticException</b> caused by quotient with a nonterminating decimal expansion
-	 * please provide a scale (number of decimals places).
-	 * The result will be truncated using {@link NumberUtils#truncate()}
+	 * the result will be truncated using {@link RoundingMode#DOWN}.
 	 */
-	public static BigDecimal division(final long value1, final long value2, final int scale) {
-		return division(toBigDecimal(value1), toBigDecimal(value2), scale);
-	}
-
-	/**
-	 * In order to avoid <b>ArithmeticException</b> caused by quotient with a nonterminating decimal expansion
-	 * please provide a scale (number of decimals places). 
-	 * The result will be truncated using {@link NumberUtils#truncate()}
-	 */
-	public static BigDecimal division(final int value1, final int value2, final int scale) {
-		return division(toBigDecimal(value1), toBigDecimal(value2), scale);
+	public static BigDecimal division(long value1, long value2, int decimalPlaces) {
+		return division(toBigDecimal(value1), toBigDecimal(value2), decimalPlaces);
 	}
 
 	// POW 
 	
-	public static BigDecimal pow(final BigDecimal base, final int power) {
+	public static BigDecimal pow(BigDecimal base, int power) {
 		return base.pow(power);
 	}
 
 	// COMPARATORS
 
-	public static boolean isEquals(final BigDecimal left, final BigDecimal right) {
+	public static boolean isEqualTo(BigDecimal left, BigDecimal right) {
 		return compareTo(left, right) == 0;
 	}
 
-	public static boolean isEquals(final BigDecimal left, final int right) {
+	public static boolean isEqualTo(BigDecimal left, int right) {
 		return compareTo(left, right) == 0;
 	}
 
-	public static boolean isEquals(final int left, final BigDecimal right) {
+	public static boolean isEqualTo(int left, BigDecimal right) {
 		return compareTo(left, right) == 0;
 	}
 
-	public static boolean isEquals(final BigDecimal left, final long right) {
+	public static boolean isEqualTo(BigDecimal left, long right) {
 		return compareTo(left, right) == 0;
 	}
 
-	public static boolean isEquals(final long left, final BigDecimal right) {
+	public static boolean isEqualTo(long left, BigDecimal right) {
 		return compareTo(left, right) == 0;
 	}
 
-	public static boolean isNotEquals(final BigDecimal left, final BigDecimal right) {
+	public static boolean isNotEqualTo(BigDecimal left, BigDecimal right) {
 		return compareTo(left, right) != 0;
 	}
 
-	public static boolean isNotEquals(final BigDecimal left, final int right) {
+	public static boolean isNotEqualTo(BigDecimal left, int right) {
 		return compareTo(left, right) != 0;
 	}
 
-	public static boolean isNotEquals(final int left, final BigDecimal right) {
+	public static boolean isNotEqualTo(int left, BigDecimal right) {
 		return compareTo(left, right) != 0;
 	}
 
-	public static boolean isNotEquals(final BigDecimal left, final long right) {
+	public static boolean isNotEqualTo(BigDecimal left, long right) {
 		return compareTo(left, right) != 0;
 	}
 
-	public static boolean isNotEquals(final long left, final BigDecimal right) {
+	public static boolean isNotEqualTo(long left, BigDecimal right) {
 		return compareTo(left, right) != 0;
 	}
 
-	public static boolean isLessThan(final BigDecimal left, final BigDecimal right) {
+	public static boolean isLessThan(BigDecimal left, BigDecimal right) {
 		return compareTo(left, right) < 0;
 	}
 
-	public static boolean isLessThan(final BigDecimal left, final int right) {
+	public static boolean isLessThan(BigDecimal left, int right) {
 		return compareTo(left, right) < 0;
 	}
 
-	public static boolean isLessThan(final int left, final BigDecimal right) {
+	public static boolean isLessThan(int left, BigDecimal right) {
 		return compareTo(left, right) < 0;
 	}
 
-	public static boolean isLessThan(final BigDecimal left, final long right) {
+	public static boolean isLessThan(BigDecimal left, long right) {
 		return compareTo(left, right) < 0;
 	}
 
-	public static boolean isLessThan(final long left, final BigDecimal right) {
+	public static boolean isLessThan(long left, BigDecimal right) {
 		return compareTo(left, right) < 0;
 	}
 
-	public static boolean isLessOrEqualThan(final BigDecimal left, final BigDecimal right) {
+	public static boolean isLessThanOrEqualTo(BigDecimal left, BigDecimal right) {
 		return compareTo(left, right) <= 0;
 	}
 
-	public static boolean isLessOrEqualThan(final BigDecimal left, final int right) {
+	public static boolean isLessThanOrEqualTo(BigDecimal left, int right) {
 		return compareTo(left, right) <= 0;
 	}
 
-	public static boolean isLessOrEqualThan(final int left, final BigDecimal right) {
+	public static boolean isLessThanOrEqualTo(int left, BigDecimal right) {
 		return compareTo(left, right) <= 0;
 	}
 
-	public static boolean isLessOrEqualThan(final BigDecimal left, final long right) {
+	public static boolean isLessThanOrEqualTo(BigDecimal left, long right) {
 		return compareTo(left, right) <= 0;
 	}
 
-	public static boolean isLessOrEqualThan(final long left, final BigDecimal right) {
+	public static boolean isLessThanOrEqualTo(long left, BigDecimal right) {
 		return compareTo(left, right) <= 0;
 	}
 
-	public static boolean isGreaterThan(final BigDecimal left, final BigDecimal right) {
+	public static boolean isGreaterThan(BigDecimal left, BigDecimal right) {
 		return compareTo(left, right) > 0;
 	}
 
-	public static boolean isGreaterThan(final BigDecimal left, final int right) {
+	public static boolean isGreaterThan(BigDecimal left, int right) {
 		return compareTo(left, right) > 0;
 	}
 
-	public static boolean isGreaterThan(final int left, final BigDecimal right) {
+	public static boolean isGreaterThan(int left, BigDecimal right) {
 		return compareTo(left, right) > 0;
 	}
 
-	public static boolean isGreaterThan(final BigDecimal left, final long right) {
+	public static boolean isGreaterThan(BigDecimal left, long right) {
 		return compareTo(left, right) > 0;
 	}
 
-	public static boolean isGreaterThan(final long left, final BigDecimal right) {
+	public static boolean isGreaterThan(long left, BigDecimal right) {
 		return compareTo(left, right) > 0;
 	}
 
-	public static boolean isGreaterOrEqualThan(final BigDecimal left, final BigDecimal right) {
+	public static boolean isGreaterThanOrEqualTo(BigDecimal left, BigDecimal right) {
 		return compareTo(left, right) >= 0;
 	}
 
-	public static boolean isGreaterOrEqualThan(final BigDecimal left, final int right) {
+	public static boolean isGreaterThanOrEqualTo(BigDecimal left, int right) {
 		return compareTo(left, right) >= 0;
 	}
 
-	public static boolean isGreaterOrEqualThan(final int left, final BigDecimal right) {
+	public static boolean isGreaterThanOrEqualTo(int left, BigDecimal right) {
 		return compareTo(left, right) >= 0;
 	}
 
-	public static boolean isGreaterOrEqualThan(final BigDecimal left, final long right) {
+	public static boolean isGreaterThanOrEqualTo(BigDecimal left, long right) {
 		return compareTo(left, right) >= 0;
 	}
 
-	public static boolean isGreaterOrEqualThan(final long left, final BigDecimal right) {
+	public static boolean isGreaterThanOrEqualTo(long left, BigDecimal right) {
 		return compareTo(left, right) >= 0;
 	}
 
 	// COMPARATORS FOR 0 AS FACILITY
 
-	public static boolean isEqualsToZERO(final BigDecimal value) {
-		return isEquals(value, ZERO);
+	public static boolean isEqualToZERO(BigDecimal value) {
+		return isEqualTo(value, ZERO);
 	}
 
-	public static boolean isNotEqualsToZERO(final BigDecimal value) {
-		return isNotEquals(value, ZERO);
+	public static boolean isNotEqualToZERO(BigDecimal value) {
+		return isNotEqualTo(value, ZERO);
 	}
 
-	public static boolean isGreaterThanZERO(final BigDecimal value) {
+	public static boolean isGreaterThanZERO(BigDecimal value) {
 		return isGreaterThan(value, ZERO);
 	}
 
-	public static boolean isGreaterOrEqualThanZERO(final BigDecimal value) {
-		return isGreaterOrEqualThan(value, ZERO);
+	public static boolean isGreaterThanOrEqualToZERO(BigDecimal value) {
+		return isGreaterThanOrEqualTo(value, ZERO);
 	}
 
-	public static boolean isLessThanZERO(final BigDecimal value) {
+	public static boolean isLessThanZERO(BigDecimal value) {
 		return isLessThan(value, ZERO);
 	}
 
-	public static boolean isLessOrEqualThanZERO(final BigDecimal value) {
-		return isLessOrEqualThan(value, ZERO);
+	public static boolean isLessThanOrEqualToZERO(BigDecimal value) {
+		return isLessThanOrEqualTo(value, ZERO);
 	}
 
 	// COMPARE TO
 
-	private static int compareTo(final BigDecimal left, final BigDecimal right) {
+	private static int compareTo(BigDecimal left, BigDecimal right) {
 		return left.compareTo(right);
 	}
 
-	private static int compareTo(final BigDecimal left, final int right) {
+	private static int compareTo(BigDecimal left, int right) {
 		return left.compareTo(toBigDecimal(right));
 	}
 
-	private static int compareTo(final int left, final BigDecimal right) {
+	private static int compareTo(int left, BigDecimal right) {
 		return toBigDecimal(left).compareTo(right);
 	}
 
-	private static int compareTo(final BigDecimal left, final long right) {
+	private static int compareTo(BigDecimal left, long right) {
 		return left.compareTo(toBigDecimal(right));
 	}
 
-	private static int compareTo(final long left, final BigDecimal right) {
+	private static int compareTo(long left, BigDecimal right) {
 		return toBigDecimal(left).compareTo(right);
 	}
 
