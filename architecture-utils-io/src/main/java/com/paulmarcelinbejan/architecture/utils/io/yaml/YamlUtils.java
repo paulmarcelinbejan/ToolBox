@@ -2,11 +2,13 @@ package com.paulmarcelinbejan.architecture.utils.io.yaml;
 
 import static com.paulmarcelinbejan.architecture.constants.Symbols.DOT;
 import static com.paulmarcelinbejan.architecture.constants.Symbols.SLASH;
+import static com.paulmarcelinbejan.architecture.utils.io.common.FileType.YAML;
 import static com.paulmarcelinbejan.architecture.utils.io.yaml.config.YamlPrefixType.CONDENSED;
 import static com.paulmarcelinbejan.architecture.utils.io.yaml.config.YamlPrefixType.NESTED;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Map;
@@ -16,6 +18,7 @@ import org.apache.commons.lang3.tuple.Pair;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.dataformat.yaml.YAMLMapper;
+import com.paulmarcelinbejan.architecture.utils.io.common.FileInfo;
 import com.paulmarcelinbejan.architecture.utils.io.yaml.config.YamlPrefixType;
 
 import lombok.AccessLevel;
@@ -33,19 +36,13 @@ public class YamlUtils {
 	 *  How to use: 
 	 *  <pre> {@code
 	 *  	
-	 *  YamlUtils.read(ConfigProperties.class, "./src/test/resources/", "MyYamlFileName.yaml");
+	 *  YamlUtils.read(ConfigProperties.class, fileInfo);
 	 *  
 	 *  } </pre>
 	 *  
 	 */
-    public static <ConfigProperties> ConfigProperties read(@NonNull final Class<ConfigProperties> configClass, @NonNull final String directoryPath, @NonNull final String yamlFileName) throws IOException {
-        InputStream inputStream = new FileInputStream(new File(directoryPath + yamlFileName));
-
-		YAMLMapper mapper = new YAMLMapper();
-		mapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
-		mapper.enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
-
-        return readValueWithoutPrefix(mapper, configClass, inputStream);
+    public static <ConfigProperties> ConfigProperties read(@NonNull Class<ConfigProperties> configClass, @NonNull FileInfo fileInfo) throws IOException {
+        return readValueWithoutPrefix(configClass, createYamlMapper(), createFileInputStream(fileInfo));
 	}
 	
 	/**
@@ -61,33 +58,41 @@ public class YamlUtils {
 	 *  	
 	 *  YamlUtils.read(
 	 *		ConfigProperties.class, 
-	 *		"./src/test/resources/",
-	 *		"MyYamlFileName.yaml", 
+	 *		fileInfo, 
 	 *		Pair.of(YamlPrefixType.NESTED, "my.prefix"));
 	 *  
 	 *  } </pre>
 	 *  
 	 */
-    public static <ConfigProperties> ConfigProperties read(@NonNull final Class<ConfigProperties> configClass, @NonNull final String directoryPath, @NonNull final String yamlFileName, @NonNull final Pair<YamlPrefixType, String> prefix) throws IOException {
-        InputStream inputStream = new FileInputStream(new File(directoryPath + yamlFileName));
-		
+    public static <ConfigProperties> ConfigProperties read(@NonNull Class<ConfigProperties> configClass, 
+    													   @NonNull FileInfo fileInfo, 
+    													   @NonNull Pair<@NonNull YamlPrefixType, @NonNull String> prefix) throws IOException {
+        return readValueWithPrefix(configClass, createYamlMapper(), createFileInputStream(fileInfo), prefix);
+	}
+
+	private static FileInputStream createFileInputStream(FileInfo fileInfo) throws FileNotFoundException {
+		return new FileInputStream(new File(fileInfo.getFullPath(YAML)));
+	}
+	
+	private static YAMLMapper createYamlMapper() {
 		YAMLMapper mapper = new YAMLMapper();
 		mapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
 		mapper.enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
-		
-        return readValueWithPrefix(mapper, configClass, inputStream, prefix);
+		return mapper;
 	}
-    
-    
 	
-    private static <ConfigProperties> ConfigProperties readValueWithPrefix(YAMLMapper mapper, Class<ConfigProperties> configClass, InputStream inputStream, Pair<YamlPrefixType, String> prefix) throws IOException {
+    private static <ConfigProperties> ConfigProperties readValueWithoutPrefix(Class<ConfigProperties> configClass, 
+    																		  YAMLMapper mapper, 
+    																		  InputStream inputStream) throws IOException {
+        return mapper.readValue(inputStream, configClass);
+    }
+    
+    private static <ConfigProperties> ConfigProperties readValueWithPrefix(Class<ConfigProperties> configClass, 
+    																	   YAMLMapper mapper, InputStream inputStream, 
+    																	   Pair<YamlPrefixType, String> prefix) throws IOException {
         return mapper.readerFor(configClass)
                      .at(fixPrefix(prefix))
                      .readValue(inputStream);
-    }
-    
-    private static <ConfigProperties> ConfigProperties readValueWithoutPrefix(YAMLMapper mapper, Class<ConfigProperties> configClass, InputStream inputStream) throws IOException {
-        return mapper.readValue(inputStream, configClass);
     }
     
     /**

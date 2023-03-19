@@ -11,7 +11,7 @@
     <artifactId>architecture-utils-io</artifactId>
   
     <dependencies>
-	  
+		
 	    <dependency>
       	    <groupId>com.paulmarcelinbejan</groupId>
       	    <artifactId>architecture-base</artifactId>
