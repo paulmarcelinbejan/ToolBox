@@ -42,29 +42,29 @@ public class DateTimeFormatUtils {
 	/**
 	 * @throws IllegalArgumentException if the pattern is invalid
 	 */
-	public static final <DateTimePattern extends DateTimePatternBase> String toString(LocalDateTime localDateTime, DateTimePattern pattern) {
-		return pattern.getFormatter().format(localDateTime);
+	public static final <DateTimePattern extends DateTimePatternBase> String toString(LocalDateTime localDateTime, DateTimePattern dateTimePattern) {
+		return dateTimePattern.getFormatter().format(localDateTime);
 	}
 	
 	/**
 	 * @throws IllegalArgumentException if the pattern is invalid
 	 */
-	public static final <DateTimePattern extends DateTimePatternBase> String toString(LocalDateTime localDateTime, DateTimePattern pattern, Locale locale) {
-		return localizedFormatter(pattern.getFormatter(), locale).format(localDateTime);
+	public static final <DateTimePattern extends DateTimePatternBase> String toString(LocalDateTime localDateTime, DateTimePattern dateTimePattern, Locale locale) {
+		return localizedFormatter(dateTimePattern.getFormatter(), locale).format(localDateTime);
 	}
 	
 	/**
 	 * @throws IllegalArgumentException if the pattern is invalid
 	 */
-	public static final String toString(LocalDateTime localDateTime, String pattern) {
-		return formatter(pattern).format(localDateTime);
+	public static final String toString(LocalDateTime localDateTime, String dateTimePattern) {
+		return formatter(dateTimePattern).format(localDateTime);
 	}
 	
 	/**
 	 * @throws IllegalArgumentException if the pattern is invalid
 	 */
-	public static final String toString(LocalDateTime localDateTime, String pattern, Locale locale) {
-		return formatter(pattern, locale).format(localDateTime);
+	public static final String toString(LocalDateTime localDateTime, String dateTimePattern, Locale locale) {
+		return formatter(dateTimePattern, locale).format(localDateTime);
 	}
 	
 	// To LocalDateTime
@@ -86,16 +86,16 @@ public class DateTimeFormatUtils {
 	/**
 	 * @throws IllegalArgumentException if the pattern is invalid
 	 */
-	public static final LocalDateTime toLocalDateTime(String date, String datePattern) {
-		return LocalDateTime.parse(date, formatter(datePattern));
+	public static final LocalDateTime toLocalDateTime(String date, String dateTimePattern) {
+		return LocalDateTime.parse(date, formatter(dateTimePattern));
 	}
 	
 	/**
 	 * @throws IllegalArgumentException if the pattern is invalid
 	 * @throws DateTimeParseException - if the text cannot be parsed
 	 */
-	public static final LocalDateTime toLocalDateTime(String date, String datePattern, Locale locale) {
-		return LocalDateTime.parse(date, formatter(datePattern, locale));
+	public static final LocalDateTime toLocalDateTime(String date, String dateTimePattern, Locale locale) {
+		return LocalDateTime.parse(date, formatter(dateTimePattern, locale));
 	}
 	
 }

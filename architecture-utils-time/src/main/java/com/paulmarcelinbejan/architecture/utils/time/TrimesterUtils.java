@@ -63,19 +63,19 @@ import lombok.NoArgsConstructor;
  * </table>
  */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-public class TrimesterUtils {
+class TrimesterUtils {
 
-	public static final Map<Month, Function<LocalDate, LocalDate>> FIRST_DAY_OF_CURRENT_TRIMESTER = initializeFirstDayOfCurrentTrimesterMap();
+	static final Map<Month, Function<LocalDate, LocalDate>> FIRST_DAY_OF_CURRENT_TRIMESTER = initializeFirstDayOfCurrentTrimesterMap();
 	
-	public static final Map<Month, Function<LocalDate, LocalDate>> LAST_DAY_OF_CURRENT_TRIMESTER = initializeLastDayOfCurrentTrimesterMap();
+	static final Map<Month, Function<LocalDate, LocalDate>> LAST_DAY_OF_CURRENT_TRIMESTER = initializeLastDayOfCurrentTrimesterMap();
 	
-	public static final Map<Month, Function<LocalDate, LocalDate>> FIRST_DAY_OF_NEXT_TRIMESTER = initializeFirstDayOfNextTrimesterMap();
+	static final Map<Month, Function<LocalDate, LocalDate>> FIRST_DAY_OF_NEXT_TRIMESTER = initializeFirstDayOfNextTrimesterMap();
 	
-	public static final Map<Month, Function<LocalDate, LocalDate>> LAST_DAY_OF_NEXT_TRIMESTER = initializeLastDayOfNextTrimesterMap();
+	static final Map<Month, Function<LocalDate, LocalDate>> LAST_DAY_OF_NEXT_TRIMESTER = initializeLastDayOfNextTrimesterMap();
 	
-	public static final Map<Month, Function<LocalDate, LocalDate>> FIRST_DAY_OF_PREVIOUS_TRIMESTER = initializeFirstDayOfPreviousTrimesterMap();
+	static final Map<Month, Function<LocalDate, LocalDate>> FIRST_DAY_OF_PREVIOUS_TRIMESTER = initializeFirstDayOfPreviousTrimesterMap();
 	
-	public static final Map<Month, Function<LocalDate, LocalDate>> LAST_DAY_OF_PREVIOUS_TRIMESTER = initializeLastDayOfPreviousTrimesterMap();
+	static final Map<Month, Function<LocalDate, LocalDate>> LAST_DAY_OF_PREVIOUS_TRIMESTER = initializeLastDayOfPreviousTrimesterMap();
 	
 	// FIRST DAY of CURRENT TRIMESTER
 	

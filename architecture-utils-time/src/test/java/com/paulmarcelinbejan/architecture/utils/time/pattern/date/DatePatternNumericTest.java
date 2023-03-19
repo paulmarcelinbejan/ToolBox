@@ -12,40 +12,40 @@ class DatePatternNumericTest {
 	@Test
 	void validateDatePatternDotSeparator() {
 		LocalDate date = LocalDate.of(2023, Month.APRIL, 6);
-		for(DatePattern.Numeric.WithDotSeparator dp : DatePattern.Numeric.WithDotSeparator.values()) {
-			String timeString = dp.formatter.format(date);
-			assertNotNull(timeString);
-			System.out.println(timeString);
+		for(DatePattern.Numeric.WithDotSeparator datePattern : DatePattern.Numeric.WithDotSeparator.values()) {
+			String dateString = datePattern.formatter.format(date);
+			assertNotNull(dateString);
+//			System.out.println(dateString);
 		}
 	}
 	
 	@Test
 	void validateDatePatternHyphenSeparator() {
 		LocalDate date = LocalDate.of(2023, Month.APRIL, 6);
-		for(DatePattern.Numeric.WithHyphenSeparator dp : DatePattern.Numeric.WithHyphenSeparator.values()) {
-			String timeString = dp.formatter.format(date);
-			assertNotNull(timeString);
-			System.out.println(timeString);
+		for(DatePattern.Numeric.WithHyphenSeparator datePattern : DatePattern.Numeric.WithHyphenSeparator.values()) {
+			String dateString = datePattern.formatter.format(date);
+			assertNotNull(dateString);
+//			System.out.println(dateString);
 		}
 	}
 	
 	@Test
 	void validateDatePatternSlashSeparator() {
 		LocalDate date = LocalDate.of(2023, Month.APRIL, 6);
-		for(DatePattern.Numeric.WithSlashSeparator dp : DatePattern.Numeric.WithSlashSeparator.values()) {
-			String timeString = dp.formatter.format(date);
-			assertNotNull(timeString);
-			System.out.println(timeString);
+		for(DatePattern.Numeric.WithSlashSeparator datePattern : DatePattern.Numeric.WithSlashSeparator.values()) {
+			String dateString = datePattern.formatter.format(date);
+			assertNotNull(dateString);
+//			System.out.println(dateString);
 		}
 	}
 	
 	@Test
 	void validateDatePatternSpaceSeparator() {
 		LocalDate date = LocalDate.of(2023, Month.APRIL, 6);
-		for(DatePattern.Numeric.WithSpaceSeparator dp : DatePattern.Numeric.WithSpaceSeparator.values()) {
-			String timeString = dp.formatter.format(date);
-			assertNotNull(timeString);
-			System.out.println(timeString);
+		for(DatePattern.Numeric.WithSpaceSeparator datePattern : DatePattern.Numeric.WithSpaceSeparator.values()) {
+			String dateString = datePattern.formatter.format(date);
+			assertNotNull(dateString);
+//			System.out.println(dateString);
 		}
 	}
 	

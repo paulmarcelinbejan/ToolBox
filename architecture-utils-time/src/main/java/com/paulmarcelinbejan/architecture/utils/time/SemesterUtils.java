@@ -51,19 +51,19 @@ import lombok.NoArgsConstructor;
  * </table>
  */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-public class SemesterUtils {
+class SemesterUtils {
 
-	public static final Map<Month, Function<LocalDate, LocalDate>> FIRST_DAY_OF_CURRENT_SEMESTER = initializeFirstDayOfCurrentSemesterMap();
+	static final Map<Month, Function<LocalDate, LocalDate>> FIRST_DAY_OF_CURRENT_SEMESTER = initializeFirstDayOfCurrentSemesterMap();
 	
-	public static final Map<Month, Function<LocalDate, LocalDate>> LAST_DAY_OF_CURRENT_SEMESTER = initializeLastDayOfCurrentSemesterMap();
+	static final Map<Month, Function<LocalDate, LocalDate>> LAST_DAY_OF_CURRENT_SEMESTER = initializeLastDayOfCurrentSemesterMap();
 	
-	public static final Map<Month, Function<LocalDate, LocalDate>> FIRST_DAY_OF_NEXT_SEMESTER = initializeFirstDayOfNextSemesterMap();
+	static final Map<Month, Function<LocalDate, LocalDate>> FIRST_DAY_OF_NEXT_SEMESTER = initializeFirstDayOfNextSemesterMap();
 	
-	public static final Map<Month, Function<LocalDate, LocalDate>> LAST_DAY_OF_NEXT_SEMESTER = initializeLastDayOfNextSemesterMap();
+	static final Map<Month, Function<LocalDate, LocalDate>> LAST_DAY_OF_NEXT_SEMESTER = initializeLastDayOfNextSemesterMap();
 	
-	public static final Map<Month, Function<LocalDate, LocalDate>> FIRST_DAY_OF_PREVIOUS_SEMESTER = initializeFirstDayOfPreviousSemesterMap();
+	static final Map<Month, Function<LocalDate, LocalDate>> FIRST_DAY_OF_PREVIOUS_SEMESTER = initializeFirstDayOfPreviousSemesterMap();
 	
-	public static final Map<Month, Function<LocalDate, LocalDate>> LAST_DAY_OF_PREVIOUS_SEMESTER = initializeLastDayOfPreviousSemesterMap();
+	static final Map<Month, Function<LocalDate, LocalDate>> LAST_DAY_OF_PREVIOUS_SEMESTER = initializeLastDayOfPreviousSemesterMap();
 	
 	// FIRST DAY of CURRENT SEMESTER
 	
