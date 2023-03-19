@@ -1,6 +1,6 @@
 package com.paulmarcelinbejan.architecture.test;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
 import java.time.LocalDate;
 
@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 import com.paulmarcelinbejan.architecture.test.entities.Car;
 import com.paulmarcelinbejan.architecture.test.entities.Manufacturer;
 
-class AssertDeepEquals_Test extends AbstractTest {
+class AssertDeepEquals_Test {
 
 	@Test
 	void deepEqualsTrue() {
@@ -24,7 +24,7 @@ class AssertDeepEquals_Test extends AbstractTest {
 		System.out.println("---");
 		System.out.println(ferrari_308GTB_same_value);
 		
-		assertDeepEquals(ferrari_308GTB, ferrari_308GTB_same_value);
+		TestUtils.assertDeepEquals(ferrari_308GTB, ferrari_308GTB_same_value);
 		
 	}
 	
@@ -41,11 +41,7 @@ class AssertDeepEquals_Test extends AbstractTest {
 		System.out.println("---");
 		System.out.println(ferrari_308GTB_different_value);
 		
-		try {
-			assertDeepEquals(ferrari_308GTB, ferrari_308GTB_different_value);
-		} catch (AssertionError e) {
-			assertNotNull(e);
-		}
+		assertDoesNotThrow(() -> TestUtils.assertDeepEquals(ferrari_308GTB, ferrari_308GTB_different_value));
 		
 	}
 	

@@ -6,12 +6,12 @@ import org.junit.jupiter.api.Test;
 
 import com.paulmarcelinbejan.architecture.test.entities.Car;
 
-class BuildObject_Test extends AbstractTest {
+class BuildObject_Test {
 
 	@Test
 	void testBuildObject() {
 
-		Car car = buildObject(Car.class);
+		Car car = TestUtils.buildObject(Car.class);
 		System.out.println(car);
 		
 		assertNotNull(car.getManufacturer());

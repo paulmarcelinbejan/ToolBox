@@ -12,8 +12,8 @@ import com.paulmarcelinbejan.validator.exception.ValidatorException;import lombo
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
-public abstract class AbstractTest {
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
+public class TestUtils {
 
 	/**
 	 * assert that two object are equals based on fields of actual,
@@ -21,14 +21,14 @@ public abstract class AbstractTest {
 	 * <p>
 	 * Example and more configuration can be found at <a href="https://assertj.github.io/doc/#basic-usage">assertj.github.io/doc</a>
 	 */
-	protected <T> void assertDeepEquals(@NonNull T expected, @NonNull T actual) {
+	public static <T> void assertDeepEquals(@NonNull T expected, @NonNull T actual) {
 		assertThat(actual).usingRecursiveComparison().isEqualTo(expected);
 	}
 	
 	/**
 	 * Create a new instance with random values of the given class using {@link EasyRandom}.
 	 */
-	protected <T> T buildObject(@NonNull final Class<T> objectClass) {
+	public static <T> T buildObject(@NonNull final Class<T> objectClass) {
 		return new EasyRandom().nextObject(objectClass);
 	}
 	
@@ -38,7 +38,7 @@ public abstract class AbstractTest {
 	 * <br> - customize the randomness of values
 	 * <br> - exclude fields to be valorized
 	 */
-	protected <T> T buildObject(@NonNull final Class<T> objectClass, @NonNull EasyRandomParameters easyRandomParameters) {
+	public static <T> T buildObject(@NonNull final Class<T> objectClass, @NonNull EasyRandomParameters easyRandomParameters) {
 		return new EasyRandom(easyRandomParameters).nextObject(objectClass);
 	}
 	
@@ -46,7 +46,7 @@ public abstract class AbstractTest {
 	 * Validate output object through BFS (Breadth-first search).
 	 * <br> A default {@link ValidatorConfig} will be used to validate the object.
 	 */
-	protected void validateObjectBFS(@NonNull Object root) throws ValidatorException {
+	public static void validateObjectBFS(@NonNull Object root) throws ValidatorException {
 		ValidatorConfig defaultValidatorConfig = ValidatorConfig.builder().getDefault().build();
 		validateObjectBFS(root, defaultValidatorConfig);
 	}
@@ -58,7 +58,7 @@ public abstract class AbstractTest {
 	 * <br> - exclude Classes to be validated
 	 * <br> - choose what is valid and what is not
 	 */
-	protected void validateObjectBFS(@NonNull Object root, @NonNull ValidatorConfig validatorConfig) throws ValidatorException {
+	protected static void validateObjectBFS(@NonNull Object root, @NonNull ValidatorConfig validatorConfig) throws ValidatorException {
 		ValidatorBFS validatorBFS = new ValidatorBFS(validatorConfig);
 		validatorBFS.isValid(root);
 	}
@@ -67,7 +67,7 @@ public abstract class AbstractTest {
 	 * Validate output object through DFS (Depth-first search)
 	 * <br> A default {@link ValidatorConfig} will be used to validate the object.
 	 */
-	protected void validateObjectDFS(@NonNull Object root) throws ValidatorException {
+	public static void validateObjectDFS(@NonNull Object root) throws ValidatorException {
 		ValidatorConfig defaultValidatorConfig = ValidatorConfig.builder().getDefault().build();
 		validateObjectDFS(root, defaultValidatorConfig);
 	}
@@ -79,7 +79,7 @@ public abstract class AbstractTest {
 	 * <br> - exclude Classes to be validated
 	 * <br> - choose what is valid and what is not
 	 */
-	protected void validateObjectDFS(@NonNull Object root, @NonNull ValidatorConfig validatorConfig) throws ValidatorException {
+	public static void validateObjectDFS(@NonNull Object root, @NonNull ValidatorConfig validatorConfig) throws ValidatorException {
 		ValidatorDFS validatorDFS = new ValidatorDFS(validatorConfig);
 		validatorDFS.isValid(root);
 	}
