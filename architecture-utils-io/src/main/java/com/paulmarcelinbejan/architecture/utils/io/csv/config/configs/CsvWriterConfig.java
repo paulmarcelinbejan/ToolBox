@@ -1,5 +1,7 @@
 package com.paulmarcelinbejan.architecture.utils.io.csv.config.configs;
 
+import static com.paulmarcelinbejan.architecture.constants.SymbolsAsChar.COMMA;
+
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -15,7 +17,7 @@ import lombok.Getter;
 
 public class CsvWriterConfig {
 
-	public static final CsvWriterConfig DEFAULT = new CsvWriterConfig(',', null, null, false);
+	public static final CsvWriterConfig DEFAULT = new CsvWriterConfig(COMMA, Map.of(), List.of(), false);
 	
 	@Getter
 	private final char separator;

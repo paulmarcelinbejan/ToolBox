@@ -11,7 +11,7 @@ import lombok.Getter;
 
 public class CsvReaderConfig {
 
-	public static final CsvReaderConfig DEFAULT = new CsvReaderConfig(',', null);
+	public static final CsvReaderConfig DEFAULT = new CsvReaderConfig(',', Map.of());
 	
 	private final char separator;
 	
