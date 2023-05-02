@@ -16,6 +16,11 @@
 			<groupId>com.paulmarcelinbejan.toolbox</groupId>
 			<artifactId>toolbox-base</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>com.paulmarcelinbejan.toolbox</groupId>
+			<artifactId>toolbox-test</artifactId>
+			<scope>test</scope>
+		</dependency>
 		
 	</dependencies>
 	

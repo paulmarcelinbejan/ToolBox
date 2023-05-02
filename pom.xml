@@ -26,17 +26,17 @@
         <maven.compiler.target>17</maven.compiler.target>
         <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
         <!-- SPRING -->
-        <spring-boot.version>3.0.4</spring-boot.version>
+        <spring-boot.version>3.0.6</spring-boot.version>
         <!-- LOGGERS -->
         <!-- <tinylog.version>2.6.0</tinylog.version> -->
         <log4j-slf4j-impl.version>2.20.0</log4j-slf4j-impl.version>
         <!-- LOMBOK -->
-        <lombok.version>1.18.24</lombok.version>
+        <lombok.version>1.18.26</lombok.version>
         <!-- JACKSON -->
-        <jackson.version>2.14.1</jackson.version>
+        <jackson.version>2.15.0</jackson.version>
         <!-- APACHE -->
         <apache-commons-lang3.version>3.12.0</apache-commons-lang3.version>
-        <apache-commons-collections.version>3.2.2</apache-commons-collections.version>
+        <apache-commons-collections4.version>4.4</apache-commons-collections4.version>
     </properties>
 
     <modules>
@@ -122,10 +122,10 @@
                 <artifactId>commons-lang3</artifactId>
                 <version>${apache-commons-lang3.version}</version>
             </dependency>
-            <dependency>
-			    <groupId>commons-collections</groupId>
-			    <artifactId>commons-collections</artifactId>
-			    <version>${apache-commons-collections.version}</version>
+			<dependency>
+			    <groupId>org.apache.commons</groupId>
+			    <artifactId>commons-collections4</artifactId>
+			    <version>${apache-commons-collections4.version}</version>
 			</dependency>
 
             <!-- Jackson -->
@@ -162,11 +162,6 @@
 				</exclusion>
 			</exclusions>
         </dependency>
-	    <dependency>
-	        <groupId>org.springframework.boot</groupId>
-	        <artifactId>spring-boot-starter-test</artifactId>
-	        <scope>test</scope>
-	    </dependency>
 		
 		<!-- LOGGER -->
 		<!-- 
