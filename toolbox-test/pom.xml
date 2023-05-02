@@ -5,13 +5,15 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>com.paulmarcelinbejan</groupId>
+        <groupId>com.paulmarcelinbejan.toolbox</groupId>
         <artifactId>toolbox</artifactId>
         <version>1.0.0</version>
     </parent>
 
     <artifactId>toolbox-test</artifactId>
-
+    <version>1.0.0</version>
+    <packaging>jar</packaging>
+    
 	<properties>
 		<paulmarcelinbejan-validator.version>1.0.0</paulmarcelinbejan-validator.version>
 		<easyrandom.version>5.0.0</easyrandom.version>
@@ -20,7 +22,7 @@
     <dependencies>
 
         <dependency>
-            <groupId>com.paulmarcelinbejan</groupId>
+            <groupId>com.paulmarcelinbejan.toolbox</groupId>
             <artifactId>toolbox-base</artifactId>
         </dependency>
         <dependency>

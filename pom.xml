@@ -13,7 +13,7 @@
     <name>ToolBox</name>
     <description>Paul Marcelin Bejan ToolBox</description>
 
-    <groupId>com.paulmarcelinbejan</groupId>
+    <groupId>com.paulmarcelinbejan.toolbox</groupId>
     <artifactId>toolbox</artifactId>
     <version>1.0.0</version>
     <packaging>pom</packaging>
@@ -24,6 +24,7 @@
         <!-- MAVEN -->
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
+        <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
         <!-- SPRING -->
         <spring-boot.version>3.0.4</spring-boot.version>
         <!-- LOGGERS -->
@@ -45,6 +46,7 @@
         <module>toolbox-constants</module>
         <module>toolbox-test</module>
         <module>toolbox-utils-io</module>
+        <module>toolbox-utils-mapping</module>
         <module>toolbox-utils-math</module>
         <module>toolbox-utils-time</module>
     </modules>
@@ -68,43 +70,48 @@
 
             <!-- toolbox dependencies -->
             <dependency>
-                <groupId>com.paulmarcelinbejan</groupId>
+                <groupId>com.paulmarcelinbejan.toolbox</groupId>
                 <artifactId>toolbox-annotations</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.paulmarcelinbejan</groupId>
+                <groupId>com.paulmarcelinbejan.toolbox</groupId>
                 <artifactId>toolbox-base</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.paulmarcelinbejan</groupId>
+                <groupId>com.paulmarcelinbejan.toolbox</groupId>
                 <artifactId>toolbox-configuration</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.paulmarcelinbejan</groupId>
+                <groupId>com.paulmarcelinbejan.toolbox</groupId>
                 <artifactId>toolbox-constants</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.paulmarcelinbejan</groupId>
+                <groupId>com.paulmarcelinbejan.toolbox</groupId>
                 <artifactId>toolbox-test</artifactId>
                 <version>${project.version}</version>
                 <scope>test</scope>
             </dependency>
             <dependency>
-                <groupId>com.paulmarcelinbejan</groupId>
+                <groupId>com.paulmarcelinbejan.toolbox</groupId>
                 <artifactId>toolbox-utils-io</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.paulmarcelinbejan</groupId>
+                <groupId>com.paulmarcelinbejan.toolbox</groupId>
+                <artifactId>toolbox-mapping</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.paulmarcelinbejan.toolbox</groupId>
                 <artifactId>toolbox-utils-math</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.paulmarcelinbejan</groupId>
+                <groupId>com.paulmarcelinbejan.toolbox</groupId>
                 <artifactId>toolbox-utils-time</artifactId>
                 <version>${project.version}</version>
             </dependency>
