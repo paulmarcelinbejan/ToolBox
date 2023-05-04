@@ -9,6 +9,7 @@
     </parent>
   
     <artifactId>toolbox-utils-io</artifactId>
+    <name>ToolBox Utils IO</name>
     <version>1.0.0</version>
     <packaging>jar</packaging>
     

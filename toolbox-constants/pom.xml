@@ -11,6 +11,7 @@
     </parent>
 
     <artifactId>toolbox-constants</artifactId>
+    <name>ToolBox Constants</name>
     <version>1.0.0</version>
     <packaging>jar</packaging>
 

@@ -11,6 +11,7 @@
     </parent>
 
     <artifactId>toolbox-annotations</artifactId>
+    <name>ToolBox Annotations</name>
     <version>1.0.0</version>
     <packaging>jar</packaging>
 

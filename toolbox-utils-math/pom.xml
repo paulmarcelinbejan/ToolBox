@@ -9,6 +9,9 @@
     </parent>
     
     <artifactId>toolbox-utils-math</artifactId>
+    <name>ToolBox Utils Math</name>
+    <version>1.0.0</version>
+    <packaging>jar</packaging>
     
     <dependencies>
 	  

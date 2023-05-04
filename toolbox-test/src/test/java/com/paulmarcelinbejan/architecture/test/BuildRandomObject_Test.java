@@ -7,12 +7,12 @@ import org.junit.jupiter.api.Test;
 import com.paulmarcelinbejan.architecture.test.entities.Car;
 import com.paulmarcelinbejan.toolbox.test.TestUtils;
 
-class BuildObject_Test {
+class BuildRandomObject_Test {
 
 	@Test
 	void testBuildObject() {
 
-		Car car = TestUtils.buildObject(Car.class);
+		Car car = TestUtils.buildRandomObject(Car.class);
 		System.out.println(car);
 		
 		assertNotNull(car.getManufacturer());

@@ -11,6 +11,7 @@
     </parent>
 
     <artifactId>toolbox-base</artifactId>
+    <name>ToolBox Base</name>
     <version>1.0.0</version>
     <packaging>jar</packaging>
 
