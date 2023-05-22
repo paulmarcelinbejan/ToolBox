@@ -24,19 +24,26 @@
         <!-- MAVEN -->
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
-        <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
+        <maven-compiler-plugin.version>3.11.0</maven-compiler-plugin.version>
         <!-- SPRING -->
         <spring-boot.version>3.0.6</spring-boot.version>
         <!-- LOGGERS -->
         <tinylog.version>2.6.1</tinylog.version>
+        <slf4j-api.version>2.0.7</slf4j-api.version>
         <log4j-slf4j-impl.version>2.20.0</log4j-slf4j-impl.version>
         <!-- LOMBOK -->
         <lombok.version>1.18.26</lombok.version>
         <!-- JACKSON -->
         <jackson.version>2.15.0</jackson.version>
+        <!-- GUAVA -->
+        <guava.version>31.1-jre</guava.version>
         <!-- APACHE -->
         <apache-commons-lang3.version>3.12.0</apache-commons-lang3.version>
+        <apache-commons-text.version>1.10.0</apache-commons-text.version>
         <apache-commons-collections4.version>4.4</apache-commons-collections4.version>
+        <!-- MAPSTRUCT -->
+        <org.mapstruct.version>1.5.5.Final</org.mapstruct.version>
+	    <lombok-mapstruct-binding.version>0.2.0</lombok-mapstruct-binding.version>
     </properties>
 
     <modules>
@@ -44,17 +51,30 @@
 		<module>toolbox-base</module>
         <module>toolbox-configuration</module>
         <module>toolbox-constants</module>
+        <module>toolbox-exception</module>
+        <module>toolbox-sql</module>
         <module>toolbox-test</module>
         <module>toolbox-utils-io</module>
         <module>toolbox-utils-mapping</module>
         <module>toolbox-utils-math</module>
+        <module>toolbox-utils-reflection</module>
         <module>toolbox-utils-time</module>
+        <module>toolbox-web</module>
+        <module>toolbox-utils-text</module>
     </modules>
 
     <dependencyManagement>
         <dependencies>
         
 	        <!-- Spring Boot dependencies -->
+	        <dependency>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-dependencies</artifactId>
+				<version>${spring-boot.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+			
 	        <dependency>
 	            <groupId>org.springframework.boot</groupId>
 	            <artifactId>spring-boot-starter</artifactId>
@@ -81,7 +101,7 @@
                 <version>${lombok.version}</version>
             </dependency>
 
-            <!-- toolbox dependencies -->
+            <!-- ToolBox dependencies -->
             <dependency>
                 <groupId>com.paulmarcelinbejan.toolbox</groupId>
                 <artifactId>toolbox-annotations</artifactId>
@@ -104,6 +124,16 @@
             </dependency>
             <dependency>
                 <groupId>com.paulmarcelinbejan.toolbox</groupId>
+                <artifactId>toolbox-exception</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.paulmarcelinbejan.toolbox</groupId>
+                <artifactId>toolbox-sql</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.paulmarcelinbejan.toolbox</groupId>
                 <artifactId>toolbox-test</artifactId>
                 <version>${project.version}</version>
                 <scope>test</scope>
@@ -115,7 +145,7 @@
             </dependency>
             <dependency>
                 <groupId>com.paulmarcelinbejan.toolbox</groupId>
-                <artifactId>toolbox-mapping</artifactId>
+                <artifactId>toolbox-utils-mapping</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
@@ -125,16 +155,43 @@
             </dependency>
             <dependency>
                 <groupId>com.paulmarcelinbejan.toolbox</groupId>
+                <artifactId>toolbox-utils-reflection</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.paulmarcelinbejan.toolbox</groupId>
+                <artifactId>toolbox-utils-text</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.paulmarcelinbejan.toolbox</groupId>
                 <artifactId>toolbox-utils-time</artifactId>
                 <version>${project.version}</version>
             </dependency>
+            <dependency>
+                <groupId>com.paulmarcelinbejan.toolbox</groupId>
+                <artifactId>toolbox-web</artifactId>
+                <version>${project.version}</version>
+            </dependency>
 
+			<!-- Guava -->
+			<dependency>
+				<groupId>com.google.guava</groupId>
+				<artifactId>guava</artifactId>
+				<version>${guava.version}</version>
+			</dependency>
+		
             <!-- Apache -->
             <dependency>
                 <groupId>org.apache.commons</groupId>
                 <artifactId>commons-lang3</artifactId>
                 <version>${apache-commons-lang3.version}</version>
             </dependency>
+            <dependency>
+			    <groupId>org.apache.commons</groupId>
+			    <artifactId>commons-text</artifactId>
+			    <version>${apache-commons-text.version}</version>
+			</dependency>
 			<dependency>
 			    <groupId>org.apache.commons</groupId>
 			    <artifactId>commons-collections4</artifactId>
@@ -170,6 +227,11 @@
 			    <version>${tinylog.version}</version>
 			</dependency>
 			<dependency>
+			    <groupId>org.slf4j</groupId>
+			    <artifactId>slf4j-api</artifactId>
+			    <version>${slf4j-api.version}</version>
+			</dependency>
+			<dependency>
 		    	<groupId>org.apache.logging.log4j</groupId>
 		    	<artifactId>log4j-slf4j-impl</artifactId>
 		    	<version>${log4j-slf4j-impl.version}</version>
@@ -195,22 +257,55 @@
     </dependencies>
 
     <build>
+		<pluginManagement>
+	        <plugins>
+	            <plugin>
+	                <groupId>org.springframework.boot</groupId>
+	                <artifactId>spring-boot-maven-plugin</artifactId>
+	                <version>${spring-boot.version}</version>
+	                <configuration>
+	                    <excludes>
+	                        <exclude>
+	                            <groupId>org.projectlombok</groupId>
+	                            <artifactId>lombok</artifactId>
+	                        </exclude>
+	                    </excludes>
+	                </configuration>
+	            </plugin>
+	            <plugin>
+		            <groupId>org.apache.maven.plugins</groupId>
+		            <artifactId>maven-compiler-plugin</artifactId>
+		            <version>${maven-compiler-plugin.version}</version>
+		            <configuration>
+		                <source>${java.version}</source> <!-- depending on your project -->
+		                <target>${java.version}</target> <!-- depending on your project -->
+		                <annotationProcessorPaths>
+		                    <path>
+		                        <groupId>org.mapstruct</groupId>
+		                        <artifactId>mapstruct-processor</artifactId>
+		                        <version>${org.mapstruct.version}</version>
+		                    </path>
+		                    <!-- other annotation processors -->
+		                    <path>
+				                <groupId>org.projectlombok</groupId>
+				                <artifactId>lombok</artifactId>
+				                <version>${lombok.version}</version>
+				            </path>
+				            <dependency>
+				                <groupId>org.projectlombok</groupId>
+				                <artifactId>lombok-mapstruct-binding</artifactId>
+				                <version>${lombok-mapstruct-binding.version}</version>
+				            </dependency>
+		                </annotationProcessorPaths>
+		            </configuration>
+		        </plugin>
+	        </plugins>
+		</pluginManagement>
         <plugins>
-			
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <version>${spring-boot.version}</version>
-                <configuration>
-                    <excludes>
-                        <exclude>
-                            <groupId>org.projectlombok</groupId>
-                            <artifactId>lombok</artifactId>
-                        </exclude>
-                    </excludes>
-                </configuration>
             </plugin>
-            
         </plugins>
     </build>
 

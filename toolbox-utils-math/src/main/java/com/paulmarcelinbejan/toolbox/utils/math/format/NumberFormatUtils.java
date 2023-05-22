@@ -10,7 +10,7 @@ import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 
 import com.paulmarcelinbejan.toolbox.constants.SymbolsAsChar;
-import com.paulmarcelinbejan.toolbox.utils.math.NumberUtils;
+import com.paulmarcelinbejan.toolbox.utils.math.MathUtils;
 import com.paulmarcelinbejan.toolbox.utils.math.format.pattern.NumberPattern;
 
 import lombok.AccessLevel;
@@ -37,7 +37,7 @@ public class NumberFormatUtils {
      *         representation of a {@code BigDecimal}.
 	 */
 	public static BigDecimal toBigDecimal(String numberToFormat) {
-		return NumberUtils.toBigDecimal(numberToFormat);
+		return MathUtils.toBigDecimal(numberToFormat);
 	}
 	
 	/**
@@ -46,7 +46,7 @@ public class NumberFormatUtils {
 	 */
 	public static BigDecimal toBigDecimal(String numberToFormat, char decimalSeparator) {
 		numberToFormat = replaceDecimalSeparator(numberToFormat, decimalSeparator);
-		return NumberUtils.toBigDecimal(numberToFormat);
+		return MathUtils.toBigDecimal(numberToFormat);
 	}
 	
 	/**
@@ -59,7 +59,7 @@ public class NumberFormatUtils {
 		numberToFormat = replaceDecimalSeparator(numberToFormat, decimalSeparator);
 		numberToFormat = replaceGroupingSeparator(numberToFormat, groupingSeparator);
 		
-		return NumberUtils.toBigDecimal(numberToFormat);
+		return MathUtils.toBigDecimal(numberToFormat);
 	}
 	
 	// FROM BigDecimal TO String

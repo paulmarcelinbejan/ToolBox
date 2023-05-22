@@ -1,0 +1,60 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	
+	<parent>
+		<groupId>com.paulmarcelinbejan.toolbox</groupId>
+		<artifactId>toolbox</artifactId>
+		<version>1.0.0</version>
+	</parent>
+	
+	<artifactId>toolbox-web</artifactId>
+	<name>ToolBox Web</name>
+	<version>1.0.0</version>
+	<packaging>jar</packaging>
+	
+	<properties>
+		<swagger-annotations.version>2.2.9</swagger-annotations.version>
+		<springdoc-openapi-starter.version>2.1.0</springdoc-openapi-starter.version>
+	</properties>
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springdoc</groupId>
+			<artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+			<version>${springdoc-openapi-starter.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>io.swagger.core.v3</groupId>
+			<artifactId>swagger-annotations</artifactId>
+			<version>${swagger-annotations.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.paulmarcelinbejan.toolbox</groupId>
+			<artifactId>toolbox-base</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.paulmarcelinbejan.toolbox</groupId>
+			<artifactId>toolbox-exception</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.paulmarcelinbejan.toolbox</groupId>
+			<artifactId>toolbox-utils-reflection</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.paulmarcelinbejan.toolbox</groupId>
+			<artifactId>toolbox-utils-mapping</artifactId>
+		</dependency>
+		<!-- don't know if it is a good idea -->
+		<dependency>
+			<groupId>com.paulmarcelinbejan.toolbox</groupId>
+			<artifactId>toolbox-sql</artifactId>
+		</dependency>
+	</dependencies>
+</project>
