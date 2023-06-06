@@ -6,11 +6,11 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.google.common.reflect.TypeToken;
 import com.paulmarcelinbejan.toolbox.exception.technical.FunctionalException;
 import com.paulmarcelinbejan.toolbox.mapstruct.BaseMapperToDTO;
 
 import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 
 /**
  * @author paulmarcelinbejan
@@ -34,12 +34,8 @@ public class ReadService<
 
 	protected final REPOSITORY repository;
 
-	protected final TypeToken<ENTITY> entityTypeToken = new TypeToken<>(getClass()) {
-		private static final long serialVersionUID = 1885496985363279110L;
-	};
-
-	@SuppressWarnings("unchecked")
-	protected final Class<ENTITY> entityClass = (Class<ENTITY>) entityTypeToken.getRawType();
+	@Setter
+	private Class<ENTITY> entityClass;
 
 	@Transactional(readOnly = true)
 	public ENTITY findById(ID id) throws FunctionalException {

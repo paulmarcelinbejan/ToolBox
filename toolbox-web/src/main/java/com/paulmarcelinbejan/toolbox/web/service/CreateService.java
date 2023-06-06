@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.zalando.fauxpas.FauxPas;
 
-import com.google.common.reflect.TypeToken;
 import com.paulmarcelinbejan.toolbox.exception.technical.FunctionalException;
 import com.paulmarcelinbejan.toolbox.exception.technical.TechnicalException;
 import com.paulmarcelinbejan.toolbox.mapstruct.BaseMapperToEntity;
@@ -17,6 +16,7 @@ import com.paulmarcelinbejan.toolbox.utils.reflection.ReflectionUtils;
 import com.paulmarcelinbejan.toolbox.utils.reflection.exception.ReflectionException;
 
 import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 
 /**
  * @author paulmarcelinbejan
@@ -41,12 +41,8 @@ public class CreateService<
 
 	protected final REPOSITORY repository;
 
-	protected final TypeToken<ENTITY> entityTypeToken = new TypeToken<>(getClass()) {
-		private static final long serialVersionUID = -6238630962738182640L;
-	};
-
-	@SuppressWarnings("unchecked")
-	protected final Class<ENTITY> entityClass = (Class<ENTITY>) entityTypeToken.getRawType();
+	@Setter
+	private Class<ENTITY> entityClass;
 
 	@SuppressWarnings("unchecked")
 	public ID save(DTO dto) throws TechnicalException {

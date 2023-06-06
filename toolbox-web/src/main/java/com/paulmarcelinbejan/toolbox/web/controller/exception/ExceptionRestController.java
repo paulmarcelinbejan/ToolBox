@@ -1,22 +1,30 @@
 package com.paulmarcelinbejan.toolbox.web.controller.exception;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.context.request.WebRequest;
 
-import com.paulmarcelinbejan.toolbox.exception.technical.BadRequestException;
 import com.paulmarcelinbejan.toolbox.exception.technical.FunctionalException;
 import com.paulmarcelinbejan.toolbox.exception.technical.TechnicalException;
 import com.paulmarcelinbejan.toolbox.web.dto.ExceptionResponse;
+
+import jakarta.validation.ConstraintViolationException;
 
 public abstract class ExceptionRestController {
 
 	@ResponseBody
 	@ResponseStatus(HttpStatus.BAD_REQUEST)
-	@ExceptionHandler(value = { BadRequestException.class })
-	public String handleBadRequestException(BadRequestException exception) {
+	@ExceptionHandler(value = { ConstraintViolationException.class })
+	public String handleConstraintViolationException(ConstraintViolationException exception) {
+		return exception.getMessage();
+	}
+
+	@ResponseBody
+	@ResponseStatus(HttpStatus.BAD_REQUEST)
+	@ExceptionHandler(value = { MethodArgumentNotValidException.class })
+	public String handleMethodArgumentNotValidException(MethodArgumentNotValidException exception) {
 		return exception.getMessage();
 	}
 
@@ -30,15 +38,15 @@ public abstract class ExceptionRestController {
 	@ResponseBody
 	@ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
 	@ExceptionHandler(value = { TechnicalException.class })
-	public ExceptionResponse handleTechnicalException(TechnicalException exception, WebRequest request) {
-		return new ExceptionResponse(exception, request.getContextPath());
+	public ExceptionResponse handleTechnicalException(TechnicalException exception) {
+		return new ExceptionResponse(exception);
 	}
 
 	@ResponseBody
 	@ExceptionHandler(Exception.class)
 	@ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-	public ExceptionResponse handleAllUncaughtException(Exception exception, WebRequest request) {
-		return new ExceptionResponse(exception, request.getContextPath());
+	public ExceptionResponse handleAllUncaughtException(Exception exception) {
+		return new ExceptionResponse(exception);
 	}
 
 }

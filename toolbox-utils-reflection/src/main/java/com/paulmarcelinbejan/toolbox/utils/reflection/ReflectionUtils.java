@@ -41,7 +41,7 @@ public class ReflectionUtils {
 		}
 	}
 
-	public static <T, A> Field getFieldByName(Class<T> clazz, String fieldName)
+	public static <T> Field getFieldByName(Class<T> clazz, String fieldName)
 			throws ReflectionException {
 		return Stream
 				// STREAM DECLARED FIELDS
@@ -53,19 +53,32 @@ public class ReflectionUtils {
 						"Class " + clazz.getCanonicalName() + " doesn't have a field with name " + fieldName));
 	}
 
-	public static <T, A> Field getFirstFieldAnnotatedWith(Class<T> clazz, Class<A> annotationClass)
+	public static <T, A> Field getFirstFieldAnnotatedWith(Class<T> clazz, Class<A> annotationType)
 			throws ReflectionException {
+
 		return Stream
 				// STREAM DECLARED FIELDS
 				.of(clazz.getDeclaredFields())
 				// FILTER TO FIND FIELDS ANNOTATED WITH PROVIDED ANNOTATION
 				.filter(field -> Stream
 						.of(field.getDeclaredAnnotations())
-						.anyMatch(annotation -> annotationClass.equals(annotation.getClass())))
+						.anyMatch(annotation -> annotationType.equals(annotation.annotationType())))
 				.findFirst()
 				.orElseThrow(() -> new ReflectionException(
 						"Class " + clazz.getCanonicalName()
-								+ " doesn't have a field annotated with " + annotationClass.getCanonicalName()));
+								+ " doesn't have a field annotated with " + annotationType.getCanonicalName()));
+
+//		for (Field field : clazz.getDeclaredFields()) {
+//			for (Annotation annotation : field.getDeclaredAnnotations()) {
+//				if (annotationType.equals(annotation.annotationType())) {
+//					return field;
+//				}
+//			}
+//		}
+//
+//		throw new ReflectionException(
+//				"Class " + clazz.getCanonicalName() + " doesn't have a field annotated with "
+//						+ annotationType.getCanonicalName());
 	}
 
 	public static <T> Method getPublicGetterOfField(Class<T> clazz, Field field) throws ReflectionException {

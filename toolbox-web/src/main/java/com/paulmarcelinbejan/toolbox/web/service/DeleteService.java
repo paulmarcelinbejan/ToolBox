@@ -7,12 +7,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.zalando.fauxpas.FauxPas;
 
-import com.google.common.reflect.TypeToken;
 import com.paulmarcelinbejan.toolbox.exception.technical.FunctionalException;
 import com.paulmarcelinbejan.toolbox.exception.technical.TechnicalException;
 import com.paulmarcelinbejan.toolbox.mapstruct.BaseMapperToDTO;
 
+import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 
 /**
  * @author paulmarcelinbejan
@@ -37,12 +38,13 @@ public class DeleteService<
 
 	private final ReadService<ID, ENTITY, DTO, MAPPER, REPOSITORY> readService;
 
-	protected final TypeToken<ENTITY> entityTypeToken = new TypeToken<>(getClass()) {
-		private static final long serialVersionUID = 8024465185033656631L;
-	};
+	@Setter
+	private Class<ENTITY> entityClass;
 
-	@SuppressWarnings("unchecked")
-	protected final Class<ENTITY> entityClass = (Class<ENTITY>) entityTypeToken.getRawType();
+	@PostConstruct
+	public void injectClassOnBean() throws TechnicalException {
+		readService.setEntityClass(entityClass);
+	}
 
 	public void delete(ID id) throws FunctionalException {
 		ENTITY entity = readService.findById(id);

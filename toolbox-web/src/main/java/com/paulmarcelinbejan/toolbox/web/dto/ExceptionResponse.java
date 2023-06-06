@@ -22,15 +22,12 @@ public class ExceptionResponse {
 
 	private String stackTrace;
 
-	private String path;
-
-	public ExceptionResponse(Exception exception, String path) {
+	public ExceptionResponse(Exception exception) {
 		timestamp = LocalDateTime.now();
 		status = String.valueOf(HttpStatus.INTERNAL_SERVER_ERROR.value());
 		error = HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase();
 		message = exception.getMessage();
 		stackTrace = ExceptionUtils.getStackTrace(exception);
-		this.path = path;
 	}
 
 }

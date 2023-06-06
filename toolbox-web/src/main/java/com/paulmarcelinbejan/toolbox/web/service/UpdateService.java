@@ -9,14 +9,15 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.zalando.fauxpas.FauxPas;
 
-import com.google.common.reflect.TypeToken;
 import com.paulmarcelinbejan.toolbox.exception.technical.FunctionalException;
 import com.paulmarcelinbejan.toolbox.exception.technical.TechnicalException;
 import com.paulmarcelinbejan.toolbox.mapstruct.BaseMapperToEntityAndToDTO;
 import com.paulmarcelinbejan.toolbox.utils.reflection.ReflectionUtils;
 import com.paulmarcelinbejan.toolbox.utils.reflection.exception.ReflectionException;
 
+import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 
 /**
  * @author paulmarcelinbejan
@@ -43,26 +44,19 @@ public class UpdateService<
 
 	private final ReadService<ID, ENTITY, DTO, MAPPER, REPOSITORY> readService;
 
-	protected final TypeToken<ID> idTypeToken = new TypeToken<>(getClass()) {
-		private static final long serialVersionUID = 6769517161081289652L;
-	};
+	@Setter
+	private Class<ID> idClass;
 
-	protected final TypeToken<ENTITY> entityTypeToken = new TypeToken<>(getClass()) {
-		private static final long serialVersionUID = 1960719835315685072L;
-	};
+	@Setter
+	private Class<ENTITY> entityClass;
 
-	protected final TypeToken<DTO> dtoTypeToken = new TypeToken<>(getClass()) {
-		private static final long serialVersionUID = -8200682379806451829L;
-	};
+	@Setter
+	private Class<DTO> dtoClass;
 
-	@SuppressWarnings("unchecked")
-	protected final Class<ID> entityIdTypeClass = (Class<ID>) idTypeToken.getRawType();
-
-	@SuppressWarnings("unchecked")
-	protected final Class<ENTITY> entityClass = (Class<ENTITY>) entityTypeToken.getRawType();
-
-	@SuppressWarnings("unchecked")
-	protected final Class<DTO> dtoClass = (Class<DTO>) dtoTypeToken.getRawType();
+	@PostConstruct
+	public void injectClassOnBean() {
+		readService.setEntityClass(entityClass);
+	}
 
 	@SuppressWarnings("unchecked")
 	public ID update(DTO dto) throws FunctionalException, TechnicalException {
@@ -93,7 +87,7 @@ public class UpdateService<
 		}
 	}
 
-	public Collection<ID> update(Collection<DTO> dtos) throws FunctionalException, TechnicalException {
+	public Collection<ID> update(Collection<DTO> dtos) {
 		return dtos
 				.stream()
 				.map(FauxPas.throwingFunction(this::update))

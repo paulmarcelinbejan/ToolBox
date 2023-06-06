@@ -61,6 +61,7 @@
         <module>toolbox-utils-time</module>
         <module>toolbox-web</module>
         <module>toolbox-utils-text</module>
+        <module>toolbox-utils-validation</module>
     </modules>
 
     <dependencyManagement>
@@ -166,6 +167,11 @@
             <dependency>
                 <groupId>com.paulmarcelinbejan.toolbox</groupId>
                 <artifactId>toolbox-utils-time</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.paulmarcelinbejan.toolbox</groupId>
+                <artifactId>toolbox-utils-validation</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
