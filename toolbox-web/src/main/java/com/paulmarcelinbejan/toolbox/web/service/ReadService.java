@@ -49,6 +49,20 @@ public class ReadService<
 		return mapper.toDto(findById(id));
 	}
 
+	/**
+	 * If some or all ids are not found, no entities are returned for these IDs.
+	 */
+	public Collection<ENTITY> findManyById(Collection<ID> ids) {
+		return repository.findAllById(ids);
+	}
+
+	/**
+	 * If some or all ids are not found, no DTOs are returned for these IDs.
+	 */
+	public Collection<DTO> findManyByIdToDto(Collection<ID> ids) {
+		return mapper.toDtos(findManyById(ids));
+	}
+
 	public Collection<ENTITY> findAll() {
 		return repository.findAll();
 	}

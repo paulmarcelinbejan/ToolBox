@@ -3,9 +3,7 @@ package com.paulmarcelinbejan.toolbox.web.service;
 import java.util.Collection;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.zalando.fauxpas.FauxPas;
 
 import com.paulmarcelinbejan.toolbox.exception.technical.FunctionalException;
 import com.paulmarcelinbejan.toolbox.exception.technical.TechnicalException;
@@ -24,7 +22,7 @@ import lombok.Setter;
  * @param <MAPPER>
  * @param <REPOSITORY>
  */
-@Service
+//@Service
 @Transactional(rollbackFor = { FunctionalException.class, TechnicalException.class })
 @RequiredArgsConstructor
 public class DeleteService<
@@ -42,7 +40,7 @@ public class DeleteService<
 	private Class<ENTITY> entityClass;
 
 	@PostConstruct
-	public void injectClassOnBean() throws TechnicalException {
+	public void injectClassOnBean() {
 		readService.setEntityClass(entityClass);
 	}
 
@@ -51,8 +49,21 @@ public class DeleteService<
 		repository.delete(entity);
 	}
 
+	/**
+	 * If an Entity is not found in the persistence store, a FunctionalException
+	 * will be thrown.
+	 */
 	public void delete(Collection<ID> ids) throws FunctionalException {
-		ids.stream().forEach(FauxPas.throwingConsumer(this::delete));
+		for (ID id : ids) {
+			delete(id);
+		}
+	}
+
+	/**
+	 * Entities that aren't found in the persistence store are silently ignored.
+	 */
+	public void deleteIfPresent(Collection<ID> ids) {
+		repository.deleteAllById(ids);
 	}
 
 }

@@ -1,19 +1,16 @@
 package com.paulmarcelinbejan.toolbox.web.service;
 
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.Collection;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.zalando.fauxpas.FauxPas;
 
 import com.paulmarcelinbejan.toolbox.exception.technical.FunctionalException;
 import com.paulmarcelinbejan.toolbox.exception.technical.TechnicalException;
 import com.paulmarcelinbejan.toolbox.mapstruct.BaseMapperToEntityAndToDTO;
-import com.paulmarcelinbejan.toolbox.utils.reflection.ReflectionUtils;
-import com.paulmarcelinbejan.toolbox.utils.reflection.exception.ReflectionException;
+import com.paulmarcelinbejan.toolbox.web.service.utils.ServiceUtils;
 
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
@@ -58,21 +55,9 @@ public class UpdateService<
 		readService.setEntityClass(entityClass);
 	}
 
-	@SuppressWarnings("unchecked")
 	public ID update(DTO dto) throws FunctionalException, TechnicalException {
 
-		ID id;
-		Method getIdEntity;
-		try {
-			Field idEntity = ReflectionUtils.getFirstFieldAnnotatedWith(entityClass, jakarta.persistence.Id.class);
-			getIdEntity = ReflectionUtils.getPublicGetterOfField(entityClass, idEntity);
-
-			Field idDto = ReflectionUtils.getFieldByName(dtoClass, idEntity.getName());
-			Method getIdDto = ReflectionUtils.getPublicGetterOfField(dtoClass, idDto);
-			id = (ID) ReflectionUtils.invokeMethod(dto, getIdDto);
-		} catch (ReflectionException e) {
-			throw new TechnicalException(e);
-		}
+		ID id = ServiceUtils.retrieveId(dto, dtoClass, entityClass);
 
 		ENTITY entity = readService.findById(id);
 
@@ -80,18 +65,18 @@ public class UpdateService<
 
 		entity = repository.save(entity);
 
-		try {
-			return (ID) ReflectionUtils.invokeMethod(entity, getIdEntity);
-		} catch (ReflectionException e) {
-			throw new TechnicalException(e);
-		}
+		return ServiceUtils.retrieveId(entity, entityClass);
+
 	}
 
-	public Collection<ID> update(Collection<DTO> dtos) {
-		return dtos
-				.stream()
-				.map(FauxPas.throwingFunction(this::update))
-				.toList();
+	public Collection<ID> update(Collection<DTO> dtos) throws FunctionalException, TechnicalException {
+		Collection<ID> ids = new ArrayList<>();
+
+		for (DTO dto : dtos) {
+			ids.add(update(dto));
+		}
+
+		return ids;
 	}
 
 }
