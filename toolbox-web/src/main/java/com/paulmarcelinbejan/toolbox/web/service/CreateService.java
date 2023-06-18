@@ -3,6 +3,7 @@ package com.paulmarcelinbejan.toolbox.web.service;
 import java.util.Collection;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.paulmarcelinbejan.toolbox.exception.technical.FunctionalException;
@@ -22,7 +23,7 @@ import lombok.Setter;
  * @param <MAPPER>
  * @param <REPOSITORY>
  */
-//@Service
+@Service
 @Transactional(rollbackFor = { FunctionalException.class, TechnicalException.class })
 @RequiredArgsConstructor
 public class CreateService<
