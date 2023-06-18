@@ -44,8 +44,8 @@ public class CsvWriterConfig {
 	
 	public CsvWriterConfig(char separator, Map<Class<?>, JsonSerializer<?>> serializers, List<String> columns, boolean appendCurrentTimeMillisToFileName) {
 		this.separator = separator;
-		this.serializers = serializers;
-		this.columns = columns;
+		this.serializers = serializers != null ? serializers : Map.of();
+		this.columns = columns != null ? columns : List.of();
 		this.appendCurrentTimeMillisToFileName = appendCurrentTimeMillisToFileName;
 		
 		this.csvMapper = buildCsvMapper();
@@ -59,7 +59,7 @@ public class CsvWriterConfig {
 		CsvMapper mapper = new CsvMapper();
 		mapper.configure(Feature.IGNORE_UNKNOWN, true);
 		
-		if(serializers != null && !serializers.isEmpty()) {
+		if(!serializers.isEmpty()) {
 			ObjectMapperUtils.registerSerializers(mapper, serializers);
 		}
 		
@@ -70,13 +70,13 @@ public class CsvWriterConfig {
 	 * return a ready to use CsvSchema configured with columns.
 	 */
 	private CsvSchema buildCsvSchema() {
-		if(columns != null && !columns.isEmpty()) {
-			return csvSchemaWithColumnsOrder(columns.toArray(String[]::new));
+		if(!columns.isEmpty()) {
+			return csvSchemaWithColumnsOrder();
 		}
 		return null;
 	}
 	
-	private CsvSchema csvSchemaWithColumnsOrder(final String[] columns) {
+	private CsvSchema csvSchemaWithColumnsOrder() {
 		Builder builder = CsvSchema.builder();
 		
 		for(String column : columns) {
@@ -84,7 +84,7 @@ public class CsvWriterConfig {
 		}
 		
 		return builder.build()
-					  .sortedBy(columns)
+					  .sortedBy(columns.toArray(String[]::new))
 					  .withColumnSeparator(separator)
 					  .withHeader()
 					  .withoutQuoteChar();

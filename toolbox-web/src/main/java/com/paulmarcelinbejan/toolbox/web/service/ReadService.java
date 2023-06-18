@@ -22,6 +22,7 @@ import lombok.Setter;
  * @param <REPOSITORY>
  */
 @Service
+@Transactional(readOnly = true)
 @RequiredArgsConstructor
 public class ReadService<
 		ID,
@@ -37,7 +38,6 @@ public class ReadService<
 	@Setter
 	private Class<ENTITY> entityClass;
 
-	@Transactional(readOnly = true)
 	public ENTITY findById(ID id) throws FunctionalException {
 		return repository
 				.findById(id)
@@ -45,17 +45,14 @@ public class ReadService<
 						"No " + entityClass.getSimpleName() + " found with the id: " + id));
 	}
 
-	@Transactional(readOnly = true)
 	public DTO findByIdToDto(ID id) throws FunctionalException {
 		return mapper.toDto(findById(id));
 	}
 
-	@Transactional(readOnly = true)
 	public Collection<ENTITY> findAll() {
 		return repository.findAll();
 	}
 
-	@Transactional(readOnly = true)
 	public Collection<DTO> findAllToDto() {
 		return mapper.toDtos(findAll());
 	}

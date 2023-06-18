@@ -47,7 +47,7 @@ public class ReflectionUtils {
 				// STREAM DECLARED FIELDS
 				.of(clazz.getDeclaredFields())
 				// FILTER TO FIND FIELD BY NAME
-				.filter(field -> TextUtils.areEquals(field.getName(), fieldName))
+				.filter(field -> TextUtils.isEqualTo(field.getName(), fieldName))
 				.findFirst()
 				.orElseThrow(() -> new ReflectionException(
 						"Class " + clazz.getCanonicalName() + " doesn't have a field with name " + fieldName));
@@ -68,17 +68,6 @@ public class ReflectionUtils {
 						"Class " + clazz.getCanonicalName()
 								+ " doesn't have a field annotated with " + annotationType.getCanonicalName()));
 
-//		for (Field field : clazz.getDeclaredFields()) {
-//			for (Annotation annotation : field.getDeclaredAnnotations()) {
-//				if (annotationType.equals(annotation.annotationType())) {
-//					return field;
-//				}
-//			}
-//		}
-//
-//		throw new ReflectionException(
-//				"Class " + clazz.getCanonicalName() + " doesn't have a field annotated with "
-//						+ annotationType.getCanonicalName());
 	}
 
 	public static <T> Method getPublicGetterOfField(Class<T> clazz, Field field) throws ReflectionException {

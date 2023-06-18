@@ -96,11 +96,11 @@ public class CsvUtils<T> {
 		
 	}
 
-	private File createFile(final FileInfo fileInfo) {
+	private static File createFile(final FileInfo fileInfo) {
 		return new File(fileInfo.getFullPath(CSV));
 	}
 	
-	private FileReader createFileReader(final FileInfo fileInfo) throws FileNotFoundException {
+	private static FileReader createFileReader(final FileInfo fileInfo) throws FileNotFoundException {
 		return new FileReader(fileInfo.getFullPath(CSV));
 	}
 	

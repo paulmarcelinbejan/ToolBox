@@ -56,8 +56,8 @@ public class NumberFormatUtils {
 	public static BigDecimal toBigDecimal(String numberToFormat, char decimalSeparator, char groupingSeparator) {
 		validateSeparators(decimalSeparator, groupingSeparator);
 		
-		numberToFormat = replaceDecimalSeparator(numberToFormat, decimalSeparator);
 		numberToFormat = replaceGroupingSeparator(numberToFormat, groupingSeparator);
+		numberToFormat = replaceDecimalSeparator(numberToFormat, decimalSeparator);
 		
 		return MathUtils.toBigDecimal(numberToFormat);
 	}
@@ -220,7 +220,7 @@ public class NumberFormatUtils {
 	 * <br>decimalPlacesTot 6, decimalPlacesToShowAlways 2: 24.102030 -> 24.10203
 	 * <br>decimalPlacesTot 6: decimalPlacesToShowAlways 3: 24.000000 -> 24.000
 	 * 
-	 * As example, sca: ###,##0.00####
+	 * As example: ###,##0.00####
 	 */
 	private static String buildPatternDecimalsFirstPartAlwaysSecondPartIfPresent(int decimalPlacesTot, int decimalPlacesToShowAlways) {
 		if(decimalPlacesTot == 0) {
@@ -242,6 +242,7 @@ public class NumberFormatUtils {
 	}
 	
 	// Validators
+	
 	private static void validateDecimalPlaces(int decimalPlaces) {
 		if(decimalPlaces < 0) throw new IllegalArgumentException("decimalPlaces can't be less than 0.");
 	}

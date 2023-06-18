@@ -1,5 +1,7 @@
 package com.paulmarcelinbejan.toolbox.utils.io.csv.config.configs;
 
+import static com.paulmarcelinbejan.toolbox.constants.SymbolsAsChar.COMMA;
+
 import java.util.Map;
 
 import com.fasterxml.jackson.databind.JsonDeserializer;
@@ -11,7 +13,7 @@ import lombok.Getter;
 
 public class CsvReaderConfig {
 
-	public static final CsvReaderConfig DEFAULT = new CsvReaderConfig(',', Map.of());
+	public static final CsvReaderConfig DEFAULT = new CsvReaderConfig(COMMA, Map.of());
 	
 	private final char separator;
 	

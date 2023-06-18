@@ -2,12 +2,12 @@ package com.paulmarcelinbejan.toolbox.web.service;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.Collection;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.zalando.fauxpas.FauxPas;
 
 import com.paulmarcelinbejan.toolbox.exception.technical.FunctionalException;
 import com.paulmarcelinbejan.toolbox.exception.technical.TechnicalException;
@@ -60,10 +60,14 @@ public class CreateService<
 	}
 
 	public Collection<ID> save(Collection<DTO> dtos) throws TechnicalException {
-		return dtos
-				.stream()
-				.map(FauxPas.throwingFunction(this::save))
-				.toList();
+		Collection<ID> savedIds = new ArrayList<>();
+
+		for (DTO dto : dtos) {
+			ID id = save(dto);
+			savedIds.add(id);
+		}
+
+		return savedIds;
 	}
 
 }
