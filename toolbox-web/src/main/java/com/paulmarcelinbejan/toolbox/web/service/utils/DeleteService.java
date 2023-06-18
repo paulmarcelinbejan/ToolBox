@@ -1,18 +1,15 @@
-package com.paulmarcelinbejan.toolbox.web.service;
+package com.paulmarcelinbejan.toolbox.web.service.utils;
 
 import java.util.Collection;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.paulmarcelinbejan.toolbox.exception.technical.FunctionalException;
 import com.paulmarcelinbejan.toolbox.exception.technical.TechnicalException;
 import com.paulmarcelinbejan.toolbox.mapstruct.BaseMapperToDTO;
 
-import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
-import lombok.Setter;
 
 /**
  * @author paulmarcelinbejan
@@ -23,7 +20,6 @@ import lombok.Setter;
  * @param <MAPPER>
  * @param <REPOSITORY>
  */
-@Service
 @Transactional(rollbackFor = { FunctionalException.class, TechnicalException.class })
 @RequiredArgsConstructor
 public class DeleteService<
@@ -36,14 +32,6 @@ public class DeleteService<
 	private final REPOSITORY repository;
 
 	private final ReadService<ID, ENTITY, DTO, MAPPER, REPOSITORY> readService;
-
-	@Setter
-	private Class<ENTITY> entityClass;
-
-	@PostConstruct
-	public void injectClassOnBean() {
-		readService.setEntityClass(entityClass);
-	}
 
 	public void delete(ID id) throws FunctionalException {
 		ENTITY entity = readService.findById(id);

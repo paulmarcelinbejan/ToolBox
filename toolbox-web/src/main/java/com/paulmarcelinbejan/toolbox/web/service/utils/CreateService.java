@@ -1,18 +1,15 @@
-package com.paulmarcelinbejan.toolbox.web.service;
+package com.paulmarcelinbejan.toolbox.web.service.utils;
 
 import java.util.Collection;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.paulmarcelinbejan.toolbox.exception.technical.FunctionalException;
 import com.paulmarcelinbejan.toolbox.exception.technical.TechnicalException;
 import com.paulmarcelinbejan.toolbox.mapstruct.BaseMapperToEntity;
-import com.paulmarcelinbejan.toolbox.web.service.utils.ServiceUtils;
 
 import lombok.RequiredArgsConstructor;
-import lombok.Setter;
 
 /**
  * @author paulmarcelinbejan
@@ -23,7 +20,6 @@ import lombok.Setter;
  * @param <MAPPER>
  * @param <REPOSITORY>
  */
-@Service
 @Transactional(rollbackFor = { FunctionalException.class, TechnicalException.class })
 @RequiredArgsConstructor
 public class CreateService<
@@ -33,12 +29,11 @@ public class CreateService<
 		MAPPER extends BaseMapperToEntity<ENTITY, DTO>,
 		REPOSITORY extends JpaRepository<ENTITY, ID>> {
 
-	protected final MAPPER mapper;
+	private final MAPPER mapper;
 
-	protected final REPOSITORY repository;
+	private final REPOSITORY repository;
 
-	@Setter
-	private Class<ENTITY> entityClass;
+	private final Class<ENTITY> entityClass;
 
 	public ID save(DTO dto) throws TechnicalException {
 		ENTITY entity = mapper.toEntity(dto);

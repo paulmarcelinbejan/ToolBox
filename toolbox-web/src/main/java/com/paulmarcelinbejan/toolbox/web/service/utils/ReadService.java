@@ -1,16 +1,14 @@
-package com.paulmarcelinbejan.toolbox.web.service;
+package com.paulmarcelinbejan.toolbox.web.service.utils;
 
 import java.util.Collection;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.paulmarcelinbejan.toolbox.exception.technical.FunctionalException;
 import com.paulmarcelinbejan.toolbox.mapstruct.BaseMapperToDTO;
 
 import lombok.RequiredArgsConstructor;
-import lombok.Setter;
 
 /**
  * @author paulmarcelinbejan
@@ -21,7 +19,6 @@ import lombok.Setter;
  * @param <MAPPER>
  * @param <REPOSITORY>
  */
-@Service
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
 public class ReadService<
@@ -31,12 +28,11 @@ public class ReadService<
 		MAPPER extends BaseMapperToDTO<ENTITY, DTO>,
 		REPOSITORY extends JpaRepository<ENTITY, ID>> {
 
-	protected final MAPPER mapper;
+	private final MAPPER mapper;
 
-	protected final REPOSITORY repository;
+	private final REPOSITORY repository;
 
-	@Setter
-	private Class<ENTITY> entityClass;
+	private final Class<ENTITY> entityClass;
 
 	public ENTITY findById(ID id) throws FunctionalException {
 		return repository
