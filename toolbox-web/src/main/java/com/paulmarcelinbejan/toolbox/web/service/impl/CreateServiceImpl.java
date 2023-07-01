@@ -1,33 +1,32 @@
-package com.paulmarcelinbejan.toolbox.web.service.utils;
+package com.paulmarcelinbejan.toolbox.web.service.impl;
 
 import java.util.Collection;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.transaction.annotation.Transactional;
 
-import com.paulmarcelinbejan.toolbox.exception.technical.FunctionalException;
 import com.paulmarcelinbejan.toolbox.exception.technical.TechnicalException;
 import com.paulmarcelinbejan.toolbox.mapstruct.BaseMapperToEntity;
+import com.paulmarcelinbejan.toolbox.web.service.CreateService;
+import com.paulmarcelinbejan.toolbox.web.service.utils.ServiceUtils;
 
 import lombok.RequiredArgsConstructor;
 
 /**
+ *
+ * Basic methods for create operation.
+ *
  * @author paulmarcelinbejan
  *
- * @param <ID>
- * @param <ENTITY>
- * @param <DTO>
- * @param <MAPPER>
- * @param <REPOSITORY>
  */
-@Transactional(rollbackFor = { FunctionalException.class, TechnicalException.class })
 @RequiredArgsConstructor
-public class CreateService<
+public class CreateServiceImpl<
 		ID,
 		ENTITY,
 		DTO,
 		MAPPER extends BaseMapperToEntity<ENTITY, DTO>,
-		REPOSITORY extends JpaRepository<ENTITY, ID>> {
+		REPOSITORY extends JpaRepository<ENTITY, ID>>
+		implements
+		CreateService<ID, DTO> {
 
 	private final MAPPER mapper;
 
@@ -35,6 +34,7 @@ public class CreateService<
 
 	private final Class<ENTITY> entityClass;
 
+	@Override
 	public ID save(DTO dto) throws TechnicalException {
 		ENTITY entity = mapper.toEntity(dto);
 
@@ -43,6 +43,7 @@ public class CreateService<
 		return ServiceUtils.retrieveId(entity, entityClass);
 	}
 
+	@Override
 	public Collection<ID> save(Collection<DTO> dtos) throws TechnicalException {
 		Collection<ENTITY> entities = mapper.toEntities(dtos);
 
