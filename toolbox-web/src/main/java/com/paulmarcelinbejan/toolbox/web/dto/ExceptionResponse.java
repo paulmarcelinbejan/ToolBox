@@ -30,4 +30,12 @@ public class ExceptionResponse {
 		stackTrace = ExceptionUtils.getStackTrace(exception);
 	}
 
+	public ExceptionResponse(Exception exception, String message) {
+		timestamp = LocalDateTime.now();
+		status = String.valueOf(HttpStatus.INTERNAL_SERVER_ERROR.value());
+		error = HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase();
+		this.message = message;
+		stackTrace = ExceptionUtils.getStackTrace(exception);
+	}
+
 }
