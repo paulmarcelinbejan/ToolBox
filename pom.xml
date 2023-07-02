@@ -27,6 +27,7 @@
         <maven-compiler-plugin.version>3.11.0</maven-compiler-plugin.version>
         <!-- SPRING -->
         <spring-boot.version>3.0.6</spring-boot.version>
+        <spring-cloud-starter-loadbalancer.version>4.0.3</spring-cloud-starter-loadbalancer.version>
         <!-- LOGGERS -->
         <tinylog.version>2.6.1</tinylog.version>
         <slf4j-api.version>2.0.7</slf4j-api.version>
@@ -44,6 +45,9 @@
         <!-- MAPSTRUCT -->
         <org.mapstruct.version>1.5.5.Final</org.mapstruct.version>
 	    <lombok-mapstruct-binding.version>0.2.0</lombok-mapstruct-binding.version>
+	    <!-- FEIGN -->
+	    <github-feign.version>12.3</github-feign.version>
+        <spring-openfeign.version>4.0.3</spring-openfeign.version>
     </properties>
 
     <modules>
@@ -52,6 +56,7 @@
         <module>toolbox-configuration</module>
         <module>toolbox-constants</module>
         <module>toolbox-exception</module>
+        <module>toolbox-spring</module>
         <module>toolbox-sql</module>
         <module>toolbox-test</module>
         <module>toolbox-utils-io</module>
@@ -94,6 +99,18 @@
 				<version>${spring-boot.version}</version>
 				<scope>test</scope>
 		    </dependency>
+		    
+		    <dependency>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-starter-web</artifactId>
+				<version>${spring-boot.version}</version>
+			</dependency>
+		
+			<dependency>
+		        <groupId>org.springframework.cloud</groupId>
+		        <artifactId>spring-cloud-starter-loadbalancer</artifactId>
+		        <version>${spring-cloud-starter-loadbalancer.version}</version>
+		    </dependency>
 	    
             <!-- Lombok dependencies -->
             <dependency>
@@ -126,6 +143,11 @@
             <dependency>
                 <groupId>com.paulmarcelinbejan.toolbox</groupId>
                 <artifactId>toolbox-exception</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.paulmarcelinbejan.toolbox</groupId>
+                <artifactId>toolbox-spring</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
@@ -243,6 +265,23 @@
 		    	<version>${log4j-slf4j-impl.version}</version>
 		    </dependency>
 	    
+	        <!-- Feign -->
+	        <dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-starter-openfeign</artifactId>
+				<version>${spring-openfeign.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>io.github.openfeign</groupId>
+				<artifactId>feign-okhttp</artifactId>
+				<version>${github-feign.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>io.github.openfeign</groupId>
+				<artifactId>feign-httpclient</artifactId>
+				<version>${github-feign.version}</version>
+			</dependency>
+			
         </dependencies>
     </dependencyManagement>
 
