@@ -26,18 +26,17 @@
         <maven.compiler.target>${java.version}</maven.compiler.target>
         <maven-compiler-plugin.version>3.11.0</maven-compiler-plugin.version>
         <!-- SPRING -->
-        <spring-boot.version>3.0.6</spring-boot.version>
+        <spring-boot.version>3.1.0</spring-boot.version>
         <spring-cloud-starter-loadbalancer.version>4.0.3</spring-cloud-starter-loadbalancer.version>
         <!-- LOGGERS -->
-        <tinylog.version>2.6.1</tinylog.version>
         <slf4j-api.version>2.0.7</slf4j-api.version>
         <log4j-slf4j-impl.version>2.20.0</log4j-slf4j-impl.version>
         <!-- LOMBOK -->
-        <lombok.version>1.18.26</lombok.version>
+        <lombok.version>1.18.28</lombok.version>
         <!-- JACKSON -->
-        <jackson.version>2.15.0</jackson.version>
+        <jackson.version>2.15.2</jackson.version>
         <!-- GUAVA -->
-        <guava.version>31.1-jre</guava.version>
+        <guava.version>32.1.1-jre</guava.version>
         <!-- APACHE -->
         <apache-commons-lang3.version>3.12.0</apache-commons-lang3.version>
         <apache-commons-text.version>1.10.0</apache-commons-text.version>
@@ -45,14 +44,17 @@
         <!-- MAPSTRUCT -->
         <org.mapstruct.version>1.5.5.Final</org.mapstruct.version>
 	    <lombok-mapstruct-binding.version>0.2.0</lombok-mapstruct-binding.version>
+	    <!-- SWAGGER -->
+	    <swagger-annotations.version>2.2.15</swagger-annotations.version>
+		<springdoc-openapi-starter.version>2.1.0</springdoc-openapi-starter.version>
 	    <!-- FEIGN -->
-	    <github-feign.version>12.3</github-feign.version>
+	    <github-feign.version>12.4</github-feign.version>
         <spring-openfeign.version>4.0.3</spring-openfeign.version>
     </properties>
 
     <modules>
-		<module>toolbox-annotations</module>
-		<module>toolbox-base</module>
+        <module>toolbox-annotations</module>
+        <module>toolbox-base</module>
         <module>toolbox-configuration</module>
         <module>toolbox-constants</module>
         <module>toolbox-exception</module>
@@ -63,10 +65,10 @@
         <module>toolbox-utils-mapping</module>
         <module>toolbox-utils-math</module>
         <module>toolbox-utils-reflection</module>
-        <module>toolbox-utils-time</module>
-        <module>toolbox-web</module>
         <module>toolbox-utils-text</module>
+        <module>toolbox-utils-time</module>
         <module>toolbox-utils-validation</module>
+        <module>toolbox-web</module>
     </modules>
 
     <dependencyManagement>
@@ -245,16 +247,6 @@
             
             <!-- LOGGER -->
 			<dependency>
-			    <groupId>org.tinylog</groupId>
-			    <artifactId>tinylog-api</artifactId>
-			    <version>${tinylog.version}</version>
-			</dependency>
-			<dependency>
-			    <groupId>org.tinylog</groupId>
-			    <artifactId>tinylog-impl</artifactId>
-			    <version>${tinylog.version}</version>
-			</dependency>
-			<dependency>
 			    <groupId>org.slf4j</groupId>
 			    <artifactId>slf4j-api</artifactId>
 			    <version>${slf4j-api.version}</version>
@@ -265,7 +257,26 @@
 		    	<version>${log4j-slf4j-impl.version}</version>
 		    </dependency>
 	    
-	        <!-- Feign -->
+	        <!-- MAPSTRUCT -->
+	        <dependency>
+		        <groupId>org.mapstruct</groupId>
+		        <artifactId>mapstruct</artifactId>
+		        <version>${org.mapstruct.version}</version>
+		    </dependency>
+	    
+	        <!-- SWAGGER -->
+	        <dependency>
+				<groupId>org.springdoc</groupId>
+				<artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+				<version>${springdoc-openapi-starter.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>io.swagger.core.v3</groupId>
+				<artifactId>swagger-annotations</artifactId>
+				<version>${swagger-annotations.version}</version>
+			</dependency>
+		
+	        <!-- FEIGN -->
 	        <dependency>
 				<groupId>org.springframework.cloud</groupId>
 				<artifactId>spring-cloud-starter-openfeign</artifactId>
@@ -285,21 +296,29 @@
         </dependencies>
     </dependencyManagement>
 
-    <dependencies>
-	
-        <!-- Spring Boot dependencies -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter</artifactId>
-        </dependency>
+	<dependencies>
 		
-        <!-- Lombok dependencies -->
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-        </dependency>
-
-    </dependencies>
+		<!-- Spring Boot dependencies -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter</artifactId>
+		</dependency>
+		<!-- Lombok dependencies -->
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+		</dependency>
+		<!-- Loggers -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-slf4j-impl</artifactId>
+		</dependency>
+		
+	</dependencies>
 
     <build>
 		<pluginManagement>
@@ -351,6 +370,10 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
+            <plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+		        <artifactId>maven-compiler-plugin</artifactId>
+			</plugin>
         </plugins>
     </build>
 

@@ -11,7 +11,7 @@
 	<version>1.0.0</version>
 	<packaging>jar</packaging>
 	<properties>
-		<spring-boot-admin-server.version>3.1.0</spring-boot-admin-server.version>
+		<spring-boot-admin-server.version>3.1.2</spring-boot-admin-server.version>
 	</properties>
 	<dependencies>
 		<dependency>
