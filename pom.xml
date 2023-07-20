@@ -22,8 +22,6 @@
 		<!-- JAVA -->
         <java.version>17</java.version>
         <!-- MAVEN -->
-        <maven.compiler.source>${java.version}</maven.compiler.source>
-        <maven.compiler.target>${java.version}</maven.compiler.target>
         <maven-compiler-plugin.version>3.11.0</maven-compiler-plugin.version>
         <!-- SPRING -->
         <spring-boot.version>3.1.0</spring-boot.version>
