@@ -1,17 +1,17 @@
 package com.paulmarcelinbejan.toolbox.exception.technical;
 
-import java.util.UUID;
+import com.paulmarcelinbejan.toolbox.exception.base.BaseException;
 
-public class TechnicalException extends Exception {
-
-	private static final long serialVersionUID = -8408094491908268042L;
+public class TechnicalException extends BaseException {
+	
+	private static final long serialVersionUID = 6430014637371694012L;
 
 	public TechnicalException(String message) {
-		super(UUID.randomUUID().toString() + " - " + message);
+		super(message);
 	}
 
 	public TechnicalException(String message, Throwable cause) {
-		super(UUID.randomUUID().toString() + " - " + message, cause);
+		super(message, cause);
 	}
 
 	public TechnicalException(Throwable cause) {

@@ -2,7 +2,7 @@ package com.paulmarcelinbejan.toolbox.web.service;
 
 import java.util.Collection;
 
-import com.paulmarcelinbejan.toolbox.exception.technical.FunctionalException;
+import com.paulmarcelinbejan.toolbox.exception.functional.FunctionalException;
 
 /**
  *

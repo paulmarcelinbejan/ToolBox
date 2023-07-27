@@ -4,7 +4,7 @@ import java.util.Collection;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.paulmarcelinbejan.toolbox.exception.technical.FunctionalException;
+import com.paulmarcelinbejan.toolbox.exception.functional.FunctionalException;
 import com.paulmarcelinbejan.toolbox.web.service.DeleteService;
 import com.paulmarcelinbejan.toolbox.web.service.ReadService;
 

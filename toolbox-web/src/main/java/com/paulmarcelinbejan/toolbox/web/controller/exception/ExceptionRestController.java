@@ -1,14 +1,16 @@
 package com.paulmarcelinbejan.toolbox.web.controller.exception;
 
+import java.util.Map;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-import com.paulmarcelinbejan.toolbox.exception.technical.FunctionalException;
+import com.paulmarcelinbejan.toolbox.exception.functional.FunctionalException;
 import com.paulmarcelinbejan.toolbox.exception.technical.TechnicalException;
-import com.paulmarcelinbejan.toolbox.web.dto.ExceptionResponse;
+import com.paulmarcelinbejan.toolbox.web.response.ExceptionResponse;
 
 import jakarta.validation.ConstraintViolationException;
 
@@ -31,15 +33,15 @@ public abstract class ExceptionRestController {
 	@ResponseBody
 	@ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
 	@ExceptionHandler(value = { FunctionalException.class })
-	public String handleFunctionalException(FunctionalException exception) {
-		return exception.getMessage();
+	public ExceptionResponse handleFunctionalException(FunctionalException exception) {
+		return new ExceptionResponse(exception, Map.of("uniqueIdentifier", exception.getUniqueIdentifier()));
 	}
 
 	@ResponseBody
 	@ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
 	@ExceptionHandler(value = { TechnicalException.class })
 	public ExceptionResponse handleTechnicalException(TechnicalException exception) {
-		return new ExceptionResponse(exception);
+		return new ExceptionResponse(exception, Map.of("uniqueIdentifier", exception.getUniqueIdentifier()));
 	}
 
 	@ResponseBody

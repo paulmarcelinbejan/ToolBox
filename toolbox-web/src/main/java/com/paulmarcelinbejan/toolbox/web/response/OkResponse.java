@@ -1,4 +1,4 @@
-package com.paulmarcelinbejan.toolbox.web.dto;
+package com.paulmarcelinbejan.toolbox.web.response;
 
 import org.springframework.http.HttpStatus;
 
