@@ -1,5 +1,7 @@
 package com.paulmarcelinbejan.toolbox.web.service.impl;
 
+import java.text.MessageFormat;
+import java.util.ArrayList;
 import java.util.Collection;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -32,36 +34,52 @@ public class ReadServiceImpl<
 	private final MAPPER mapper;
 
 	private final REPOSITORY repository;
-
-	private final Class<ENTITY> entityClass;
+	
+	/**
+	 * This can be a dynamic message, 
+	 * just put {0} inside your message to be replaced by the id that was not found on DB.
+	 */
+	private final String errorMessageIfEntityNotFound;
 
 	@Override
 	public ENTITY findById(ID id) throws FunctionalException {
 		return repository
 				.findById(id)
-				.orElseThrow(() -> new FunctionalException(
-						"No " + entityClass.getSimpleName() + " found with the id: " + id));
+				.orElseThrow(() -> new FunctionalException(MessageFormat.format(errorMessageIfEntityNotFound, id)));
 	}
 
 	@Override
 	public DTO findByIdToDto(ID id) throws FunctionalException {
-		return mapper.toDto(findById(id));
+		ENTITY entity = findById(id);
+		return mapper.toDto(entity);
 	}
 
-	/**
-	 * If some or all ids are not found, no entities are returned for these IDs.
-	 */
 	@Override
-	public Collection<ENTITY> findManyById(Collection<ID> ids) {
+	public Collection<ENTITY> findManyById(Collection<ID> ids) throws FunctionalException {
+		Collection<ENTITY> entities = new ArrayList<>();
+
+		for(ID id : ids) {
+			entities.add(findById(id));
+		}
+		
+		return entities;
+	}
+
+	@Override
+	public Collection<ENTITY> findManyByIdIfPresent(Collection<ID> ids) {
 		return repository.findAllById(ids);
 	}
-
-	/**
-	 * If some or all ids are not found, no DTOs are returned for these IDs.
-	 */
+	
 	@Override
-	public Collection<DTO> findManyByIdToDto(Collection<ID> ids) {
-		return mapper.toDtos(findManyById(ids));
+	public Collection<DTO> findManyByIdToDto(Collection<ID> ids) throws FunctionalException {
+		Collection<ENTITY> entities = findManyById(ids);
+		return mapper.toDtos(entities);
+	}
+	
+	@Override
+	public Collection<DTO> findManyByIdToDtoIfPresent(Collection<ID> ids) {
+		Collection<ENTITY> entities = findManyByIdIfPresent(ids);
+		return mapper.toDtos(entities);
 	}
 
 	@Override

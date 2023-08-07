@@ -15,6 +15,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class ServiceUtils {
 
+	public static <ENTITY, ID> String buildErrorMessageIfEntityNotFound(Class<ENTITY> entityClass) {
+		return "No " + entityClass.getSimpleName() + " found with the id: {0}";
+	}
+	
 	@SuppressWarnings("unchecked")
 	public static <ID, ENTITY> ID retrieveId(ENTITY entity, Class<ENTITY> entityClass) throws TechnicalException {
 		try {

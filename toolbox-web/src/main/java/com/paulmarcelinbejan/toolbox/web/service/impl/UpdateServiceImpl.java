@@ -2,6 +2,7 @@ package com.paulmarcelinbejan.toolbox.web.service.impl;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.function.Function;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -37,27 +38,25 @@ public class UpdateServiceImpl<
 
 	private final ReadService<ID, ENTITY, DTO> readService;
 
-	private final Class<ENTITY> entityClass;
-
-	private final Class<DTO> dtoClass;
+	private final Function<ENTITY, ID> entityGetterId;
+	
+	private final Function<DTO, ID> dtoGetterId;
 
 	@Override
-	public ID update(DTO dto) throws FunctionalException, TechnicalException {
-
-		ID id = ServiceUtils.retrieveId(dto, dtoClass, entityClass);
-
-		ENTITY entity = readService.findById(id);
-
-		mapper.updateEntityFromDto(entity, dto);
-
-		entity = repository.save(entity);
-
-		return ServiceUtils.retrieveId(entity, entityClass);
-
+	public ID update(DTO dto) throws FunctionalException {
+		ENTITY entity = updateEntityByDto(dto);
+		return entityGetterId.apply(entity);
 	}
 
 	@Override
-	public Collection<ID> update(Collection<DTO> dtos) throws FunctionalException, TechnicalException {
+	public DTO updateAndReturn(DTO dto) throws FunctionalException {
+		ENTITY entity = updateEntityByDto(dto);
+		DTO dtoUpdated = mapper.toDto(entity);
+		return dtoUpdated;
+	}
+	
+	@Override
+	public Collection<ID> update(Collection<DTO> dtos) throws FunctionalException {
 		Collection<ID> ids = new ArrayList<>();
 
 		for (DTO dto : dtos) {
@@ -65,6 +64,25 @@ public class UpdateServiceImpl<
 		}
 
 		return ids;
+	}
+
+	@Override
+	public Collection<DTO> updateAndReturn(Collection<DTO> dtos) throws FunctionalException {
+		Collection<DTO> dtosUpdated = new ArrayList<>();
+
+		for (DTO dto : dtos) {
+			dtosUpdated.add(updateAndReturn(dto));
+		}
+
+		return dtosUpdated;
+	}
+
+	private ENTITY updateEntityByDto(DTO dto) throws FunctionalException {
+		ID id = dtoGetterId.apply(dto);
+		ENTITY entity = readService.findById(id);
+		mapper.updateEntityFromDto(entity, dto);
+		entity = repository.save(entity);
+		return entity;
 	}
 
 }

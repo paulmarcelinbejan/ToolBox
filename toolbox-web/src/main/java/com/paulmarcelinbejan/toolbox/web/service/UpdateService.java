@@ -16,6 +16,10 @@ public interface UpdateService<ID, DTO> {
 
 	ID update(DTO dto) throws FunctionalException, TechnicalException;
 
+	DTO updateAndReturn(DTO dto) throws FunctionalException, TechnicalException;
+	
 	Collection<ID> update(Collection<DTO> dtos) throws FunctionalException, TechnicalException;
+	
+	Collection<DTO> updateAndReturn(Collection<DTO> dtos) throws FunctionalException, TechnicalException;
 
 }

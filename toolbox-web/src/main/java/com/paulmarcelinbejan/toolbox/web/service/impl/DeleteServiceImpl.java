@@ -35,11 +35,12 @@ public class DeleteServiceImpl<
 		ENTITY entity = readService.findById(id);
 		repository.delete(entity);
 	}
+	
+	@Override
+	public void deleteIfPresent(ID id) throws FunctionalException {
+		repository.deleteById(id);
+	}
 
-	/**
-	 * If an Entity is not found in the persistence store, a FunctionalException
-	 * will be thrown.
-	 */
 	@Override
 	public void delete(Collection<ID> ids) throws FunctionalException {
 		for (ID id : ids) {
@@ -47,9 +48,6 @@ public class DeleteServiceImpl<
 		}
 	}
 
-	/**
-	 * Entities that aren't found in the persistence store are silently ignored.
-	 */
 	@Override
 	public void deleteIfPresent(Collection<ID> ids) {
 		repository.deleteAllById(ids);

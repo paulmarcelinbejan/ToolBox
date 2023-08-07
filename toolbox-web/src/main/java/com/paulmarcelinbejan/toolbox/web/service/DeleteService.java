@@ -15,6 +15,8 @@ public interface DeleteService<ID> {
 
 	void delete(ID id) throws FunctionalException;
 
+	void deleteIfPresent(ID id) throws FunctionalException;
+
 	/**
 	 * If an Entity is not found in the persistence store, a FunctionalException
 	 * will be thrown.

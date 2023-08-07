@@ -1,13 +1,13 @@
 package com.paulmarcelinbejan.toolbox.web.service.impl;
 
 import java.util.Collection;
+import java.util.function.Function;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.paulmarcelinbejan.toolbox.exception.technical.TechnicalException;
 import com.paulmarcelinbejan.toolbox.mapstruct.BaseMapperToEntity;
 import com.paulmarcelinbejan.toolbox.web.service.CreateService;
-import com.paulmarcelinbejan.toolbox.web.service.utils.ServiceUtils;
 
 import lombok.RequiredArgsConstructor;
 
@@ -31,25 +31,21 @@ public class CreateServiceImpl<
 	private final MAPPER mapper;
 
 	private final REPOSITORY repository;
-
-	private final Class<ENTITY> entityClass;
+	
+	private final Function<ENTITY, ID> entityGetterId;
 
 	@Override
 	public ID save(DTO dto) throws TechnicalException {
 		ENTITY entity = mapper.toEntity(dto);
-
 		entity = repository.save(entity);
-
-		return ServiceUtils.retrieveId(entity, entityClass);
+		return entityGetterId.apply(entity);
 	}
 
 	@Override
 	public Collection<ID> save(Collection<DTO> dtos) throws TechnicalException {
 		Collection<ENTITY> entities = mapper.toEntities(dtos);
-
 		entities = repository.saveAll(entities);
-
-		return ServiceUtils.retrieveIds(entities, entityClass);
+		return entities.stream().map(entityGetterId).toList();
 	}
 
 }
