@@ -9,7 +9,6 @@ import java.util.Arrays;
 import java.util.stream.Stream;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.text.WordUtils;
 
 import com.paulmarcelinbejan.toolbox.utils.reflection.exception.ReflectionException;
 import com.paulmarcelinbejan.toolbox.utils.text.TextUtils;
@@ -70,15 +69,19 @@ public class ReflectionUtils {
 
 	}
 
-	public static <T> Method getPublicGetterOfField(Class<T> clazz, Field field) throws ReflectionException {
-		String fieldName = field.getName();
-		String getterNameOfField = GETTER_PREFIX + WordUtils.capitalize(fieldName);
+	public static <T> Method getPublicGetterOfFieldName(Class<T> clazz, String fieldName) throws ReflectionException {
+		String getterNameOfField = GETTER_PREFIX + TextUtils.firstLetterUppercase(fieldName);
 		return getPublicGetters(clazz)
 				.filter(getter -> getter.getName().contentEquals(getterNameOfField))
 				.findFirst()
 				.orElseThrow(() -> new ReflectionException(
 						"Class " + clazz.getCanonicalName() + " doesn't have a getter method named " + getterNameOfField
 								+ " for field " + fieldName));
+	}
+	
+	public static <T> Method getPublicGetterOfField(Class<T> clazz, Field field) throws ReflectionException {
+		String fieldName = field.getName();
+		return getPublicGetterOfFieldName(clazz, fieldName);
 	}
 
 	public static Object invokeMethod(Object objectOnWhichToInvokeTheMethod, Method method) throws ReflectionException {
@@ -109,5 +112,12 @@ public class ReflectionUtils {
 				.filter(method -> method.getParameters().length == 0)
 				.filter(method -> Modifier.isPublic(method.getModifiers()));
 	}
+	
+    public static String getterName(String fieldName) {
+        StringBuilder builder = new StringBuilder(GETTER_PREFIX);
+        builder.append(Character.toUpperCase(fieldName.charAt(0)));
+        builder.append(fieldName.substring(1));
+        return builder.toString();
+    }
 
 }
