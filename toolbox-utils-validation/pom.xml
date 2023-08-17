@@ -17,6 +17,14 @@
 			<groupId>jakarta.validation</groupId>
 			<artifactId>jakarta.validation-api</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>com.paulmarcelinbejan.toolbox</groupId>
+			<artifactId>toolbox-utils-reflection</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.paulmarcelinbejan.toolbox</groupId>
+			<artifactId>toolbox-utils-time</artifactId>
+		</dependency>
 	</dependencies>
 	
 </project>
