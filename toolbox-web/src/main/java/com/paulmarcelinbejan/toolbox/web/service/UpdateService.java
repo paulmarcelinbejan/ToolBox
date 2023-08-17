@@ -3,7 +3,6 @@ package com.paulmarcelinbejan.toolbox.web.service;
 import java.util.Collection;
 
 import com.paulmarcelinbejan.toolbox.exception.functional.FunctionalException;
-import com.paulmarcelinbejan.toolbox.exception.technical.TechnicalException;
 
 /**
  *
@@ -12,14 +11,14 @@ import com.paulmarcelinbejan.toolbox.exception.technical.TechnicalException;
  * @author paulmarcelinbejan
  *
  */
-public interface UpdateService<ID, DTO> {
+public interface UpdateService<ID, ENTITY> {
 
-	ID update(DTO dto) throws FunctionalException, TechnicalException;
+	ID update(ENTITY entity) throws FunctionalException;
 
-	DTO updateAndReturn(DTO dto) throws FunctionalException, TechnicalException;
+	ENTITY updateAndReturn(ENTITY entity) throws FunctionalException;
 	
-	Collection<ID> update(Collection<DTO> dtos) throws FunctionalException, TechnicalException;
+	Collection<ID> update(Collection<ENTITY> entities) throws FunctionalException;
 	
-	Collection<DTO> updateAndReturn(Collection<DTO> dtos) throws FunctionalException, TechnicalException;
+	Collection<ENTITY> updateAndReturn(Collection<ENTITY> entities) throws FunctionalException;
 
 }

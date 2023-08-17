@@ -3,6 +3,7 @@ package com.paulmarcelinbejan.toolbox.web.service.impl;
 import java.util.Collection;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.paulmarcelinbejan.toolbox.exception.functional.FunctionalException;
 import com.paulmarcelinbejan.toolbox.web.service.DeleteService;
@@ -17,18 +18,18 @@ import lombok.RequiredArgsConstructor;
  * @author paulmarcelinbejan
  *
  */
+@Transactional
 @RequiredArgsConstructor
 public class DeleteServiceImpl<
 		ID,
 		ENTITY,
-		DTO,
 		REPOSITORY extends JpaRepository<ENTITY, ID>>
 		implements
 		DeleteService<ID> {
 
 	private final REPOSITORY repository;
 
-	private final ReadService<ID, ENTITY, DTO> readService;
+	private final ReadService<ID, ENTITY> readService;
 
 	@Override
 	public void delete(ID id) throws FunctionalException {
@@ -37,19 +38,19 @@ public class DeleteServiceImpl<
 	}
 	
 	@Override
-	public void deleteIfPresent(ID id) throws FunctionalException {
+	public void deleteIfPresent(ID id) {
 		repository.deleteById(id);
 	}
 
 	@Override
-	public void delete(Collection<ID> ids) throws FunctionalException {
+	public void deleteMany(Collection<ID> ids) throws FunctionalException {
 		for (ID id : ids) {
 			delete(id);
 		}
 	}
 
 	@Override
-	public void deleteIfPresent(Collection<ID> ids) {
+	public void deleteManyIfPresent(Collection<ID> ids) {
 		repository.deleteAllById(ids);
 	}
 

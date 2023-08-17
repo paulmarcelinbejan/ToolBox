@@ -5,13 +5,12 @@ import java.util.Collection;
 import java.util.function.Function;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.paulmarcelinbejan.toolbox.exception.functional.FunctionalException;
-import com.paulmarcelinbejan.toolbox.exception.technical.TechnicalException;
-import com.paulmarcelinbejan.toolbox.mapstruct.BaseMapperToEntityAndToDTO;
+import com.paulmarcelinbejan.toolbox.mapstruct.UpdateEntityMapper;
 import com.paulmarcelinbejan.toolbox.web.service.ReadService;
 import com.paulmarcelinbejan.toolbox.web.service.UpdateService;
-import com.paulmarcelinbejan.toolbox.web.service.utils.ServiceUtils;
 
 import lombok.RequiredArgsConstructor;
 
@@ -22,67 +21,54 @@ import lombok.RequiredArgsConstructor;
  * @author paulmarcelinbejan
  *
  */
+@Transactional
 @RequiredArgsConstructor
 public class UpdateServiceImpl<
 		ID,
 		ENTITY,
-		DTO,
-		MAPPER extends BaseMapperToEntityAndToDTO<ENTITY, DTO>,
-		REPOSITORY extends JpaRepository<ENTITY, ID>>
+		REPOSITORY extends JpaRepository<ENTITY, ID>,
+		MAPPER extends UpdateEntityMapper<ENTITY>>
 		implements
-		UpdateService<ID, DTO> {
-
-	private final MAPPER mapper;
+		UpdateService<ID, ENTITY> {
 
 	private final REPOSITORY repository;
-
-	private final ReadService<ID, ENTITY, DTO> readService;
+	
+	private final MAPPER mapper;
+	
+	private final ReadService<ID, ENTITY> readService;
 
 	private final Function<ENTITY, ID> entityGetterId;
-	
-	private final Function<DTO, ID> dtoGetterId;
 
 	@Override
-	public ID update(DTO dto) throws FunctionalException {
-		ENTITY entity = updateEntityByDto(dto);
+	public ID update(ENTITY entity) throws FunctionalException {
+		entity = updateAndReturn(entity);
 		return entityGetterId.apply(entity);
 	}
 
 	@Override
-	public DTO updateAndReturn(DTO dto) throws FunctionalException {
-		ENTITY entity = updateEntityByDto(dto);
-		DTO dtoUpdated = mapper.toDto(entity);
-		return dtoUpdated;
+	public ENTITY updateAndReturn(ENTITY newEntity) throws FunctionalException {
+		ENTITY entity = readService.findById(entityGetterId.apply(newEntity));
+		mapper.updateEntity(entity, newEntity);
+		entity = repository.save(entity);
+		return entity;
 	}
 	
 	@Override
-	public Collection<ID> update(Collection<DTO> dtos) throws FunctionalException {
+	public Collection<ID> update(Collection<ENTITY> entities) throws FunctionalException {
 		Collection<ID> ids = new ArrayList<>();
-
-		for (DTO dto : dtos) {
-			ids.add(update(dto));
+		for (ENTITY entity : entities) {
+			ids.add(update(entity));
 		}
-
 		return ids;
 	}
 
 	@Override
-	public Collection<DTO> updateAndReturn(Collection<DTO> dtos) throws FunctionalException {
-		Collection<DTO> dtosUpdated = new ArrayList<>();
-
-		for (DTO dto : dtos) {
-			dtosUpdated.add(updateAndReturn(dto));
+	public Collection<ENTITY> updateAndReturn(Collection<ENTITY> entities) throws FunctionalException {
+		Collection<ENTITY> entitiesUpdated = new ArrayList<>();
+		for (ENTITY entity : entities) {
+			entitiesUpdated.add(updateAndReturn(entity));
 		}
-
-		return dtosUpdated;
-	}
-
-	private ENTITY updateEntityByDto(DTO dto) throws FunctionalException {
-		ID id = dtoGetterId.apply(dto);
-		ENTITY entity = readService.findById(id);
-		mapper.updateEntityFromDto(entity, dto);
-		entity = repository.save(entity);
-		return entity;
+		return entitiesUpdated;
 	}
 
 }

@@ -15,8 +15,12 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class ServiceUtils {
 
-	public static <ENTITY, ID> String buildErrorMessageIfEntityNotFound(Class<ENTITY> entityClass) {
-		return "No " + entityClass.getSimpleName() + " found with the id: {0}";
+	public static <ENTITY> String buildErrorMessageIfEntityNotFoundById(Class<ENTITY> entityClass) {
+		return buildErrorMessageIfEntityNotFoundByParameter(entityClass, "id");
+	}
+	
+	public static <ENTITY> String buildErrorMessageIfEntityNotFoundByParameter(Class<ENTITY> entityClass, String parameter) {
+		return "No " + entityClass.getSimpleName() + " found with "+parameter+": {0}";
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -46,19 +50,34 @@ public class ServiceUtils {
 		}
 	}
 
-	public static <ENTITY> Method entityIdGetter(Class<ENTITY> entityClass) throws ReflectionException {
-		Field idField = ReflectionUtils.getFirstFieldAnnotatedWith(entityClass, jakarta.persistence.Id.class);
-		return ReflectionUtils.getPublicGetterOfField(entityClass, idField);
+	private static <ENTITY> Method entityIdGetter(Class<ENTITY> entityClass) throws TechnicalException {
+		try {
+			Field idField = retrieveIdFieldByIdAnnotation(entityClass);
+			return ReflectionUtils.getPublicGetterOfField(entityClass, idField);
+		} catch (ReflectionException e) {
+			throw new TechnicalException(e);
+		}
 	}
 
+	/**
+	 * Retrieve id value on DTO that has the same name of the id field present on Entity
+	 */
 	@SuppressWarnings("unchecked")
-	public static <ID, ENTITY, DTO> ID retrieveId(DTO dto, Class<DTO> dtoClass, Class<ENTITY> entityClass)
+	public static <ID, ENTITY, DTO> ID retrieveIdFromDto(DTO dto, Class<DTO> dtoClass, Class<ENTITY> entityClass)
 			throws TechnicalException {
 		try {
-			Field idEntity = ReflectionUtils.getFirstFieldAnnotatedWith(entityClass, jakarta.persistence.Id.class);
+			Field idEntity = retrieveIdFieldByIdAnnotation(entityClass);
 			Field idDto = ReflectionUtils.getFieldByName(dtoClass, idEntity.getName());
 			Method getIdDto = ReflectionUtils.getPublicGetterOfField(dtoClass, idDto);
 			return (ID) ReflectionUtils.invokeMethod(dto, getIdDto);
+		} catch (ReflectionException e) {
+			throw new TechnicalException(e);
+		}
+	}
+	
+	private static <ENTITY> Field retrieveIdFieldByIdAnnotation(Class<ENTITY> entityClass) throws TechnicalException {
+		try {
+			return ReflectionUtils.getFirstFieldAnnotatedWith(entityClass, jakarta.persistence.Id.class);
 		} catch (ReflectionException e) {
 			throw new TechnicalException(e);
 		}

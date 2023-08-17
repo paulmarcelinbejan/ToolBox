@@ -11,28 +11,25 @@ import com.paulmarcelinbejan.toolbox.exception.functional.FunctionalException;
  * @author paulmarcelinbejan
  *
  */
-public interface ReadService<ID, ENTITY, DTO> {
+public interface ReadService<ID, ENTITY> {
 
+	/**
+	 * Returns a reference to the entity with the given identifier.
+	 */
+	ENTITY getReferenceById(ID id);
+	
 	ENTITY findById(ID id) throws FunctionalException;
 
-	DTO findByIdToDto(ID id) throws FunctionalException;
-
+	/**
+	 * If an Entity is not found in the persistence store, a FunctionalException will be thrown.
+	 */
 	Collection<ENTITY> findManyById(Collection<ID> ids) throws FunctionalException;
 
 	/**
-	 * If some or all ids are not found, no entities are returned for these IDs.
+	 * Entities that aren't found in the persistence store are silently ignored.
 	 */
 	Collection<ENTITY> findManyByIdIfPresent(Collection<ID> ids);
-	
-	Collection<DTO> findManyByIdToDto(Collection<ID> ids) throws FunctionalException;
-
-	/**
-	 * If some or all ids are not found, no DTOs are returned for these IDs.
-	 */
-	Collection<DTO> findManyByIdToDtoIfPresent(Collection<ID> ids);
 
 	Collection<ENTITY> findAll();
-
-	Collection<DTO> findAllToDto();
 
 }

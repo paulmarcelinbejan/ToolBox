@@ -2,8 +2,6 @@ package com.paulmarcelinbejan.toolbox.web.service;
 
 import java.util.Collection;
 
-import com.paulmarcelinbejan.toolbox.exception.technical.TechnicalException;
-
 /**
  *
  * Basic methods for create operation.
@@ -11,10 +9,14 @@ import com.paulmarcelinbejan.toolbox.exception.technical.TechnicalException;
  * @author paulmarcelinbejan
  *
  */
-public interface CreateService<ID, DTO> {
+public interface CreateService<ID, ENTITY> {
 
-	ID save(DTO dto) throws TechnicalException;
+	ID save(ENTITY entity);
 
-	Collection<ID> save(Collection<DTO> dtos) throws TechnicalException;
+	ENTITY saveAndReturn(ENTITY entity);
+	
+	Collection<ID> save(Collection<ENTITY> entities);
+	
+	Collection<ENTITY> saveAndReturn(Collection<ENTITY> entities);
 
 }
