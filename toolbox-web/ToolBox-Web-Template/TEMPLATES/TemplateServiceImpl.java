@@ -5,7 +5,6 @@ import java.util.Collection;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import ${PACKAGE}.${ENTITY_LOWERCASE}.dto.${ENTITY}Dto;
 import ${PACKAGE}.${ENTITY_LOWERCASE}.entity.${ENTITY};
 import ${PACKAGE}.${ENTITY_LOWERCASE}.mapper.${ENTITY}Mapper;
 import ${PACKAGE}.${ENTITY_LOWERCASE}.repository.${ENTITY}Repository;
@@ -27,32 +26,31 @@ import com.paulmarcelinbejan.toolbox.web.service.utils.ServiceUtils;
 public class ${ENTITY}ServiceImpl implements ${ENTITY}Service {
 
 	public ${ENTITY}ServiceImpl(${ENTITY}Mapper ${ENTITY_LOWERCAMELCASE}Mapper, ${ENTITY}Repository ${ENTITY_LOWERCAMELCASE}Repository) {
-		createService = new CreateServiceImpl<>(${ENTITY_LOWERCAMELCASE}Mapper, ${ENTITY_LOWERCAMELCASE}Repository, ${ENTITY}::getId);
-		readService = new ReadServiceImpl<>(${ENTITY_LOWERCAMELCASE}Mapper, ${ENTITY_LOWERCAMELCASE}Repository, ServiceUtils.buildErrorMessageIfEntityNotFound(${ENTITY}.class));
+		createService = new CreateServiceImpl<>(${ENTITY_LOWERCAMELCASE}Repository, ${ENTITY}::getId);
+		readService = new ReadServiceImpl<>(${ENTITY_LOWERCAMELCASE}Repository, ServiceUtils.buildErrorMessageIfEntityNotFoundById(${ENTITY}.class));
 		updateService = new UpdateServiceImpl<>(
-				${ENTITY_LOWERCAMELCASE}Mapper,
 				${ENTITY_LOWERCAMELCASE}Repository,
+				${ENTITY_LOWERCAMELCASE}Mapper,
 				readService,
-				${ENTITY}::getId,
-				${ENTITY}Dto::getId);
+				${ENTITY}::getId);
 		deleteService = new DeleteServiceImpl<>(${ENTITY_LOWERCAMELCASE}Repository, readService);
 	}
 
-	private final CreateService<${ID_TYPE}, ${ENTITY}Dto> createService;
-	private final ReadService<${ID_TYPE}, ${ENTITY}, ${ENTITY}Dto> readService;
-	private final UpdateService<${ID_TYPE}, ${ENTITY}Dto> updateService;
+	private final CreateService<${ID_TYPE}, ${ENTITY}> createService;
+	private final ReadService<${ID_TYPE}, ${ENTITY}> readService;
+	private final UpdateService<${ID_TYPE}, ${ENTITY}> updateService;
 	private final DeleteService<${ID_TYPE}> deleteService;
+
+	@Override
+	@Transactional(readOnly = true)
+	public ${ENTITY} getReferenceById(${ID_TYPE} id) {
+		return readService.getReferenceById(id);
+	}
 
 	@Override
 	@Transactional(readOnly = true)
 	public ${ENTITY} findById(${ID_TYPE} id) throws FunctionalException {
 		return readService.findById(id);
-	}
-
-	@Override
-	@Transactional(readOnly = true)
-	public ${ENTITY}Dto findByIdToDto(${ID_TYPE} id) throws FunctionalException {
-		return readService.findByIdToDto(id);
 	}
 
 	@Override
@@ -66,18 +64,6 @@ public class ${ENTITY}ServiceImpl implements ${ENTITY}Service {
 	public Collection<${ENTITY}> findManyByIdIfPresent(Collection<${ID_TYPE}> ids) {
 		return readService.findManyByIdIfPresent(ids);
 	}
-	
-	@Override
-	@Transactional(readOnly = true)
-	public Collection<${ENTITY}Dto> findManyByIdToDto(Collection<${ID_TYPE}> ids) throws FunctionalException {
-		return readService.findManyByIdToDto(ids);
-	}
-	
-	@Override
-	@Transactional(readOnly = true)
-	public Collection<${ENTITY}Dto> findManyByIdToDtoIfPresent(Collection<${ID_TYPE}> ids) {
-		return readService.findManyByIdToDtoIfPresent(ids);
-	}
 
 	@Override
 	@Transactional(readOnly = true)
@@ -86,39 +72,43 @@ public class ${ENTITY}ServiceImpl implements ${ENTITY}Service {
 	}
 
 	@Override
-	@Transactional(readOnly = true)
-	public Collection<${ENTITY}Dto> findAllToDto() {
-		return readService.findAllToDto();
+	public ${ID_TYPE} save(${ENTITY} entity) {
+		return createService.save(entity);
 	}
 
 	@Override
-	public ${ID_TYPE} save(${ENTITY}Dto dto) throws TechnicalException {
-		return createService.save(dto);
+	public ${ENTITY} saveAndReturn(${ENTITY} entity) {
+		return createService.saveAndReturn(entity);
 	}
 
 	@Override
-	public Collection<${ID_TYPE}> save(Collection<${ENTITY}Dto> dtos) throws TechnicalException {
-		return createService.save(dtos);
+	public Collection<${ID_TYPE}> save(Collection<${ENTITY}> entities) {
+		return createService.save(entities);
 	}
 
 	@Override
-	public ${ID_TYPE} update(${ENTITY}Dto dto) throws FunctionalException, TechnicalException {
-		return updateService.update(dto);
+	public Collection<${ENTITY}> saveAndReturn(Collection<${ENTITY}> entities) {
+		return createService.saveAndReturn(entities);
 	}
 
 	@Override
-	public ${ENTITY}Dto updateAndReturn(${ENTITY}Dto dto) throws FunctionalException, TechnicalException {
-		return updateService.updateAndReturn(dto);
+	public ${ID_TYPE} update(${ENTITY} entity) throws FunctionalException {
+		return updateService.update(entity);
+	}
+
+	@Override
+	public ${ENTITY} updateAndReturn(${ENTITY} entity) throws FunctionalException {
+		return updateService.updateAndReturn(entity);
 	}
 	
 	@Override
-	public Collection<${ID_TYPE}> update(Collection<${ENTITY}Dto> dtos) throws FunctionalException, TechnicalException {
-		return updateService.update(dtos);
+	public Collection<${ID_TYPE}> update(Collection<${ENTITY}> entities) throws FunctionalException {
+		return updateService.update(entities);
 	}
 	
 	@Override
-	public Collection<${ENTITY}Dto> updateAndReturn(Collection<${ENTITY}Dto> dtos) throws FunctionalException, TechnicalException {
-		return updateService.updateAndReturn(dtos);
+	public Collection<${ENTITY}> updateAndReturn(Collection<${ENTITY}> entities) throws FunctionalException {
+		return updateService.updateAndReturn(entities);
 	}
 
 	@Override
@@ -127,18 +117,18 @@ public class ${ENTITY}ServiceImpl implements ${ENTITY}Service {
 	}
 	
 	@Override
-	public void deleteIfPresent(${ID_TYPE} id) throws FunctionalException {
+	public void deleteIfPresent(${ID_TYPE} id) {
 		deleteService.deleteIfPresent(id);
 	}
 
 	@Override
-	public void delete(Collection<${ID_TYPE}> ids) throws FunctionalException {
-		deleteService.delete(ids);
+	public void deleteMany(Collection<${ID_TYPE}> ids) throws FunctionalException {
+		deleteService.deleteMany(ids);
 	}
 
 	@Override
-	public void deleteIfPresent(Collection<${ID_TYPE}> ids) {
-		deleteService.deleteIfPresent(ids);
+	public void deleteManyIfPresent(Collection<${ID_TYPE}> ids) {
+		deleteService.deleteManyIfPresent(ids);
 	}
 	
 }

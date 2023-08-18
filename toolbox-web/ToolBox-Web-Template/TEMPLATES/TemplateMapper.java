@@ -8,11 +8,9 @@ import org.mapstruct.Mapping;
 import org.mapstruct.MappingConstants;
 import org.mapstruct.MappingTarget;
 import org.mapstruct.Named;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import ${PACKAGE}.${ENTITY_LOWERCASE}.dto.${ENTITY}Dto;
 import ${PACKAGE}.${ENTITY_LOWERCASE}.entity.${ENTITY};
-import com.paulmarcelinbejan.toolbox.exception.functional.FunctionalException;
 import com.paulmarcelinbejan.toolbox.mapstruct.BaseMapperToEntityAndToDTO;
 
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
@@ -24,17 +22,18 @@ public abstract class ${ENTITY}Mapper implements BaseMapperToEntityAndToDTO<${EN
 
 	@Override
 	@IterableMapping(qualifiedByName = "toEntity")
-	public abstract Collection<${ENTITY}> toEntities(Collection<${ENTITY}Dto> dtoList);
+	public abstract Collection<${ENTITY}> toEntities(Collection<${ENTITY}Dto> dtos);
+
+	@Override
+	@Named("toDto")
+	public abstract ${ENTITY}Dto toDto(${ENTITY} entity);
 
 	@Override
 	@IterableMapping(qualifiedByName = "toDto")
 	public abstract Collection<${ENTITY}Dto> toDtos(Collection<${ENTITY}> entities);
 
 	@Override
-	public abstract void updateEntityFromDto(@MappingTarget ${ENTITY} entity, ${ENTITY}Dto dto);
-
-	@Override
-	@Named("toDto")
-	public abstract ${ENTITY}Dto toDto(${ENTITY} entity);
+	@Mapping(target = "id", ignore = true)
+	public abstract void updateEntity(@MappingTarget ${ENTITY} toUpdate, ${ENTITY} newValue);
 
 }
