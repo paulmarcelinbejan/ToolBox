@@ -20,7 +20,13 @@ public class ServiceUtils {
 	}
 	
 	public static <ENTITY> String buildErrorMessageIfEntityNotFoundByParameter(Class<ENTITY> entityClass, String parameter) {
-		return "No " + entityClass.getSimpleName() + " found with "+parameter+": {0}";
+		StringBuilder errorMesssageBuilder = new StringBuilder();
+		errorMesssageBuilder.append("No ");
+		errorMesssageBuilder.append(entityClass.getSimpleName());
+		errorMesssageBuilder.append(" found with ");
+		errorMesssageBuilder.append(parameter);
+		errorMesssageBuilder.append(": {0}");
+		return errorMesssageBuilder.toString();
 	}
 	
 	@SuppressWarnings("unchecked")
