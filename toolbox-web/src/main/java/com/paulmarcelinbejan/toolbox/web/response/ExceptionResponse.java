@@ -9,9 +9,9 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
-import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import com.paulmarcelinbejan.toolbox.exception.utils.ExceptionUtils;
+import com.paulmarcelinbejan.toolbox.jackson.deserializer.LocalDateTimeDeserializer;
+import com.paulmarcelinbejan.toolbox.jackson.serializer.LocalDateTimeSerializer;
 
 import lombok.Data;
 import lombok.extern.log4j.Log4j2;
