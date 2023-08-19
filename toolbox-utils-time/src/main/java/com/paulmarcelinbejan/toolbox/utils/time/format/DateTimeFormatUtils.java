@@ -26,10 +26,30 @@ public class DateTimeFormatUtils {
 	 * 
 	 * @param DatePattern datePattern
 	 * @param TimePattern timePattern
+	 * 
+	 * This method uses a single space to concatenate date with time
+	 * 
 	 * @return a new DateTimePattern
 	 */
 	public static final <DatePattern extends DatePatternBase, TimePattern extends TimePatternBase> String buildPattern(DatePattern datePattern, TimePattern timePattern) {
-		return datePattern.getValue() + " " + timePattern.getValue();
+		return buildPattern(datePattern, " ", timePattern);
+	}
+	
+	/**
+	 * Build a pattern combining DatePattern with TimePattern.
+	 * 
+	 * @param DatePattern datePattern
+	 * @param String dateTimeConcatenation
+	 * @param TimePattern timePattern
+	 * 
+	 * @return a new DateTimePattern
+	 */
+	public static final <DatePattern extends DatePatternBase, TimePattern extends TimePatternBase> String buildPattern(DatePattern datePattern, String dateTimeConcatenation, TimePattern timePattern) {
+		return new StringBuilder()
+				.append(datePattern.getValue())
+				.append(dateTimeConcatenation)
+				.append(timePattern.getValue())
+				.toString();
 	}
 	
 	public static final <DatePattern extends DatePatternBase, TimePattern extends TimePatternBase> String toString(LocalDateTime localDateTime, DatePattern datePattern, TimePattern timePattern) {

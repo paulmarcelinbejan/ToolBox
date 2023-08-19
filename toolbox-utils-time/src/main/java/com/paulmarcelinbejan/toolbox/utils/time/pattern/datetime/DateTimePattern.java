@@ -59,7 +59,7 @@ public enum DateTimePattern implements DateTimePatternBase {
     }
     
     // Too much work to create all possible combination of DatePattern with TimePattern.
-    // Use the LocalDateTimeFormatUtils#buildPattern() to combine patterns.
+    // Use the DateTimeFormatUtils#buildPattern() to combine patterns.
     
 //    enum Literal {
 //    	

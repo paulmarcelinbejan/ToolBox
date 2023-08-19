@@ -35,6 +35,10 @@
 		</dependency>
 		<dependency>
 			<groupId>com.paulmarcelinbejan.toolbox</groupId>
+			<artifactId>toolbox-jackson</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.paulmarcelinbejan.toolbox</groupId>
 			<artifactId>toolbox-utils-reflection</artifactId>
 		</dependency>
 		<dependency>
