@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.paulmarcelinbejan.toolbox.exception.functional.FunctionalException;
-import com.paulmarcelinbejan.toolbox.mapstruct.UpdateEntityMapper;
+import com.paulmarcelinbejan.toolbox.utils.mapping.MapperUpdateEntity;
 import com.paulmarcelinbejan.toolbox.web.service.ReadService;
 import com.paulmarcelinbejan.toolbox.web.service.UpdateService;
 
@@ -27,7 +27,7 @@ public class UpdateServiceImpl<
 		ID,
 		ENTITY,
 		REPOSITORY extends JpaRepository<ENTITY, ID>,
-		MAPPER extends UpdateEntityMapper<ENTITY>>
+		MAPPER extends MapperUpdateEntity<ENTITY>>
 		implements
 		UpdateService<ID, ENTITY> {
 
