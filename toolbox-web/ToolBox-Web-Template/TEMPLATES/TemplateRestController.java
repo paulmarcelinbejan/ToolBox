@@ -14,13 +14,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import ${PACKAGE}.${ENTITY_LOWERCASE}.dto.${ENTITY}Dto;
+import ${PACKAGE}.${ENTITY_LOWERCASE}.dto.${ENTITY}Response;
+import ${PACKAGE}.${ENTITY_LOWERCASE}.dto.${ENTITY}SaveRequest;
+import ${PACKAGE}.${ENTITY_LOWERCASE}.dto.${ENTITY}UpdateRequest;
 import ${PACKAGE}.${ENTITY_LOWERCASE}.mapper.${ENTITY}Mapper;
 import ${PACKAGE}.${ENTITY_LOWERCASE}.service.${ENTITY}Service;
+
 import com.paulmarcelinbejan.toolbox.exception.functional.FunctionalException;
 import com.paulmarcelinbejan.toolbox.utils.validation.ValidatorUtils;
 import com.paulmarcelinbejan.toolbox.web.response.OkResponse;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
 @RestController
@@ -34,34 +38,34 @@ public class ${ENTITY}RestController {
 
 	@GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody ${ENTITY}Dto findById(@PathVariable ${ID_TYPE} id) throws FunctionalException {
-		return ${ENTITY_LOWERCAMELCASE}Mapper.toDto(${ENTITY_LOWERCAMELCASE}Service.findById(id));
+		return ${ENTITY_LOWERCAMELCASE}Mapper.toResponse(${ENTITY_LOWERCAMELCASE}Service.findById(id));
 	}
 
 	@GetMapping(value = "/", produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody Collection<${ENTITY}Dto> findAll() {
-		return ${ENTITY_LOWERCAMELCASE}Mapper.toDtos(${ENTITY_LOWERCAMELCASE}Service.findAll());
+		return ${ENTITY_LOWERCAMELCASE}Mapper.toResponses(${ENTITY_LOWERCAMELCASE}Service.findAll());
 	}
 
 	@PostMapping(value = "/save-one", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public @ResponseBody ${ID_TYPE} save(@Validated(${ENTITY}Dto.CreateValidation.class) @RequestBody final ${ENTITY}Dto dto) {
-		return ${ENTITY_LOWERCAMELCASE}Service.save(${ENTITY_LOWERCAMELCASE}Mapper.toEntity(dto));
+	public @ResponseBody ${ID_TYPE} save(@Valid @RequestBody final ${ENTITY}SaveRequest saveRequest) {
+		return ${ENTITY_LOWERCAMELCASE}Service.save(${ENTITY_LOWERCAMELCASE}Mapper.fromSaveRequestToEntity(saveRequest));
 	}
 
 	@PostMapping(value = "/save-many", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public @ResponseBody Collection<${ID_TYPE}> save(@RequestBody final Collection<${ENTITY}Dto> dtos) {
-		ValidatorUtils.validateGroups(dtos, ${ENTITY}Dto.CreateValidation.class);
-		return ${ENTITY_LOWERCAMELCASE}Service.save(${ENTITY_LOWERCAMELCASE}Mapper.toEntities(dtos));
+	public @ResponseBody Collection<${ID_TYPE}> save(@RequestBody final Collection<${ENTITY}SaveRequest> saveRequests) {
+		ValidatorUtils.validateAll(saveRequests);
+		return ${ENTITY_LOWERCAMELCASE}Service.save(${ENTITY_LOWERCAMELCASE}Mapper.fromSaveRequestsToEntities(saveRequests));
 	}
 
 	@PutMapping(value = "/update-one", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public @ResponseBody ${ID_TYPE} update(@Validated(${ENTITY}Dto.UpdateValidation.class) @RequestBody final ${ENTITY}Dto dto) throws FunctionalException {
-		return ${ENTITY_LOWERCAMELCASE}Service.update(${ENTITY_LOWERCAMELCASE}Mapper.toEntity(dto));
+	public @ResponseBody ${ID_TYPE} update(@Valid @RequestBody final ${ENTITY}UpdateRequest updateRequest) throws FunctionalException {
+		return ${ENTITY_LOWERCAMELCASE}Service.update(${ENTITY_LOWERCAMELCASE}Mapper.fromUpdateRequestToEntity(updateRequest));
 	}
 
 	@PutMapping(value = "/update-many", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public @ResponseBody Collection<${ID_TYPE}> update(@RequestBody final Collection<${ENTITY}Dto> dtos) throws FunctionalException {
-		ValidatorUtils.validateGroups(dtos, ${ENTITY}Dto.UpdateValidation.class);
-		return ${ENTITY_LOWERCAMELCASE}Service.update(${ENTITY_LOWERCAMELCASE}Mapper.toEntities(dtos));
+	public @ResponseBody Collection<${ID_TYPE}> update(@RequestBody final Collection<${ENTITY}UpdateRequest> updateRequests) throws FunctionalException {
+		ValidatorUtils.validateAll(updateRequests);
+		return ${ENTITY_LOWERCAMELCASE}Service.update(${ENTITY_LOWERCAMELCASE}Mapper.fromUpdateRequestsToEntities(updateRequests));
 	}
 
 	@DeleteMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
