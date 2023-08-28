@@ -1,8 +1,7 @@
 package com.paulmarcelinbejan.toolbox.web.service;
 
-import java.util.Collection;
-
-import com.paulmarcelinbejan.toolbox.exception.functional.FunctionalException;
+import com.paulmarcelinbejan.toolbox.web.service.update.UpdateAndReturnEntityService;
+import com.paulmarcelinbejan.toolbox.web.service.update.UpdateAndReturnIdService;
 
 /**
  *
@@ -11,14 +10,8 @@ import com.paulmarcelinbejan.toolbox.exception.functional.FunctionalException;
  * @author paulmarcelinbejan
  *
  */
-public interface UpdateService<ID, ENTITY> {
-
-	ID update(ENTITY entity) throws FunctionalException;
-
-	ENTITY updateAndReturn(ENTITY entity) throws FunctionalException;
-	
-	Collection<ID> update(Collection<ENTITY> entities) throws FunctionalException;
-	
-	Collection<ENTITY> updateAndReturn(Collection<ENTITY> entities) throws FunctionalException;
+public interface UpdateService<ID, ENTITY> extends 
+				 UpdateAndReturnIdService<ID, ENTITY>,
+				 UpdateAndReturnEntityService<ENTITY> {
 
 }
