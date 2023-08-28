@@ -35,7 +35,10 @@ public class TextUtils {
 	}
 	
 	public static String firstLetterUppercase(String text) {
-		return text.substring(0, 1).toUpperCase() + text.substring(1);
+		return new StringBuilder()
+				.append(text.substring(0, 1).toUpperCase())
+				.append(text.substring(1))
+				.toString();
 	}
 
 }
