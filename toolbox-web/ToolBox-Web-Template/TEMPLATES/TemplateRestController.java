@@ -37,12 +37,12 @@ public class ${ENTITY}RestController {
 	private final ${ENTITY}Mapper ${ENTITY_LOWERCAMELCASE}Mapper;
 
 	@GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-	public @ResponseBody ${ENTITY}Dto findById(@PathVariable ${ID_TYPE} id) throws FunctionalException {
+	public @ResponseBody ${ENTITY}Response findById(@PathVariable ${ID_TYPE} id) throws FunctionalException {
 		return ${ENTITY_LOWERCAMELCASE}Mapper.toResponse(${ENTITY_LOWERCAMELCASE}Service.findById(id));
 	}
 
 	@GetMapping(value = "/", produces = MediaType.APPLICATION_JSON_VALUE)
-	public @ResponseBody Collection<${ENTITY}Dto> findAll() {
+	public @ResponseBody Collection<${ENTITY}Response> findAll() {
 		return ${ENTITY_LOWERCAMELCASE}Mapper.toResponses(${ENTITY_LOWERCAMELCASE}Service.findAll());
 	}
 

@@ -14,10 +14,10 @@ import ${PACKAGE}.${ENTITY_LOWERCASE}.dto.${ENTITY}SaveRequest;
 import ${PACKAGE}.${ENTITY_LOWERCASE}.dto.${ENTITY}UpdateRequest;
 import ${PACKAGE}.${ENTITY_LOWERCASE}.entity.${ENTITY};
 
-import com.paulmarcelinbejan.toolbox.utils.mapping.BaseMapperToEntityAndToResponse;
+import com.paulmarcelinbejan.toolbox.utils.mapping.BaseFullMapper;
 
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
-public abstract class ${ENTITY}Mapper implements BaseMapperToEntityAndToResponse<${ENTITY}, ${ENTITY}SaveRequest, ${ENTITY}UpdateRequest, ${ENTITY}Response> {
+public abstract class ${ENTITY}Mapper implements BaseFullMapper<${ENTITY}, ${ENTITY}SaveRequest, ${ENTITY}UpdateRequest, ${ENTITY}Response> {
 
 	@Override
 	@Named("fromSaveRequestToEntity")
@@ -43,10 +43,10 @@ public abstract class ${ENTITY}Mapper implements BaseMapperToEntityAndToResponse
 
 	@Override
 	@Named("toResponse")
-	public abstract ${ENTITY}Dto toResponse(${ENTITY} entity);
+	public abstract ${ENTITY}Response toResponse(${ENTITY} entity);
 
 	@Override
 	@IterableMapping(qualifiedByName = "toResponse")
-	public abstract Collection<${ENTITY}Dto> toResponses(Collection<${ENTITY}> entities);
+	public abstract Collection<${ENTITY}Response> toResponses(Collection<${ENTITY}> entities);
 
 }
