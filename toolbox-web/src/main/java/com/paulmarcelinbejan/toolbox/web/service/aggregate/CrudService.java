@@ -5,6 +5,9 @@ import com.paulmarcelinbejan.toolbox.web.service.DeleteService;
 import com.paulmarcelinbejan.toolbox.web.service.ReadService;
 import com.paulmarcelinbejan.toolbox.web.service.UpdateService;
 
+/**
+ * CREATE, READ, UPDATE, DELETE service
+ */
 public interface CrudService<ID, ENTITY>
 		extends
 		CreateService<ID, ENTITY>,
