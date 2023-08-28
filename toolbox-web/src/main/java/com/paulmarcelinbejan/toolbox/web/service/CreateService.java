@@ -1,6 +1,7 @@
 package com.paulmarcelinbejan.toolbox.web.service;
 
-import java.util.Collection;
+import com.paulmarcelinbejan.toolbox.web.service.create.CreateAndReturnEntityService;
+import com.paulmarcelinbejan.toolbox.web.service.create.CreateAndReturnIdService;
 
 /**
  *
@@ -9,14 +10,8 @@ import java.util.Collection;
  * @author paulmarcelinbejan
  *
  */
-public interface CreateService<ID, ENTITY> {
-
-	ID save(ENTITY entity);
-
-	ENTITY saveAndReturn(ENTITY entity);
-	
-	Collection<ID> save(Collection<ENTITY> entities);
-	
-	Collection<ENTITY> saveAndReturn(Collection<ENTITY> entities);
+public interface CreateService<ID, ENTITY> extends 
+				 CreateAndReturnIdService<ID, ENTITY>,
+				 CreateAndReturnEntityService<ENTITY> {
 
 }
