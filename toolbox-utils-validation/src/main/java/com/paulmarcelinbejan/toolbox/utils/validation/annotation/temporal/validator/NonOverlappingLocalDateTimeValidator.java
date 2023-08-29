@@ -1,8 +1,8 @@
-package com.paulmarcelinbejan.toolbox.utils.validation.annotation.validator;
+package com.paulmarcelinbejan.toolbox.utils.validation.annotation.temporal.validator;
 
 import com.paulmarcelinbejan.toolbox.utils.time.DateTimeUtils;
 import com.paulmarcelinbejan.toolbox.utils.time.aware.HistoricalLocalDateTimeAware;
-import com.paulmarcelinbejan.toolbox.utils.validation.annotation.NonOverlappingLocalDateTime;
+import com.paulmarcelinbejan.toolbox.utils.validation.annotation.temporal.NonOverlappingLocalDateTime;
 
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;

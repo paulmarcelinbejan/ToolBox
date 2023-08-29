@@ -1,4 +1,4 @@
-package com.paulmarcelinbejan.toolbox.utils.validation.annotation;
+package com.paulmarcelinbejan.toolbox.utils.validation.annotation.temporal;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
@@ -6,7 +6,7 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-import com.paulmarcelinbejan.toolbox.utils.validation.annotation.validator.NonOverlappingLocalDateValidator;
+import com.paulmarcelinbejan.toolbox.utils.validation.annotation.temporal.validator.NonOverlappingLocalTimeValidator;
 
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;
@@ -14,13 +14,13 @@ import jakarta.validation.Payload;
 @Documented
 @Target({ ElementType.TYPE, ElementType.ANNOTATION_TYPE })
 @Retention(RetentionPolicy.RUNTIME)
-@Constraint(validatedBy = { NonOverlappingLocalDateValidator.class })
-public @interface NonOverlappingLocalDate {
+@Constraint(validatedBy = { NonOverlappingLocalTimeValidator.class })
+public @interface NonOverlappingLocalTime {
 
 	/**
 	 * Message to return if not valid
 	 */
-    String message() default "Overlapping_of_LocalDate";
+    String message() default "Overlapping_of_LocalTime";
 
     /**
      * Validation Groups
