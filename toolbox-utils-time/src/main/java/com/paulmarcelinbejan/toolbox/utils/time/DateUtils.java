@@ -24,6 +24,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class DateUtils {
 
+	/**
+	 * LocalDate that can be used when an end date is not defined.
+	 */
+	public static final LocalDate MAX_END_DATE = DateUtils.buildLocalDate(9999, 12, 31);
+	
 	// DAY
 	
 	public static LocalDate addDays(LocalDate localDate, int daysToAdd) {
