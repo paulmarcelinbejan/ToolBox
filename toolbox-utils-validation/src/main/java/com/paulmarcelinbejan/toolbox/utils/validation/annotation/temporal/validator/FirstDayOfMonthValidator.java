@@ -15,7 +15,7 @@ public class FirstDayOfMonthValidator implements ConstraintValidator<FirstDayOfM
      */
     @Override
     public boolean isValid(LocalDate localDate, ConstraintValidatorContext constraintValidatorContext) {
-    	return DateUtils.isFirstDayOfMonth(localDate);
+    	return localDate == null ? false : DateUtils.isFirstDayOfMonth(localDate);
     }
 
 }

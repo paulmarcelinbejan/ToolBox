@@ -25,7 +25,7 @@ import lombok.NoArgsConstructor;
 public class DateUtils {
 
 	/**
-	 * LocalDate that can be used when an end date is not defined.
+	 * 31/12/9999 LocalDate that can be used when an end date is not defined.
 	 */
 	public static final LocalDate MAX_END_DATE = DateUtils.buildLocalDate(9999, 12, 31);
 	
