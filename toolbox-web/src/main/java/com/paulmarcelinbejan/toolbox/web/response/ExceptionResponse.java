@@ -14,9 +14,9 @@ import com.paulmarcelinbejan.toolbox.jackson.deserializer.LocalDateTimeDeseriali
 import com.paulmarcelinbejan.toolbox.jackson.serializer.LocalDateTimeSerializer;
 
 import lombok.Data;
-import lombok.extern.log4j.Log4j2;
+import lombok.extern.slf4j.Slf4j;
 
-@Log4j2
+@Slf4j
 @Data
 public class ExceptionResponse {
 

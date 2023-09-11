@@ -1,6 +1,6 @@
 package com.paulmarcelinbejan.toolbox.utils.reflection.exception;
 
-public class ReflectionException extends Exception {
+public class ReflectionException extends RuntimeException {
 
 	private static final long serialVersionUID = 300539795850465717L;
 
