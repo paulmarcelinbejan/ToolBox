@@ -1,6 +1,6 @@
 package com.paulmarcelinbejan.toolbox.utils.mapping;
 
-public interface BaseFromSaveToResponseMapper<
+public interface BaseToEntityAndToResponseMapper<
 		ENTITY,
 		SAVE_REQUEST,
 		RESPONSE>
