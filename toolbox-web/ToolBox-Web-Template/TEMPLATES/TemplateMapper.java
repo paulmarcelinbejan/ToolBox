@@ -14,10 +14,10 @@ import ${PACKAGE}.${ENTITY_LOWERCASE}.dto.${ENTITY}SaveRequest;
 import ${PACKAGE}.${ENTITY_LOWERCASE}.dto.${ENTITY}UpdateRequest;
 import ${PACKAGE}.${ENTITY_LOWERCASE}.entity.${ENTITY};
 
-import com.paulmarcelinbejan.toolbox.utils.mapping.BaseFullMapper;
+import com.paulmarcelinbejan.toolbox.utils.mapping.FullMapper;
 
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
-public abstract class ${ENTITY}Mapper implements BaseFullMapper<${ENTITY}, ${ENTITY}SaveRequest, ${ENTITY}UpdateRequest, ${ENTITY}Response> {
+public abstract class ${ENTITY}Mapper implements FullMapper<${ENTITY}, ${ENTITY}SaveRequest, ${ENTITY}UpdateRequest, ${ENTITY}Response> {
 
 	@Override
 	@Named("fromSaveRequestToEntity")
