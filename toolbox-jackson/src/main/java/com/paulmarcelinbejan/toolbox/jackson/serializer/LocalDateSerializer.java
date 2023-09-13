@@ -11,7 +11,7 @@ import com.paulmarcelinbejan.toolbox.utils.time.pattern.date.DatePattern;
 
 public class LocalDateSerializer extends JsonSerializer<LocalDate> {
 
-	private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern(DatePattern.Numeric.WithSlashSeparator.ddMMyyyy.getValue());
+	private static final DateTimeFormatter FORMATTER = DatePattern.Numeric.WithSlashSeparator.ddMMyyyy.getFormatter();
 	
 	@Override
 	public void serialize(LocalDate value, JsonGenerator gen, SerializerProvider serializers) throws IOException {

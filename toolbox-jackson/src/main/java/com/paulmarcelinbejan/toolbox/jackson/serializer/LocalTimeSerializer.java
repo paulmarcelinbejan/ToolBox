@@ -11,7 +11,7 @@ import com.paulmarcelinbejan.toolbox.utils.time.pattern.time.TimePattern;
 
 public class LocalTimeSerializer extends JsonSerializer<LocalTime> {
 
-	private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern(TimePattern.With24HourClockFormat.HHmmss.getValue());
+	private static final DateTimeFormatter FORMATTER = TimePattern.With24HourClockFormat.HHmmss.getFormatter();
 	
 	@Override
 	public void serialize(LocalTime value, JsonGenerator gen, SerializerProvider serializers) throws IOException {

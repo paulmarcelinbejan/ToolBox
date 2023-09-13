@@ -11,7 +11,7 @@ import com.paulmarcelinbejan.toolbox.utils.time.pattern.time.TimePattern;
 
 public class LocalTimeDeserializer extends JsonDeserializer<LocalTime> {
 
-	private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern(TimePattern.With24HourClockFormat.HHmmss.getValue());
+	private static final DateTimeFormatter FORMATTER = TimePattern.With24HourClockFormat.HHmmss.getFormatter();
 
 	@Override
 	public LocalTime deserialize(JsonParser jsonParser, DeserializationContext ctxt) throws IOException {
