@@ -2,7 +2,7 @@ package com.paulmarcelinbejan.toolbox.utils.mapping;
 
 import java.util.Collection;
 
-public interface MapperToResponse<ENTITY, RESPONSE> {
+public interface MapperFromEntityToResponse<ENTITY, RESPONSE> {
 
 	RESPONSE toResponse(ENTITY entity);
 

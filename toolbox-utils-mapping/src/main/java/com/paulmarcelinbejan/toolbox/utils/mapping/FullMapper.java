@@ -1,6 +1,6 @@
 package com.paulmarcelinbejan.toolbox.utils.mapping;
 
-public interface BaseFullMapper<
+public interface FullMapper<
 		ENTITY,
 		SAVE_REQUEST,
 		UPDATE_REQUEST,
@@ -9,6 +9,6 @@ public interface BaseFullMapper<
 		MapperFromSaveRequestToEntity<ENTITY, SAVE_REQUEST>,
 		MapperFromUpdateRequestToEntity<ENTITY, UPDATE_REQUEST>,
 		MapperUpdateEntity<ENTITY>,
-		MapperToResponse<ENTITY, RESPONSE> {
+		MapperFromEntityToResponse<ENTITY, RESPONSE> {
 
 }

@@ -1,11 +1,11 @@
 package com.paulmarcelinbejan.toolbox.utils.mapping;
 
-public interface BaseToEntityAndToResponseMapper<
+public interface MapperFromSaveRequestToEntityAndFromEntityToResponse<
 		ENTITY,
 		SAVE_REQUEST,
 		RESPONSE>
 		extends
 		MapperFromSaveRequestToEntity<ENTITY, SAVE_REQUEST>,
-		MapperToResponse<ENTITY, RESPONSE> {
+		MapperFromEntityToResponse<ENTITY, RESPONSE> {
 
 }
