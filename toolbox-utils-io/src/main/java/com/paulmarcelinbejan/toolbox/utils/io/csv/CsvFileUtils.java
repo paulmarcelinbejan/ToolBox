@@ -28,22 +28,22 @@ public class CsvFileUtils<T> {
 	
 	private final Class<T> typeParameterClass;
 	
-	private final CsvReaderConfig csvReaderConfig;
-	private final CsvWriterConfig csvWriterConfig;
+	private final CsvReaderConfig readerConfig;
+	private final CsvWriterConfig writerConfig;
 	
 	/**
 	 * This constructor will use default configuration. 
 	 */
 	public CsvFileUtils(@NonNull final Class<T> typeParameterClass) {
 		this.typeParameterClass = typeParameterClass;
-		this.csvReaderConfig = CsvReaderConfig.DEFAULT;
-		this.csvWriterConfig = CsvWriterConfig.DEFAULT;
+		this.readerConfig = CsvReaderConfig.DEFAULT;
+		this.writerConfig = CsvWriterConfig.DEFAULT;
 	}
 	
 	public CsvFileUtils(@NonNull final Class<T> typeParameterClass, @NonNull final CsvFileUtilsConfig csvFileUtilsConfig) {
 		this.typeParameterClass = typeParameterClass;
-		this.csvReaderConfig = csvFileUtilsConfig.getCsvReaderConfig();
-		this.csvWriterConfig = csvFileUtilsConfig.getCsvWriterConfig();
+		this.readerConfig = csvFileUtilsConfig.getReaderConfig();
+		this.writerConfig = csvFileUtilsConfig.getWriterConfig();
 	}
 	
 	/**
@@ -54,8 +54,8 @@ public class CsvFileUtils<T> {
 	public MappingIterator<T> iterator(@NonNull final FileInfo fileInfo) throws IOException {
 		Reader reader = FileUtils.createFileReader(fileInfo, CSV);
 
-		CsvMapper csvMapper = csvReaderConfig.getCsvMapper();
-		CsvSchema csvSchema = csvReaderConfig.getCsvSchema();
+		CsvMapper csvMapper = readerConfig.getCsvMapper();
+		CsvSchema csvSchema = readerConfig.getCsvSchema();
 		
 		return csvMapper.readerFor(typeParameterClass)
 						.with(csvSchema)
@@ -77,12 +77,12 @@ public class CsvFileUtils<T> {
 	 */
 	public void write(@NonNull final FileInfo fileInfo, @NonNull final List<T> records) throws IOException {
 		
-		if(csvWriterConfig.isAppendCurrentTimeMillisToFileName()) {
+		if(writerConfig.isAppendCurrentTimeMillisToFileName()) {
 			fileInfo.appendCurrentTimeMillisToFileName();
 		}
 		
-		CsvMapper mapper = csvWriterConfig.getCsvMapper();
-		CsvSchema schema = csvWriterConfig.getCsvSchema()
+		CsvMapper mapper = writerConfig.getCsvMapper();
+		CsvSchema schema = writerConfig.getCsvSchema()
 										  .orElse(defaultWriterCsvSchema(mapper));
 
 		ObjectWriter writer = mapper.writerFor(typeParameterClass)
@@ -97,7 +97,7 @@ public class CsvFileUtils<T> {
 	
 	private CsvSchema defaultWriterCsvSchema(final CsvMapper mapper) {
 		return mapper.schemaFor(typeParameterClass)
-				 	 .withColumnSeparator(csvWriterConfig.getSeparator())
+				 	 .withColumnSeparator(writerConfig.getSeparator())
 				 	 .withHeader()
 				 	 .withoutQuoteChar();
 	}
