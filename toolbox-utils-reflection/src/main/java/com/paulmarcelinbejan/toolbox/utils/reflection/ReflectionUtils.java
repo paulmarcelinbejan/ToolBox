@@ -39,7 +39,7 @@ public class ReflectionUtils {
 	}
 
 	public static void makeFieldAccessible(final Field field) {
-		org.springframework.util.ReflectionUtils.makeAccessible(field);
+		field.setAccessible(true);
 	}
 	
 	public static Object getFieldValue(final Object instance, final Field field) throws ReflectionException {
