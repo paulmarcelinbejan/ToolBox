@@ -5,11 +5,11 @@ import static com.paulmarcelinbejan.toolbox.utils.io.config.FileType.JSON;
 import java.io.File;
 import java.io.IOException;
 import java.io.Reader;
-import java.util.ArrayList;
 import java.util.List;
 
 import com.fasterxml.jackson.core.util.DefaultIndenter;
 import com.fasterxml.jackson.core.util.DefaultPrettyPrinter;
+import com.fasterxml.jackson.databind.MappingIterator;
 import com.fasterxml.jackson.databind.json.JsonMapper;
 import com.paulmarcelinbejan.toolbox.utils.io.FileUtils;
 import com.paulmarcelinbejan.toolbox.utils.io.config.FileInfo;
@@ -51,9 +51,21 @@ public class JsonFileUtils<T> {
      * JSON file starts with square brackets
      */
 	public List<T> readList(FileInfo fileInfo) throws IOException {
+		MappingIterator<T> iterator = iterator(fileInfo);
+		List<T> list = iterator.readAll();
+		iterator.close();
+		return list;
+	}
+	
+    /**
+     * JSON file starts with square brackets
+     * 
+     * Remember to close the Reader usign <b>iterator.close()</b> in order to release any resources associated with it.
+     */
+	public MappingIterator<T> iterator(FileInfo fileInfo) throws IOException {
 		Reader reader = FileUtils.createFileReader(fileInfo, JSON);
 		JsonMapper mapper = readerConfig.getJsonMapper();
-		return mapper.readValue(reader, mapper.getTypeFactory().constructCollectionType(ArrayList.class, typeParameterClass));
+        return mapper.readerFor(typeParameterClass).readValues(reader);
     }
 	
     /**

@@ -26,7 +26,7 @@ public class JsonWriterConfig {
 	private final JsonMapper jsonMapper;
 	
 	/**
-	 * return a JsonMapper configured with serializers (if any)
+	 * return a JsonMapper configured with serializers (if any) and prettyPrinter
 	 */
 	private JsonMapper buildJsonMapper() {
 		JsonMapper mapper = new JsonMapper();
