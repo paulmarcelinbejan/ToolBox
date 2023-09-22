@@ -8,6 +8,8 @@ import java.io.Reader;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.core.util.DefaultIndenter;
+import com.fasterxml.jackson.core.util.DefaultPrettyPrinter;
 import com.fasterxml.jackson.databind.json.JsonMapper;
 import com.paulmarcelinbejan.toolbox.utils.io.FileUtils;
 import com.paulmarcelinbejan.toolbox.utils.io.config.FileInfo;
@@ -59,7 +61,7 @@ public class JsonFileUtils<T> {
      */
     public void write(FileInfo fileInfo, T object) throws IOException {
     	File file = FileUtils.createFile(fileInfo, JSON);
-    	writerConfig.getJsonMapper().writerWithDefaultPrettyPrinter().writeValue(file, object);
+    	writerConfig.getJsonMapper().writer().with(prettyPrinter()).writeValue(file, object);
     }
     
     /**
@@ -67,7 +69,13 @@ public class JsonFileUtils<T> {
      */
     public void writeList(FileInfo fileInfo, List<T> object) throws IOException {
     	File file = FileUtils.createFile(fileInfo, JSON);
-    	writerConfig.getJsonMapper().writerWithDefaultPrettyPrinter().writeValue(file, object);
+    	writerConfig.getJsonMapper().writer().with(prettyPrinter()).writeValue(file, object);
+    }
+    
+    private DefaultPrettyPrinter prettyPrinter() {
+    	DefaultPrettyPrinter prettyPrinter = new DefaultPrettyPrinter();        
+        prettyPrinter.indentArraysWith(DefaultIndenter.SYSTEM_LINEFEED_INSTANCE);
+        return prettyPrinter;
     }
 	
 }
