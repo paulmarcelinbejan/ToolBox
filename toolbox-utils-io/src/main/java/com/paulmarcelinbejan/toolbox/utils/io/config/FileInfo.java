@@ -1,4 +1,4 @@
-package com.paulmarcelinbejan.toolbox.utils.io.common;
+package com.paulmarcelinbejan.toolbox.utils.io.config;
 
 import static com.paulmarcelinbejan.toolbox.constants.Symbols.UNDERSCORE;
 
@@ -29,7 +29,7 @@ public class FileInfo {
 		return new StringBuilder()
 				.append(directoryPath)
 				.append(fileNameWithoutExtension)
-				.append(fileType.value)
+				.append(fileType.extension)
 				.toString();
 	}
 	

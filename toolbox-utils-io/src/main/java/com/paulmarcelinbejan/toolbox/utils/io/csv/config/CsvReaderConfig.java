@@ -1,19 +1,28 @@
-package com.paulmarcelinbejan.toolbox.utils.io.csv.config.configs;
+package com.paulmarcelinbejan.toolbox.utils.io.csv.config;
 
 import static com.paulmarcelinbejan.toolbox.constants.SymbolsAsChar.COMMA;
 
+import java.util.Collections;
 import java.util.Map;
 
 import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.dataformat.csv.CsvMapper;
 import com.fasterxml.jackson.dataformat.csv.CsvSchema;
-import com.paulmarcelinbejan.toolbox.utils.io.common.utils.ObjectMapperUtils;
+import com.paulmarcelinbejan.toolbox.utils.io.common.ObjectMapperUtils;
 
 import lombok.Getter;
 
 public class CsvReaderConfig {
 
-	public static final CsvReaderConfig DEFAULT = new CsvReaderConfig(COMMA, Map.of());
+	public CsvReaderConfig(char separator, Map<Class<?>, JsonDeserializer<?>> deserializers) {
+		this.separator = separator;
+		this.deserializers = deserializers;
+		
+		this.csvMapper = buildCsvMapper();
+		this.csvSchema = buildCsvSchema();
+	}
+	
+	public static final CsvReaderConfig DEFAULT = new CsvReaderConfig(COMMA, Collections.emptyMap());
 	
 	private final char separator;
 	
@@ -24,14 +33,6 @@ public class CsvReaderConfig {
 	
 	@Getter
 	private final CsvSchema csvSchema;
-	
-	public CsvReaderConfig(char separator, Map<Class<?>, JsonDeserializer<?>> deserializers) {
-		this.separator = separator;
-		this.deserializers = deserializers;
-		
-		this.csvMapper = buildCsvMapper();
-		this.csvSchema = buildCsvSchema();
-	}
 	
 	/**
 	 * return a CsvMapper configured with deserializers (if any)
@@ -47,7 +48,7 @@ public class CsvReaderConfig {
 	}
 	
 	/**
-	 * return a CsvSchema configured with separator
+	 * return a CsvSchema configured with separator and header line
 	 */
 	private CsvSchema buildCsvSchema() {
 		return CsvSchema.emptySchema()

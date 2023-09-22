@@ -1,4 +1,4 @@
-package com.paulmarcelinbejan.toolbox.utils.io.common.utils;
+package com.paulmarcelinbejan.toolbox.utils.io.common;
 
 import java.util.Map;
 

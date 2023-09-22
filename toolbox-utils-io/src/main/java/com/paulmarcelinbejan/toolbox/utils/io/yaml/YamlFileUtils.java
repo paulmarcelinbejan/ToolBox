@@ -2,7 +2,7 @@ package com.paulmarcelinbejan.toolbox.utils.io.yaml;
 
 import static com.paulmarcelinbejan.toolbox.constants.Symbols.DOT;
 import static com.paulmarcelinbejan.toolbox.constants.Symbols.SLASH;
-import static com.paulmarcelinbejan.toolbox.utils.io.common.FileType.YAML;
+import static com.paulmarcelinbejan.toolbox.utils.io.config.FileType.YAML;
 import static com.paulmarcelinbejan.toolbox.utils.io.yaml.config.YamlPrefixType.CONDENSED;
 import static com.paulmarcelinbejan.toolbox.utils.io.yaml.config.YamlPrefixType.NESTED;
 
@@ -18,7 +18,8 @@ import org.apache.commons.lang3.tuple.Pair;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.dataformat.yaml.YAMLMapper;
-import com.paulmarcelinbejan.toolbox.utils.io.common.FileInfo;
+import com.paulmarcelinbejan.toolbox.utils.io.common.ObjectMapperUtils;
+import com.paulmarcelinbejan.toolbox.utils.io.config.FileInfo;
 import com.paulmarcelinbejan.toolbox.utils.io.yaml.config.YamlPrefixType;
 
 import lombok.AccessLevel;
@@ -27,7 +28,7 @@ import lombok.NonNull;
 
 // TODO implement write method
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-public class YamlUtils {
+public class YamlFileUtils {
 	
 	/**
 	 *  Read YAML file <br>
@@ -104,8 +105,8 @@ public class YamlUtils {
     }
     
 	private static final Map<YamlPrefixType, Function<String, String>> PREFIX_MAP = Map.of(
-			CONDENSED, YamlUtils::convertCondensedPrefix,
-			NESTED, YamlUtils::convertNestedPrefix
+			CONDENSED, YamlFileUtils::convertCondensedPrefix,
+			NESTED, YamlFileUtils::convertNestedPrefix
 	);
 	
 	private static String convertCondensedPrefix(String prefix) {

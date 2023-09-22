@@ -1,7 +1,8 @@
-package com.paulmarcelinbejan.toolbox.utils.io.csv.config.configs;
+package com.paulmarcelinbejan.toolbox.utils.io.csv.config;
 
 import static com.paulmarcelinbejan.toolbox.constants.SymbolsAsChar.COMMA;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -11,12 +12,22 @@ import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.dataformat.csv.CsvMapper;
 import com.fasterxml.jackson.dataformat.csv.CsvSchema;
 import com.fasterxml.jackson.dataformat.csv.CsvSchema.Builder;
-import com.paulmarcelinbejan.toolbox.utils.io.common.utils.ObjectMapperUtils;
+import com.paulmarcelinbejan.toolbox.utils.io.common.ObjectMapperUtils;
 
 import lombok.Getter;
 
 public class CsvWriterConfig {
 
+	public CsvWriterConfig(char separator, Map<Class<?>, JsonSerializer<?>> serializers, List<String> columns, boolean appendCurrentTimeMillisToFileName) {
+		this.separator = separator;
+		this.serializers = serializers != null ? serializers : Collections.emptyMap();
+		this.columns = columns != null ? columns : Collections.emptyList();
+		this.appendCurrentTimeMillisToFileName = appendCurrentTimeMillisToFileName;
+		
+		this.csvMapper = buildCsvMapper();
+		this.csvSchema = buildCsvSchema();
+	}
+	
 	public static final CsvWriterConfig DEFAULT = new CsvWriterConfig(COMMA, Map.of(), List.of(), false);
 	
 	@Getter
@@ -40,16 +51,6 @@ public class CsvWriterConfig {
 	
 	public Optional<CsvSchema> getCsvSchema() {
 		return Optional.ofNullable(csvSchema);
-	}
-	
-	public CsvWriterConfig(char separator, Map<Class<?>, JsonSerializer<?>> serializers, List<String> columns, boolean appendCurrentTimeMillisToFileName) {
-		this.separator = separator;
-		this.serializers = serializers != null ? serializers : Map.of();
-		this.columns = columns != null ? columns : List.of();
-		this.appendCurrentTimeMillisToFileName = appendCurrentTimeMillisToFileName;
-		
-		this.csvMapper = buildCsvMapper();
-		this.csvSchema = buildCsvSchema();
 	}
 	
 	/**

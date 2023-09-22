@@ -1,10 +1,8 @@
 package com.paulmarcelinbejan.toolbox.utils.io.csv;
 
-import static com.paulmarcelinbejan.toolbox.utils.io.common.FileType.CSV;
+import static com.paulmarcelinbejan.toolbox.utils.io.config.FileType.CSV;
 
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
 import java.util.List;
@@ -13,10 +11,11 @@ import com.fasterxml.jackson.databind.MappingIterator;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fasterxml.jackson.dataformat.csv.CsvMapper;
 import com.fasterxml.jackson.dataformat.csv.CsvSchema;
-import com.paulmarcelinbejan.toolbox.utils.io.common.FileInfo;
-import com.paulmarcelinbejan.toolbox.utils.io.csv.config.CsvUtilsConfig;
-import com.paulmarcelinbejan.toolbox.utils.io.csv.config.configs.CsvReaderConfig;
-import com.paulmarcelinbejan.toolbox.utils.io.csv.config.configs.CsvWriterConfig;
+import com.paulmarcelinbejan.toolbox.utils.io.FileUtils;
+import com.paulmarcelinbejan.toolbox.utils.io.config.FileInfo;
+import com.paulmarcelinbejan.toolbox.utils.io.csv.config.CsvReaderConfig;
+import com.paulmarcelinbejan.toolbox.utils.io.csv.config.CsvFileUtilsConfig;
+import com.paulmarcelinbejan.toolbox.utils.io.csv.config.CsvWriterConfig;
 
 import lombok.NonNull;
 
@@ -25,7 +24,7 @@ import lombok.NonNull;
  * <br>
  * It uses the jackson-dataformat-csv
  */
-public class CsvUtils<T> {
+public class CsvFileUtils<T> {
 	
 	private final Class<T> typeParameterClass;
 	
@@ -35,16 +34,16 @@ public class CsvUtils<T> {
 	/**
 	 * This constructor will use default configuration. 
 	 */
-	public CsvUtils(@NonNull final Class<T> typeParameterClass) {
+	public CsvFileUtils(@NonNull final Class<T> typeParameterClass) {
 		this.typeParameterClass = typeParameterClass;
 		this.csvReaderConfig = CsvReaderConfig.DEFAULT;
 		this.csvWriterConfig = CsvWriterConfig.DEFAULT;
 	}
 	
-	public CsvUtils(@NonNull final Class<T> typeParameterClass, @NonNull final CsvUtilsConfig csvUtilsConfig) {
+	public CsvFileUtils(@NonNull final Class<T> typeParameterClass, @NonNull final CsvFileUtilsConfig csvFileUtilsConfig) {
 		this.typeParameterClass = typeParameterClass;
-		this.csvReaderConfig = csvUtilsConfig.getCsvReaderConfig();
-		this.csvWriterConfig = csvUtilsConfig.getCsvWriterConfig();
+		this.csvReaderConfig = csvFileUtilsConfig.getCsvReaderConfig();
+		this.csvWriterConfig = csvFileUtilsConfig.getCsvWriterConfig();
 	}
 	
 	/**
@@ -53,7 +52,7 @@ public class CsvUtils<T> {
 	 * @throws IOException if the file can not be found, or if the data can not be parsed correctly.
 	 */
 	public MappingIterator<T> iterator(@NonNull final FileInfo fileInfo) throws IOException {
-		Reader reader = createFileReader(fileInfo);
+		Reader reader = FileUtils.createFileReader(fileInfo, CSV);
 
 		CsvMapper csvMapper = csvReaderConfig.getCsvMapper();
 		CsvSchema csvSchema = csvReaderConfig.getCsvSchema();
@@ -89,19 +88,11 @@ public class CsvUtils<T> {
 		ObjectWriter writer = mapper.writerFor(typeParameterClass)
 									.with(schema);
 		
-		File file = createFile(fileInfo);
+		File file = FileUtils.createFile(fileInfo, CSV);
 
 		writer.writeValues(file)
 			  .writeAll(records);
 		
-	}
-
-	private static File createFile(final FileInfo fileInfo) {
-		return new File(fileInfo.getFullPath(CSV));
-	}
-	
-	private static FileReader createFileReader(final FileInfo fileInfo) throws FileNotFoundException {
-		return new FileReader(fileInfo.getFullPath(CSV));
 	}
 	
 	private CsvSchema defaultWriterCsvSchema(final CsvMapper mapper) {
