@@ -3,12 +3,12 @@ package com.paulmarcelinbejan.toolbox.utils.validation.annotation.temporal.valid
 import java.time.LocalDate;
 
 import com.paulmarcelinbejan.toolbox.utils.time.DateUtils;
-import com.paulmarcelinbejan.toolbox.utils.validation.annotation.temporal.FirstDayOfMonth;
+import com.paulmarcelinbejan.toolbox.utils.validation.annotation.temporal.LastDayOfMonth;
 
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 
-public class LastDayOfMonthValidator implements ConstraintValidator<FirstDayOfMonth, LocalDate> {
+public class LastDayOfMonthValidator implements ConstraintValidator<LastDayOfMonth, LocalDate> {
 
     /**
      * Checks if is valid.
