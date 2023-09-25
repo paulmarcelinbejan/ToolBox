@@ -72,22 +72,22 @@ public class ${ENTITY}ServiceImpl implements ${ENTITY}Service {
 	}
 
 	@Override
-	public ${ID_TYPE} save(${ENTITY} entity) {
+	public ${ID_TYPE} save(${ENTITY} entity) throws FunctionalException {
 		return createService.save(entity);
 	}
 
 	@Override
-	public ${ENTITY} saveAndReturn(${ENTITY} entity) {
+	public ${ENTITY} saveAndReturn(${ENTITY} entity) throws FunctionalException {
 		return createService.saveAndReturn(entity);
 	}
 
 	@Override
-	public Collection<${ID_TYPE}> save(Collection<${ENTITY}> entities) {
+	public Collection<${ID_TYPE}> save(Collection<${ENTITY}> entities) throws FunctionalException {
 		return createService.save(entities);
 	}
 
 	@Override
-	public Collection<${ENTITY}> saveAndReturn(Collection<${ENTITY}> entities) {
+	public Collection<${ENTITY}> saveAndReturn(Collection<${ENTITY}> entities) throws FunctionalException {
 		return createService.saveAndReturn(entities);
 	}
 

@@ -46,12 +46,12 @@ public class ${ENTITY}RestController {
 	}
 
 	@PostMapping(value = "/save-one", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public @ResponseBody ${ID_TYPE} save(@Valid @RequestBody final ${ENTITY}SaveRequest saveRequest) {
+	public @ResponseBody ${ID_TYPE} save(@Valid @RequestBody final ${ENTITY}SaveRequest saveRequest) throws FunctionalException {
 		return ${ENTITY_LOWERCAMELCASE}Service.save(${ENTITY_LOWERCAMELCASE}Mapper.fromSaveRequestToEntity(saveRequest));
 	}
 
 	@PostMapping(value = "/save-many", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public @ResponseBody Collection<${ID_TYPE}> save(@RequestBody final Collection<${ENTITY}SaveRequest> saveRequests) {
+	public @ResponseBody Collection<${ID_TYPE}> save(@RequestBody final Collection<${ENTITY}SaveRequest> saveRequests) throws FunctionalException {
 		ValidatorUtils.validateAll(saveRequests);
 		return ${ENTITY_LOWERCAMELCASE}Service.save(${ENTITY_LOWERCAMELCASE}Mapper.fromSaveRequestsToEntities(saveRequests));
 	}
