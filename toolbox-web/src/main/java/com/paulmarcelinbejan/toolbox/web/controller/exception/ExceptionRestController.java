@@ -1,6 +1,7 @@
 package com.paulmarcelinbejan.toolbox.web.controller.exception;
 
 import java.util.Map;
+import java.util.NoSuchElementException;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 import com.paulmarcelinbejan.toolbox.exception.functional.FunctionalException;
 import com.paulmarcelinbejan.toolbox.exception.technical.TechnicalException;
+import com.paulmarcelinbejan.toolbox.exception.utils.ExceptionUtils;
 import com.paulmarcelinbejan.toolbox.web.response.ExceptionResponse;
 
 import jakarta.validation.ConstraintViolationException;
@@ -30,6 +32,16 @@ public abstract class ExceptionRestController {
 		return exception.getMessage();
 	}
 
+	@ResponseBody
+	@ResponseStatus(value = HttpStatus.NOT_FOUND)
+	@ExceptionHandler(value = { NoSuchElementException.class })
+	public ExceptionResponse handleNoSuchElementException(NoSuchElementException exception) {
+		return new ExceptionResponse(exception, 
+				Map.of("status", String.valueOf(HttpStatus.NOT_FOUND.value()), 
+					   "error", HttpStatus.NOT_FOUND.getReasonPhrase(), 
+					   "uniqueIdentifier", ExceptionUtils.getUniqueIdentifier()));
+	}
+	
 	@ResponseBody
 	@ResponseStatus(HttpStatus.BAD_REQUEST)
 	@ExceptionHandler(value = { FunctionalException.class })
