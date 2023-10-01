@@ -58,6 +58,9 @@ public class ExceptionResponse {
 		log.error(stackTrace);
 	}
 	
+	/**
+	 * fieldValue can contain: status, error, uniqueIdentifier, message
+	 */
 	public ExceptionResponse(Exception exception, Map<String, String> fieldValue) {
 		timestamp = LocalDateTime.now();
 		status = fieldValue.getOrDefault("status", String.valueOf(HttpStatus.INTERNAL_SERVER_ERROR.value()));
@@ -77,6 +80,7 @@ public class ExceptionResponse {
 		this.uniqueIdentifier = uniqueIdentifier;
 		this.message = message;
 		this.stackTrace = stackTrace;
+		log.error(stackTrace);
 	}
 
 }
