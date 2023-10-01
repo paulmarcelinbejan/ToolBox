@@ -43,13 +43,10 @@ public abstract class ExceptionRestController {
 	}
 	
 	@ResponseBody
-	@ResponseStatus(HttpStatus.BAD_REQUEST)
+	@ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
 	@ExceptionHandler(value = { FunctionalException.class })
 	public ExceptionResponse handleFunctionalException(FunctionalException exception) {
-		return new ExceptionResponse(exception, 
-				Map.of("status", String.valueOf(HttpStatus.BAD_REQUEST.value()), 
-					   "error", HttpStatus.BAD_REQUEST.getReasonPhrase(), 
-					   "uniqueIdentifier", exception.getUniqueIdentifier()));
+		return new ExceptionResponse(exception, Map.of("uniqueIdentifier", exception.getUniqueIdentifier()));
 	}
 
 	@ResponseBody
