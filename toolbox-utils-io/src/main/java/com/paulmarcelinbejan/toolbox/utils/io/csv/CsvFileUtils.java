@@ -13,8 +13,8 @@ import com.fasterxml.jackson.dataformat.csv.CsvMapper;
 import com.fasterxml.jackson.dataformat.csv.CsvSchema;
 import com.paulmarcelinbejan.toolbox.utils.io.FileUtils;
 import com.paulmarcelinbejan.toolbox.utils.io.config.FileInfo;
-import com.paulmarcelinbejan.toolbox.utils.io.csv.config.CsvReaderConfig;
 import com.paulmarcelinbejan.toolbox.utils.io.csv.config.CsvFileUtilsConfig;
+import com.paulmarcelinbejan.toolbox.utils.io.csv.config.CsvReaderConfig;
 import com.paulmarcelinbejan.toolbox.utils.io.csv.config.CsvWriterConfig;
 
 import lombok.NonNull;
