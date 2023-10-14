@@ -1,7 +1,7 @@
 package com.paulmarcelinbejan.toolbox.utils.time.format;
 
 import static com.paulmarcelinbejan.toolbox.utils.time.format.common.FormatUtils.formatter;
-import static com.paulmarcelinbejan.toolbox.utils.time.format.common.FormatUtils.localizedFormatter;
+import static com.paulmarcelinbejan.toolbox.utils.time.format.common.FormatUtils.formatterLocalized;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -18,7 +18,7 @@ import lombok.NoArgsConstructor;
  * Format a String into LocalDate / LocalDateTime.
  */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-public class DateFormatUtils {
+public class LocalDateFormatUtils {
 	
 	// To String
 	
@@ -27,7 +27,7 @@ public class DateFormatUtils {
 	}
 	
 	public static final <DatePattern extends DatePatternBase> String toString(LocalDate localDate, DatePattern datePattern, Locale locale) {
-		return localizedFormatter(datePattern.getFormatter(), locale).format(localDate);
+		return formatterLocalized(datePattern.getFormatter(), locale).format(localDate);
 	}
 	
 	public static final <DatePattern extends DatePatternBase> String toString(LocalDateTime localDate, DatePattern datePattern) {
@@ -35,7 +35,7 @@ public class DateFormatUtils {
 	}
 	
 	public static final <DatePattern extends DatePatternBase> String toString(LocalDateTime localDate, DatePattern datePattern, Locale locale) {
-		return localizedFormatter(datePattern.getFormatter(), locale).format(localDate);
+		return formatterLocalized(datePattern.getFormatter(), locale).format(localDate);
 	}
 	
 	/**
@@ -49,7 +49,7 @@ public class DateFormatUtils {
 	 * @throws IllegalArgumentException if the pattern is invalid
 	 */
 	public static final String toString(LocalDate localDate, String datePattern, Locale locale) {
-		return formatter(datePattern, locale).format(localDate);
+		return formatterLocalized(datePattern, locale).format(localDate);
 	}
 	
 	/**
@@ -63,7 +63,7 @@ public class DateFormatUtils {
 	 * @throws IllegalArgumentException if the pattern is invalid
 	 */
 	public static final String toString(LocalDateTime localDate, String datePattern, Locale locale) {
-		return formatter(datePattern, locale).format(localDate);
+		return formatterLocalized(datePattern, locale).format(localDate);
 	}
 	
 	// To LocalDate
@@ -79,7 +79,7 @@ public class DateFormatUtils {
 	 * @throws DateTimeParseException - if the text cannot be parsed
 	 */
 	public static final <DatePattern extends DatePatternBase> LocalDate toLocalDate(String date, DatePattern datePattern, Locale locale) {
-		return LocalDate.parse(date, localizedFormatter(datePattern.getFormatter(), locale));
+		return LocalDate.parse(date, formatterLocalized(datePattern.getFormatter(), locale));
 	}
 	
 	/**
@@ -95,7 +95,7 @@ public class DateFormatUtils {
 	 * @throws DateTimeParseException - if the text cannot be parsed
 	 */
 	public static final LocalDate toLocalDate(String date, String datePattern, Locale locale) {
-		return LocalDate.parse(date, formatter(datePattern, locale));
+		return LocalDate.parse(date, formatterLocalized(datePattern, locale));
 	}
 	
 	// To LocalDateTime
@@ -111,7 +111,7 @@ public class DateFormatUtils {
 	 * @throws DateTimeParseException - if the text cannot be parsed
 	 */
 	public static final <DatePattern extends DatePatternBase> LocalDateTime toLocalDateTime(String date, DatePattern datePattern, Locale locale) {
-		return LocalDateTime.parse(date, localizedFormatter(datePattern.getFormatter(), locale));
+		return LocalDateTime.parse(date, formatterLocalized(datePattern.getFormatter(), locale));
 	}
 	
 	/**
@@ -127,7 +127,7 @@ public class DateFormatUtils {
 	 * @throws DateTimeParseException - if the text cannot be parsed
 	 */
 	public static final LocalDateTime toLocalDateTime(String date, String datePattern, Locale locale) {
-		return LocalDateTime.parse(date, formatter(datePattern, locale));
+		return LocalDateTime.parse(date, formatterLocalized(datePattern, locale));
 	}
 	
 }

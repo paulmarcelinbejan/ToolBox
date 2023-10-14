@@ -13,11 +13,11 @@ public class FormatUtils {
 		return DateTimeFormatter.ofPattern(pattern);
 	}
 	
-	public static final DateTimeFormatter formatter(String pattern, Locale locale) {
+	public static final DateTimeFormatter formatterLocalized(String pattern, Locale locale) {
 		return formatter(pattern).localizedBy(locale);
 	}
 	
-	public static final DateTimeFormatter localizedFormatter(DateTimeFormatter formatter, Locale locale) {
+	public static final DateTimeFormatter formatterLocalized(DateTimeFormatter formatter, Locale locale) {
 		return formatter.localizedBy(locale);
 	}
 	

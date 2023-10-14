@@ -2,7 +2,7 @@ package com.paulmarcelinbejan.toolbox.utils.time.pattern.datetime;
 
 import java.time.format.DateTimeFormatter;
 
-import com.paulmarcelinbejan.toolbox.utils.time.format.DateTimeFormatUtils;
+import com.paulmarcelinbejan.toolbox.utils.time.format.LocalDateTimeFormatUtils;
 import com.paulmarcelinbejan.toolbox.utils.time.pattern.DateTimePatternBase;
 
 import lombok.Getter;
@@ -11,7 +11,7 @@ import lombok.Getter;
  * DateTimePattern
  *
  * Just a few, you can build a large number of DateTimePattern by combining a DatePattern with a TimePattern.
- * Use {@link DateTimeFormatUtils#buildPattern()} to create patterns with date and time.
+ * Use {@link LocalDateTimeFormatUtils#buildPattern()} to create patterns with date and time.
  */
 public enum DateTimePattern implements DateTimePatternBase {
 

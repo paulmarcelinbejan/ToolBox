@@ -1,17 +1,14 @@
 package com.paulmarcelinbejan.toolbox.web.response;
 
-import java.time.LocalDateTime;
+import java.time.Instant;
 import java.util.Map;
 
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.paulmarcelinbejan.toolbox.exception.utils.ExceptionUtils;
-import com.paulmarcelinbejan.toolbox.jackson.deserializer.LocalDateTimeDeserializer;
-import com.paulmarcelinbejan.toolbox.jackson.serializer.LocalDateTimeSerializer;
 
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
@@ -21,9 +18,8 @@ import lombok.extern.slf4j.Slf4j;
 public class ExceptionResponse {
 
 	@JsonProperty
-	@JsonSerialize(using = LocalDateTimeSerializer.class)
-	@JsonDeserialize(using = LocalDateTimeDeserializer.class)
-	private final LocalDateTime timestamp;
+	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+	private final Instant timestamp;
 
 	@JsonProperty
 	private final String status;
@@ -41,7 +37,7 @@ public class ExceptionResponse {
 	private final String stackTrace;
 	
 	public ExceptionResponse(Exception exception) {
-		timestamp = LocalDateTime.now();
+		timestamp = Instant.now();
 		status = String.valueOf(HttpStatus.INTERNAL_SERVER_ERROR.value());
 		error = HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase();
 		message = exception.getMessage();
@@ -50,7 +46,7 @@ public class ExceptionResponse {
 	}
 
 	public ExceptionResponse(Exception exception, String message) {
-		timestamp = LocalDateTime.now();
+		timestamp = Instant.now();
 		status = String.valueOf(HttpStatus.INTERNAL_SERVER_ERROR.value());
 		error = HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase();
 		this.message = message;
@@ -62,7 +58,7 @@ public class ExceptionResponse {
 	 * fieldValue can contain: status, error, uniqueIdentifier, message
 	 */
 	public ExceptionResponse(Exception exception, Map<String, String> fieldValue) {
-		timestamp = LocalDateTime.now();
+		timestamp = Instant.now();
 		status = fieldValue.getOrDefault("status", String.valueOf(HttpStatus.INTERNAL_SERVER_ERROR.value()));
 		error = fieldValue.getOrDefault("error", HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase());
 		uniqueIdentifier = fieldValue.getOrDefault("uniqueIdentifier", "");
@@ -72,7 +68,7 @@ public class ExceptionResponse {
 	}
 	
 	@JsonCreator
-	public ExceptionResponse(LocalDateTime timestamp, String status, String error, String uniqueIdentifier,
+	public ExceptionResponse(Instant timestamp, String status, String error, String uniqueIdentifier,
 			String message, String stackTrace) {
 		this.timestamp = timestamp;
 		this.status = status;

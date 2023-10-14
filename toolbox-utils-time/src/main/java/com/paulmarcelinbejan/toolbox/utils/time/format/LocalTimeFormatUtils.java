@@ -1,7 +1,7 @@
 package com.paulmarcelinbejan.toolbox.utils.time.format;
 
 import static com.paulmarcelinbejan.toolbox.utils.time.format.common.FormatUtils.formatter;
-import static com.paulmarcelinbejan.toolbox.utils.time.format.common.FormatUtils.localizedFormatter;
+import static com.paulmarcelinbejan.toolbox.utils.time.format.common.FormatUtils.formatterLocalized;
 
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -19,7 +19,7 @@ import lombok.NoArgsConstructor;
  * Format a String into LocalTime.
  */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-public class TimeFormatUtils {
+public class LocalTimeFormatUtils {
 
 	public static final <TimePattern extends TimePatternBase> String toString(LocalTime localTime, TimePattern timePattern) {
 		return timePattern.getFormatter().format(localTime);
@@ -78,7 +78,7 @@ public class TimeFormatUtils {
 	 * @throws DateTimeParseException - if the text cannot be parsed
 	 */
 	public static final <TimePattern extends TimePatternBase> LocalTime toLocalTime(String time, TimePattern timePattern, Locale locale) {
-		return LocalTime.parse(time, localizedFormatter(timePattern.getFormatter(), locale));
+		return LocalTime.parse(time, formatterLocalized(timePattern.getFormatter(), locale));
 	}
 	
 	/**
@@ -94,7 +94,7 @@ public class TimeFormatUtils {
 	 * @throws DateTimeParseException - if the text cannot be parsed
 	 */
 	public static final LocalTime toLocalTime(String time, String timePattern, Locale locale) {
-		return LocalTime.parse(time, formatter(timePattern, locale));
+		return LocalTime.parse(time, formatterLocalized(timePattern, locale));
 	}
 	
 }
