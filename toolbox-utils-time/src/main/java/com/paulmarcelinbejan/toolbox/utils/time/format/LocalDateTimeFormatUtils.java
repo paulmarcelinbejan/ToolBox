@@ -25,21 +25,7 @@ public class LocalDateTimeFormatUtils {
 	 * Build a pattern combining DatePattern with TimePattern.
 	 * 
 	 * @param DatePattern datePattern
-	 * @param TimePattern timePattern
-	 * 
-	 * This method uses a single space to concatenate date with time
-	 * 
-	 * @return a new DateTimePattern
-	 */
-	public static final <DatePattern extends DatePatternBase, TimePattern extends TimePatternBase> String buildPattern(DatePattern datePattern, TimePattern timePattern) {
-		return buildPattern(datePattern, " ", timePattern);
-	}
-	
-	/**
-	 * Build a pattern combining DatePattern with TimePattern.
-	 * 
-	 * @param DatePattern datePattern
-	 * @param String dateTimeConcatenation
+	 * @param String dateTimeConcatenation, 'T' as in ISO format, ' ' or whatever
 	 * @param TimePattern timePattern
 	 * 
 	 * @return a new DateTimePattern
@@ -52,12 +38,12 @@ public class LocalDateTimeFormatUtils {
 				.toString();
 	}
 	
-	public static final <DatePattern extends DatePatternBase, TimePattern extends TimePatternBase> String toString(LocalDateTime localDateTime, DatePattern datePattern, TimePattern timePattern) {
-		return formatter(buildPattern(datePattern, timePattern)).format(localDateTime);
+	public static final <DatePattern extends DatePatternBase, TimePattern extends TimePatternBase> String toString(LocalDateTime localDateTime, DatePattern datePattern, String dateTimeConcatenation, TimePattern timePattern) {
+		return formatter(buildPattern(datePattern, dateTimeConcatenation, timePattern)).format(localDateTime);
 	}
 	
-	public static final <DatePattern extends DatePatternBase, TimePattern extends TimePatternBase> String toString(LocalDateTime localDateTime, DatePattern datePattern, TimePattern timePattern, Locale locale) {
-		return formatterLocalized(buildPattern(datePattern, timePattern), locale).format(localDateTime);
+	public static final <DatePattern extends DatePatternBase, TimePattern extends TimePatternBase> String toString(LocalDateTime localDateTime, DatePattern datePattern, String dateTimeConcatenation, TimePattern timePattern, Locale locale) {
+		return formatterLocalized(buildPattern(datePattern, dateTimeConcatenation, timePattern), locale).format(localDateTime);
 	}
 	
 	/**
