@@ -21,13 +21,16 @@ import java.time.temporal.TemporalAdjusters;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
+/**
+ * Be aware that LocalDate is time-zone agnostic!
+ */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-public class DateUtils {
+public class LocalDateUtils {
 
 	/**
 	 * 31/12/9999 LocalDate that can be used when an end date is not defined.
 	 */
-	public static final LocalDate MAX_END_DATE = DateUtils.buildLocalDate(9999, 12, 31);
+	public static final LocalDate MAX_END_DATE = LocalDateUtils.buildLocalDate(9999, 12, 31);
 	
 	// DAY
 	

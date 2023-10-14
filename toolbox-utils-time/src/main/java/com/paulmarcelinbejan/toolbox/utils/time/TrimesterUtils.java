@@ -1,10 +1,10 @@
 package com.paulmarcelinbejan.toolbox.utils.time;
 
-import static com.paulmarcelinbejan.toolbox.utils.time.DateUtils.buildLocalDate;
-import static com.paulmarcelinbejan.toolbox.utils.time.DateUtils.isFirstTrimester;
-import static com.paulmarcelinbejan.toolbox.utils.time.DateUtils.isFourthTrimester;
-import static com.paulmarcelinbejan.toolbox.utils.time.DateUtils.isSecondTrimester;
-import static com.paulmarcelinbejan.toolbox.utils.time.DateUtils.isThirdTrimester;
+import static com.paulmarcelinbejan.toolbox.utils.time.LocalDateUtils.buildLocalDate;
+import static com.paulmarcelinbejan.toolbox.utils.time.LocalDateUtils.isFirstTrimester;
+import static com.paulmarcelinbejan.toolbox.utils.time.LocalDateUtils.isFourthTrimester;
+import static com.paulmarcelinbejan.toolbox.utils.time.LocalDateUtils.isSecondTrimester;
+import static com.paulmarcelinbejan.toolbox.utils.time.LocalDateUtils.isThirdTrimester;
 import static java.time.Month.APRIL;
 import static java.time.Month.AUGUST;
 import static java.time.Month.DECEMBER;

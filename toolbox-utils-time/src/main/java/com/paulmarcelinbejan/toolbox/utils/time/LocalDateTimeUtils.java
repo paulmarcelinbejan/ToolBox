@@ -24,8 +24,11 @@ import java.time.temporal.TemporalAdjusters;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
+/**
+ * Be aware that LocalDateTime is time-zone agnostic!
+ */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-public class DateTimeUtils {
+public class LocalDateTimeUtils {
 
 	// NANO SECOND
 	

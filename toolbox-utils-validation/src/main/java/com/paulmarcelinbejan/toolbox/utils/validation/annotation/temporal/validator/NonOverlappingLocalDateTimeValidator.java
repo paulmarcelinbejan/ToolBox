@@ -1,6 +1,6 @@
 package com.paulmarcelinbejan.toolbox.utils.validation.annotation.temporal.validator;
 
-import com.paulmarcelinbejan.toolbox.utils.time.DateTimeUtils;
+import com.paulmarcelinbejan.toolbox.utils.time.LocalDateTimeUtils;
 import com.paulmarcelinbejan.toolbox.utils.time.aware.HistoricalLocalDateTimeAware;
 import com.paulmarcelinbejan.toolbox.utils.validation.annotation.temporal.NonOverlappingLocalDateTime;
 
@@ -14,7 +14,7 @@ public class NonOverlappingLocalDateTimeValidator implements ConstraintValidator
      */
     @Override
     public boolean isValid(HistoricalLocalDateTimeAware historicalLocalDateTimeAware, ConstraintValidatorContext constraintValidatorContext) {
-    	return DateTimeUtils.isBefore(historicalLocalDateTimeAware.startLocalDateTime(), historicalLocalDateTimeAware.endLocalDateTime());
+    	return LocalDateTimeUtils.isBefore(historicalLocalDateTimeAware.startLocalDateTime(), historicalLocalDateTimeAware.endLocalDateTime());
     }
 
 }

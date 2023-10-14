@@ -1,9 +1,9 @@
 package com.paulmarcelinbejan.toolbox.utils.time;
 
-import static com.paulmarcelinbejan.toolbox.utils.time.DateUtils.buildLocalDate;
-import static com.paulmarcelinbejan.toolbox.utils.time.DateUtils.isFirstQuadrimester;
-import static com.paulmarcelinbejan.toolbox.utils.time.DateUtils.isSecondQuadrimester;
-import static com.paulmarcelinbejan.toolbox.utils.time.DateUtils.isThirdQuadrimester;
+import static com.paulmarcelinbejan.toolbox.utils.time.LocalDateUtils.buildLocalDate;
+import static com.paulmarcelinbejan.toolbox.utils.time.LocalDateUtils.isFirstQuadrimester;
+import static com.paulmarcelinbejan.toolbox.utils.time.LocalDateUtils.isSecondQuadrimester;
+import static com.paulmarcelinbejan.toolbox.utils.time.LocalDateUtils.isThirdQuadrimester;
 import static java.time.Month.APRIL;
 import static java.time.Month.AUGUST;
 import static java.time.Month.DECEMBER;

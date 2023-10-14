@@ -1,8 +1,8 @@
 package com.paulmarcelinbejan.toolbox.utils.time;
 
-import static com.paulmarcelinbejan.toolbox.utils.time.DateUtils.buildLocalDate;
-import static com.paulmarcelinbejan.toolbox.utils.time.DateUtils.isFirstSemester;
-import static com.paulmarcelinbejan.toolbox.utils.time.DateUtils.isSecondSemester;
+import static com.paulmarcelinbejan.toolbox.utils.time.LocalDateUtils.buildLocalDate;
+import static com.paulmarcelinbejan.toolbox.utils.time.LocalDateUtils.isFirstSemester;
+import static com.paulmarcelinbejan.toolbox.utils.time.LocalDateUtils.isSecondSemester;
 import static java.time.Month.APRIL;
 import static java.time.Month.AUGUST;
 import static java.time.Month.DECEMBER;

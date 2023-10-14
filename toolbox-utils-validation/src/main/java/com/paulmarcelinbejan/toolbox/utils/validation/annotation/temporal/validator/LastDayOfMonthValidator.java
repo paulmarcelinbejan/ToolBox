@@ -2,7 +2,7 @@ package com.paulmarcelinbejan.toolbox.utils.validation.annotation.temporal.valid
 
 import java.time.LocalDate;
 
-import com.paulmarcelinbejan.toolbox.utils.time.DateUtils;
+import com.paulmarcelinbejan.toolbox.utils.time.LocalDateUtils;
 import com.paulmarcelinbejan.toolbox.utils.validation.annotation.temporal.LastDayOfMonth;
 
 import jakarta.validation.ConstraintValidator;
@@ -15,7 +15,7 @@ public class LastDayOfMonthValidator implements ConstraintValidator<LastDayOfMon
      */
     @Override
     public boolean isValid(LocalDate localDate, ConstraintValidatorContext constraintValidatorContext) {
-    	return localDate != null && DateUtils.isLastDayOfMonth(localDate);
+    	return localDate != null && LocalDateUtils.isLastDayOfMonth(localDate);
     }
 
 }
