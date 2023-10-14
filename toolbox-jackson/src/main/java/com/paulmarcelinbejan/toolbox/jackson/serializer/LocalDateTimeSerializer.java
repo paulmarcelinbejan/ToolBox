@@ -13,7 +13,7 @@ import com.paulmarcelinbejan.toolbox.utils.time.pattern.time.TimePattern;
 
 public class LocalDateTimeSerializer extends JsonSerializer<LocalDateTime> {
 
-	private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern(LocalDateTimeFormatUtils.buildPattern(DatePattern.Numeric.WithSlashSeparator.ddMMyyyy, TimePattern.With24HourClockFormat.HHmmss));
+	private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern(LocalDateTimeFormatUtils.buildPattern(DatePattern.Numeric.WithSlashSeparator.ddMMyyyy, " ", TimePattern.With24HourClockFormat.HHmmss));
 	
 	@Override
 	public void serialize(LocalDateTime value, JsonGenerator gen, SerializerProvider serializers) throws IOException {
