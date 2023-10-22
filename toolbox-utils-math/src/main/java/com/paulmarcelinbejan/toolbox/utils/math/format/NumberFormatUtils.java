@@ -9,6 +9,7 @@ import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 
+import com.paulmarcelinbejan.toolbox.constants.Symbols;
 import com.paulmarcelinbejan.toolbox.constants.SymbolsAsChar;
 import com.paulmarcelinbejan.toolbox.utils.math.MathUtils;
 import com.paulmarcelinbejan.toolbox.utils.math.format.pattern.NumberPattern;
@@ -213,7 +214,7 @@ public class NumberFormatUtils {
 	}
 	
 	/**
-	 * DECIMALS_FIRST_PART_ALWAYS_SECOND_PART_IF_PRESENT
+	 * {@link NumberPattern#DECIMALS_FIRST_PART_ALWAYS_SECOND_PART_IF_PRESENT}
 	 * show first part of decimals in any case, then show decimals until the last valorized decimal
 	 * 
 	 * Example:
@@ -227,9 +228,12 @@ public class NumberFormatUtils {
 			return INTEGER_PATTERN;
 		}
 		
-		String pattern = INTEGER_PATTERN_DOT;
-		pattern = pattern + repeatString(SHOW_DECIMALS_ALWAYS, decimalPlacesToShowAlways);
-		pattern = pattern + repeatString(SHOW_DECIMALS_IF_PRESENT, decimalPlacesTot - decimalPlacesToShowAlways);
+		String pattern = new StringBuilder()
+				.append(INTEGER_PATTERN_DOT)
+				.append(repeatString(SHOW_DECIMALS_ALWAYS, decimalPlacesToShowAlways))
+				.append(repeatString(SHOW_DECIMALS_IF_PRESENT, decimalPlacesTot - decimalPlacesToShowAlways))
+				.toString();
+		
 		return pattern;
 	}	
 	
@@ -252,7 +256,7 @@ public class NumberFormatUtils {
 	}
 	
 	/**
-	 * Validate methods for DECIMALS_FIRST_PART_ALWAYS_SECOND_PART_IF_PRESENT
+	 * Validate methods for {@link NumberPattern#DECIMALS_FIRST_PART_ALWAYS_SECOND_PART_IF_PRESENT}
 	 */
 	private static void validate_toString_for_DECIMALS_FIRST_PART_ALWAYS_SECOND_PART_IF_PRESENT(int decimalPlacesTot, int decimalPlacesToShowAlways, NumberPattern numberFormatPattern) {
 		if(DECIMALS_FIRST_PART_ALWAYS_SECOND_PART_IF_PRESENT != numberFormatPattern) throw new IllegalArgumentException("Invalid NumberFormatPattern. This method can only be used for: " + DECIMALS_FIRST_PART_ALWAYS_SECOND_PART_IF_PRESENT);
@@ -263,7 +267,7 @@ public class NumberFormatUtils {
 	
 	// Constants
 	private static final String INTEGER_PATTERN = "###,##0";
-	private static final String INTEGER_PATTERN_DOT = INTEGER_PATTERN + ".";
+	private static final String INTEGER_PATTERN_DOT = INTEGER_PATTERN + DOT;
 	
 	private static final String SHOW_DECIMALS_ALWAYS = "0";
 	private static final String SHOW_DECIMALS_IF_PRESENT = "#";
