@@ -9,7 +9,6 @@ import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 
-import com.paulmarcelinbejan.toolbox.constants.Symbols;
 import com.paulmarcelinbejan.toolbox.constants.SymbolsAsChar;
 import com.paulmarcelinbejan.toolbox.utils.math.MathUtils;
 import com.paulmarcelinbejan.toolbox.utils.math.format.pattern.NumberPattern;
