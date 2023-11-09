@@ -59,17 +59,21 @@
         <module>toolbox-configuration</module>
         <module>toolbox-constants</module>
         <module>toolbox-exception</module>
-        <module>toolbox-jackson</module>
         <module>toolbox-spring</module>
         <module>toolbox-sql</module>
         <module>toolbox-test</module>
+        <module>toolbox-utils-csv</module>
         <module>toolbox-utils-io</module>
+        <module>toolbox-utils-jackson</module>
+        <module>toolbox-utils-json</module>
         <module>toolbox-utils-mapping</module>
         <module>toolbox-utils-math</module>
+        <module>toolbox-utils-pdf</module>
         <module>toolbox-utils-reflection</module>
         <module>toolbox-utils-text</module>
         <module>toolbox-utils-time</module>
         <module>toolbox-utils-validation</module>
+        <module>toolbox-utils-yaml</module>
         <module>toolbox-web</module>
     </modules>
 
@@ -123,11 +127,6 @@
             <!-- ToolBox dependencies -->
             <dependency>
                 <groupId>com.paulmarcelinbejan.toolbox</groupId>
-                <artifactId>toolbox-annotations</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.paulmarcelinbejan.toolbox</groupId>
                 <artifactId>toolbox-base</artifactId>
                 <version>${project.version}</version>
             </dependency>
@@ -148,11 +147,6 @@
             </dependency>
             <dependency>
                 <groupId>com.paulmarcelinbejan.toolbox</groupId>
-                <artifactId>toolbox-jackson</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.paulmarcelinbejan.toolbox</groupId>
                 <artifactId>toolbox-spring</artifactId>
                 <version>${project.version}</version>
             </dependency>
@@ -169,7 +163,22 @@
             </dependency>
             <dependency>
                 <groupId>com.paulmarcelinbejan.toolbox</groupId>
+                <artifactId>toolbox-utils-csv</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.paulmarcelinbejan.toolbox</groupId>
                 <artifactId>toolbox-utils-io</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.paulmarcelinbejan.toolbox</groupId>
+                <artifactId>toolbox-utils-jackson</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.paulmarcelinbejan.toolbox</groupId>
+                <artifactId>toolbox-utils-json</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
@@ -180,6 +189,11 @@
             <dependency>
                 <groupId>com.paulmarcelinbejan.toolbox</groupId>
                 <artifactId>toolbox-utils-math</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.paulmarcelinbejan.toolbox</groupId>
+                <artifactId>toolbox-utils-pdf</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
@@ -200,6 +214,11 @@
             <dependency>
                 <groupId>com.paulmarcelinbejan.toolbox</groupId>
                 <artifactId>toolbox-utils-validation</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.paulmarcelinbejan.toolbox</groupId>
+                <artifactId>toolbox-utils-yaml</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>

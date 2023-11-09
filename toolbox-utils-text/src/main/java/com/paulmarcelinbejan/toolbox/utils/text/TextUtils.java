@@ -37,7 +37,9 @@ public class TextUtils {
 	}
 	
 	public static String firstLetterUppercase(String text) {
-		if (text == null || text.isEmpty()) throw new InvalidParameterException("The parameter text is null or empty!");
+		if (text == null || text.isEmpty()) {
+			throw new InvalidParameterException("The parameter text is null or empty!");
+		}
 		return new StringBuilder()
 				.append(text.substring(0, 1).toUpperCase())
 				.append(text.substring(1))
