@@ -106,27 +106,43 @@ public class MathUtils {
 	}
 	
 	// Truncate
-	
-	/*
-		2 Options:
-		- RoundingMode.DOWN
-		- RoundingMode.FLOOR
-		For positive numbers they works in the same way.
-		For negative numbers:
-		RoundingMode.DOWN will go to positive,
-		RoundingMode.FLOOR will go to negative,
-		
-		As Example:
-		-1.6 will be truncated to:
-		RoundingMode.DOWN -> -1
-		RoundingMode.FLOOR -> -2
+
+	/**
+	 * The truncate function use {@link RoundingMode#FLOOR} to truncate the number.
+	 * <pre>
+	 * There are 2 Options:
+     * - RoundingMode.DOWN
+	 * - RoundingMode.FLOOR
+	 * 
+	 * For positive numbers they works in the same way.
+	 * For negative numbers:
+	 * RoundingMode.DOWN will go to positive,
+	 * RoundingMode.FLOOR will go to negative,
+	 *	
+	 * As Example:
+	 * -1.6 will be truncated to:
+	 * RoundingMode.DOWN -> -1
+	 * RoundingMode.FLOOR -> -2
+     * </pre>
+     * 
+     * To truncate with {@link RoundingMode#DOWN} use {@link MathUtils#truncateDown}
 	 */
+	public static BigDecimal truncate(BigDecimal value, int decimalPlaces) {
+		return value.setScale(decimalPlaces, RoundingMode.FLOOR);
+	}
 	
 	/**
 	 * The truncate function use {@link RoundingMode#DOWN} to truncate the number.
 	 */
-	public static BigDecimal truncate(BigDecimal value, int decimalPlaces) {
+	public static BigDecimal truncateDown(BigDecimal value, int decimalPlaces) {
 		return value.setScale(decimalPlaces, RoundingMode.DOWN);
+	}
+	
+	/**
+	 * The truncate function use {@link RoundingMode#FLOOR} to truncate the number.
+	 */
+	public static BigDecimal truncateFloor(BigDecimal value, int decimalPlaces) {
+		return value.setScale(decimalPlaces, RoundingMode.FLOOR);
 	}
 
 	public static BigDecimal truncateToZeroDecimalPlaces(BigDecimal value) {
