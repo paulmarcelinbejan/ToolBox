@@ -1,6 +1,6 @@
 package com.paulmarcelinbejan.toolbox.utils.json.config;
 
-import java.util.Collections;
+import java.util.HashMap;
 import java.util.Map;
 
 import com.fasterxml.jackson.databind.JsonDeserializer;
@@ -12,12 +12,11 @@ import lombok.Getter;
 public class JsonReaderConfig {
 
 	public JsonReaderConfig(Map<Class<?>, JsonDeserializer<?>> deserializers) {
-		this.deserializers = deserializers != null ? deserializers : Collections.emptyMap();
-		
+		this.deserializers = deserializers != null ? deserializers : new HashMap<>();
 		this.jsonMapper = buildJsonMapper();
 	}
 	
-	public static final JsonReaderConfig DEFAULT = new JsonReaderConfig(Collections.emptyMap());
+	public static final JsonReaderConfig DEFAULT = new JsonReaderConfig(new HashMap<>());
 	
 	@Getter
 	private final Map<Class<?>, JsonDeserializer<?>> deserializers;

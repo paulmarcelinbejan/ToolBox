@@ -1,6 +1,6 @@
 package com.paulmarcelinbejan.toolbox.utils.json.config;
 
-import java.util.Collections;
+import java.util.HashMap;
 import java.util.Map;
 
 import com.fasterxml.jackson.databind.JsonSerializer;
@@ -12,12 +12,11 @@ import lombok.Getter;
 public class JsonWriterConfig {
 
 	public JsonWriterConfig(Map<Class<?>, JsonSerializer<?>> serializers) {
-		this.serializers = serializers != null ? serializers : Collections.emptyMap();
-		
+		this.serializers = serializers != null ? serializers : new HashMap<>();
 		this.jsonMapper = buildJsonMapper();
 	}
 	
-	public static final JsonWriterConfig DEFAULT = new JsonWriterConfig(Collections.emptyMap());
+	public static final JsonWriterConfig DEFAULT = new JsonWriterConfig(new HashMap<>());
 	
 	@Getter
 	private final Map<Class<?>, JsonSerializer<?>> serializers;

@@ -14,8 +14,6 @@ import java.io.InputStream;
 import java.util.Map;
 import java.util.function.Function;
 
-import org.apache.commons.lang3.tuple.Pair;
-
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.dataformat.yaml.YAMLMapper;
 import com.paulmarcelinbejan.toolbox.utils.io.config.FileInfo;
@@ -59,15 +57,17 @@ public class YamlFileUtils {
 	 *  YamlUtils.read(
 	 *		ConfigProperties.class, 
 	 *		fileInfo, 
-	 *		Pair.of(YamlPrefixType.NESTED, "my.prefix"));
+	 *		"my.prefix",
+	 *		YamlPrefixType.NESTED);
 	 *  
 	 *  } </pre>
 	 *  
 	 */
-    public static <ConfigProperties> ConfigProperties read(@NonNull Class<ConfigProperties> configClass, 
-    													   @NonNull FileInfo fileInfo, 
-    													   @NonNull Pair<@NonNull YamlPrefixType, @NonNull String> prefix) throws IOException {
-        return readValueWithPrefix(configClass, createYamlMapper(), createFileInputStream(fileInfo), prefix);
+    public static <ConfigProperties> ConfigProperties read(Class<ConfigProperties> configClass, 
+    													   FileInfo fileInfo, 
+    													   String prefix,
+														   YamlPrefixType yamlPrefixType) throws IOException {
+        return readValueWithPrefix(configClass, createYamlMapper(), createFileInputStream(fileInfo), prefix, yamlPrefixType);
 	}
 
 	private static FileInputStream createFileInputStream(FileInfo fileInfo) throws FileNotFoundException {
@@ -88,10 +88,12 @@ public class YamlFileUtils {
     }
     
     private static <ConfigProperties> ConfigProperties readValueWithPrefix(Class<ConfigProperties> configClass, 
-    																	   YAMLMapper mapper, InputStream inputStream, 
-    																	   Pair<YamlPrefixType, String> prefix) throws IOException {
+    																	   YAMLMapper mapper, 
+    																	   InputStream inputStream, 
+    																	   String prefix,
+    																	   YamlPrefixType yamlPrefixType) throws IOException {
         return mapper.readerFor(configClass)
-                     .at(fixPrefix(prefix))
+                     .at(fixPrefix(prefix, yamlPrefixType))
                      .readValue(inputStream);
     }
     
@@ -99,8 +101,8 @@ public class YamlFileUtils {
      * convert prefix used for @ConfigurationProperties
      * into prefix used by @YAMLMapper
      */
-    private static String fixPrefix(Pair<YamlPrefixType, String> prefixPair) {
-    	return PREFIX_MAP.get(prefixPair.getLeft()).apply(prefixPair.getRight());
+    private static String fixPrefix(String prefix, YamlPrefixType yamlPrefixType) {
+    	return PREFIX_MAP.get(yamlPrefixType).apply(prefix);
     }
     
 	private static final Map<YamlPrefixType, Function<String, String>> PREFIX_MAP = Map.of(

@@ -21,7 +21,7 @@ import lombok.NoArgsConstructor;
 public class ReflectionUtils {
 	
 	@SuppressWarnings("unchecked")
-	public static <T> Constructor<T> getNoArgsConstructor(Class<T> clazz) throws ReflectionException {
+	public static <T> Constructor<T> getNoArgsConstructor(Class<T> clazz) {
 		return (Constructor<T>) Arrays
 				.asList(clazz.getDeclaredConstructors())
 				.stream()
@@ -30,7 +30,7 @@ public class ReflectionUtils {
 				.orElseThrow(() -> new ReflectionException(MessageFormat.format("Class {} doesn't have a no args contructor.", clazz.getCanonicalName())));
 	}
 
-	public static <T> T getNewInstanceViaNoArgsConstructor(Class<T> clazz) throws ReflectionException {
+	public static <T> T getNewInstanceViaNoArgsConstructor(Class<T> clazz) {
 		try {
 			return getNoArgsConstructor(clazz).newInstance();
 		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | ReflectionException e) {
@@ -38,21 +38,36 @@ public class ReflectionUtils {
 		}
 	}
 
-	public static void makeFieldAccessible(final Field field) {
+	public static boolean isFieldAccessible(final Object instance, final Field field) {
+		return field.canAccess(instance);
+	}
+	
+	private static void makeFieldAccessible(final Field field) {
 		field.setAccessible(true);
 	}
 	
-	public static Object getFieldValue(final Object instance, final Field field) throws ReflectionException {
-		makeFieldAccessible(field);
-		try {
-			return field.get(instance);
-		} catch (IllegalArgumentException | IllegalAccessException e) {
-			throw new ReflectionException(MessageFormat.format("Exception retrieving field value from {}", field));
+	public static Object getFieldValue(final Object instance, final Field field) {
+		boolean isFieldAccessible = isFieldAccessible(instance, field);
+		
+		if(!isFieldAccessible) {
+			makeFieldAccessible(field);
 		}
+		
+		Object fieldValue;
+		try {
+			fieldValue = field.get(instance);
+		} catch (IllegalArgumentException | IllegalAccessException e) {
+			throw new ReflectionException(MessageFormat.format("Error retrieving value of field {} with reflection.", field.getName()), e);
+		}
+		
+		if(!isFieldAccessible) {
+			field.setAccessible(false);
+		}
+		
+		return fieldValue;
 	}
 	
-	public static <T> Field getFieldByName(Class<T> clazz, String fieldName)
-			throws ReflectionException {
+	public static <T> Field getFieldByName(Class<T> clazz, String fieldName) {
 		return Stream
 				// STREAM DECLARED FIELDS
 				.of(clazz.getDeclaredFields())
@@ -62,8 +77,7 @@ public class ReflectionUtils {
 				.orElseThrow(() -> new ReflectionException(MessageFormat.format("Class {} doesn't have a field with name {}.", clazz.getCanonicalName(), fieldName)));
 	}
 
-	public static <T, A> Field getFirstFieldAnnotatedWith(Class<T> clazz, Class<A> annotationType)
-			throws ReflectionException {
+	public static <T, A> Field getFirstFieldAnnotatedWith(Class<T> clazz, Class<A> annotationType) {
 
 		return Stream
 				// STREAM DECLARED FIELDS
@@ -77,7 +91,7 @@ public class ReflectionUtils {
 
 	}
 
-	public static <T> Method getPublicGetterOfFieldName(Class<T> clazz, String fieldName) throws ReflectionException {
+	public static <T> Method getPublicGetterOfFieldName(Class<T> clazz, String fieldName) {
 		String getterNameOfField = GETTER_PREFIX + TextUtils.firstLetterUppercase(fieldName);
 		return getPublicGetters(clazz)
 				.filter(getter -> getter.getName().contentEquals(getterNameOfField))
@@ -85,12 +99,12 @@ public class ReflectionUtils {
 				.orElseThrow(() -> new ReflectionException(MessageFormat.format("Class {} doesn't have a getter method named {} for field {}.", clazz.getCanonicalName(), getterNameOfField, fieldName)));
 	}
 	
-	public static <T> Method getPublicGetterOfField(Class<T> clazz, Field field) throws ReflectionException {
+	public static <T> Method getPublicGetterOfField(Class<T> clazz, Field field) {
 		String fieldName = field.getName();
 		return getPublicGetterOfFieldName(clazz, fieldName);
 	}
 
-	public static Object invokeMethod(Object objectOnWhichToInvokeTheMethod, Method method) throws ReflectionException {
+	public static Object invokeMethod(Object objectOnWhichToInvokeTheMethod, Method method) {
 		try {
 			return method.invoke(objectOnWhichToInvokeTheMethod);
 		} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
@@ -98,8 +112,7 @@ public class ReflectionUtils {
 		}
 	}
 
-	public static Object invokeMethod(Object objectOnWhichToInvokeTheMethod, Method method, Object... paramsOfMethod)
-			throws ReflectionException {
+	public static Object invokeMethod(Object objectOnWhichToInvokeTheMethod, Method method, Object... paramsOfMethod) {
 		try {
 			return method.invoke(objectOnWhichToInvokeTheMethod, paramsOfMethod);
 		} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
