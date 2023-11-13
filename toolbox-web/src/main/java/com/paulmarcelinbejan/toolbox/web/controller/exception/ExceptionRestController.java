@@ -15,9 +15,17 @@ import com.paulmarcelinbejan.toolbox.exception.utils.ExceptionUtils;
 import com.paulmarcelinbejan.toolbox.web.response.ExceptionResponse;
 
 import jakarta.validation.ConstraintViolationException;
+import jakarta.validation.ValidationException;
 
 public abstract class ExceptionRestController {
-
+	
+	@ResponseBody
+	@ResponseStatus(HttpStatus.BAD_REQUEST)
+	@ExceptionHandler(value = { ValidationException.class })
+	public String handleValidationException(ValidationException exception) {
+		return exception.getMessage();
+	}
+	
 	@ResponseBody
 	@ResponseStatus(HttpStatus.BAD_REQUEST)
 	@ExceptionHandler(value = { ConstraintViolationException.class })
