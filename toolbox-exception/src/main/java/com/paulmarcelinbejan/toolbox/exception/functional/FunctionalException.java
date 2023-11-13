@@ -1,8 +1,6 @@
 package com.paulmarcelinbejan.toolbox.exception.functional;
 
-import com.paulmarcelinbejan.toolbox.exception.base.BaseException;
-
-public class FunctionalException extends BaseException {
+public class FunctionalException extends Exception {
 
 	private static final long serialVersionUID = 7539736532128095750L;
 	

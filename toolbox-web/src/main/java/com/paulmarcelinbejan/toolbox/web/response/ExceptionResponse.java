@@ -18,6 +18,9 @@ import lombok.extern.slf4j.Slf4j;
 public class ExceptionResponse {
 
 	@JsonProperty
+	private final String uniqueIdentifier;
+	
+	@JsonProperty
 	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
 	private final Instant timestamp;
 
@@ -26,9 +29,9 @@ public class ExceptionResponse {
 
 	@JsonProperty
 	private final String error;
-
+	
 	@JsonProperty
-	private String uniqueIdentifier = "";
+	private final String exception;
 	
 	@JsonProperty
 	private final String message;
@@ -37,46 +40,63 @@ public class ExceptionResponse {
 	private final String stackTrace;
 	
 	public ExceptionResponse(Exception exception) {
-		timestamp = Instant.now();
-		status = String.valueOf(HttpStatus.INTERNAL_SERVER_ERROR.value());
-		error = HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase();
-		message = exception.getMessage();
-		stackTrace = ExceptionUtils.getStackTrace(exception);
-		log.error(stackTrace);
+		this(ExceptionUtils.getUniqueIdentifier(), 
+			 Instant.now(), 
+			 String.valueOf(HttpStatus.INTERNAL_SERVER_ERROR.value()), 
+			 HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase(), 
+			 exception.getClass().getSimpleName(), 
+			 exception.getMessage(), 
+			 ExceptionUtils.getStackTrace(exception));
 	}
 
 	public ExceptionResponse(Exception exception, String message) {
-		timestamp = Instant.now();
-		status = String.valueOf(HttpStatus.INTERNAL_SERVER_ERROR.value());
-		error = HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase();
-		this.message = message;
-		stackTrace = ExceptionUtils.getStackTrace(exception);
-		log.error(stackTrace);
+		this(ExceptionUtils.getUniqueIdentifier(), 
+		     Instant.now(), 
+		     String.valueOf(HttpStatus.INTERNAL_SERVER_ERROR.value()), 
+			 HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase(), 
+			 exception.getClass().getSimpleName(), 
+			 message, 
+			 ExceptionUtils.getStackTrace(exception));
 	}
 	
-	/**
-	 * fieldValue can contain: status, error, uniqueIdentifier, message
-	 */
-	public ExceptionResponse(Exception exception, Map<String, String> fieldValue) {
-		timestamp = Instant.now();
-		status = fieldValue.getOrDefault("status", String.valueOf(HttpStatus.INTERNAL_SERVER_ERROR.value()));
-		error = fieldValue.getOrDefault("error", HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase());
-		uniqueIdentifier = fieldValue.getOrDefault("uniqueIdentifier", "");
-		message = fieldValue.getOrDefault("message", exception.getMessage());
-		stackTrace = ExceptionUtils.getStackTrace(exception);
-		log.error(stackTrace);
+	public ExceptionResponse(Exception exception, Map<ExceptionField, String> fieldValue) {
+		this(fieldValue.getOrDefault(ExceptionField.UNIQUEIDENTIFIER, ExceptionUtils.getUniqueIdentifier()), 
+		     Instant.now(), 
+		     fieldValue.getOrDefault(ExceptionField.STATUS, String.valueOf(HttpStatus.INTERNAL_SERVER_ERROR.value())), 
+		     fieldValue.getOrDefault(ExceptionField.ERROR, HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase()), 
+			 exception.getClass().getSimpleName(), 
+			 fieldValue.getOrDefault(ExceptionField.MESSAGE, exception.getMessage()), 
+			 ExceptionUtils.getStackTrace(exception));
 	}
 	
 	@JsonCreator
-	public ExceptionResponse(Instant timestamp, String status, String error, String uniqueIdentifier,
-			String message, String stackTrace) {
+	public ExceptionResponse(String uniqueIdentifier, Instant timestamp, String status, String error,
+			String exception, String message, String stackTrace) {
 		this.timestamp = timestamp;
 		this.status = status;
 		this.error = error;
+		this.exception = exception;
 		this.uniqueIdentifier = uniqueIdentifier;
 		this.message = message;
 		this.stackTrace = stackTrace;
 		log.error(stackTrace);
+	}
+	
+	
+	public enum ExceptionField {
+		
+		UNIQUEIDENTIFIER("uniqueIdentifier"),
+		STATUS("status"),
+		ERROR("error"),
+		EXCEPTION("exception"),
+		MESSAGE("message");
+		
+		public final String fieldName;
+		
+		private ExceptionField(String fieldName) {
+	    	this.fieldName = fieldName;
+	    }
+		
 	}
 
 }

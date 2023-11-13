@@ -1,8 +1,6 @@
 package com.paulmarcelinbejan.toolbox.exception.technical;
 
-import com.paulmarcelinbejan.toolbox.exception.base.BaseException;
-
-public class TechnicalException extends BaseException {
+public class TechnicalException extends Exception {
 	
 	private static final long serialVersionUID = 6430014637371694012L;
 
