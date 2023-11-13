@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
@@ -35,6 +36,16 @@ public class ObjectMapperUtils {
 		SimpleModule module = new SimpleModule();
 		addDeserializers(module, deserializers);
 		mapper.registerModule(module);
+	}
+	
+	public static <Mapper extends ObjectMapper> void registerJavaTimeModule(Mapper mapper) {
+		mapper.registerModule(new JavaTimeModule());
+	}
+	
+	public static ObjectMapper getMapperWithJavaTimeModule() {
+		ObjectMapper mapper = new ObjectMapper();
+		registerJavaTimeModule(mapper);
+		return mapper;
 	}
 	
 }

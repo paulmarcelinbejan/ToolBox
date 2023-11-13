@@ -8,7 +8,10 @@ import org.springframework.http.HttpStatus;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.paulmarcelinbejan.toolbox.exception.utils.ExceptionUtils;
+import com.paulmarcelinbejan.toolbox.utils.jackson.ObjectMapperUtils;
 
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
@@ -79,8 +82,16 @@ public class ExceptionResponse {
 		this.uniqueIdentifier = uniqueIdentifier;
 		this.message = message;
 		this.stackTrace = stackTrace;
-		log.error(stackTrace);
+
+		try {
+			String json = MAPPER.writeValueAsString(this);
+			log.error(json);
+		} catch (JsonProcessingException e) {
+			log.error(stackTrace);
+		}
 	}
+	
+	private static final ObjectMapper MAPPER = ObjectMapperUtils.getMapperWithJavaTimeModule();
 	
 	
 	public enum ExceptionField {
