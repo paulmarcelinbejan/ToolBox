@@ -5,6 +5,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
+import java.lang.reflect.TypeVariable;
 import java.text.MessageFormat;
 import java.util.Arrays;
 import java.util.stream.Stream;
@@ -37,6 +38,14 @@ public class ReflectionUtils {
 			throw new ReflectionException(MessageFormat.format("Error handling {} with reflection.", clazz.getCanonicalName()), e);
 		}
 	}
+	
+	/**
+	 * isParameterizedType
+	 */
+	public static boolean isParameterizedType(Class<?> clazz) {
+		TypeVariable<?>[] genericTypes = clazz.getTypeParameters();
+		return genericTypes.length > 0;
+    }
 
 	public static boolean isFieldAccessible(final Object instance, final Field field) {
 		return field.canAccess(instance);
