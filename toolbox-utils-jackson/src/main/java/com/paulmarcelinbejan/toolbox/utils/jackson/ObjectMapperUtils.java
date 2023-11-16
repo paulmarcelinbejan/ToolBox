@@ -2,9 +2,12 @@ package com.paulmarcelinbejan.toolbox.utils.jackson;
 
 import java.util.Map;
 
+import com.fasterxml.jackson.core.util.DefaultIndenter;
+import com.fasterxml.jackson.core.util.DefaultPrettyPrinter;
 import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
@@ -47,5 +50,16 @@ public class ObjectMapperUtils {
 		registerJavaTimeModule(mapper);
 		return mapper;
 	}
+    
+    public static ObjectWriter getWriterWithPrettyPrint(ObjectMapper mapper) {
+    	ObjectWriter objectWriter = mapper.writer().with(prettyPrinter());
+    	return objectWriter;
+    }
+    
+    public static DefaultPrettyPrinter prettyPrinter() {
+    	DefaultPrettyPrinter prettyPrinter = new DefaultPrettyPrinter();        
+        prettyPrinter.indentArraysWith(DefaultIndenter.SYSTEM_LINEFEED_INSTANCE);
+        return prettyPrinter;
+    }
 	
 }
