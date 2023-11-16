@@ -9,7 +9,7 @@ import org.springframework.http.HttpStatus;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectWriter;
 import com.paulmarcelinbejan.toolbox.exception.utils.ExceptionUtils;
 import com.paulmarcelinbejan.toolbox.utils.jackson.ObjectMapperUtils;
 
@@ -34,64 +34,67 @@ public class ExceptionResponse {
 	private final String error;
 	
 	@JsonProperty
-	private final String exception;
+	private final String exceptionType;
 	
 	@JsonProperty
 	private final String message;
-
-	@JsonProperty
-	private final String stackTrace;
 	
 	public ExceptionResponse(Exception exception) {
-		this(ExceptionUtils.getUniqueIdentifier(), 
+		this(exception,
+			 ExceptionUtils.getUniqueIdentifier(), 
 			 Instant.now(), 
 			 String.valueOf(HttpStatus.INTERNAL_SERVER_ERROR.value()), 
 			 HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase(), 
 			 exception.getClass().getSimpleName(), 
-			 exception.getMessage(), 
-			 ExceptionUtils.getStackTrace(exception));
+			 exception.getMessage());
 	}
 
 	public ExceptionResponse(Exception exception, String message) {
-		this(ExceptionUtils.getUniqueIdentifier(), 
+		this(exception,
+			 ExceptionUtils.getUniqueIdentifier(), 
 		     Instant.now(), 
 		     String.valueOf(HttpStatus.INTERNAL_SERVER_ERROR.value()), 
 			 HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase(), 
 			 exception.getClass().getSimpleName(), 
-			 message, 
-			 ExceptionUtils.getStackTrace(exception));
+			 message);
 	}
 	
 	public ExceptionResponse(Exception exception, Map<ExceptionField, String> fieldValue) {
-		this(fieldValue.getOrDefault(ExceptionField.UNIQUEIDENTIFIER, ExceptionUtils.getUniqueIdentifier()), 
+		this(exception,
+			 fieldValue.getOrDefault(ExceptionField.UNIQUEIDENTIFIER, ExceptionUtils.getUniqueIdentifier()), 
 		     Instant.now(), 
 		     fieldValue.getOrDefault(ExceptionField.STATUS, String.valueOf(HttpStatus.INTERNAL_SERVER_ERROR.value())), 
 		     fieldValue.getOrDefault(ExceptionField.ERROR, HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase()), 
 			 exception.getClass().getSimpleName(), 
-			 fieldValue.getOrDefault(ExceptionField.MESSAGE, exception.getMessage()), 
-			 ExceptionUtils.getStackTrace(exception));
+			 fieldValue.getOrDefault(ExceptionField.MESSAGE, exception.getMessage()));
+	}
+	
+	public ExceptionResponse(Exception exception, String uniqueIdentifier, Instant timestamp, String status, String error,
+			String exceptionType, String message) {
+		this(uniqueIdentifier, timestamp, status, error, exceptionType, message);
+		log.error("Exception Stack Trace", exception);
 	}
 	
 	@JsonCreator
 	public ExceptionResponse(String uniqueIdentifier, Instant timestamp, String status, String error,
-			String exception, String message, String stackTrace) {
+			String exceptionType, String message) {
+		
+		this.uniqueIdentifier = uniqueIdentifier;
 		this.timestamp = timestamp;
 		this.status = status;
 		this.error = error;
-		this.exception = exception;
-		this.uniqueIdentifier = uniqueIdentifier;
+		this.exceptionType = exceptionType;
 		this.message = message;
-		this.stackTrace = stackTrace;
 
 		try {
-			String json = MAPPER.writeValueAsString(this);
+			String json = "\n"+JSON_WRITER.writeValueAsString(this);
 			log.error(json);
 		} catch (JsonProcessingException e) {
-			log.error(stackTrace);
+			log.info("\nExceptionType: {} \nMessage: {} \nUniqueIdentifier: {}", exceptionType, message, uniqueIdentifier);
 		}
 	}
 	
-	private static final ObjectMapper MAPPER = ObjectMapperUtils.getMapperWithJavaTimeModule();
+	private static final ObjectWriter JSON_WRITER = ObjectMapperUtils.getWriterWithPrettyPrint(ObjectMapperUtils.getMapperWithJavaTimeModule());
 	
 	
 	public enum ExceptionField {
@@ -99,7 +102,7 @@ public class ExceptionResponse {
 		UNIQUEIDENTIFIER("uniqueIdentifier"),
 		STATUS("status"),
 		ERROR("error"),
-		EXCEPTION("exception"),
+		EXCEPTIONTYPE("exceptionType"),
 		MESSAGE("message");
 		
 		public final String fieldName;
