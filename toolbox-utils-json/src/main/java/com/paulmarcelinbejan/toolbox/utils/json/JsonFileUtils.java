@@ -1,10 +1,8 @@
 package com.paulmarcelinbejan.toolbox.utils.json;
 
-import static com.paulmarcelinbejan.toolbox.utils.io.config.FileType.JSON;
-
-import java.io.File;
 import java.io.IOException;
-import java.io.Reader;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.List;
 
 import com.fasterxml.jackson.core.util.DefaultIndenter;
@@ -43,8 +41,9 @@ public class JsonFileUtils<T> {
      * JSON file starts with curly brackets
      */
 	public T read(FileInfo fileInfo) throws IOException {
-		Reader reader = FileUtils.createFileReader(fileInfo, JSON);
-		return readerConfig.getJsonMapper().readValue(reader, typeParameterClass);
+		InputStream fileInputStream = FileUtils.createFileInputStream(fileInfo);
+		T json = readerConfig.getJsonMapper().readValue(fileInputStream, typeParameterClass);
+		return json;
     }
 	
     /**
@@ -63,31 +62,32 @@ public class JsonFileUtils<T> {
      * Remember to close the Reader usign <b>iterator.close()</b> in order to release any resources associated with it.
      */
 	public MappingIterator<T> iterator(FileInfo fileInfo) throws IOException {
-		Reader reader = FileUtils.createFileReader(fileInfo, JSON);
+		InputStream fileInputStream = FileUtils.createFileInputStream(fileInfo);
 		JsonMapper mapper = readerConfig.getJsonMapper();
-        return mapper.readerFor(typeParameterClass).readValues(reader);
+        return mapper.readerFor(typeParameterClass)
+        			 .readValues(fileInputStream);
     }
 	
     /**
      * JSON file starts with curly brackets
      */
     public void write(FileInfo fileInfo, T object) throws IOException {
-    	File file = FileUtils.createFile(fileInfo, JSON);
+    	OutputStream fileOutputStream = FileUtils.createFileOutputStream(fileInfo);
     	writerConfig.getJsonMapper()
     				.writer()
     				.with(prettyPrinter())
-    				.writeValue(file, object);
+    				.writeValue(fileOutputStream, object);
     }
     
     /**
      * JSON file starts with square brackets
      */
     public void writeList(FileInfo fileInfo, List<T> objects) throws IOException {
-    	File file = FileUtils.createFile(fileInfo, JSON);
+    	OutputStream fileOutputStream = FileUtils.createFileOutputStream(fileInfo);
     	writerConfig.getJsonMapper()
     				.writer()
     				.with(prettyPrinter())
-    				.writeValue(file, objects);
+    				.writeValue(fileOutputStream, objects);
     }
     
     private DefaultPrettyPrinter prettyPrinter() {

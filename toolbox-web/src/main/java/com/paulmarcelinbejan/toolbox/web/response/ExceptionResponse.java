@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import com.paulmarcelinbejan.toolbox.exception.utils.ExceptionUtils;
 import com.paulmarcelinbejan.toolbox.utils.jackson.ObjectMapperUtils;
@@ -94,8 +95,14 @@ public class ExceptionResponse {
 		}
 	}
 	
-	private static final ObjectWriter JSON_WRITER = ObjectMapperUtils.getWriterWithPrettyPrint(ObjectMapperUtils.getMapperWithJavaTimeModule());
+	private static final ObjectWriter JSON_WRITER = objectWriter();
 	
+	private static final ObjectWriter objectWriter() {
+		ObjectMapper mapper = new ObjectMapper();
+		ObjectMapperUtils.registerJavaTimeModule(mapper);
+		ObjectWriter objectWriter = ObjectMapperUtils.getWriterWithPrettyPrinter(mapper);
+		return objectWriter;
+	}
 	
 	public enum ExceptionField {
 		

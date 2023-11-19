@@ -1,4 +1,4 @@
-package com.paulmarcelinbejan.toolbox.utils.io.json.dummy;
+package com.paulmarcelinbejan.toolbox.utils.json.dummy;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

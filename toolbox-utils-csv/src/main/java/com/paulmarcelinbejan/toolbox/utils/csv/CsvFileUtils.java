@@ -1,7 +1,5 @@
 package com.paulmarcelinbejan.toolbox.utils.csv;
 
-import static com.paulmarcelinbejan.toolbox.utils.io.config.FileType.CSV;
-
 import java.io.File;
 import java.io.IOException;
 import java.io.Reader;
@@ -52,7 +50,7 @@ public class CsvFileUtils<T> {
 	 * @throws IOException if the file can not be found, or if the data can not be parsed correctly.
 	 */
 	public MappingIterator<T> iterator(@NonNull final FileInfo fileInfo) throws IOException {
-		Reader reader = FileUtils.createFileReader(fileInfo, CSV);
+		Reader reader = FileUtils.createFileReader(fileInfo);
 
 		CsvMapper csvMapper = readerConfig.getCsvMapper();
 		CsvSchema csvSchema = readerConfig.getCsvSchema();
@@ -83,12 +81,12 @@ public class CsvFileUtils<T> {
 		
 		CsvMapper mapper = writerConfig.getCsvMapper();
 		CsvSchema schema = writerConfig.getCsvSchema()
-										  .orElse(defaultWriterCsvSchema(mapper));
+									   .orElse(defaultWriterCsvSchema(mapper));
 
 		ObjectWriter writer = mapper.writerFor(typeParameterClass)
 									.with(schema);
 		
-		File file = FileUtils.createFile(fileInfo, CSV);
+		File file = FileUtils.createFile(fileInfo);
 
 		writer.writeValues(file)
 			  .writeAll(records);

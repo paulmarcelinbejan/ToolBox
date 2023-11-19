@@ -12,20 +12,22 @@ public class FileInfo {
 	@NonNull 
 	private String fileNameWithoutExtension;
 	
-	public FileInfo(@NonNull String fileNameWithoutExtension) {
+	@NonNull 
+	private FileType fileType;
+	
+	public FileInfo(@NonNull String fileNameWithoutExtension, @NonNull FileType fileType) {
 		this.directoryPath = "";
 		this.fileNameWithoutExtension = fileNameWithoutExtension;
+		this.fileType = fileType;
 	}
 	
-	public FileInfo(@NonNull String directoryPath, @NonNull String fileNameWithoutExtension) {
+	public FileInfo(@NonNull String directoryPath, @NonNull String fileNameWithoutExtension, @NonNull FileType fileType) {
 		this.directoryPath = directoryPath;
 		this.fileNameWithoutExtension = fileNameWithoutExtension;
+		this.fileType = fileType;
 	}
-
-	// The FileType is not a field of FileInfo to prevent passing a wrong value.
-	// Each Utility class know what is the FileType that must be used.
 	
-	public final String getFullPath(@NonNull FileType fileType) {
+	public final String getFullPath() {
 		return new StringBuilder()
 				.append(directoryPath)
 				.append(fileNameWithoutExtension)
