@@ -2,99 +2,89 @@ package com.paulmarcelinbejan.toolbox.utils.yaml;
 
 import static com.paulmarcelinbejan.toolbox.constants.Symbols.DOT;
 import static com.paulmarcelinbejan.toolbox.constants.Symbols.SLASH;
-import static com.paulmarcelinbejan.toolbox.utils.io.config.FileType.YAML;
 import static com.paulmarcelinbejan.toolbox.utils.yaml.config.YamlPrefixType.CONDENSED;
 import static com.paulmarcelinbejan.toolbox.utils.yaml.config.YamlPrefixType.NESTED;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.Map;
 import java.util.function.Function;
 
-import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.dataformat.yaml.YAMLMapper;
+import com.paulmarcelinbejan.toolbox.utils.io.FileUtils;
 import com.paulmarcelinbejan.toolbox.utils.io.config.FileInfo;
+import com.paulmarcelinbejan.toolbox.utils.yaml.config.YamlFileUtilsConfig;
 import com.paulmarcelinbejan.toolbox.utils.yaml.config.YamlPrefixType;
 
-import lombok.AccessLevel;
-import lombok.NoArgsConstructor;
 import lombok.NonNull;
 
-// TODO implement write method
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
-public class YamlFileUtils {
+public class YamlFileUtils<T> {
+	
+	private final Class<T> typeParameterClass;
+	
+	private final YAMLMapper mapper;
 	
 	/**
-	 *  Read YAML file <br>
-	 *  
-	 *  <p>
-	 *  How to use: 
-	 *  <pre> {@code
-	 *  	
-	 *  YamlUtils.read(ConfigProperties.class, fileInfo);
-	 *  
-	 *  } </pre>
-	 *  
+	 * This constructor will use default configuration. 
 	 */
-    public static <ConfigProperties> ConfigProperties read(@NonNull Class<ConfigProperties> configClass, @NonNull FileInfo fileInfo) throws IOException {
-        return readValueWithoutPrefix(configClass, createYamlMapper(), createFileInputStream(fileInfo));
+	public YamlFileUtils(@NonNull final Class<T> typeParameterClass) {
+		this.typeParameterClass = typeParameterClass;
+		this.mapper = YamlFileUtilsConfig.DEFAULT.getYamlMapper();
+	}
+	
+	public YamlFileUtils(@NonNull final Class<T> typeParameterClass, @NonNull final YamlFileUtilsConfig yamlFileUtilsConfig) {
+		this.typeParameterClass = typeParameterClass;
+		this.mapper = yamlFileUtilsConfig.getYamlMapper();
 	}
 	
 	/**
-	 *  Read YAML file <br>
-	 *  The format of prefix must be the same used for {@link org.springframework.boot.context.properties.ConfigurationProperties ConfigurationProperties}
-	 *  
-	 *  <p>
-	 *  How to use:
-	 *  <br>
-	 *  if your prefix is one word only, you can use any {@link YamlPrefixType}.
-	 *  
-	 *  <pre> {@code
-	 *  	
-	 *  YamlUtils.read(
-	 *		ConfigProperties.class, 
-	 *		fileInfo, 
-	 *		"my.prefix",
-	 *		YamlPrefixType.NESTED);
-	 *  
-	 *  } </pre>
-	 *  
+	 *  Read YAML file
 	 */
-    public static <ConfigProperties> ConfigProperties read(Class<ConfigProperties> configClass, 
-    													   FileInfo fileInfo, 
-    													   String prefix,
-														   YamlPrefixType yamlPrefixType) throws IOException {
-        return readValueWithPrefix(configClass, createYamlMapper(), createFileInputStream(fileInfo), prefix, yamlPrefixType);
-	}
-
-	private static FileInputStream createFileInputStream(FileInfo fileInfo) throws FileNotFoundException {
-		return new FileInputStream(new File(fileInfo.getFullPath(YAML)));
+    public T read(@NonNull FileInfo fileInfo) throws IOException {
+        T yaml = readValueWithoutPrefix(mapper, FileUtils.createFileInputStream(fileInfo));
+		return yaml;
 	}
 	
-	private static YAMLMapper createYamlMapper() {
-		YAMLMapper mapper = new YAMLMapper();
-		mapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
-		mapper.enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
-		return mapper;
+	/**
+	 *  Read YAML file
+	 *  
+	 *  <br> The format of prefix must be the same used for {@link org.springframework.boot.context.properties.ConfigurationProperties ConfigurationProperties}
+	 *  
+	 *  <br> if your prefix is one word only, you can use any {@link YamlPrefixType}.
+	 */
+    public T read(FileInfo fileInfo, String prefix, YamlPrefixType yamlPrefixType) throws IOException {
+        T yaml = readValueWithPrefix(mapper, FileUtils.createFileInputStream(fileInfo), prefix, yamlPrefixType);
+		return yaml;
 	}
-	
-    private static <ConfigProperties> ConfigProperties readValueWithoutPrefix(Class<ConfigProperties> configClass, 
-    																		  YAMLMapper mapper, 
-    																		  InputStream inputStream) throws IOException {
-        return mapper.readValue(inputStream, configClass);
+    
+    public void write(FileInfo fileInfo, T value) throws IOException {
+    	writeValueWithoutPrefix(mapper, FileUtils.createFileOutputStream(fileInfo), value);
     }
     
-    private static <ConfigProperties> ConfigProperties readValueWithPrefix(Class<ConfigProperties> configClass, 
-    																	   YAMLMapper mapper, 
-    																	   InputStream inputStream, 
-    																	   String prefix,
-    																	   YamlPrefixType yamlPrefixType) throws IOException {
-        return mapper.readerFor(configClass)
+    public void write(FileInfo fileInfo, String prefix, YamlPrefixType yamlPrefixType, T value) throws IOException {
+    	writeValueWithPrefix(mapper, FileUtils.createFileOutputStream(fileInfo), prefix, yamlPrefixType, value);
+    }
+	
+    private T readValueWithoutPrefix(YAMLMapper mapper, InputStream inputStream) throws IOException {
+        return mapper.readValue(inputStream, typeParameterClass);
+    }
+    
+    private T readValueWithPrefix(YAMLMapper mapper, InputStream inputStream, String prefix, YamlPrefixType yamlPrefixType) throws IOException {
+        return mapper.readerFor(typeParameterClass)
                      .at(fixPrefix(prefix, yamlPrefixType))
                      .readValue(inputStream);
+    }
+    
+    private void writeValueWithoutPrefix(YAMLMapper mapper, OutputStream outputStream, T value) throws IOException {
+        mapper.writerFor(typeParameterClass)
+  	  		  .writeValue(outputStream, value);
+    }
+    
+    private void writeValueWithPrefix(YAMLMapper mapper, OutputStream outputStream, String prefix, YamlPrefixType yamlPrefixType, T value) throws IOException {
+        mapper.writerFor(typeParameterClass)
+        	  .withRootName(fixPrefix(prefix, yamlPrefixType))
+              .writeValue(outputStream, value);
     }
     
     /**
