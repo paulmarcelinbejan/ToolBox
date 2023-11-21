@@ -1,94 +1,131 @@
 package com.paulmarcelinbejan.toolbox.utils.csv.config;
 
-import static com.paulmarcelinbejan.toolbox.constants.SymbolsAsChar.COMMA;
-
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 import com.fasterxml.jackson.core.JsonGenerator.Feature;
 import com.fasterxml.jackson.databind.JsonSerializer;
+import com.fasterxml.jackson.databind.Module;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.dataformat.csv.CsvFactory;
+import com.fasterxml.jackson.dataformat.csv.CsvFactoryBuilder;
 import com.fasterxml.jackson.dataformat.csv.CsvMapper;
-import com.fasterxml.jackson.dataformat.csv.CsvSchema;
-import com.fasterxml.jackson.dataformat.csv.CsvSchema.Builder;
+import com.fasterxml.jackson.dataformat.csv.CsvParser;
 import com.paulmarcelinbejan.toolbox.utils.jackson.ObjectMapperUtils;
 
 import lombok.Getter;
 
 public class CsvWriterConfig {
 
-	public CsvWriterConfig(char separator, Map<Class<?>, JsonSerializer<?>> serializers, List<String> columns, boolean appendCurrentTimeMillisToFileName) {
-		this.separator = separator;
-		this.serializers = serializers != null ? serializers : Collections.emptyMap();
-		this.columns = columns != null ? columns : Collections.emptyList();
-		this.appendCurrentTimeMillisToFileName = appendCurrentTimeMillisToFileName;
+	public CsvWriterConfig(
+			List<CsvParser.Feature> enableCsvParserFeatures,
+			List<CsvParser.Feature> disableCsvParserFeatures,
+			List<SerializationFeature> enableSerializationFeatures,
+			List<SerializationFeature> disableSerializationFeatures,
+			List<Module> modules, 
+			Map<Class<?>, JsonSerializer<?>> serializers) {
 		
-		this.csvMapper = buildCsvMapper();
-		this.csvSchema = buildCsvSchema();
+		boolean createCsvFactory = createCsvFactory(enableCsvParserFeatures, disableCsvParserFeatures);
+		
+		if(createCsvFactory) {
+			CsvFactory csvFactory = buildCsvFactory(enableCsvParserFeatures, disableCsvParserFeatures);
+			this.csvMapper = buildCsvMapper(csvFactory, enableSerializationFeatures, disableSerializationFeatures, modules, serializers);
+		} else {
+			this.csvMapper = buildCsvMapper(enableSerializationFeatures, disableSerializationFeatures, modules, serializers);
+		}
+		
 	}
 	
-	public static final CsvWriterConfig DEFAULT = new CsvWriterConfig(COMMA, Map.of(), List.of(), false);
-	
-	@Getter
-	private final char separator;
-	
-	private final Map<Class<?>, JsonSerializer<?>> serializers;
-	
-	/**
-	 * Columns Header, it will be used to write only the columns present in this list. 
-	 * It will also be used to order them, otherwise the alphabetical order will be applied.
-	 */
-	private final List<String> columns;
-
-	@Getter
-	private final boolean appendCurrentTimeMillisToFileName;
+	public static final CsvWriterConfig DEFAULT = new CsvWriterConfig(
+			Collections.emptyList(), 
+			Collections.emptyList(), 
+			Collections.emptyList(), 
+			Collections.emptyList(), 
+			Collections.emptyList(), 
+			Collections.emptyMap());
 	
 	@Getter
 	private final CsvMapper csvMapper;
 	
-	private final CsvSchema csvSchema;
-	
-	public Optional<CsvSchema> getCsvSchema() {
-		return Optional.ofNullable(csvSchema);
-	}
-	
-	/**
-	 * return a CsvMapper configured with serializers (if any)
-	 */
-	private CsvMapper buildCsvMapper() {
-		CsvMapper mapper = new CsvMapper();
-		mapper.configure(Feature.IGNORE_UNKNOWN, true);
+	private CsvMapper buildCsvMapper(
+			List<SerializationFeature> enableSerializationFeatures,
+			List<SerializationFeature> disableSerializationFeatures,
+			List<Module> modules, 
+			Map<Class<?>, JsonSerializer<?>> serializers) {
 		
-		if(!serializers.isEmpty()) {
-			ObjectMapperUtils.registerSerializers(mapper, serializers);
-		}
+		CsvMapper mapper = new CsvMapper();
+		mapper.enable(Feature.IGNORE_UNKNOWN);
+		
+		configureCsvMapper(mapper, enableSerializationFeatures, disableSerializationFeatures, modules, serializers);
 		
 		return mapper;
 	}
 	
-	/**
-	 * return a ready to use CsvSchema configured with columns.
-	 */
-	private CsvSchema buildCsvSchema() {
-		if(!columns.isEmpty()) {
-			return csvSchemaWithColumnsOrder();
+	private CsvMapper buildCsvMapper(
+			CsvFactory csvFactory,
+			List<SerializationFeature> enableSerializationFeatures,
+			List<SerializationFeature> disableSerializationFeatures,
+			List<Module> modules, 
+			Map<Class<?>, JsonSerializer<?>> serializers) {
+		CsvMapper mapper = new CsvMapper(csvFactory);
+		mapper.enable(Feature.IGNORE_UNKNOWN);
+		
+		configureCsvMapper(mapper, enableSerializationFeatures, disableSerializationFeatures, modules, serializers);
+		
+		return mapper;
+	}
+
+	private void configureCsvMapper(CsvMapper mapper,
+			List<SerializationFeature> enableSerializationFeatures,
+			List<SerializationFeature> disableSerializationFeatures,
+			List<Module> modules, 
+			Map<Class<?>, JsonSerializer<?>> serializers) {
+		
+		if(enableSerializationFeatures != null && !enableSerializationFeatures.isEmpty()) {
+			ObjectMapperUtils.enableSerializationFeatures(mapper, enableSerializationFeatures);
 		}
-		return null;
+		
+		if(disableSerializationFeatures != null && !disableSerializationFeatures.isEmpty()) {
+			ObjectMapperUtils.disableSerializationFeatures(mapper, disableSerializationFeatures);
+		}
+		
+		if(modules != null && !modules.isEmpty()) {
+			ObjectMapperUtils.registerModules(mapper, modules);
+		}
+		
+		if(serializers != null && !serializers.isEmpty()) {
+			ObjectMapperUtils.registerSerializers(mapper, serializers);
+		}
+		
 	}
 	
-	private CsvSchema csvSchemaWithColumnsOrder() {
-		Builder builder = CsvSchema.builder();
+	private CsvFactory buildCsvFactory(
+			List<CsvParser.Feature> enableCsvParserFeatures,
+			List<CsvParser.Feature> disableCsvParserFeatures) {
 		
-		for(String column : columns) {
-			builder = builder.addColumn(column);
+		CsvFactoryBuilder csvFactoryBuilder = CsvFactory.builder();
+		
+		if(enableCsvParserFeatures != null && !enableCsvParserFeatures.isEmpty()) {
+			enableCsvParserFeatures.forEach(csvFactoryBuilder::enable);
 		}
 		
-		return builder.build()
-					  .sortedBy(columns.toArray(String[]::new))
-					  .withColumnSeparator(separator)
-					  .withHeader()
-					  .withoutQuoteChar();
+		if(disableCsvParserFeatures != null && !disableCsvParserFeatures.isEmpty()) {
+			disableCsvParserFeatures.forEach(csvFactoryBuilder::disable);
+		}
+		
+		return csvFactoryBuilder.build();
+		
+	}
+	
+	private boolean createCsvFactory(
+			List<CsvParser.Feature> enableCsvParserFeatures,
+			List<CsvParser.Feature> disableCsvParserFeatures) {
+		if((enableCsvParserFeatures != null && !enableCsvParserFeatures.isEmpty())
+				|| (disableCsvParserFeatures != null && !disableCsvParserFeatures.isEmpty())) {
+			return true;
+		}
+		return false;
 	}
 	
 }

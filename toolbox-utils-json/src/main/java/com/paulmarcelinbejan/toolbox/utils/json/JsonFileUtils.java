@@ -12,45 +12,39 @@ import com.fasterxml.jackson.databind.json.JsonMapper;
 import com.paulmarcelinbejan.toolbox.utils.io.FileUtils;
 import com.paulmarcelinbejan.toolbox.utils.io.config.FileInfo;
 import com.paulmarcelinbejan.toolbox.utils.json.config.JsonFileUtilsConfig;
-import com.paulmarcelinbejan.toolbox.utils.json.config.JsonReaderConfig;
-import com.paulmarcelinbejan.toolbox.utils.json.config.JsonWriterConfig;
 
-public class JsonFileUtils<T> {
-
-	private final Class<T> typeParameterClass;
-	
-	private final JsonReaderConfig readerConfig;
-	private final JsonWriterConfig writerConfig;
+public class JsonFileUtils {
 
 	/**
 	 * This constructor will use default configuration. 
 	 */
-    public JsonFileUtils(Class<T> typeParameterClass) {
-		this.typeParameterClass = typeParameterClass;
-		this.readerConfig = JsonReaderConfig.DEFAULT;
-		this.writerConfig = JsonWriterConfig.DEFAULT;
+    public JsonFileUtils() {
+		this.mapperReader = JsonFileUtilsConfig.DEFAULT.getReaderConfig().getJsonMapper();
+		this.mapperWriter = JsonFileUtilsConfig.DEFAULT.getWriterConfig().getJsonMapper();
 	}
     
-    public JsonFileUtils(Class<T> typeParameterClass, JsonFileUtilsConfig jsonFileUtilsConfig) {
-		this.typeParameterClass = typeParameterClass;
-		this.readerConfig = jsonFileUtilsConfig.getReaderConfig();
-		this.writerConfig = jsonFileUtilsConfig.getWriterConfig();
+    public JsonFileUtils(JsonFileUtilsConfig jsonFileUtilsConfig) {
+		this.mapperReader = jsonFileUtilsConfig.getReaderConfig().getJsonMapper();
+		this.mapperWriter = jsonFileUtilsConfig.getWriterConfig().getJsonMapper();
 	}
+    
+	private final JsonMapper mapperReader;
+	private final JsonMapper mapperWriter;
 
     /**
      * JSON file starts with curly brackets
      */
-	public T read(FileInfo fileInfo) throws IOException {
+	public <T> T read(FileInfo fileInfo, Class<T> clazz) throws IOException {
 		InputStream fileInputStream = FileUtils.createFileInputStream(fileInfo);
-		T json = readerConfig.getJsonMapper().readValue(fileInputStream, typeParameterClass);
+		T json = mapperReader.readValue(fileInputStream, clazz);
 		return json;
     }
 	
     /**
      * JSON file starts with square brackets
      */
-	public List<T> readList(FileInfo fileInfo) throws IOException {
-		MappingIterator<T> iterator = iterator(fileInfo);
+	public <T> List<T> readList(FileInfo fileInfo, Class<T> clazz) throws IOException {
+		MappingIterator<T> iterator = iterator(fileInfo, clazz);
 		List<T> list = iterator.readAll();
 		iterator.close();
 		return list;
@@ -61,20 +55,18 @@ public class JsonFileUtils<T> {
      * 
      * Remember to close the Reader usign <b>iterator.close()</b> in order to release any resources associated with it.
      */
-	public MappingIterator<T> iterator(FileInfo fileInfo) throws IOException {
+	public <T> MappingIterator<T> iterator(FileInfo fileInfo, Class<T> clazz) throws IOException {
 		InputStream fileInputStream = FileUtils.createFileInputStream(fileInfo);
-		JsonMapper mapper = readerConfig.getJsonMapper();
-        return mapper.readerFor(typeParameterClass)
-        			 .readValues(fileInputStream);
+        return mapperReader.readerFor(clazz)
+        			 	   .readValues(fileInputStream);
     }
 	
     /**
      * JSON file starts with curly brackets
      */
-    public void write(FileInfo fileInfo, T object) throws IOException {
+    public <T> void write(FileInfo fileInfo, T object) throws IOException {
     	OutputStream fileOutputStream = FileUtils.createFileOutputStream(fileInfo);
-    	writerConfig.getJsonMapper()
-    				.writer()
+    	mapperWriter.writer()
     				.with(prettyPrinter())
     				.writeValue(fileOutputStream, object);
     }
@@ -82,10 +74,9 @@ public class JsonFileUtils<T> {
     /**
      * JSON file starts with square brackets
      */
-    public void writeList(FileInfo fileInfo, List<T> objects) throws IOException {
+    public <T> void writeList(FileInfo fileInfo, List<T> objects) throws IOException {
     	OutputStream fileOutputStream = FileUtils.createFileOutputStream(fileInfo);
-    	writerConfig.getJsonMapper()
-    				.writer()
+    	mapperWriter.writer()
     				.with(prettyPrinter())
     				.writeValue(fileOutputStream, objects);
     }

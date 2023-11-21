@@ -20,17 +20,17 @@ class JsonFileUtilsTest {
 
 	@Test
 	void testReadOne() throws IOException {
-		JsonFileUtils<Employee> json = new JsonFileUtils<>(Employee.class);
+		JsonFileUtils json = new JsonFileUtils();
 		FileInfo fileInfo = new FileInfo(DirectoryPath.SRC_TEST_RESOURCES.value, "employee", JSON);
-		Employee employee = json.read(fileInfo);
+		Employee employee = json.read(fileInfo, Employee.class);
 		assertNotNull(employee);
 	}
 	
 	@Test
 	void testReadMany() throws IOException {
-		JsonFileUtils<Employee> json = new JsonFileUtils<>(Employee.class);
+		JsonFileUtils json = new JsonFileUtils();
 		FileInfo fileInfo = new FileInfo(DirectoryPath.SRC_TEST_RESOURCES.value, "employees", JSON);
-		List<Employee> employees = json.readList(fileInfo);
+		List<Employee> employees = json.readList(fileInfo, Employee.class);
 		assertNotNull(employees);
 		assertEquals(3, employees.size());
 	}
@@ -38,7 +38,7 @@ class JsonFileUtilsTest {
 	@Test
 	void testWriteOne() {
 		Employee employee = new Employee("Paul", "P");
-		JsonFileUtils<Employee> json = new JsonFileUtils<>(Employee.class);
+		JsonFileUtils json = new JsonFileUtils();
 		FileInfo fileInfo = new FileInfo(DirectoryPath.SRC_TEST_RESOURCES.value, "employeeWrittenByJava", JSON);
 		try {
 			json.write(fileInfo, employee);
@@ -51,7 +51,7 @@ class JsonFileUtilsTest {
 	@Test
 	void testWriteMany() throws IOException {
 		List<Employee> employees = List.of(new Employee("a", "a"), new Employee("b", "b"), new Employee("c", "c"), new Employee("d", "d"));
-		JsonFileUtils<Employee> json = new JsonFileUtils<>(Employee.class);
+		JsonFileUtils json = new JsonFileUtils();
 		FileInfo fileInfo = new FileInfo(DirectoryPath.SRC_TEST_RESOURCES.value, "employeesWrittenByJava", JSON);
 		try {
 			json.writeList(fileInfo, employees);

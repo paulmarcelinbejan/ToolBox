@@ -35,6 +35,10 @@ public class FileInfo {
 				.toString();
 	}
 	
+	/**
+	 * This method append a currentTimeMillis to the name of the file.
+	 * Useful when you don't want to override files.
+	 */
 	public final void appendCurrentTimeMillisToFileName() {
 		this.fileNameWithoutExtension = new StringBuilder()
 				.append(fileNameWithoutExtension)
