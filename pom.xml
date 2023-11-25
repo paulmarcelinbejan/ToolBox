@@ -56,7 +56,6 @@
 
     <modules>
         <module>toolbox-base</module>
-        <module>toolbox-configuration</module>
         <module>toolbox-constants</module>
         <module>toolbox-exception</module>
         <module>toolbox-spring</module>
@@ -132,22 +131,12 @@
             </dependency>
             <dependency>
                 <groupId>com.paulmarcelinbejan.toolbox</groupId>
-                <artifactId>toolbox-configuration</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.paulmarcelinbejan.toolbox</groupId>
                 <artifactId>toolbox-constants</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.paulmarcelinbejan.toolbox</groupId>
                 <artifactId>toolbox-exception</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.paulmarcelinbejan.toolbox</groupId>
-                <artifactId>toolbox-spring</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>

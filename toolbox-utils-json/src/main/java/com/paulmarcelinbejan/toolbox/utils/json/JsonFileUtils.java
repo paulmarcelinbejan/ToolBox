@@ -12,6 +12,8 @@ import com.fasterxml.jackson.databind.json.JsonMapper;
 import com.paulmarcelinbejan.toolbox.utils.io.FileUtils;
 import com.paulmarcelinbejan.toolbox.utils.io.config.FileInfo;
 import com.paulmarcelinbejan.toolbox.utils.json.config.JsonFileUtilsConfig;
+import com.paulmarcelinbejan.toolbox.utils.json.config.JsonReaderConfig;
+import com.paulmarcelinbejan.toolbox.utils.json.config.JsonWriterConfig;
 
 public class JsonFileUtils {
 
@@ -26,6 +28,11 @@ public class JsonFileUtils {
     public JsonFileUtils(JsonFileUtilsConfig jsonFileUtilsConfig) {
 		this.mapperReader = jsonFileUtilsConfig.getReaderConfig().getJsonMapper();
 		this.mapperWriter = jsonFileUtilsConfig.getWriterConfig().getJsonMapper();
+	}
+    
+    public JsonFileUtils(JsonReaderConfig readerConfig, JsonWriterConfig writerConfig) {
+		this.mapperReader = readerConfig.getJsonMapper();
+		this.mapperWriter = writerConfig.getJsonMapper();
 	}
     
 	private final JsonMapper mapperReader;
