@@ -16,6 +16,8 @@ import com.paulmarcelinbejan.toolbox.utils.io.FileUtils;
 import com.paulmarcelinbejan.toolbox.utils.io.config.FileInfo;
 import com.paulmarcelinbejan.toolbox.utils.yaml.config.YamlFileUtilsConfig;
 import com.paulmarcelinbejan.toolbox.utils.yaml.config.YamlPrefixType;
+import com.paulmarcelinbejan.toolbox.utils.yaml.config.YamlReaderConfig;
+import com.paulmarcelinbejan.toolbox.utils.yaml.config.YamlWriterConfig;
 
 import lombok.NonNull;
 
@@ -32,6 +34,11 @@ public class YamlFileUtils {
 	public YamlFileUtils(@NonNull final YamlFileUtilsConfig yamlFileUtilsConfig) {
 		this.mapperReader = yamlFileUtilsConfig.getReaderConfig().getYamlMapper();
 		this.mapperWriter = yamlFileUtilsConfig.getWriterConfig().getYamlMapper();
+	}
+	
+    public YamlFileUtils(YamlReaderConfig readerConfig, YamlWriterConfig writerConfig) {
+		this.mapperReader = readerConfig.getYamlMapper();
+		this.mapperWriter = writerConfig.getYamlMapper();
 	}
 	
 	private final YAMLMapper mapperReader;
