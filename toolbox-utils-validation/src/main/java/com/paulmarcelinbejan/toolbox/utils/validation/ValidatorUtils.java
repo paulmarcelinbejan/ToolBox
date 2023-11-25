@@ -16,8 +16,8 @@ public class ValidatorUtils {
 
 	private static final Validator VALIDATOR = Validation.buildDefaultValidatorFactory().getValidator();
 	
-	public static <TO_VALIDATE> void validate(TO_VALIDATE toValidate) {
-		Set<ConstraintViolation<TO_VALIDATE>> violations = VALIDATOR.validate(toValidate);
+	public static <T> void validate(T toValidate) {
+		Set<ConstraintViolation<T>> violations = VALIDATOR.validate(toValidate);
 		if (!violations.isEmpty()) {
 			throw new ConstraintViolationException(violations);
 		}
@@ -26,9 +26,9 @@ public class ValidatorUtils {
 	/**
 	 * Throws ConstraintViolationException with the first violation encountered as soon as one of the element to be validated is not valid.
 	 */
-	public static <TO_VALIDATE> void validate(Collection<TO_VALIDATE> collectionToValidate) {
-		for (TO_VALIDATE toValidate : collectionToValidate) {
-			Set<ConstraintViolation<TO_VALIDATE>> violations = VALIDATOR.validate(toValidate);
+	public static <T> void validate(Collection<T> collectionToValidate) {
+		for (T toValidate : collectionToValidate) {
+			Set<ConstraintViolation<T>> violations = VALIDATOR.validate(toValidate);
 			if (!violations.isEmpty()) {
 				throw new ConstraintViolationException(violations);
 			}
@@ -38,10 +38,10 @@ public class ValidatorUtils {
 	/**
 	 * Validate all the elements of the collection, then if at least one was not valid, a ConstraintViolationException is thrown with all the violations encountered.
 	 */
-	public static <TO_VALIDATE> void validateAll(Collection<TO_VALIDATE> collectionToValidate) {
-		Set<ConstraintViolation<TO_VALIDATE>> allViolations = new HashSet<>();
-		for (TO_VALIDATE toValidate : collectionToValidate) {
-			Set<ConstraintViolation<TO_VALIDATE>> violations = VALIDATOR.validate(toValidate);
+	public static <T> void validateAll(Collection<T> collectionToValidate) {
+		Set<ConstraintViolation<T>> allViolations = new HashSet<>();
+		for (T toValidate : collectionToValidate) {
+			Set<ConstraintViolation<T>> violations = VALIDATOR.validate(toValidate);
 			allViolations.addAll(violations);
 		}
 		if (!allViolations.isEmpty()) {
@@ -49,8 +49,8 @@ public class ValidatorUtils {
 		}
 	}
 
-	public static <TO_VALIDATE> void validateByGroups(TO_VALIDATE toValidate, Class<?>... groups) {
-		Set<ConstraintViolation<TO_VALIDATE>> violations = VALIDATOR.validate(toValidate, groups);
+	public static <T> void validateByGroups(T toValidate, Class<?>... groups) {
+		Set<ConstraintViolation<T>> violations = VALIDATOR.validate(toValidate, groups);
 		if (!violations.isEmpty()) {
 			throw new ConstraintViolationException(violations);
 		}
@@ -59,9 +59,9 @@ public class ValidatorUtils {
 	/**
 	 * Throws ConstraintViolationException with the first violation encountered as soon as one of the element to be validated is not valid.
 	 */
-	public static <TO_VALIDATE> void validateByGroups(Collection<TO_VALIDATE> collectionToValidate, Class<?>... groups) {
-		for (TO_VALIDATE toValidate : collectionToValidate) {
-			Set<ConstraintViolation<TO_VALIDATE>> violations = VALIDATOR.validate(toValidate, groups);
+	public static <T> void validateByGroups(Collection<T> collectionToValidate, Class<?>... groups) {
+		for (T toValidate : collectionToValidate) {
+			Set<ConstraintViolation<T>> violations = VALIDATOR.validate(toValidate, groups);
 			if (!violations.isEmpty()) {
 				throw new ConstraintViolationException(violations);
 			}
@@ -71,10 +71,10 @@ public class ValidatorUtils {
 	/**
 	 * Validate all the elements of the collection, then if at least one was not valid, a ConstraintViolationException is thrown with all the violations encountered.
 	 */
-	public static <TO_VALIDATE> void validateAllByGroups(Collection<TO_VALIDATE> collectionToValidate, Class<?>... groups) {
-		Set<ConstraintViolation<TO_VALIDATE>> allViolations = new HashSet<>();
-		for (TO_VALIDATE toValidate : collectionToValidate) {
-			Set<ConstraintViolation<TO_VALIDATE>> violations =  VALIDATOR.validate(toValidate, groups);
+	public static <T> void validateAllByGroups(Collection<T> collectionToValidate, Class<?>... groups) {
+		Set<ConstraintViolation<T>> allViolations = new HashSet<>();
+		for (T toValidate : collectionToValidate) {
+			Set<ConstraintViolation<T>> violations =  VALIDATOR.validate(toValidate, groups);
 			allViolations.addAll(violations);
 		}
 		if (!allViolations.isEmpty()) {
