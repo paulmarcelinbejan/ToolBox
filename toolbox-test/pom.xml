@@ -16,7 +16,7 @@
     <packaging>jar</packaging>
     
 	<properties>
-		<paulmarcelinbejan-validator.version>1.0.0</paulmarcelinbejan-validator.version>
+		<toolbox-validator.version>3.2.0</toolbox-validator.version>
 		<easyrandom.version>5.0.0</easyrandom.version>
 	</properties>
 	
@@ -29,14 +29,15 @@
         </dependency>
         
         <dependency>
-            <groupId>com.paulmarcelinbejan.toolbox</groupId>
-            <artifactId>toolbox-base</artifactId>
-        </dependency>
-        
-        <dependency>
-			<groupId>com.paulmarcelinbejan</groupId>
-            <artifactId>validator</artifactId>
-            <version>${paulmarcelinbejan-validator.version}</version>
+			<groupId>io.github.paulmarcelinbejan.toolbox</groupId>
+			<artifactId>validathor-bfs</artifactId>
+            <version>${toolbox-validator.version}</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>io.github.paulmarcelinbejan.toolbox</groupId>
+			<artifactId>validathor-dfs</artifactId>
+            <version>${toolbox-validator.version}</version>
 		</dependency>
 			
         <dependency>

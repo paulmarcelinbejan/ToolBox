@@ -3,11 +3,10 @@ package com.paulmarcelinbejan.toolbox.test;
 import org.jeasy.random.EasyRandom;
 import org.jeasy.random.EasyRandomParameters;
 
-import com.paulmarcelinbejan.validator.algorithm.bfs.ValidatorBFS;
-import com.paulmarcelinbejan.validator.algorithm.dfs.ValidatorDFS;
-import com.paulmarcelinbejan.validator.config.ValidatorConfig;
-import com.paulmarcelinbejan.validator.exception.ValidatorException;
-
+import io.github.paulmarcelinbejan.toolbox.validathor.bfs.ValidathorBFS;
+import io.github.paulmarcelinbejan.toolbox.validathor.dfs.ValidathorDFS;
+import io.github.paulmarcelinbejan.toolbox.validathor.exception.ValidathorException;
+import io.github.paulmarcelinbejan.toolbox.validathor.registry.ValidathorRegistry;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
@@ -33,45 +32,23 @@ public class TestUtils {
 	}
 	
 	/**
-	 * Validate output object through BFS (Breadth-first search).
-	 * <br> A default {@link ValidatorConfig} will be used to validate the object.
-	 */
-	public static void validateObjectBFS(@NonNull Object root) throws ValidatorException {
-		ValidatorConfig defaultValidatorConfig = ValidatorConfig.builder().getDefault().build();
-		validateObjectBFS(root, defaultValidatorConfig);
-	}
-	
-	/**
 	 * Validate output object through BFS (Breadth-first search)
-	 * <br> Use {@link ValidatorConfig} to:
-	 * <br> - validate only the first level, or the entire hierarchy.
-	 * <br> - exclude Classes to be validated
-	 * <br> - choose what is valid and what is not
+	 * <br> Use {@link ValidathorRegistry} to configure the validation.
+	 * @throws ValidathorException 
 	 */
-	protected static void validateObjectBFS(@NonNull Object root, @NonNull ValidatorConfig validatorConfig) throws ValidatorException {
-		ValidatorBFS validatorBFS = new ValidatorBFS(validatorConfig);
-		validatorBFS.isValid(root);
+	public static void validateObjectBFS(@NonNull Object root, ValidathorRegistry validathorRegistry, boolean collectAllValidationException) throws ValidathorException {
+		ValidathorBFS validathorBFS = new ValidathorBFS(validathorRegistry, collectAllValidationException);
+		validathorBFS.validate(root);
 	}
 	
 	/**
 	 * Validate output object through DFS (Depth-first search)
-	 * <br> A default {@link ValidatorConfig} will be used to validate the object.
+	 * <br> Use {@link ValidathorRegistry} to configure the validation.
+	 * @throws ValidathorException 
 	 */
-	public static void validateObjectDFS(@NonNull Object root) throws ValidatorException {
-		ValidatorConfig defaultValidatorConfig = ValidatorConfig.builder().getDefault().build();
-		validateObjectDFS(root, defaultValidatorConfig);
-	}
-	
-	/**
-	 * Validate output object through DFS (Depth-first search)
-	 * <br> Use {@link ValidatorConfig} to:
-	 * <br> - validate only the first level, or the entire hierarchy.
-	 * <br> - exclude Classes to be validated
-	 * <br> - choose what is valid and what is not
-	 */
-	public static void validateObjectDFS(@NonNull Object root, @NonNull ValidatorConfig validatorConfig) throws ValidatorException {
-		ValidatorDFS validatorDFS = new ValidatorDFS(validatorConfig);
-		validatorDFS.isValid(root);
+	public static void validateObjectDFS(@NonNull Object root, ValidathorRegistry validathorRegistry, boolean collectAllValidationException) throws ValidathorException {
+		ValidathorDFS validathorDFS = new ValidathorDFS(validathorRegistry, collectAllValidationException);
+		validathorDFS.validate(root);
 	}
 	
 }
