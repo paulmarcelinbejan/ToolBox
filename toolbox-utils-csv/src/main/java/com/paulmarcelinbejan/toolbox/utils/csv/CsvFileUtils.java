@@ -10,6 +10,8 @@ import com.fasterxml.jackson.dataformat.csv.CsvMapper;
 import com.fasterxml.jackson.dataformat.csv.CsvSchema;
 import com.fasterxml.jackson.dataformat.csv.CsvSchema.Builder;
 import com.paulmarcelinbejan.toolbox.utils.csv.config.CsvFileUtilsConfig;
+import com.paulmarcelinbejan.toolbox.utils.csv.config.CsvReaderConfig;
+import com.paulmarcelinbejan.toolbox.utils.csv.config.CsvWriterConfig;
 import com.paulmarcelinbejan.toolbox.utils.io.FileUtils;
 import com.paulmarcelinbejan.toolbox.utils.io.config.FileInfo;
 
@@ -33,6 +35,11 @@ public class CsvFileUtils {
 	public CsvFileUtils(@NonNull final CsvFileUtilsConfig csvFileUtilsConfig) {
 		this.mapperReader = csvFileUtilsConfig.getReaderConfig().getCsvMapper();
 		this.mapperWriter = csvFileUtilsConfig.getWriterConfig().getCsvMapper();
+	}
+	
+    public CsvFileUtils(CsvReaderConfig readerConfig, CsvWriterConfig writerConfig) {
+		this.mapperReader = readerConfig.getCsvMapper();
+		this.mapperWriter = writerConfig.getCsvMapper();
 	}
 	
 	private final CsvMapper mapperReader;
