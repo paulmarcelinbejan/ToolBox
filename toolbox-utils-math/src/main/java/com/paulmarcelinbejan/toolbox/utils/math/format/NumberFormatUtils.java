@@ -148,7 +148,7 @@ public class NumberFormatUtils {
 	
 	private static DecimalFormat getDecimalFormat(String pattern, DecimalFormatSymbols decimalFormatSymbols) {
 		DecimalFormat df = new DecimalFormat(pattern, decimalFormatSymbols);
-		df.setRoundingMode(RoundingMode.FLOOR);
+		df.setRoundingMode(RoundingMode.DOWN);
 		return df;
 	}
 	

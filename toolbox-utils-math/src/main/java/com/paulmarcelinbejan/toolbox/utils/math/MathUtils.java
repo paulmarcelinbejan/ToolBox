@@ -106,11 +106,10 @@ public class MathUtils {
 	}
 	
 	// Truncate
-
+	
 	/**
-	 * The truncate function use {@link RoundingMode#FLOOR} to truncate the number.
 	 * <pre>
-	 * There are 2 Options:
+	 * There are 2 options to truncate a number:
      * - RoundingMode.DOWN
 	 * - RoundingMode.FLOOR
 	 * 
@@ -124,29 +123,44 @@ public class MathUtils {
 	 * RoundingMode.DOWN -> -1
 	 * RoundingMode.FLOOR -> -2
      * </pre>
-     * 
-     * To truncate with {@link RoundingMode#DOWN} use {@link MathUtils#truncateDown}
-	 */
-	public static BigDecimal truncate(BigDecimal value, int decimalPlaces) {
-		return value.setScale(decimalPlaces, RoundingMode.FLOOR);
-	}
-	
-	/**
-	 * The truncate function use {@link RoundingMode#DOWN} to truncate the number.
 	 */
 	public static BigDecimal truncateDown(BigDecimal value, int decimalPlaces) {
 		return value.setScale(decimalPlaces, RoundingMode.DOWN);
 	}
 	
 	/**
-	 * The truncate function use {@link RoundingMode#FLOOR} to truncate the number.
+	 * <pre>
+	 * There are 2 options to truncate a number:
+     * - RoundingMode.DOWN
+	 * - RoundingMode.FLOOR
+	 * 
+	 * For positive numbers they works in the same way.
+	 * For negative numbers:
+	 * RoundingMode.DOWN will go to positive,
+	 * RoundingMode.FLOOR will go to negative,
+	 *	
+	 * As Example:
+	 * -1.6 will be truncated to:
+	 * RoundingMode.DOWN -> -1
+	 * RoundingMode.FLOOR -> -2
+     * </pre>
 	 */
 	public static BigDecimal truncateFloor(BigDecimal value, int decimalPlaces) {
 		return value.setScale(decimalPlaces, RoundingMode.FLOOR);
 	}
 
-	public static BigDecimal truncateToZeroDecimalPlaces(BigDecimal value) {
-		return truncate(value, 0);
+	/**
+	 * See {@link MathUtils#truncateDown(BigDecimal, int)}
+	 */
+	public static BigDecimal truncateDownToZeroDecimalPlaces(BigDecimal value) {
+		return truncateDown(value, 0);
+	}
+	
+	/**
+	 * See {@link MathUtils#truncateFloor(BigDecimal, int)}
+	 */
+	public static BigDecimal truncateFloorToZeroDecimalPlaces(BigDecimal value) {
+		return truncateDown(value, 0);
 	}
 
 	// Round
