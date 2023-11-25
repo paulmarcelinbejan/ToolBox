@@ -1,10 +1,10 @@
-package com.paulmarcelinbejan.toolbox.utils.time;
+package com.paulmarcelinbejan.toolbox.utils.time.localdate;
 
-import static com.paulmarcelinbejan.toolbox.utils.time.LocalDateUtils.buildLocalDate;
-import static com.paulmarcelinbejan.toolbox.utils.time.LocalDateUtils.isFirstTrimester;
-import static com.paulmarcelinbejan.toolbox.utils.time.LocalDateUtils.isFourthTrimester;
-import static com.paulmarcelinbejan.toolbox.utils.time.LocalDateUtils.isSecondTrimester;
-import static com.paulmarcelinbejan.toolbox.utils.time.LocalDateUtils.isThirdTrimester;
+import static com.paulmarcelinbejan.toolbox.utils.time.localdate.LocalDateUtils.buildLocalDate;
+import static com.paulmarcelinbejan.toolbox.utils.time.localdate.LocalDateUtils.isFirstTrimester;
+import static com.paulmarcelinbejan.toolbox.utils.time.localdate.LocalDateUtils.isFourthTrimester;
+import static com.paulmarcelinbejan.toolbox.utils.time.localdate.LocalDateUtils.isSecondTrimester;
+import static com.paulmarcelinbejan.toolbox.utils.time.localdate.LocalDateUtils.isThirdTrimester;
 import static java.time.Month.APRIL;
 import static java.time.Month.AUGUST;
 import static java.time.Month.DECEMBER;
@@ -63,19 +63,19 @@ import lombok.NoArgsConstructor;
  * </table>
  */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-class TrimesterUtils {
+public class LocalDateTrimesterUtils {
 
-	static final Map<Month, Function<LocalDate, LocalDate>> FIRST_DAY_OF_CURRENT_TRIMESTER = initializeFirstDayOfCurrentTrimesterMap();
+	private static final Map<Month, Function<LocalDate, LocalDate>> FIRST_DAY_OF_CURRENT_TRIMESTER = initializeFirstDayOfCurrentTrimesterMap();
 	
-	static final Map<Month, Function<LocalDate, LocalDate>> LAST_DAY_OF_CURRENT_TRIMESTER = initializeLastDayOfCurrentTrimesterMap();
+	private static final Map<Month, Function<LocalDate, LocalDate>> LAST_DAY_OF_CURRENT_TRIMESTER = initializeLastDayOfCurrentTrimesterMap();
 	
-	static final Map<Month, Function<LocalDate, LocalDate>> FIRST_DAY_OF_NEXT_TRIMESTER = initializeFirstDayOfNextTrimesterMap();
+	private static final Map<Month, Function<LocalDate, LocalDate>> FIRST_DAY_OF_NEXT_TRIMESTER = initializeFirstDayOfNextTrimesterMap();
 	
-	static final Map<Month, Function<LocalDate, LocalDate>> LAST_DAY_OF_NEXT_TRIMESTER = initializeLastDayOfNextTrimesterMap();
+	private static final Map<Month, Function<LocalDate, LocalDate>> LAST_DAY_OF_NEXT_TRIMESTER = initializeLastDayOfNextTrimesterMap();
 	
-	static final Map<Month, Function<LocalDate, LocalDate>> FIRST_DAY_OF_PREVIOUS_TRIMESTER = initializeFirstDayOfPreviousTrimesterMap();
+	private static final Map<Month, Function<LocalDate, LocalDate>> FIRST_DAY_OF_PREVIOUS_TRIMESTER = initializeFirstDayOfPreviousTrimesterMap();
 	
-	static final Map<Month, Function<LocalDate, LocalDate>> LAST_DAY_OF_PREVIOUS_TRIMESTER = initializeLastDayOfPreviousTrimesterMap();
+	private static final Map<Month, Function<LocalDate, LocalDate>> LAST_DAY_OF_PREVIOUS_TRIMESTER = initializeLastDayOfPreviousTrimesterMap();
 	
 	// FIRST DAY of CURRENT TRIMESTER
 	
@@ -83,24 +83,24 @@ class TrimesterUtils {
 		Map<Month, Function<LocalDate, LocalDate>> map = new EnumMap<>(Month.class);
 		
 		// FIRST TRIMESTER
-		map.put(JANUARY, TrimesterUtils::firstDayOfCurrentTrimesterStartingAtFirstTrimester);
-		map.put(FEBRUARY, TrimesterUtils::firstDayOfCurrentTrimesterStartingAtFirstTrimester);
-		map.put(MARCH, TrimesterUtils::firstDayOfCurrentTrimesterStartingAtFirstTrimester);
+		map.put(JANUARY, LocalDateTrimesterUtils::firstDayOfCurrentTrimesterStartingAtFirstTrimester);
+		map.put(FEBRUARY, LocalDateTrimesterUtils::firstDayOfCurrentTrimesterStartingAtFirstTrimester);
+		map.put(MARCH, LocalDateTrimesterUtils::firstDayOfCurrentTrimesterStartingAtFirstTrimester);
 		
 		// SECOND TRIMESTER
-		map.put(APRIL, TrimesterUtils::firstDayOfCurrentTrimesterStartingAtSecondTrimester);
-		map.put(MAY, TrimesterUtils::firstDayOfCurrentTrimesterStartingAtSecondTrimester);
-		map.put(JUNE, TrimesterUtils::firstDayOfCurrentTrimesterStartingAtSecondTrimester);
+		map.put(APRIL, LocalDateTrimesterUtils::firstDayOfCurrentTrimesterStartingAtSecondTrimester);
+		map.put(MAY, LocalDateTrimesterUtils::firstDayOfCurrentTrimesterStartingAtSecondTrimester);
+		map.put(JUNE, LocalDateTrimesterUtils::firstDayOfCurrentTrimesterStartingAtSecondTrimester);
 		
 		// THIRD TRIMESTER
-		map.put(JULY, TrimesterUtils::firstDayOfCurrentTrimesterStartingAtThirdTrimester);
-		map.put(AUGUST, TrimesterUtils::firstDayOfCurrentTrimesterStartingAtThirdTrimester);
-		map.put(SEPTEMBER, TrimesterUtils::firstDayOfCurrentTrimesterStartingAtThirdTrimester);
+		map.put(JULY, LocalDateTrimesterUtils::firstDayOfCurrentTrimesterStartingAtThirdTrimester);
+		map.put(AUGUST, LocalDateTrimesterUtils::firstDayOfCurrentTrimesterStartingAtThirdTrimester);
+		map.put(SEPTEMBER, LocalDateTrimesterUtils::firstDayOfCurrentTrimesterStartingAtThirdTrimester);
 		
 		// FOURTH TRIMESTER
-		map.put(OCTOBER, TrimesterUtils::firstDayOfCurrentTrimesterStartingAtFourthTrimester);
-		map.put(NOVEMBER, TrimesterUtils::firstDayOfCurrentTrimesterStartingAtFourthTrimester);
-		map.put(DECEMBER, TrimesterUtils::firstDayOfCurrentTrimesterStartingAtFourthTrimester);
+		map.put(OCTOBER, LocalDateTrimesterUtils::firstDayOfCurrentTrimesterStartingAtFourthTrimester);
+		map.put(NOVEMBER, LocalDateTrimesterUtils::firstDayOfCurrentTrimesterStartingAtFourthTrimester);
+		map.put(DECEMBER, LocalDateTrimesterUtils::firstDayOfCurrentTrimesterStartingAtFourthTrimester);
 		
 		return map;
 	}
@@ -111,24 +111,24 @@ class TrimesterUtils {
 		Map<Month, Function<LocalDate, LocalDate>> map = new EnumMap<>(Month.class);
 		
 		// FIRST TRIMESTER
-		map.put(JANUARY, TrimesterUtils::lastDayOfCurrentTrimesterStartingAtFirstTrimester);
-		map.put(FEBRUARY, TrimesterUtils::lastDayOfCurrentTrimesterStartingAtFirstTrimester);
-		map.put(MARCH, TrimesterUtils::lastDayOfCurrentTrimesterStartingAtFirstTrimester);
+		map.put(JANUARY, LocalDateTrimesterUtils::lastDayOfCurrentTrimesterStartingAtFirstTrimester);
+		map.put(FEBRUARY, LocalDateTrimesterUtils::lastDayOfCurrentTrimesterStartingAtFirstTrimester);
+		map.put(MARCH, LocalDateTrimesterUtils::lastDayOfCurrentTrimesterStartingAtFirstTrimester);
 		
 		// SECOND TRIMESTER
-		map.put(APRIL, TrimesterUtils::lastDayOfCurrentTrimesterStartingAtSecondTrimester);
-		map.put(MAY, TrimesterUtils::lastDayOfCurrentTrimesterStartingAtSecondTrimester);
-		map.put(JUNE, TrimesterUtils::lastDayOfCurrentTrimesterStartingAtSecondTrimester);
+		map.put(APRIL, LocalDateTrimesterUtils::lastDayOfCurrentTrimesterStartingAtSecondTrimester);
+		map.put(MAY, LocalDateTrimesterUtils::lastDayOfCurrentTrimesterStartingAtSecondTrimester);
+		map.put(JUNE, LocalDateTrimesterUtils::lastDayOfCurrentTrimesterStartingAtSecondTrimester);
 		
 		// THIRD TRIMESTER
-		map.put(JULY, TrimesterUtils::lastDayOfCurrentTrimesterStartingAtThirdTrimester);
-		map.put(AUGUST, TrimesterUtils::lastDayOfCurrentTrimesterStartingAtThirdTrimester);
-		map.put(SEPTEMBER, TrimesterUtils::lastDayOfCurrentTrimesterStartingAtThirdTrimester);
+		map.put(JULY, LocalDateTrimesterUtils::lastDayOfCurrentTrimesterStartingAtThirdTrimester);
+		map.put(AUGUST, LocalDateTrimesterUtils::lastDayOfCurrentTrimesterStartingAtThirdTrimester);
+		map.put(SEPTEMBER, LocalDateTrimesterUtils::lastDayOfCurrentTrimesterStartingAtThirdTrimester);
 		
 		// FOURTH TRIMESTER
-		map.put(OCTOBER, TrimesterUtils::lastDayOfCurrentTrimesterStartingAtFourthTrimester);
-		map.put(NOVEMBER, TrimesterUtils::lastDayOfCurrentTrimesterStartingAtFourthTrimester);
-		map.put(DECEMBER, TrimesterUtils::lastDayOfCurrentTrimesterStartingAtFourthTrimester);
+		map.put(OCTOBER, LocalDateTrimesterUtils::lastDayOfCurrentTrimesterStartingAtFourthTrimester);
+		map.put(NOVEMBER, LocalDateTrimesterUtils::lastDayOfCurrentTrimesterStartingAtFourthTrimester);
+		map.put(DECEMBER, LocalDateTrimesterUtils::lastDayOfCurrentTrimesterStartingAtFourthTrimester);
 		
 		return map;
 	}
@@ -139,24 +139,24 @@ class TrimesterUtils {
 		Map<Month, Function<LocalDate, LocalDate>> map = new EnumMap<>(Month.class);
 		
 		// FIRST TRIMESTER
-		map.put(JANUARY, TrimesterUtils::firstDayOfNextTrimesterStartingAtFirstTrimester);
-		map.put(FEBRUARY, TrimesterUtils::firstDayOfNextTrimesterStartingAtFirstTrimester);
-		map.put(MARCH, TrimesterUtils::firstDayOfNextTrimesterStartingAtFirstTrimester);
+		map.put(JANUARY, LocalDateTrimesterUtils::firstDayOfNextTrimesterStartingAtFirstTrimester);
+		map.put(FEBRUARY, LocalDateTrimesterUtils::firstDayOfNextTrimesterStartingAtFirstTrimester);
+		map.put(MARCH, LocalDateTrimesterUtils::firstDayOfNextTrimesterStartingAtFirstTrimester);
 		
 		// SECOND TRIMESTER
-		map.put(APRIL, TrimesterUtils::firstDayOfNextTrimesterStartingAtSecondTrimester);
-		map.put(MAY, TrimesterUtils::firstDayOfNextTrimesterStartingAtSecondTrimester);
-		map.put(JUNE, TrimesterUtils::firstDayOfNextTrimesterStartingAtSecondTrimester);
+		map.put(APRIL, LocalDateTrimesterUtils::firstDayOfNextTrimesterStartingAtSecondTrimester);
+		map.put(MAY, LocalDateTrimesterUtils::firstDayOfNextTrimesterStartingAtSecondTrimester);
+		map.put(JUNE, LocalDateTrimesterUtils::firstDayOfNextTrimesterStartingAtSecondTrimester);
 		
 		// THIRD TRIMESTER
-		map.put(JULY, TrimesterUtils::firstDayOfNextTrimesterStartingAtThirdTrimester);
-		map.put(AUGUST, TrimesterUtils::firstDayOfNextTrimesterStartingAtThirdTrimester);
-		map.put(SEPTEMBER, TrimesterUtils::firstDayOfNextTrimesterStartingAtThirdTrimester);
+		map.put(JULY, LocalDateTrimesterUtils::firstDayOfNextTrimesterStartingAtThirdTrimester);
+		map.put(AUGUST, LocalDateTrimesterUtils::firstDayOfNextTrimesterStartingAtThirdTrimester);
+		map.put(SEPTEMBER, LocalDateTrimesterUtils::firstDayOfNextTrimesterStartingAtThirdTrimester);
 		
 		// FOURTH TRIMESTER
-		map.put(OCTOBER, TrimesterUtils::firstDayOfNextTrimesterStartingAtFourthTrimester);
-		map.put(NOVEMBER, TrimesterUtils::firstDayOfNextTrimesterStartingAtFourthTrimester);
-		map.put(DECEMBER, TrimesterUtils::firstDayOfNextTrimesterStartingAtFourthTrimester);
+		map.put(OCTOBER, LocalDateTrimesterUtils::firstDayOfNextTrimesterStartingAtFourthTrimester);
+		map.put(NOVEMBER, LocalDateTrimesterUtils::firstDayOfNextTrimesterStartingAtFourthTrimester);
+		map.put(DECEMBER, LocalDateTrimesterUtils::firstDayOfNextTrimesterStartingAtFourthTrimester);
 		
 		return map;
 	}
@@ -167,24 +167,24 @@ class TrimesterUtils {
 		Map<Month, Function<LocalDate, LocalDate>> map = new EnumMap<>(Month.class);
 		
 		// FIRST TRIMESTER
-		map.put(JANUARY, TrimesterUtils::lastDayOfNextTrimesterStartingAtFirstTrimester);
-		map.put(FEBRUARY, TrimesterUtils::lastDayOfNextTrimesterStartingAtFirstTrimester);
-		map.put(MARCH, TrimesterUtils::lastDayOfNextTrimesterStartingAtFirstTrimester);
+		map.put(JANUARY, LocalDateTrimesterUtils::lastDayOfNextTrimesterStartingAtFirstTrimester);
+		map.put(FEBRUARY, LocalDateTrimesterUtils::lastDayOfNextTrimesterStartingAtFirstTrimester);
+		map.put(MARCH, LocalDateTrimesterUtils::lastDayOfNextTrimesterStartingAtFirstTrimester);
 		
 		// SECOND TRIMESTER
-		map.put(APRIL, TrimesterUtils::lastDayOfNextTrimesterStartingAtSecondTrimester);
-		map.put(MAY, TrimesterUtils::lastDayOfNextTrimesterStartingAtSecondTrimester);
-		map.put(JUNE, TrimesterUtils::lastDayOfNextTrimesterStartingAtSecondTrimester);
+		map.put(APRIL, LocalDateTrimesterUtils::lastDayOfNextTrimesterStartingAtSecondTrimester);
+		map.put(MAY, LocalDateTrimesterUtils::lastDayOfNextTrimesterStartingAtSecondTrimester);
+		map.put(JUNE, LocalDateTrimesterUtils::lastDayOfNextTrimesterStartingAtSecondTrimester);
 		
 		// THIRD TRIMESTER
-		map.put(JULY, TrimesterUtils::lastDayOfNextTrimesterStartingAtThirdTrimester);
-		map.put(AUGUST, TrimesterUtils::lastDayOfNextTrimesterStartingAtThirdTrimester);
-		map.put(SEPTEMBER, TrimesterUtils::lastDayOfNextTrimesterStartingAtThirdTrimester);
+		map.put(JULY, LocalDateTrimesterUtils::lastDayOfNextTrimesterStartingAtThirdTrimester);
+		map.put(AUGUST, LocalDateTrimesterUtils::lastDayOfNextTrimesterStartingAtThirdTrimester);
+		map.put(SEPTEMBER, LocalDateTrimesterUtils::lastDayOfNextTrimesterStartingAtThirdTrimester);
 		
 		// FOURTH TRIMESTER
-		map.put(OCTOBER, TrimesterUtils::lastDayOfNextTrimesterStartingAtFourthTrimester);
-		map.put(NOVEMBER, TrimesterUtils::lastDayOfNextTrimesterStartingAtFourthTrimester);
-		map.put(DECEMBER, TrimesterUtils::lastDayOfNextTrimesterStartingAtFourthTrimester);
+		map.put(OCTOBER, LocalDateTrimesterUtils::lastDayOfNextTrimesterStartingAtFourthTrimester);
+		map.put(NOVEMBER, LocalDateTrimesterUtils::lastDayOfNextTrimesterStartingAtFourthTrimester);
+		map.put(DECEMBER, LocalDateTrimesterUtils::lastDayOfNextTrimesterStartingAtFourthTrimester);
 		
 		return map;
 	}
@@ -195,24 +195,24 @@ class TrimesterUtils {
 		Map<Month, Function<LocalDate, LocalDate>> map = new EnumMap<>(Month.class);
 		
 		// FIRST TRIMESTER
-		map.put(JANUARY, TrimesterUtils::firstDayOfPreviousTrimesterStartingAtFirstTrimester);
-		map.put(FEBRUARY, TrimesterUtils::firstDayOfPreviousTrimesterStartingAtFirstTrimester);
-		map.put(MARCH, TrimesterUtils::firstDayOfPreviousTrimesterStartingAtFirstTrimester);
+		map.put(JANUARY, LocalDateTrimesterUtils::firstDayOfPreviousTrimesterStartingAtFirstTrimester);
+		map.put(FEBRUARY, LocalDateTrimesterUtils::firstDayOfPreviousTrimesterStartingAtFirstTrimester);
+		map.put(MARCH, LocalDateTrimesterUtils::firstDayOfPreviousTrimesterStartingAtFirstTrimester);
 		
 		// SECOND TRIMESTER
-		map.put(APRIL, TrimesterUtils::firstDayOfPreviousTrimesterStartingAtSecondTrimester);
-		map.put(MAY, TrimesterUtils::firstDayOfPreviousTrimesterStartingAtSecondTrimester);
-		map.put(JUNE, TrimesterUtils::firstDayOfPreviousTrimesterStartingAtSecondTrimester);
+		map.put(APRIL, LocalDateTrimesterUtils::firstDayOfPreviousTrimesterStartingAtSecondTrimester);
+		map.put(MAY, LocalDateTrimesterUtils::firstDayOfPreviousTrimesterStartingAtSecondTrimester);
+		map.put(JUNE, LocalDateTrimesterUtils::firstDayOfPreviousTrimesterStartingAtSecondTrimester);
 		
 		// THIRD TRIMESTER
-		map.put(JULY, TrimesterUtils::firstDayOfPreviousTrimesterStartingAtThirdTrimester);
-		map.put(AUGUST, TrimesterUtils::firstDayOfPreviousTrimesterStartingAtThirdTrimester);
-		map.put(SEPTEMBER, TrimesterUtils::firstDayOfPreviousTrimesterStartingAtThirdTrimester);
+		map.put(JULY, LocalDateTrimesterUtils::firstDayOfPreviousTrimesterStartingAtThirdTrimester);
+		map.put(AUGUST, LocalDateTrimesterUtils::firstDayOfPreviousTrimesterStartingAtThirdTrimester);
+		map.put(SEPTEMBER, LocalDateTrimesterUtils::firstDayOfPreviousTrimesterStartingAtThirdTrimester);
 		
 		// FOURTH TRIMESTER
-		map.put(OCTOBER, TrimesterUtils::firstDayOfPreviousTrimesterStartingAtFourthTrimester);
-		map.put(NOVEMBER, TrimesterUtils::firstDayOfPreviousTrimesterStartingAtFourthTrimester);
-		map.put(DECEMBER, TrimesterUtils::firstDayOfPreviousTrimesterStartingAtFourthTrimester);
+		map.put(OCTOBER, LocalDateTrimesterUtils::firstDayOfPreviousTrimesterStartingAtFourthTrimester);
+		map.put(NOVEMBER, LocalDateTrimesterUtils::firstDayOfPreviousTrimesterStartingAtFourthTrimester);
+		map.put(DECEMBER, LocalDateTrimesterUtils::firstDayOfPreviousTrimesterStartingAtFourthTrimester);
 		
 		return map;
 	}
@@ -223,24 +223,24 @@ class TrimesterUtils {
 		Map<Month, Function<LocalDate, LocalDate>> map = new EnumMap<>(Month.class);
 		
 		// FIRST TRIMESTER
-		map.put(JANUARY, TrimesterUtils::lastDayOfPreviousTrimesterStartingAtFirstTrimester);
-		map.put(FEBRUARY, TrimesterUtils::lastDayOfPreviousTrimesterStartingAtFirstTrimester);
-		map.put(MARCH, TrimesterUtils::lastDayOfPreviousTrimesterStartingAtFirstTrimester);
+		map.put(JANUARY, LocalDateTrimesterUtils::lastDayOfPreviousTrimesterStartingAtFirstTrimester);
+		map.put(FEBRUARY, LocalDateTrimesterUtils::lastDayOfPreviousTrimesterStartingAtFirstTrimester);
+		map.put(MARCH, LocalDateTrimesterUtils::lastDayOfPreviousTrimesterStartingAtFirstTrimester);
 		
 		// SECOND TRIMESTER
-		map.put(APRIL, TrimesterUtils::lastDayOfPreviousTrimesterStartingAtSecondTrimester);
-		map.put(MAY, TrimesterUtils::lastDayOfPreviousTrimesterStartingAtSecondTrimester);
-		map.put(JUNE, TrimesterUtils::lastDayOfPreviousTrimesterStartingAtSecondTrimester);
+		map.put(APRIL, LocalDateTrimesterUtils::lastDayOfPreviousTrimesterStartingAtSecondTrimester);
+		map.put(MAY, LocalDateTrimesterUtils::lastDayOfPreviousTrimesterStartingAtSecondTrimester);
+		map.put(JUNE, LocalDateTrimesterUtils::lastDayOfPreviousTrimesterStartingAtSecondTrimester);
 		
 		// THIRD TRIMESTER
-		map.put(JULY, TrimesterUtils::lastDayOfPreviousTrimesterStartingAtThirdTrimester);
-		map.put(AUGUST, TrimesterUtils::lastDayOfPreviousTrimesterStartingAtThirdTrimester);
-		map.put(SEPTEMBER, TrimesterUtils::lastDayOfPreviousTrimesterStartingAtThirdTrimester);
+		map.put(JULY, LocalDateTrimesterUtils::lastDayOfPreviousTrimesterStartingAtThirdTrimester);
+		map.put(AUGUST, LocalDateTrimesterUtils::lastDayOfPreviousTrimesterStartingAtThirdTrimester);
+		map.put(SEPTEMBER, LocalDateTrimesterUtils::lastDayOfPreviousTrimesterStartingAtThirdTrimester);
 		
 		// FOURTH TRIMESTER
-		map.put(OCTOBER, TrimesterUtils::lastDayOfPreviousTrimesterStartingAtFourthTrimester);
-		map.put(NOVEMBER, TrimesterUtils::lastDayOfPreviousTrimesterStartingAtFourthTrimester);
-		map.put(DECEMBER, TrimesterUtils::lastDayOfPreviousTrimesterStartingAtFourthTrimester);
+		map.put(OCTOBER, LocalDateTrimesterUtils::lastDayOfPreviousTrimesterStartingAtFourthTrimester);
+		map.put(NOVEMBER, LocalDateTrimesterUtils::lastDayOfPreviousTrimesterStartingAtFourthTrimester);
+		map.put(DECEMBER, LocalDateTrimesterUtils::lastDayOfPreviousTrimesterStartingAtFourthTrimester);
 		
 		return map;
 	}
@@ -417,6 +417,30 @@ class TrimesterUtils {
 	private static final LocalDate lastDayOfPreviousTrimesterStartingAtFourthTrimester(final LocalDate localDate) {
 		throwExceptionIfIsNotTheFourthTrimester(localDate);
 		return lastDayOfThirdTrimester(localDate.getYear());
+	}
+
+	public static Map<Month, Function<LocalDate, LocalDate>> getFirstDayOfCurrentTrimester() {
+		return FIRST_DAY_OF_CURRENT_TRIMESTER;
+	}
+
+	public static Map<Month, Function<LocalDate, LocalDate>> getLastDayOfCurrentTrimester() {
+		return LAST_DAY_OF_CURRENT_TRIMESTER;
+	}
+
+	public static Map<Month, Function<LocalDate, LocalDate>> getFirstDayOfNextTrimester() {
+		return FIRST_DAY_OF_NEXT_TRIMESTER;
+	}
+
+	public static Map<Month, Function<LocalDate, LocalDate>> getLastDayOfNextTrimester() {
+		return LAST_DAY_OF_NEXT_TRIMESTER;
+	}
+
+	public static Map<Month, Function<LocalDate, LocalDate>> getFirstDayOfPreviousTrimester() {
+		return FIRST_DAY_OF_PREVIOUS_TRIMESTER;
+	}
+
+	public static Map<Month, Function<LocalDate, LocalDate>> getLastDayOfPreviousTrimester() {
+		return LAST_DAY_OF_PREVIOUS_TRIMESTER;
 	}
 	
 //	public enum TRIMESTER {

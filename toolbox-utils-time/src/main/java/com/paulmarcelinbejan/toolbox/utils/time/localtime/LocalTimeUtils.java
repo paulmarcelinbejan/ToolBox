@@ -1,4 +1,4 @@
-package com.paulmarcelinbejan.toolbox.utils.time;
+package com.paulmarcelinbejan.toolbox.utils.time.localtime;
 
 import static java.time.temporal.ChronoUnit.MICROS;
 import static java.time.temporal.ChronoUnit.MILLIS;

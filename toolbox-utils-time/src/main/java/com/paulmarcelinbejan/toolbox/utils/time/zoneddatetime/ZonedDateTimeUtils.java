@@ -1,4 +1,4 @@
-package com.paulmarcelinbejan.toolbox.utils.time;
+package com.paulmarcelinbejan.toolbox.utils.time.zoneddatetime;
 
 import static java.time.Month.APRIL;
 import static java.time.Month.AUGUST;
@@ -22,6 +22,8 @@ import java.time.LocalTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.temporal.TemporalAdjusters;
+
+import com.paulmarcelinbejan.toolbox.utils.time.localdate.LocalDateUtils;
 
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
@@ -268,27 +270,27 @@ public class ZonedDateTimeUtils {
 	// TRIMESTER (3 month period)
 	
 	public static ZonedDateTime firstDayOfCurrentTrimester(ZonedDateTime zonedDateTime) {
-		return TrimesterUtils.FIRST_DAY_OF_CURRENT_TRIMESTER.get(zonedDateTime.getMonth()).apply(zonedDateTime.toLocalDate()).atStartOfDay(zonedDateTime.getZone());
+		return ZonedDateTimeTrimesterUtils.getFirstDayOfCurrentTrimester().get(zonedDateTime.getMonth()).apply(zonedDateTime);
 	}
 	
 	public static ZonedDateTime lastDayOfCurrentTrimester(ZonedDateTime zonedDateTime) {
-		return TrimesterUtils.LAST_DAY_OF_CURRENT_TRIMESTER.get(zonedDateTime.getMonth()).apply(zonedDateTime.toLocalDate()).atStartOfDay(zonedDateTime.getZone());
+		return ZonedDateTimeTrimesterUtils.getLastDayOfCurrentTrimester().get(zonedDateTime.getMonth()).apply(zonedDateTime);
 	}
 	
 	public static ZonedDateTime firstDayOfNextTrimester(ZonedDateTime zonedDateTime) {
-		return TrimesterUtils.FIRST_DAY_OF_NEXT_TRIMESTER.get(zonedDateTime.getMonth()).apply(zonedDateTime.toLocalDate()).atStartOfDay(zonedDateTime.getZone());
+		return ZonedDateTimeTrimesterUtils.getFirstDayOfNextTrimester().get(zonedDateTime.getMonth()).apply(zonedDateTime);
 	}
 	
 	public static ZonedDateTime lastDayOfNextTrimester(ZonedDateTime zonedDateTime) {
-		return TrimesterUtils.LAST_DAY_OF_NEXT_TRIMESTER.get(zonedDateTime.getMonth()).apply(zonedDateTime.toLocalDate()).atStartOfDay(zonedDateTime.getZone());
+		return ZonedDateTimeTrimesterUtils.getLastDayOfNextTrimester().get(zonedDateTime.getMonth()).apply(zonedDateTime);
 	}
 	
 	public static ZonedDateTime firstDayOfPreviousTrimester(ZonedDateTime zonedDateTime) {
-		return TrimesterUtils.FIRST_DAY_OF_PREVIOUS_TRIMESTER.get(zonedDateTime.getMonth()).apply(zonedDateTime.toLocalDate()).atStartOfDay(zonedDateTime.getZone());
+		return ZonedDateTimeTrimesterUtils.getFirstDayOfPreviousTrimester().get(zonedDateTime.getMonth()).apply(zonedDateTime);
 	}
 	
 	public static ZonedDateTime lastDayOfPreviousTrimester(ZonedDateTime zonedDateTime) {
-		return TrimesterUtils.LAST_DAY_OF_PREVIOUS_TRIMESTER.get(zonedDateTime.getMonth()).apply(zonedDateTime.toLocalDate()).atStartOfDay(zonedDateTime.getZone());
+		return ZonedDateTimeTrimesterUtils.getLastDayOfPreviousTrimester().get(zonedDateTime.getMonth()).apply(zonedDateTime);
 	}
 	
 	public static boolean isFirstTrimester(ZonedDateTime zonedDateTime) {
@@ -314,27 +316,27 @@ public class ZonedDateTimeUtils {
 	// QUADRIMESTER (4 month period)
 	
 	public static ZonedDateTime firstDayOfCurrentQuadrimester(ZonedDateTime zonedDateTime) {
-		return QuadrimesterUtils.FIRST_DAY_OF_CURRENT_QUADRIMESTER.get(zonedDateTime.getMonth()).apply(zonedDateTime.toLocalDate()).atStartOfDay(zonedDateTime.getZone());
+		return ZonedDateTimeQuadrimesterUtils.getFirstDayOfCurrentQuadrimester().get(zonedDateTime.getMonth()).apply(zonedDateTime);
 	}
 	
 	public static ZonedDateTime lastDayOfCurrentQuadrimester(ZonedDateTime zonedDateTime) {
-		return QuadrimesterUtils.LAST_DAY_OF_CURRENT_QUADRIMESTER.get(zonedDateTime.getMonth()).apply(zonedDateTime.toLocalDate()).atStartOfDay(zonedDateTime.getZone());
+		return ZonedDateTimeQuadrimesterUtils.getLastDayOfCurrentQuadrimester().get(zonedDateTime.getMonth()).apply(zonedDateTime);
 	}
 	
 	public static ZonedDateTime firstDayOfNextQuadrimester(ZonedDateTime zonedDateTime) {
-		return QuadrimesterUtils.FIRST_DAY_OF_NEXT_QUADRIMESTER.get(zonedDateTime.getMonth()).apply(zonedDateTime.toLocalDate()).atStartOfDay(zonedDateTime.getZone());
+		return ZonedDateTimeQuadrimesterUtils.getFirstDayOfNextQuadrimester().get(zonedDateTime.getMonth()).apply(zonedDateTime);
 	}
 	
 	public static ZonedDateTime lastDayOfNextQuadrimester(ZonedDateTime zonedDateTime) {
-		return QuadrimesterUtils.LAST_DAY_OF_NEXT_QUADRIMESTER.get(zonedDateTime.getMonth()).apply(zonedDateTime.toLocalDate()).atStartOfDay(zonedDateTime.getZone());
+		return ZonedDateTimeQuadrimesterUtils.getLastDayOfNextQuadrimester().get(zonedDateTime.getMonth()).apply(zonedDateTime);
 	}
 	
 	public static ZonedDateTime firstDayOfPreviousQuadrimester(ZonedDateTime zonedDateTime) {
-		return QuadrimesterUtils.FIRST_DAY_OF_PREVIOUS_QUADRIMESTER.get(zonedDateTime.getMonth()).apply(zonedDateTime.toLocalDate()).atStartOfDay(zonedDateTime.getZone());
+		return ZonedDateTimeQuadrimesterUtils.getFirstDayOfPreviousQuadrimester().get(zonedDateTime.getMonth()).apply(zonedDateTime);
 	}
 	
 	public static ZonedDateTime lastDayOfPreviousQuadrimester(ZonedDateTime zonedDateTime) {
-		return QuadrimesterUtils.LAST_DAY_OF_PREVIOUS_QUADRIMESTER.get(zonedDateTime.getMonth()).apply(zonedDateTime.toLocalDate()).atStartOfDay(zonedDateTime.getZone());
+		return ZonedDateTimeQuadrimesterUtils.getLastDayOfPreviousQuadrimester().get(zonedDateTime.getMonth()).apply(zonedDateTime);
 	}
 	
 	public static boolean isFirstQuadrimester(ZonedDateTime zonedDateTime) {
@@ -355,27 +357,27 @@ public class ZonedDateTimeUtils {
 	// SEMESTER (6 month period)
 	
 	public static ZonedDateTime firstDayOfCurrentSemester(ZonedDateTime zonedDateTime) {
-		return SemesterUtils.FIRST_DAY_OF_CURRENT_SEMESTER.get(zonedDateTime.getMonth()).apply(zonedDateTime.toLocalDate()).atStartOfDay(zonedDateTime.getZone());
+		return ZonedDateTimeSemesterUtils.getFirstDayOfCurrentSemester().get(zonedDateTime.getMonth()).apply(zonedDateTime);
 	}
 	
 	public static ZonedDateTime lastDayOfCurrentSemester(ZonedDateTime zonedDateTime) {
-		return SemesterUtils.LAST_DAY_OF_CURRENT_SEMESTER.get(zonedDateTime.getMonth()).apply(zonedDateTime.toLocalDate()).atStartOfDay(zonedDateTime.getZone());
+		return ZonedDateTimeSemesterUtils.getLastDayOfCurrentSemester().get(zonedDateTime.getMonth()).apply(zonedDateTime);
 	}
 	
 	public static ZonedDateTime firstDayOfNextSemester(ZonedDateTime zonedDateTime) {
-		return SemesterUtils.FIRST_DAY_OF_NEXT_SEMESTER.get(zonedDateTime.getMonth()).apply(zonedDateTime.toLocalDate()).atStartOfDay(zonedDateTime.getZone());
+		return ZonedDateTimeSemesterUtils.getFirstDayOfNextSemester().get(zonedDateTime.getMonth()).apply(zonedDateTime);
 	}
 	
 	public static ZonedDateTime lastDayOfNextSemester(ZonedDateTime zonedDateTime) {
-		return SemesterUtils.LAST_DAY_OF_NEXT_SEMESTER.get(zonedDateTime.getMonth()).apply(zonedDateTime.toLocalDate()).atStartOfDay(zonedDateTime.getZone());
+		return ZonedDateTimeSemesterUtils.getLastDayOfNextSemester().get(zonedDateTime.getMonth()).apply(zonedDateTime);
 	}
 	
 	public static ZonedDateTime firstDayOfPreviousSemester(ZonedDateTime zonedDateTime) {
-		return SemesterUtils.FIRST_DAY_OF_PREVIOUS_SEMESTER.get(zonedDateTime.getMonth()).apply(zonedDateTime.toLocalDate()).atStartOfDay(zonedDateTime.getZone());
+		return ZonedDateTimeSemesterUtils.getFirstDayOfPreviousSemester().get(zonedDateTime.getMonth()).apply(zonedDateTime);
 	}
 	
 	public static ZonedDateTime lastDayOfPreviousSemester(ZonedDateTime zonedDateTime) {
-		return SemesterUtils.LAST_DAY_OF_PREVIOUS_SEMESTER.get(zonedDateTime.getMonth()).apply(zonedDateTime.toLocalDate()).atStartOfDay(zonedDateTime.getZone());
+		return ZonedDateTimeSemesterUtils.getLastDayOfPreviousSemester().get(zonedDateTime.getMonth()).apply(zonedDateTime);
 	}
 	
 	public static boolean isFirstSemester(ZonedDateTime zonedDateTime) {
@@ -493,6 +495,10 @@ public class ZonedDateTimeUtils {
 	}
 	
 	// SET SPECIFIC DATE
+	
+	public static ZonedDateTime buildZonedDateTime(int year, int month, int day, ZoneId zoneId) {
+		return LocalDateUtils.buildLocalDate(year, month, day).atStartOfDay(zoneId);
+	}
 	
 	public static ZonedDateTime buildZonedDateTime(LocalDateTime dateTime, ZoneId zoneId) {
 		return ZonedDateTime.of(dateTime, zoneId);

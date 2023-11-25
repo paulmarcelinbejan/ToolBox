@@ -1,4 +1,4 @@
-package com.paulmarcelinbejan.toolbox.utils.time;
+package com.paulmarcelinbejan.toolbox.utils.time.localdate;
 
 import static java.time.Month.APRIL;
 import static java.time.Month.AUGUST;
@@ -131,27 +131,27 @@ public class LocalDateUtils {
 	// TRIMESTER (3 month period)
 	
 	public static LocalDate firstDayOfCurrentTrimester(LocalDate localDate) {
-		return TrimesterUtils.FIRST_DAY_OF_CURRENT_TRIMESTER.get(localDate.getMonth()).apply(localDate);
+		return LocalDateTrimesterUtils.getFirstDayOfCurrentTrimester().get(localDate.getMonth()).apply(localDate);
 	}
 	
 	public static LocalDate lastDayOfCurrentTrimester(LocalDate localDate) {
-		return TrimesterUtils.LAST_DAY_OF_CURRENT_TRIMESTER.get(localDate.getMonth()).apply(localDate);
+		return LocalDateTrimesterUtils.getLastDayOfCurrentTrimester().get(localDate.getMonth()).apply(localDate);
 	}
 	
 	public static LocalDate firstDayOfNextTrimester(LocalDate localDate) {
-		return TrimesterUtils.FIRST_DAY_OF_NEXT_TRIMESTER.get(localDate.getMonth()).apply(localDate);
+		return LocalDateTrimesterUtils.getFirstDayOfNextTrimester().get(localDate.getMonth()).apply(localDate);
 	}
 	
 	public static LocalDate lastDayOfNextTrimester(LocalDate localDate) {
-		return TrimesterUtils.LAST_DAY_OF_NEXT_TRIMESTER.get(localDate.getMonth()).apply(localDate);
+		return LocalDateTrimesterUtils.getLastDayOfNextTrimester().get(localDate.getMonth()).apply(localDate);
 	}
 	
 	public static LocalDate firstDayOfPreviousTrimester(LocalDate localDate) {
-		return TrimesterUtils.FIRST_DAY_OF_PREVIOUS_TRIMESTER.get(localDate.getMonth()).apply(localDate);
+		return LocalDateTrimesterUtils.getFirstDayOfPreviousTrimester().get(localDate.getMonth()).apply(localDate);
 	}
 	
 	public static LocalDate lastDayOfPreviousTrimester(LocalDate localDate) {
-		return TrimesterUtils.LAST_DAY_OF_PREVIOUS_TRIMESTER.get(localDate.getMonth()).apply(localDate);
+		return LocalDateTrimesterUtils.getLastDayOfPreviousTrimester().get(localDate.getMonth()).apply(localDate);
 	}
 	
 	public static boolean isFirstTrimester(LocalDate localDate) {
@@ -177,27 +177,27 @@ public class LocalDateUtils {
 	// QUADRIMESTER (4 month period)
 	
 	public static LocalDate firstDayOfCurrentQuadrimester(LocalDate localDate) {
-		return QuadrimesterUtils.FIRST_DAY_OF_CURRENT_QUADRIMESTER.get(localDate.getMonth()).apply(localDate);
+		return LocalDateQuadrimesterUtils.getFirstDayOfCurrentQuadrimester().get(localDate.getMonth()).apply(localDate);
 	}
 	
 	public static LocalDate lastDayOfCurrentQuadrimester(LocalDate localDate) {
-		return QuadrimesterUtils.LAST_DAY_OF_CURRENT_QUADRIMESTER.get(localDate.getMonth()).apply(localDate);
+		return LocalDateQuadrimesterUtils.getLastDayOfCurrentQuadrimester().get(localDate.getMonth()).apply(localDate);
 	}
 	
 	public static LocalDate firstDayOfNextQuadrimester(LocalDate localDate) {
-		return QuadrimesterUtils.FIRST_DAY_OF_NEXT_QUADRIMESTER.get(localDate.getMonth()).apply(localDate);
+		return LocalDateQuadrimesterUtils.getFirstDayOfNextQuadrimester().get(localDate.getMonth()).apply(localDate);
 	}
 	
 	public static LocalDate lastDayOfNextQuadrimester(LocalDate localDate) {
-		return QuadrimesterUtils.LAST_DAY_OF_NEXT_QUADRIMESTER.get(localDate.getMonth()).apply(localDate);
+		return LocalDateQuadrimesterUtils.getLastDayOfNextQuadrimester().get(localDate.getMonth()).apply(localDate);
 	}
 	
 	public static LocalDate firstDayOfPreviousQuadrimester(LocalDate localDate) {
-		return QuadrimesterUtils.FIRST_DAY_OF_PREVIOUS_QUADRIMESTER.get(localDate.getMonth()).apply(localDate);
+		return LocalDateQuadrimesterUtils.getFirstDayOfPreviousQuadrimester().get(localDate.getMonth()).apply(localDate);
 	}
 	
 	public static LocalDate lastDayOfPreviousQuadrimester(LocalDate localDate) {
-		return QuadrimesterUtils.LAST_DAY_OF_PREVIOUS_QUADRIMESTER.get(localDate.getMonth()).apply(localDate);
+		return LocalDateQuadrimesterUtils.getLastDayOfPreviousQuadrimester().get(localDate.getMonth()).apply(localDate);
 	}
 	
 	public static boolean isFirstQuadrimester(LocalDate localDate) {
@@ -218,27 +218,27 @@ public class LocalDateUtils {
 	// SEMESTER (6 month period)
 	
 	public static LocalDate firstDayOfCurrentSemester(LocalDate localDate) {
-		return SemesterUtils.FIRST_DAY_OF_CURRENT_SEMESTER.get(localDate.getMonth()).apply(localDate);
+		return LocalDateSemesterUtils.getFirstDayOfCurrentSemester().get(localDate.getMonth()).apply(localDate);
 	}
 	
 	public static LocalDate lastDayOfCurrentSemester(LocalDate localDate) {
-		return SemesterUtils.LAST_DAY_OF_CURRENT_SEMESTER.get(localDate.getMonth()).apply(localDate);
+		return LocalDateSemesterUtils.getLastDayOfCurrentSemester().get(localDate.getMonth()).apply(localDate);
 	}
 	
 	public static LocalDate firstDayOfNextSemester(LocalDate localDate) {
-		return SemesterUtils.FIRST_DAY_OF_NEXT_SEMESTER.get(localDate.getMonth()).apply(localDate);
+		return LocalDateSemesterUtils.getFirstDayOfNextSemester().get(localDate.getMonth()).apply(localDate);
 	}
 	
 	public static LocalDate lastDayOfNextSemester(LocalDate localDate) {
-		return SemesterUtils.LAST_DAY_OF_NEXT_SEMESTER.get(localDate.getMonth()).apply(localDate);
+		return LocalDateSemesterUtils.getLastDayOfNextSemester().get(localDate.getMonth()).apply(localDate);
 	}
 	
 	public static LocalDate firstDayOfPreviousSemester(LocalDate localDate) {
-		return SemesterUtils.FIRST_DAY_OF_PREVIOUS_SEMESTER.get(localDate.getMonth()).apply(localDate);
+		return LocalDateSemesterUtils.getFirstDayOfPreviousSemester().get(localDate.getMonth()).apply(localDate);
 	}
 	
 	public static LocalDate lastDayOfPreviousSemester(LocalDate localDate) {
-		return SemesterUtils.LAST_DAY_OF_PREVIOUS_SEMESTER.get(localDate.getMonth()).apply(localDate);
+		return LocalDateSemesterUtils.getLastDayOfPreviousSemester().get(localDate.getMonth()).apply(localDate);
 	}
 	
 	public static boolean isFirstSemester(LocalDate localDate) {

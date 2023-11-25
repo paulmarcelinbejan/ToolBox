@@ -1,4 +1,4 @@
-package com.paulmarcelinbejan.toolbox.utils.time;
+package com.paulmarcelinbejan.toolbox.utils.time.localdatetime;
 
 import static java.time.Month.APRIL;
 import static java.time.Month.AUGUST;
