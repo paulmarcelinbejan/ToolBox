@@ -74,6 +74,7 @@
         <module>toolbox-utils-validation</module>
         <module>toolbox-utils-yaml</module>
         <module>toolbox-web</module>
+        <module>toolbox-service-helper</module>
     </modules>
 
     <dependencyManagement>
@@ -139,6 +140,11 @@
                 <artifactId>toolbox-exception</artifactId>
                 <version>${project.version}</version>
             </dependency>
+            <dependency>
+				<groupId>com.paulmarcelinbejan.toolbox</groupId>
+				<artifactId>toolbox-service-helper</artifactId>
+				<version>${project.version}</version>
+			</dependency>
             <dependency>
                 <groupId>com.paulmarcelinbejan.toolbox</groupId>
                 <artifactId>toolbox-sql</artifactId>
