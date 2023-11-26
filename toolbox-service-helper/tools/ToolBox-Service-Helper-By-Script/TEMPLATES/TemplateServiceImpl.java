@@ -26,109 +26,109 @@ import com.paulmarcelinbejan.toolbox.service.helper.utils.ServiceHelperUtils;
 public class ${ENTITY}ServiceImpl implements ${ENTITY}Service {
 
 	public ${ENTITY}ServiceImpl(${ENTITY}Mapper ${ENTITY_LOWERCAMELCASE}Mapper, ${ENTITY}Repository ${ENTITY_LOWERCAMELCASE}Repository) {
-		createService = new CreateServiceImpl<>(${ENTITY_LOWERCAMELCASE}Repository, ${ENTITY}::getId);
-		readService = new ReadServiceImpl<>(${ENTITY_LOWERCAMELCASE}Repository, ServiceUtils.buildErrorMessageIfEntityNotFoundById(${ENTITY}.class));
-		updateService = new UpdateServiceImpl<>(
+		createServiceHelper = new CreateServiceHelperImpl<>(${ENTITY_LOWERCAMELCASE}Repository, ${ENTITY}::getId);
+		readServiceHelper = new ReadServiceHelperImpl<>(${ENTITY_LOWERCAMELCASE}Repository, ServiceHelperUtils.buildErrorMessageIfEntityNotFoundById(${ENTITY}.class));
+		updateServiceHelper = new UpdateServiceHelperImpl<>(
 				${ENTITY_LOWERCAMELCASE}Repository,
 				${ENTITY_LOWERCAMELCASE}Mapper,
-				readService,
+				readServiceHelper,
 				${ENTITY}::getId);
-		deleteService = new DeleteServiceImpl<>(${ENTITY_LOWERCAMELCASE}Repository, readService);
+		deleteServiceHelper = new DeleteServiceHelperImpl<>(${ENTITY_LOWERCAMELCASE}Repository, readServiceHelper);
 	}
 
-	private final CreateService<${ID_TYPE}, ${ENTITY}> createService;
-	private final ReadService<${ID_TYPE}, ${ENTITY}> readService;
-	private final UpdateService<${ID_TYPE}, ${ENTITY}> updateService;
-	private final DeleteService<${ID_TYPE}> deleteService;
+	private final CreateServiceHelper<${ID_TYPE}, ${ENTITY}> createServiceHelper;
+	private final ReadServiceHelper<${ID_TYPE}, ${ENTITY}> readServiceHelper;
+	private final UpdateServiceHelper<${ID_TYPE}, ${ENTITY}> updateServiceHelper;
+	private final DeleteServiceHelper<${ID_TYPE}> deleteServiceHelper;
 
 	@Override
 	@Transactional(readOnly = true)
 	public ${ENTITY} getReferenceById(${ID_TYPE} id) {
-		return readService.getReferenceById(id);
+		return readServiceHelper.getReferenceById(id);
 	}
 
 	@Override
 	@Transactional(readOnly = true)
 	public ${ENTITY} findById(${ID_TYPE} id) throws FunctionalException {
-		return readService.findById(id);
+		return readServiceHelper.findById(id);
 	}
 
 	@Override
 	@Transactional(readOnly = true)
 	public List<${ENTITY}> findManyById(List<${ID_TYPE}> ids) throws FunctionalException {
-		return readService.findManyById(ids);
+		return readServiceHelper.findManyById(ids);
 	}
 
 	@Override
 	@Transactional(readOnly = true)
 	public List<${ENTITY}> findManyByIdIfPresent(List<${ID_TYPE}> ids) {
-		return readService.findManyByIdIfPresent(ids);
+		return readServiceHelper.findManyByIdIfPresent(ids);
 	}
 
 	@Override
 	@Transactional(readOnly = true)
 	public List<${ENTITY}> findAll() {
-		return readService.findAll();
+		return readServiceHelper.findAll();
 	}
 
 	@Override
 	public ${ID_TYPE} save(${ENTITY} entity) throws FunctionalException {
-		return createService.save(entity);
+		return createServiceHelper.save(entity);
 	}
 
 	@Override
 	public ${ENTITY} saveAndReturn(${ENTITY} entity) throws FunctionalException {
-		return createService.saveAndReturn(entity);
+		return createServiceHelper.saveAndReturn(entity);
 	}
 
 	@Override
 	public List<${ID_TYPE}> save(List<${ENTITY}> entities) throws FunctionalException {
-		return createService.save(entities);
+		return createServiceHelper.save(entities);
 	}
 
 	@Override
 	public List<${ENTITY}> saveAndReturn(List<${ENTITY}> entities) throws FunctionalException {
-		return createService.saveAndReturn(entities);
+		return createServiceHelper.saveAndReturn(entities);
 	}
 
 	@Override
 	public ${ID_TYPE} update(${ENTITY} entity) throws FunctionalException {
-		return updateService.update(entity);
+		return updateServiceHelper.update(entity);
 	}
 
 	@Override
 	public ${ENTITY} updateAndReturn(${ENTITY} entity) throws FunctionalException {
-		return updateService.updateAndReturn(entity);
+		return updateServiceHelper.updateAndReturn(entity);
 	}
 	
 	@Override
 	public List<${ID_TYPE}> update(List<${ENTITY}> entities) throws FunctionalException {
-		return updateService.update(entities);
+		return updateServiceHelper.update(entities);
 	}
 	
 	@Override
 	public List<${ENTITY}> updateAndReturn(List<${ENTITY}> entities) throws FunctionalException {
-		return updateService.updateAndReturn(entities);
+		return updateServiceHelper.updateAndReturn(entities);
 	}
 
 	@Override
 	public void delete(${ID_TYPE} id) throws FunctionalException {
-		deleteService.delete(id);
+		deleteServiceHelper.delete(id);
 	}
 	
 	@Override
 	public void deleteIfPresent(${ID_TYPE} id) {
-		deleteService.deleteIfPresent(id);
+		deleteServiceHelper.deleteIfPresent(id);
 	}
 
 	@Override
 	public void deleteMany(List<${ID_TYPE}> ids) throws FunctionalException {
-		deleteService.deleteMany(ids);
+		deleteServiceHelper.deleteMany(ids);
 	}
 
 	@Override
 	public void deleteManyIfPresent(List<${ID_TYPE}> ids) {
-		deleteService.deleteManyIfPresent(ids);
+		deleteServiceHelper.deleteManyIfPresent(ids);
 	}
 	
 }

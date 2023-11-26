@@ -18,7 +18,6 @@ import ${PACKAGE}.${ENTITY_LOWERCASE}.dto.${ENTITY}SaveRequest;
 import ${PACKAGE}.${ENTITY_LOWERCASE}.dto.${ENTITY}UpdateRequest;
 import ${PACKAGE}.${ENTITY_LOWERCASE}.mapper.${ENTITY}Mapper;
 import ${PACKAGE}.${ENTITY_LOWERCASE}.service.${ENTITY}Service;
-
 import com.paulmarcelinbejan.toolbox.exception.functional.FunctionalException;
 import com.paulmarcelinbejan.toolbox.utils.validation.ValidatorUtils;
 import com.paulmarcelinbejan.toolbox.web.response.OkResponse;

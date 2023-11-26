@@ -39,9 +39,9 @@ public interface ${ENTITY}Service {
 
 	// UPDATE 
 
-	ID update(${ENTITY} entity) throws FunctionalException;
+	${ID_TYPE} update(${ENTITY} entity) throws FunctionalException;
 	
-	List<ID> update(List<${ENTITY}> entities) throws FunctionalException;
+	List<${ID_TYPE}> update(List<${ENTITY}> entities) throws FunctionalException;
 
 	${ENTITY} updateAndReturn(${ENTITY} entity) throws FunctionalException;
 	
