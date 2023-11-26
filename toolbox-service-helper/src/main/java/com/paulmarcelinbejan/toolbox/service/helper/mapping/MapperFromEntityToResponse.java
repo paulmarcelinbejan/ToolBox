@@ -1,11 +1,12 @@
 package com.paulmarcelinbejan.toolbox.service.helper.mapping;
 
 import java.util.Collection;
+import java.util.List;
 
 public interface MapperFromEntityToResponse<ENTITY, RESPONSE> {
 
 	RESPONSE toResponse(ENTITY entity);
 
-	Collection<RESPONSE> toResponses(Collection<ENTITY> entities);
+	List<RESPONSE> toResponses(Collection<ENTITY> entities);
 
 }
