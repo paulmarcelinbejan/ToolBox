@@ -1,6 +1,7 @@
 package com.paulmarcelinbejan.toolbox.web.service.impl;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.function.Function;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -32,26 +33,28 @@ public class CreateServiceImpl<
 
 	@Override
 	public ID save(ENTITY entity) {
-		entity = saveAndReturn(entity);
-		return entityGetterId.apply(entity);
+		ENTITY savedEntity = saveAndReturn(entity);
+		ID id = entityGetterId.apply(savedEntity);
+		return id;
 	}
 	
 	@Override
 	public ENTITY saveAndReturn(ENTITY entity) {
-		entity = repository.save(entity);
-		return entity;
+		ENTITY savedEntity = repository.save(entity);
+		return savedEntity;
 	}
 
 	@Override
-	public Collection<ID> save(Collection<ENTITY> entities) {
-		entities = saveAndReturn(entities);
-		return entities.stream().map(entityGetterId).toList();
+	public List<ID> save(Collection<ENTITY> entities) {
+		List<ENTITY> savedEntities = saveAndReturn(entities);
+		List<ID> ids = savedEntities.stream().map(entityGetterId).toList();
+		return ids;
 	}
 	
 	@Override
-	public Collection<ENTITY> saveAndReturn(Collection<ENTITY> entities) {
-		entities = repository.saveAll(entities);
-		return entities;
+	public List<ENTITY> saveAndReturn(Collection<ENTITY> entities) {
+		List<ENTITY> savedEntities = repository.saveAll(entities);
+		return savedEntities;
 	}
 
 }

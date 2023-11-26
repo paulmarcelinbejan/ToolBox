@@ -1,6 +1,7 @@
 package com.paulmarcelinbejan.toolbox.web.service.create;
 
 import java.util.Collection;
+import java.util.List;
 
 import com.paulmarcelinbejan.toolbox.exception.functional.FunctionalException;
 
@@ -15,6 +16,6 @@ public interface CreateAndReturnIdService<ID, ENTITY> {
 
 	ID save(ENTITY entity) throws FunctionalException;
 	
-	Collection<ID> save(Collection<ENTITY> entities) throws FunctionalException;
+	List<ID> save(Collection<ENTITY> entities) throws FunctionalException;
 
 }
