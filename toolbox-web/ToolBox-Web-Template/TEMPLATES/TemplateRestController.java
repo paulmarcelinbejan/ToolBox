@@ -1,6 +1,6 @@
 package ${PACKAGE}.${ENTITY_LOWERCASE}.controller;
 
-import java.util.Collection;
+import java.util.List;
 
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -41,7 +41,7 @@ public class ${ENTITY}RestController {
 	}
 
 	@GetMapping(value = "/", produces = MediaType.APPLICATION_JSON_VALUE)
-	public @ResponseBody Collection<${ENTITY}Response> findAll() {
+	public @ResponseBody List<${ENTITY}Response> findAll() {
 		return ${ENTITY_LOWERCAMELCASE}Mapper.toResponses(${ENTITY_LOWERCAMELCASE}Service.findAll());
 	}
 
@@ -51,7 +51,7 @@ public class ${ENTITY}RestController {
 	}
 
 	@PostMapping(value = "/save-many", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public @ResponseBody Collection<${ID_TYPE}> save(@RequestBody final Collection<${ENTITY}SaveRequest> saveRequests) throws FunctionalException {
+	public @ResponseBody List<${ID_TYPE}> save(@RequestBody final List<${ENTITY}SaveRequest> saveRequests) throws FunctionalException {
 		ValidatorUtils.validateAll(saveRequests);
 		return ${ENTITY_LOWERCAMELCASE}Service.save(${ENTITY_LOWERCAMELCASE}Mapper.fromSaveRequestsToEntities(saveRequests));
 	}
@@ -62,7 +62,7 @@ public class ${ENTITY}RestController {
 	}
 
 	@PutMapping(value = "/update-many", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public @ResponseBody Collection<${ID_TYPE}> update(@RequestBody final Collection<${ENTITY}UpdateRequest> updateRequests) throws FunctionalException {
+	public @ResponseBody List<${ID_TYPE}> update(@RequestBody final List<${ENTITY}UpdateRequest> updateRequests) throws FunctionalException {
 		ValidatorUtils.validateAll(updateRequests);
 		return ${ENTITY_LOWERCAMELCASE}Service.update(${ENTITY_LOWERCAMELCASE}Mapper.fromUpdateRequestsToEntities(updateRequests));
 	}
@@ -74,7 +74,7 @@ public class ${ENTITY}RestController {
 	}
 
 	@DeleteMapping(value = "/", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public @ResponseBody OkResponse delete(@RequestBody Collection<${ID_TYPE}> ids) throws FunctionalException {
+	public @ResponseBody OkResponse delete(@RequestBody List<${ID_TYPE}> ids) throws FunctionalException {
 		${ENTITY_LOWERCAMELCASE}Service.deleteMany(ids);
 		return new OkResponse();
 	}
