@@ -26,7 +26,7 @@ public class ExceptionResponse {
 	
 	@JsonProperty
 	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
-	private final Instant timestamp;
+	private final Instant timestampUTC;
 
 	@JsonProperty
 	private final String status;
@@ -81,7 +81,7 @@ public class ExceptionResponse {
 			String exceptionType, String message) {
 		
 		this.uniqueIdentifier = uniqueIdentifier;
-		this.timestamp = timestamp;
+		this.timestampUTC = timestamp;
 		this.status = status;
 		this.error = error;
 		this.exceptionType = exceptionType;
