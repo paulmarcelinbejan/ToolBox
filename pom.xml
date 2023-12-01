@@ -11,12 +11,35 @@
     </developers>
 
     <name>ToolBox</name>
-    <description>Paul Marcelin Bejan ToolBox</description>
+    <description>ToolBox for Java</description>
 
     <groupId>com.paulmarcelinbejan.toolbox</groupId>
     <artifactId>toolbox</artifactId>
     <version>1.0.0</version>
     <packaging>pom</packaging>
+
+    <modules>
+        <module>toolbox-base</module>
+        <module>toolbox-constants</module>
+        <module>toolbox-exception</module>
+        <module>toolbox-service-helper</module>
+        <module>toolbox-spring</module>
+        <module>toolbox-sql</module>
+        <module>toolbox-test</module>
+        <module>toolbox-utils-csv</module>
+        <module>toolbox-utils-io</module>
+        <module>toolbox-utils-jackson</module>
+        <module>toolbox-utils-json</module>
+        <module>toolbox-utils-mapping</module>
+        <module>toolbox-utils-math</module>
+        <module>toolbox-utils-pdf</module>
+        <module>toolbox-utils-reflection</module>
+        <module>toolbox-utils-text</module>
+        <module>toolbox-utils-time</module>
+        <module>toolbox-utils-validation</module>
+        <module>toolbox-utils-yaml</module>
+        <module>toolbox-web</module>
+    </modules>
 
     <properties>
 		<!-- JAVA -->
@@ -54,29 +77,6 @@
         <spring-openfeign.version>4.0.3</spring-openfeign.version>
     </properties>
 
-    <modules>
-        <module>toolbox-base</module>
-        <module>toolbox-constants</module>
-        <module>toolbox-exception</module>
-        <module>toolbox-spring</module>
-        <module>toolbox-sql</module>
-        <module>toolbox-test</module>
-        <module>toolbox-utils-csv</module>
-        <module>toolbox-utils-io</module>
-        <module>toolbox-utils-jackson</module>
-        <module>toolbox-utils-json</module>
-        <module>toolbox-utils-mapping</module>
-        <module>toolbox-utils-math</module>
-        <module>toolbox-utils-pdf</module>
-        <module>toolbox-utils-reflection</module>
-        <module>toolbox-utils-text</module>
-        <module>toolbox-utils-time</module>
-        <module>toolbox-utils-validation</module>
-        <module>toolbox-utils-yaml</module>
-        <module>toolbox-web</module>
-        <module>toolbox-service-helper</module>
-    </modules>
-
     <dependencyManagement>
         <dependencies>
         
@@ -108,6 +108,7 @@
                 <groupId>org.projectlombok</groupId>
                 <artifactId>lombok</artifactId>
                 <version>${lombok.version}</version>
+                <scope>provided</scope>
             </dependency>
 
 			<!-- Unit Test -->
