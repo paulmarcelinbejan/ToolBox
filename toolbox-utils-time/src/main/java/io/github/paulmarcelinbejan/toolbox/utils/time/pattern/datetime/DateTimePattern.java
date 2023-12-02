@@ -3,15 +3,13 @@ package io.github.paulmarcelinbejan.toolbox.utils.time.pattern.datetime;
 import java.time.format.DateTimeFormatter;
 
 import io.github.paulmarcelinbejan.toolbox.utils.time.pattern.DateTimePatternBase;
-import io.github.paulmarcelinbejan.toolbox.utils.time.pattern.date.DatePattern;
-import io.github.paulmarcelinbejan.toolbox.utils.time.pattern.time.TimePattern;
 import lombok.Getter;
 
 /**
  * DateTimePattern
  * <p>
  * Represents various date and time patterns. You can build a large number of DateTimePattern instances
- * by combining a DatePattern with a TimePattern. Use the {@link DateTimePattern#buildPattern(DatePattern, String, TimePattern)} method
+ * by combining a DatePattern with a TimePattern. Use the DateTimePattern.buildPattern(DatePattern, String, TimePattern) method
  * to create patterns with date and time.
  * </p>
  */
