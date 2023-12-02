@@ -35,8 +35,8 @@ import lombok.NoArgsConstructor;
  * <p>
  * A year can be divided into four TRIMESTER (also known as Q1, Q2, Q3, Q4): <br>
  * 
- * <pre>
  * <table>
+ *  <caption>Trimester Dates</caption>
  * 	<tr>
  * 		<th></th>
  * 		<th>First Day</th>
@@ -63,7 +63,6 @@ import lombok.NoArgsConstructor;
  *  	<td>31st December</td>
  *  </tr>
  * </table>
- * </pre>
  */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class ZonedDateTimeTrimesterUtils {

@@ -32,8 +32,8 @@ import lombok.NoArgsConstructor;
  * <p>
  * A year can be divided into two SEMESTER: <br>
  * 
- * <pre>
  * <table>
+ *  <caption>Semester Dates</caption>
  * 	<tr>
  * 		<th></th>
  * 		<th>First Day</th>
@@ -50,7 +50,6 @@ import lombok.NoArgsConstructor;
  *  	<td>31st December</td>
  *  </tr>
  * </table>
- * </pre>
  */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class LocalDateSemesterUtils {

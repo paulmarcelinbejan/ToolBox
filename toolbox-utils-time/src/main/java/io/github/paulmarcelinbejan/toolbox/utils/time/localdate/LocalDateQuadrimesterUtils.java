@@ -34,8 +34,8 @@ import lombok.NoArgsConstructor;
  * 
  * A year can be divided into three QUADRIMESTER: <br>
  * 
- * <pre>
  * <table>
+ *  <caption>Quadrimester Dates</caption>
  * 	<tr>
  * 		<th></th>
  * 		<th>First Day</th>
@@ -57,7 +57,6 @@ import lombok.NoArgsConstructor;
  *  	<td>31st December</td>
  *  </tr>
  * </table>
- * </pre>
  */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class LocalDateQuadrimesterUtils {

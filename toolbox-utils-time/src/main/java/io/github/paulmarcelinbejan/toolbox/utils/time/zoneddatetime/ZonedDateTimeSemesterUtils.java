@@ -34,6 +34,7 @@ import lombok.NoArgsConstructor;
  * A year can be divided into two SEMESTERS: <br>
  * 
  * <table>
+ *  <caption>Semester Dates</caption>
  *  <tr>
  *      <th></th>
  *      <th>First Day</th>
