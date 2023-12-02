@@ -47,7 +47,7 @@ public class CsvReaderConfig {
 	@Getter
 	private final CsvMapper csvMapper;
 	
-	private CsvMapper buildCsvMapper(
+	private static CsvMapper buildCsvMapper(
 			List<DeserializationFeature> enableDeserializationFeatures,
 			List<DeserializationFeature> disableDeserializationFeatures,
 			List<Module> modules, 
@@ -59,7 +59,7 @@ public class CsvReaderConfig {
 		return mapper;
 	}
 	
-	private CsvMapper buildCsvMapper(
+	private static CsvMapper buildCsvMapper(
 			CsvFactory csvFactory,
 			List<DeserializationFeature> enableDeserializationFeatures,
 			List<DeserializationFeature> disableDeserializationFeatures,
@@ -72,7 +72,7 @@ public class CsvReaderConfig {
 		return mapper;
 	}
 
-	private void configureCsvMapper(CsvMapper mapper, 
+	private static void configureCsvMapper(CsvMapper mapper, 
 			List<DeserializationFeature> enableDeserializationFeatures,
 			List<DeserializationFeature> disableDeserializationFeatures,
 			List<Module> modules, 
@@ -96,7 +96,7 @@ public class CsvReaderConfig {
 		
 	}
 	
-	private CsvFactory buildCsvFactory(
+	private static CsvFactory buildCsvFactory(
 			List<CsvParser.Feature> enableCsvParserFeatures,
 			List<CsvParser.Feature> disableCsvParserFeatures) {
 		
@@ -114,7 +114,7 @@ public class CsvReaderConfig {
 		
 	}
 
-	private boolean createCsvFactory(
+	private static boolean createCsvFactory(
 			List<CsvParser.Feature> enableCsvParserFeatures,
 			List<CsvParser.Feature> disableCsvParserFeatures) {
 		if((enableCsvParserFeatures != null && !enableCsvParserFeatures.isEmpty())

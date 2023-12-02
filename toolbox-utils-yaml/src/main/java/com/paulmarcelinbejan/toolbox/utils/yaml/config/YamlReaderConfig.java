@@ -57,7 +57,7 @@ public class YamlReaderConfig {
 	 * <br> - Modules registered
 	 * <br> - Deserializers registered
 	 */
-	private YAMLMapper buildYamlMapper(
+	private static YAMLMapper buildYamlMapper(
 			List<YAMLGenerator.Feature> enableYamlGeneratorFeatures,
 			List<YAMLGenerator.Feature> disableYamlGeneratorFeatures,
 			List<DeserializationFeature> enableDeserializationFeatures,
@@ -72,7 +72,7 @@ public class YamlReaderConfig {
 		
 	}
 
-	private void configureYamlMapper(YAMLMapper mapper,
+	private static void configureYamlMapper(YAMLMapper mapper,
 			List<DeserializationFeature> enableDeserializationFeatures,
 			List<DeserializationFeature> disableDeserializationFeatures,
 			List<Module> modules,
@@ -96,7 +96,7 @@ public class YamlReaderConfig {
 		
 	}
 	
-	private YAMLFactory buildYamlFactory(
+	private static YAMLFactory buildYamlFactory(
 			List<YAMLGenerator.Feature> enableYamlGeneratorFeatures,
 			List<YAMLGenerator.Feature> disableYamlGeneratorFeatures) {
 		

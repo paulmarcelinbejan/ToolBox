@@ -1,8 +1,8 @@
 package com.paulmarcelinbejan.toolbox.utils.csv;
 
 import java.io.IOException;
+import java.io.OutputStream;
 import java.io.Reader;
-import java.io.Writer;
 import java.util.List;
 
 import com.fasterxml.jackson.databind.MappingIterator;
@@ -64,10 +64,9 @@ public class CsvFileUtils {
 	 * @throws IOException if the file can not be found, or if the data can not be parsed correctly.
 	 */
 	public <T> List<T> read(@NonNull final FileInfo fileInfo, char separator, Class<T> clazz) throws IOException {
-		MappingIterator<T> iterator = iterator(fileInfo, separator, clazz);
-		List<T> list = iterator.readAll();
-		iterator.close();
-		return list;
+    	try (MappingIterator<T> iterator = iterator(fileInfo, separator, clazz)) {
+    		return iterator.readAll();
+		}
 	}
 	
 	/**
@@ -75,11 +74,9 @@ public class CsvFileUtils {
 	 */
 	public <T> void write(@NonNull final FileInfo fileInfo, char separator, Class<T> clazz, @NonNull final List<T> records) throws IOException {
 		
-		Writer fileWriter = FileUtils.createFileWriter(fileInfo);
-		
 		CsvSchema schema = buildWriterCsvSchema(mapperReader, separator, clazz);
 
-		writeFile(mapperWriter, clazz, schema, fileWriter, records);
+		writeFile(clazz, schema, fileInfo, records);
 		
 	}
 	
@@ -89,11 +86,9 @@ public class CsvFileUtils {
 	 */
 	public <T> void write(@NonNull final FileInfo fileInfo, char separator, List<String> columns, Class<T> clazz, @NonNull final List<T> records) throws IOException {
 		
-		Writer fileWriter = FileUtils.createFileWriter(fileInfo);
-		
 		CsvSchema schema = buildWriterCsvSchema(separator, columns);
 
-		writeFile(mapperWriter, clazz, schema, fileWriter, records);
+		writeFile(clazz, schema, fileInfo, records);
 		
 	}
 	
@@ -124,11 +119,13 @@ public class CsvFileUtils {
 		
 	}
 	
-	private static <T> void writeFile(CsvMapper mapper, Class<T> clazz, CsvSchema schema, Writer fileWriter, final List<T> records) throws IOException {
-		mapper.writerFor(clazz)
-			  .with(schema)
-			  .writeValues(fileWriter)
-			  .writeAll(records);
+	private <T> void writeFile(Class<T> clazz, CsvSchema schema, FileInfo fileInfo, final List<T> records) throws IOException {
+		try (OutputStream fileOutputStream = FileUtils.createFileOutputStream(fileInfo)) {
+			mapperWriter.writerFor(clazz)
+				  .with(schema)
+				  .writeValues(fileOutputStream)
+				  .writeAll(records);
+		}
 	}
 	
 	/**

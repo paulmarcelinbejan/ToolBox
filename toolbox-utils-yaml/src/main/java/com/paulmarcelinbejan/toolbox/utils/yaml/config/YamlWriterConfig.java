@@ -56,7 +56,7 @@ public class YamlWriterConfig {
 	 * <br> - Modules registered
 	 * <br> - Serializers registered
 	 */
-	private YAMLMapper buildYamlMapper(
+	private static YAMLMapper buildYamlMapper(
 			List<YAMLGenerator.Feature> enableYamlGeneratorFeatures,
 			List<YAMLGenerator.Feature> disableYamlGeneratorFeatures,
 			List<SerializationFeature> enableSerializationFeatures,
@@ -71,7 +71,7 @@ public class YamlWriterConfig {
 		
 	}
 
-	private void configureYamlMapper(YAMLMapper mapper, 
+	private static void configureYamlMapper(YAMLMapper mapper, 
 			List<SerializationFeature> enableSerializationFeatures,
 			List<SerializationFeature> disableSerializationFeatures,
 			List<Module> modules,
@@ -95,7 +95,7 @@ public class YamlWriterConfig {
 		
 	}
 	
-	private YAMLFactory buildYamlFactory(
+	private static YAMLFactory buildYamlFactory(
 			List<YAMLGenerator.Feature> enableYamlGeneratorFeatures,
 			List<YAMLGenerator.Feature> disableYamlGeneratorFeatures) {
 		

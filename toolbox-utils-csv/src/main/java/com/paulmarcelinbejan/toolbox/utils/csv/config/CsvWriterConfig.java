@@ -48,7 +48,7 @@ public class CsvWriterConfig {
 	@Getter
 	private final CsvMapper csvMapper;
 	
-	private CsvMapper buildCsvMapper(
+	private static CsvMapper buildCsvMapper(
 			List<SerializationFeature> enableSerializationFeatures,
 			List<SerializationFeature> disableSerializationFeatures,
 			List<Module> modules, 
@@ -62,7 +62,7 @@ public class CsvWriterConfig {
 		return mapper;
 	}
 	
-	private CsvMapper buildCsvMapper(
+	private static CsvMapper buildCsvMapper(
 			CsvFactory csvFactory,
 			List<SerializationFeature> enableSerializationFeatures,
 			List<SerializationFeature> disableSerializationFeatures,
@@ -76,7 +76,7 @@ public class CsvWriterConfig {
 		return mapper;
 	}
 
-	private void configureCsvMapper(CsvMapper mapper,
+	private static void configureCsvMapper(CsvMapper mapper,
 			List<SerializationFeature> enableSerializationFeatures,
 			List<SerializationFeature> disableSerializationFeatures,
 			List<Module> modules, 
@@ -100,7 +100,7 @@ public class CsvWriterConfig {
 		
 	}
 	
-	private CsvFactory buildCsvFactory(
+	private static CsvFactory buildCsvFactory(
 			List<CsvParser.Feature> enableCsvParserFeatures,
 			List<CsvParser.Feature> disableCsvParserFeatures) {
 		
@@ -118,7 +118,7 @@ public class CsvWriterConfig {
 		
 	}
 	
-	private boolean createCsvFactory(
+	private static boolean createCsvFactory(
 			List<CsvParser.Feature> enableCsvParserFeatures,
 			List<CsvParser.Feature> disableCsvParserFeatures) {
 		if((enableCsvParserFeatures != null && !enableCsvParserFeatures.isEmpty())

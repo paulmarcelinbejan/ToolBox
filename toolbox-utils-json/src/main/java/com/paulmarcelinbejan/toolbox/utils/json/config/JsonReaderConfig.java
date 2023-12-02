@@ -37,7 +37,7 @@ public class JsonReaderConfig {
 	@Getter
 	private final JsonMapper jsonMapper;
 	
-	private JsonMapper buildJsonMapper(
+	private static JsonMapper buildJsonMapper(
 			List<DeserializationFeature> enableDeserializationFeatures,
 			List<DeserializationFeature> disableDeserializationFeatures,
 			List<Module> modules,
@@ -49,7 +49,7 @@ public class JsonReaderConfig {
 		
 	}
 	
-	private void configureJsonMapper(JsonMapper mapper,
+	private static void configureJsonMapper(JsonMapper mapper,
 			List<DeserializationFeature> enableDeserializationFeatures,
 			List<DeserializationFeature> disableDeserializationFeatures,
 			List<Module> modules,

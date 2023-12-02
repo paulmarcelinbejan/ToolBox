@@ -40,7 +40,7 @@ public class JsonWriterConfig {
 	/**
 	 * return a JsonMapper configured with serializers (if any)
 	 */
-	private JsonMapper buildJsonMapper(
+	private static JsonMapper buildJsonMapper(
 			List<SerializationFeature> enableSerializationFeatures,
 			List<SerializationFeature> disableSerializationFeatures,
 			List<Module> modules,
@@ -52,7 +52,7 @@ public class JsonWriterConfig {
 		
 	}
 	
-	private void configureJsonMapper(JsonMapper mapper, 
+	private static void configureJsonMapper(JsonMapper mapper, 
 			List<SerializationFeature> enableSerializationFeatures,
 			List<SerializationFeature> disableSerializationFeatures,
 			List<Module> modules,

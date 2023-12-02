@@ -42,19 +42,18 @@ public class JsonFileUtils {
      * JSON file starts with curly brackets
      */
 	public <T> T read(FileInfo fileInfo, Class<T> clazz) throws IOException {
-		InputStream fileInputStream = FileUtils.createFileInputStream(fileInfo);
-		T json = mapperReader.readValue(fileInputStream, clazz);
-		return json;
+    	try (InputStream fileInputStream = FileUtils.createFileInputStream(fileInfo)) {
+    		return mapperReader.readValue(fileInputStream, clazz);
+		}
     }
 	
     /**
      * JSON file starts with square brackets
      */
 	public <T> List<T> readList(FileInfo fileInfo, Class<T> clazz) throws IOException {
-		MappingIterator<T> iterator = iterator(fileInfo, clazz);
-		List<T> list = iterator.readAll();
-		iterator.close();
-		return list;
+    	try (MappingIterator<T> iterator = iterator(fileInfo, clazz)) {
+    		return iterator.readAll();
+		}
 	}
 	
     /**
@@ -72,23 +71,25 @@ public class JsonFileUtils {
      * JSON file starts with curly brackets
      */
     public <T> void write(FileInfo fileInfo, T object) throws IOException {
-    	OutputStream fileOutputStream = FileUtils.createFileOutputStream(fileInfo);
-    	mapperWriter.writer()
-    				.with(prettyPrinter())
-    				.writeValue(fileOutputStream, object);
+    	try (OutputStream fileOutputStream = FileUtils.createFileOutputStream(fileInfo)) {
+			mapperWriter.writer()
+						.with(prettyPrinter())
+						.writeValue(fileOutputStream, object);
+		}
     }
     
     /**
      * JSON file starts with square brackets
      */
     public <T> void writeList(FileInfo fileInfo, List<T> objects) throws IOException {
-    	OutputStream fileOutputStream = FileUtils.createFileOutputStream(fileInfo);
-    	mapperWriter.writer()
-    				.with(prettyPrinter())
-    				.writeValue(fileOutputStream, objects);
+    	try (OutputStream fileOutputStream = FileUtils.createFileOutputStream(fileInfo)) {
+			mapperWriter.writer()
+						.with(prettyPrinter())
+						.writeValue(fileOutputStream, objects);
+		}
     }
     
-    private DefaultPrettyPrinter prettyPrinter() {
+    private static DefaultPrettyPrinter prettyPrinter() {
     	DefaultPrettyPrinter prettyPrinter = new DefaultPrettyPrinter();        
         prettyPrinter.indentArraysWith(DefaultIndenter.SYSTEM_LINEFEED_INSTANCE);
         return prettyPrinter;

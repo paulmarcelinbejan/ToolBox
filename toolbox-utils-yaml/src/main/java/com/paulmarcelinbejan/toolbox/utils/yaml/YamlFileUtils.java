@@ -48,8 +48,9 @@ public class YamlFileUtils {
 	 *  Read YAML file
 	 */
     public <T> T read(@NonNull FileInfo fileInfo, Class<T> clazz) throws IOException {
-    	T yaml = readValueWithoutPrefix(mapperReader, FileUtils.createFileInputStream(fileInfo), clazz);
-		return yaml;
+    	try (InputStream fileInputStream = FileUtils.createFileInputStream(fileInfo)) {
+    		return readValueWithoutPrefix(mapperReader, fileInputStream, clazz);
+		}
 	}
 	
 	/**
@@ -59,34 +60,39 @@ public class YamlFileUtils {
 	 *  <br> if your prefix is one word only, you can use any {@link YamlPrefixType}.
 	 */
     public <T> T read(FileInfo fileInfo, Class<T> clazz, String prefix, YamlPrefixType yamlPrefixType) throws IOException {
-        T yaml = readValueWithPrefix(mapperReader, FileUtils.createFileInputStream(fileInfo), clazz, prefix, yamlPrefixType);
-		return yaml;
+    	try (InputStream fileInputStream = FileUtils.createFileInputStream(fileInfo)) {
+    		return readValueWithPrefix(mapperReader, FileUtils.createFileInputStream(fileInfo), clazz, prefix, yamlPrefixType);
+		}
 	}
     
     public <T> void write(FileInfo fileInfo, Class<T> clazz, T value) throws IOException {
-    	writeValueWithoutPrefix(mapperWriter, FileUtils.createFileOutputStream(fileInfo), clazz, value);
+    	try (OutputStream fileOutputStream = FileUtils.createFileOutputStream(fileInfo)) {
+    		writeValueWithoutPrefix(mapperWriter, fileOutputStream, clazz, value);
+		}
     }
     
     public <T> void write(FileInfo fileInfo, Class<T> clazz, T value, String prefix, YamlPrefixType yamlPrefixType) throws IOException {
-    	writeValueWithPrefix(mapperWriter, FileUtils.createFileOutputStream(fileInfo), clazz, value, prefix, yamlPrefixType);
+    	try (OutputStream fileOutputStream = FileUtils.createFileOutputStream(fileInfo)) {
+    		writeValueWithPrefix(mapperWriter, fileOutputStream, clazz, value, prefix, yamlPrefixType);
+		}
     }
 	
-    private <T> T readValueWithoutPrefix(YAMLMapper mapper, InputStream inputStream, Class<T> clazz) throws IOException {
+    private static <T> T readValueWithoutPrefix(YAMLMapper mapper, InputStream inputStream, Class<T> clazz) throws IOException {
         return mapper.readValue(inputStream, clazz);
     }
     
-    private <T> T readValueWithPrefix(YAMLMapper mapper, InputStream inputStream, Class<T> clazz, String prefix, YamlPrefixType yamlPrefixType) throws IOException {
+    private static <T> T readValueWithPrefix(YAMLMapper mapper, InputStream inputStream, Class<T> clazz, String prefix, YamlPrefixType yamlPrefixType) throws IOException {
         return mapper.readerFor(clazz)
                      .at(fixPrefix(prefix, yamlPrefixType))
                      .readValue(inputStream);
     }
     
-    private <T> void writeValueWithoutPrefix(YAMLMapper mapper, OutputStream outputStream, Class<T> clazz, T value) throws IOException {
+    private static <T> void writeValueWithoutPrefix(YAMLMapper mapper, OutputStream outputStream, Class<T> clazz, T value) throws IOException {
         mapper.writerFor(clazz)
   	  		  .writeValue(outputStream, value);
     }
     
-    private <T> void writeValueWithPrefix(YAMLMapper mapper, OutputStream outputStream, Class<T> clazz, T value, String prefix, YamlPrefixType yamlPrefixType) throws IOException {
+    private static <T> void writeValueWithPrefix(YAMLMapper mapper, OutputStream outputStream, Class<T> clazz, T value, String prefix, YamlPrefixType yamlPrefixType) throws IOException {
         mapper.writerFor(clazz)
         	  .withRootName(fixPrefix(prefix, yamlPrefixType))
               .writeValue(outputStream, value);
