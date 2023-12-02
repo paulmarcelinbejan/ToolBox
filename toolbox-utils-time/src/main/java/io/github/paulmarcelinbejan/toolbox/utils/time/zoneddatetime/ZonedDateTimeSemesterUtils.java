@@ -28,30 +28,28 @@ import lombok.NoArgsConstructor;
 
 /**
  * A semester is a period of six months. <br>
- * From latin semestris: sex (six) mensis (month).
+ * From Latin semestris: sex (six) mensis (month).
  * 
  * <p>
- * A year can be divided into two SEMESTER: <br>
+ * A year can be divided into two SEMESTERS: <br>
  * 
- * <pre>
  * <table>
- * 	<tr>
- * 		<th></th>
- * 		<th>First Day</th>
- * 		<th>Last Day</th>
- * 	</tr>
- * 	<tr>
- *  	<th>FIRST</td>
- *  	<td>1st January</td>
- *  	<td>30th June</td>
+ *  <tr>
+ *      <th></th>
+ *      <th>First Day</th>
+ *      <th>Last Day</th>
  *  </tr>
  *  <tr>
- *  	<th>SECOND</td>
- *  	<td>1st July</td>
- *  	<td>31st December</td>
+ *      <th>FIRST</th>
+ *      <td>1st January</td>
+ *      <td>30th June</td>
+ *  </tr>
+ *  <tr>
+ *      <th>SECOND</th>
+ *      <td>1st July</td>
+ *      <td>31st December</td>
  *  </tr>
  * </table>
- * </pre>
  */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class ZonedDateTimeSemesterUtils {

@@ -43,17 +43,17 @@ import lombok.NoArgsConstructor;
  * 		<th>Last Day</th>
  * 	</tr>
  * 	<tr>
- *  	<th>FIRST</td>
+ *  	<th>FIRST</th>
  *  	<td>1st January</td>
  *  	<td>30th April</td>
  *  </tr>
  *  <tr>
- *  	<th>SECOND</td>
+ *  	<th>SECOND</th>
  *  	<td>1st May</td>
  *  	<td>31st August</td>
  *  </tr>
  *  <tr>
- *  	<th>THIRD</td>
+ *  	<th>THIRD</th>
  *  	<td>1st September</td>
  *  	<td>31st December</td>
  *  </tr>
