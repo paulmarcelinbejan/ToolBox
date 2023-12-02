@@ -62,20 +62,56 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class ZonedDateTimeQuadrimesterUtils {
 
+	/**
+	 * A map containing functions to get the first day of the current quadrimester for each month.
+	 * The map associates each Month with a corresponding function that takes a ZonedDateTime
+	 * and returns the first day of the current quadrimester.
+	 */
 	private static final Map<Month, Function<ZonedDateTime, ZonedDateTime>> FIRST_DAY_OF_CURRENT_QUADRIMESTER = initializeFirstDayOfCurrentQuadrimesterMap();
-	
+
+	/**
+	 * A map containing functions to get the last day of the current quadrimester for each month.
+	 * The map associates each Month with a corresponding function that takes a ZonedDateTime
+	 * and returns the last day of the current quadrimester.
+	 */
 	private static final Map<Month, Function<ZonedDateTime, ZonedDateTime>> LAST_DAY_OF_CURRENT_QUADRIMESTER = initializeLastDayOfCurrentQuadrimesterMap();
-	
+
+	/**
+	 * A map containing functions to get the first day of the next quadrimester for each month.
+	 * The map associates each Month with a corresponding function that takes a ZonedDateTime
+	 * and returns the first day of the next quadrimester.
+	 */
 	private static final Map<Month, Function<ZonedDateTime, ZonedDateTime>> FIRST_DAY_OF_NEXT_QUADRIMESTER = initializeFirstDayOfNextQuadrimesterMap();
-	
+
+	/**
+	 * A map containing functions to get the last day of the next quadrimester for each month.
+	 * The map associates each Month with a corresponding function that takes a ZonedDateTime
+	 * and returns the last day of the next quadrimester.
+	 */
 	private static final Map<Month, Function<ZonedDateTime, ZonedDateTime>> LAST_DAY_OF_NEXT_QUADRIMESTER = initializeLastDayOfNextQuadrimesterMap();
-	
+
+	/**
+	 * A map containing functions to get the first day of the previous quadrimester for each month.
+	 * The map associates each Month with a corresponding function that takes a ZonedDateTime
+	 * and returns the first day of the previous quadrimester.
+	 */
 	private static final Map<Month, Function<ZonedDateTime, ZonedDateTime>> FIRST_DAY_OF_PREVIOUS_QUADRIMESTER = initializeFirstDayOfPreviousQuadrimesterMap();
-	
+
+	/**
+	 * A map containing functions to get the last day of the previous quadrimester for each month.
+	 * The map associates each Month with a corresponding function that takes a ZonedDateTime
+	 * and returns the last day of the previous quadrimester.
+	 */
 	private static final Map<Month, Function<ZonedDateTime, ZonedDateTime>> LAST_DAY_OF_PREVIOUS_QUADRIMESTER = initializeLastDayOfPreviousQuadrimesterMap();
 	
 	// FIRST DAY of CURRENT QUADRIMESTER
 	
+	/**
+	 * Initializes and returns a mapping of the first day of the current quadrimester for each month.
+	 *
+	 * @return A {@code Map} where the keys are {@code Month} objects, and the values are functions
+	 *         mapping a {@code ZonedDateTime} to the first day of the current quadrimester for the respective month.
+	 */
 	private static final Map<Month, Function<ZonedDateTime, ZonedDateTime>> initializeFirstDayOfCurrentQuadrimesterMap() {
 		Map<Month, Function<ZonedDateTime, ZonedDateTime>> map = new EnumMap<>(Month.class);
 		
@@ -102,6 +138,12 @@ public class ZonedDateTimeQuadrimesterUtils {
 	
 	// LAST DAY of CURRENT QUADRIMESTER
 	
+	/**
+	 * Initializes and returns a mapping of the last day of the current quadrimester for each month.
+	 *
+	 * @return A {@code Map} where the keys are {@code Month} objects, and the values are functions
+	 *         mapping a {@code ZonedDateTime} to the last day of the current quadrimester for the respective month.
+	 */
 	private static final Map<Month, Function<ZonedDateTime, ZonedDateTime>> initializeLastDayOfCurrentQuadrimesterMap() {
 		Map<Month, Function<ZonedDateTime, ZonedDateTime>> map = new EnumMap<>(Month.class);
 		
@@ -128,6 +170,12 @@ public class ZonedDateTimeQuadrimesterUtils {
 	
 	// FIRST DAY of NEXT QUADRIMESTER
 	
+	/**
+	 * Initializes and returns a mapping of the first day of the next quadrimester for each month.
+	 *
+	 * @return A {@code Map} where the keys are {@code Month} objects, and the values are functions
+	 *         mapping a {@code ZonedDateTime} to the first day of the next quadrimester for the respective month.
+	 */
 	private static final Map<Month, Function<ZonedDateTime, ZonedDateTime>> initializeFirstDayOfNextQuadrimesterMap() {
 		Map<Month, Function<ZonedDateTime, ZonedDateTime>> map = new EnumMap<>(Month.class);
 		
@@ -154,6 +202,12 @@ public class ZonedDateTimeQuadrimesterUtils {
 	
 	// LAST DAY of NEXT QUADRIMESTER
 	
+	/**
+	 * Initializes and returns a mapping of the last day of the next quadrimester for each month.
+	 *
+	 * @return A {@code Map} where the keys are {@code Month} objects, and the values are functions
+	 *         mapping a {@code ZonedDateTime} to the last day of the next quadrimester for the respective month.
+	 */
 	private static final Map<Month, Function<ZonedDateTime, ZonedDateTime>> initializeLastDayOfNextQuadrimesterMap() {
 		Map<Month, Function<ZonedDateTime, ZonedDateTime>> map = new EnumMap<>(Month.class);
 		
@@ -180,6 +234,12 @@ public class ZonedDateTimeQuadrimesterUtils {
 	
 	// FIRST DAY of PREVIOUS QUADRIMESTER
 	
+	/**
+	 * Initializes and returns a mapping of the first day of the previous quadrimester for each month.
+	 *
+	 * @return A {@code Map} where the keys are {@code Month} objects, and the values are functions
+	 *         mapping a {@code ZonedDateTime} to the first day of the previous quadrimester for the respective month.
+	 */
 	private static final Map<Month, Function<ZonedDateTime, ZonedDateTime>> initializeFirstDayOfPreviousQuadrimesterMap() {
 		Map<Month, Function<ZonedDateTime, ZonedDateTime>> map = new EnumMap<>(Month.class);
 		
@@ -206,6 +266,12 @@ public class ZonedDateTimeQuadrimesterUtils {
 	
 	// LAST DAY of PREVIOUS QUADRIMESTER
 	
+	/**
+	 * Initializes and returns a mapping of the last day of the previous quadrimester for each month.
+	 *
+	 * @return A {@code Map} where the keys are {@code Month} objects, and the values are functions
+	 *         mapping a {@code ZonedDateTime} to the last day of the previous quadrimester for the respective month.
+	 */
 	private static final Map<Month, Function<ZonedDateTime, ZonedDateTime>> initializeLastDayOfPreviousQuadrimesterMap() {
 		Map<Month, Function<ZonedDateTime, ZonedDateTime>> map = new EnumMap<>(Month.class);
 		
@@ -230,69 +296,171 @@ public class ZonedDateTimeQuadrimesterUtils {
 		return map;
 	}
 	
+	/**
+	 * Returns the {@code ZonedDateTime} representing the first day of the first quadrimester at the start of the day.
+	 *
+	 * @param year The year for which the first day is calculated.
+	 * @param zoneId The time zone ID for the resulting {@code ZonedDateTime}.
+	 * @return A {@code ZonedDateTime} representing the first day of the first quadrimester at the start of the day.
+	 */
 	private static final ZonedDateTime firstDayOfFirstQuadrimesterAtStartOfDay(final int year, final ZoneId zoneId) {
 		return buildZonedDateTime(year, 1, 1, zoneId);
 	}
 	
+	/**
+	 * Returns the {@code ZonedDateTime} representing the first day of the second quadrimester at the start of the day.
+	 *
+	 * @param year The year for which the first day is calculated.
+	 * @param zoneId The time zone ID for the resulting {@code ZonedDateTime}.
+	 * @return A {@code ZonedDateTime} representing the first day of the second quadrimester at the start of the day.
+	 */
 	private static final ZonedDateTime firstDayOfSecondQuadrimesterAtStartOfDay(final int year, final ZoneId zoneId) {
 		return buildZonedDateTime(year, 5, 1, zoneId);
 	}
 	
+	/**
+	 * Returns the {@code ZonedDateTime} representing the first day of the third quadrimester at the start of the day.
+	 *
+	 * @param year The year for which the first day is calculated.
+	 * @param zoneId The time zone ID for the resulting {@code ZonedDateTime}.
+	 * @return A {@code ZonedDateTime} representing the first day of the third quadrimester at the start of the day.
+	 */
 	private static final ZonedDateTime firstDayOfThirdQuadrimesterAtStartOfDay(final int year, final ZoneId zoneId) {
 		return buildZonedDateTime(year, 9, 1, zoneId);
 	}
 	
+	/**
+	 * Returns the {@code ZonedDateTime} representing the last day of the first quadrimester at the start of the day.
+	 *
+	 * @param year The year for which the last day is calculated.
+	 * @param zoneId The time zone ID for the resulting {@code ZonedDateTime}.
+	 * @return A {@code ZonedDateTime} representing the last day of the first quadrimester at the start of the day.
+	 */
 	private static final ZonedDateTime lastDayOfFirstQuadrimesterAtStartOfDay(final int year, final ZoneId zoneId) {
 		return buildZonedDateTime(year, 4, 30, zoneId);
 	}
 	
+	/**
+	 * Returns the {@code ZonedDateTime} representing the last day of the second quadrimester at the start of the day.
+	 *
+	 * @param year The year for which the last day is calculated.
+	 * @param zoneId The time zone ID for the resulting {@code ZonedDateTime}.
+	 * @return A {@code ZonedDateTime} representing the last day of the second quadrimester at the start of the day.
+	 */
 	private static final ZonedDateTime lastDayOfSecondQuadrimesterAtStartOfDay(final int year, final ZoneId zoneId) {
 		return buildZonedDateTime(year, 8, 31, zoneId);
 	}
 	
+	/**
+	 * Returns the {@code ZonedDateTime} representing the last day of the third quadrimester at the start of the day.
+	 *
+	 * @param year The year for which the last day is calculated.
+	 * @param zoneId The time zone ID for the resulting {@code ZonedDateTime}.
+	 * @return A {@code ZonedDateTime} representing the last day of the third quadrimester at the start of the day.
+	 */
 	private static final ZonedDateTime lastDayOfThirdQuadrimesterAtStartOfDay(final int year, final ZoneId zoneId) {
 		return buildZonedDateTime(year, 12, 31, zoneId);
 	}
 	
+	/**
+	 * Throws an {@code IllegalArgumentException} if the given {@code ZonedDateTime} is not in the first quadrimester.
+	 *
+	 * @param zonedDateTime The {@code ZonedDateTime} to check.
+	 * @throws IllegalArgumentException If the provided {@code ZonedDateTime} is not in the first quadrimester.
+	 */
 	private static final void throwExceptionIfIsNotTheFirstQuadrimester(final ZonedDateTime zonedDateTime) {
 		if(!isFirstQuadrimester(zonedDateTime)) throw new IllegalArgumentException("The zonedDateTime is not on first quadrimester");
 	}
 	
+	/**
+	 * Throws an {@code IllegalArgumentException} if the given {@code ZonedDateTime} is not in the second quadrimester.
+	 *
+	 * @param zonedDateTime The {@code ZonedDateTime} to check.
+	 * @throws IllegalArgumentException If the provided {@code ZonedDateTime} is not in the second quadrimester.
+	 */
 	private static final void throwExceptionIfIsNotTheSecondQuadrimester(final ZonedDateTime zonedDateTime) {
 		if(!isSecondQuadrimester(zonedDateTime)) throw new IllegalArgumentException("The zonedDateTime is not on second quadrimester");
 	}
 	
+	/**
+	 * Throws an {@code IllegalArgumentException} if the given {@code ZonedDateTime} is not in the third quadrimester.
+	 *
+	 * @param zonedDateTime The {@code ZonedDateTime} to check.
+	 * @throws IllegalArgumentException If the provided {@code ZonedDateTime} is not in the third quadrimester.
+	 */
 	private static final void throwExceptionIfIsNotTheThirdQuadrimester(final ZonedDateTime zonedDateTime) {
 		if(!isThirdQuadrimester(zonedDateTime)) throw new IllegalArgumentException("The zonedDateTime is not on third quadrimester");
 	}
 	
 	// CURRENT QUADRIMESTER
 	
+	/**
+	 * Returns the {@code ZonedDateTime} representing the first day of the current quadrimester, starting at the first quadrimester.
+	 *
+	 * @param zonedDateTime The reference {@code ZonedDateTime} to determine the year and time zone.
+	 * @return A {@code ZonedDateTime} representing the first day of the current quadrimester, starting at the first quadrimester.
+	 * @throws IllegalArgumentException If the provided {@code ZonedDateTime} is not in the first quadrimester.
+	 */
 	private static final ZonedDateTime firstDayOfCurrentQuadrimesterStartingAtFirstQuadrimester(final ZonedDateTime zonedDateTime) {
 		throwExceptionIfIsNotTheFirstQuadrimester(zonedDateTime);
 		return firstDayOfFirstQuadrimesterAtStartOfDay(zonedDateTime.getYear(), zonedDateTime.getZone());
 	}
 	
+	/**
+	 * Returns the {@code ZonedDateTime} representing the first day of the current quadrimester, starting at the second quadrimester.
+	 *
+	 * @param zonedDateTime The reference {@code ZonedDateTime} to determine the year and time zone.
+	 * @return A {@code ZonedDateTime} representing the first day of the current quadrimester, starting at the second quadrimester.
+	 * @throws IllegalArgumentException If the provided {@code ZonedDateTime} is not in the second quadrimester.
+	 */
 	private static final ZonedDateTime firstDayOfCurrentQuadrimesterStartingAtSecondQuadrimester(final ZonedDateTime zonedDateTime) {
 		throwExceptionIfIsNotTheSecondQuadrimester(zonedDateTime);
 		return firstDayOfSecondQuadrimesterAtStartOfDay(zonedDateTime.getYear(), zonedDateTime.getZone());
 	}
 	
+	/**
+	 * Returns the {@code ZonedDateTime} representing the first day of the current quadrimester, starting at the third quadrimester.
+	 *
+	 * @param zonedDateTime The reference {@code ZonedDateTime} to determine the year and time zone.
+	 * @return A {@code ZonedDateTime} representing the first day of the current quadrimester, starting at the third quadrimester.
+	 * @throws IllegalArgumentException If the provided {@code ZonedDateTime} is not in the third quadrimester.
+	 */
 	private static final ZonedDateTime firstDayOfCurrentQuadrimesterStartingAtThirdQuadrimester(final ZonedDateTime zonedDateTime) {
 		throwExceptionIfIsNotTheThirdQuadrimester(zonedDateTime);
 		return firstDayOfThirdQuadrimesterAtStartOfDay(zonedDateTime.getYear(), zonedDateTime.getZone());
 	}
 	
+	/**
+	 * Returns the {@code ZonedDateTime} representing the last day of the current quadrimester, starting at the first quadrimester.
+	 *
+	 * @param zonedDateTime The reference {@code ZonedDateTime} to determine the year and time zone.
+	 * @return A {@code ZonedDateTime} representing the last day of the current quadrimester, starting at the first quadrimester.
+	 * @throws IllegalArgumentException If the provided {@code ZonedDateTime} is not in the first quadrimester.
+	 */
 	private static final ZonedDateTime lastDayOfCurrentQuadrimesterStartingAtFirstQuadrimester(final ZonedDateTime zonedDateTime) {
 		throwExceptionIfIsNotTheFirstQuadrimester(zonedDateTime);
 		return lastDayOfFirstQuadrimesterAtStartOfDay(zonedDateTime.getYear(), zonedDateTime.getZone());
 	}
 	
+	/**
+	 * Returns the {@code ZonedDateTime} representing the last day of the current quadrimester, starting at the second quadrimester.
+	 *
+	 * @param zonedDateTime The reference {@code ZonedDateTime} to determine the year and time zone.
+	 * @return A {@code ZonedDateTime} representing the last day of the current quadrimester, starting at the second quadrimester.
+	 * @throws IllegalArgumentException If the provided {@code ZonedDateTime} is not in the second quadrimester.
+	 */
 	private static final ZonedDateTime lastDayOfCurrentQuadrimesterStartingAtSecondQuadrimester(final ZonedDateTime zonedDateTime) {
 		throwExceptionIfIsNotTheSecondQuadrimester(zonedDateTime);
 		return lastDayOfSecondQuadrimesterAtStartOfDay(zonedDateTime.getYear(), zonedDateTime.getZone());
 	}
 	
+	/**
+	 * Returns the {@code ZonedDateTime} representing the last day of the current quadrimester, starting at the third quadrimester.
+	 *
+	 * @param zonedDateTime The reference {@code ZonedDateTime} to determine the year and time zone.
+	 * @return A {@code ZonedDateTime} representing the last day of the current quadrimester, starting at the third quadrimester.
+	 * @throws IllegalArgumentException If the provided {@code ZonedDateTime} is not in the third quadrimester.
+	 */
 	private static final ZonedDateTime lastDayOfCurrentQuadrimesterStartingAtThirdQuadrimester(final ZonedDateTime zonedDateTime) {
 		throwExceptionIfIsNotTheThirdQuadrimester(zonedDateTime);
 		return lastDayOfThirdQuadrimesterAtStartOfDay(zonedDateTime.getYear(), zonedDateTime.getZone());
@@ -300,31 +468,73 @@ public class ZonedDateTimeQuadrimesterUtils {
 	
 	// NEXT QUADRIMESTER
 	
+	/**
+	 * Returns the {@code ZonedDateTime} representing the first day of the next quadrimester, starting at the first quadrimester.
+	 *
+	 * @param zonedDateTime The reference {@code ZonedDateTime} to determine the year and time zone.
+	 * @return A {@code ZonedDateTime} representing the first day of the next quadrimester, starting at the first quadrimester.
+	 * @throws IllegalArgumentException If the provided {@code ZonedDateTime} is not in the first quadrimester.
+	 */
 	private static final ZonedDateTime firstDayOfNextQuadrimesterStartingAtFirstQuadrimester(final ZonedDateTime zonedDateTime) {
 		throwExceptionIfIsNotTheFirstQuadrimester(zonedDateTime);
 		return firstDayOfSecondQuadrimesterAtStartOfDay(zonedDateTime.getYear(), zonedDateTime.getZone());
 	}
 	
+	/**
+	 * Returns the {@code ZonedDateTime} representing the first day of the next quadrimester, starting at the second quadrimester.
+	 *
+	 * @param zonedDateTime The reference {@code ZonedDateTime} to determine the year and time zone.
+	 * @return A {@code ZonedDateTime} representing the first day of the next quadrimester, starting at the second quadrimester.
+	 * @throws IllegalArgumentException If the provided {@code ZonedDateTime} is not in the second quadrimester.
+	 */
 	private static final ZonedDateTime firstDayOfNextQuadrimesterStartingAtSecondQuadrimester(final ZonedDateTime zonedDateTime) {
 		throwExceptionIfIsNotTheSecondQuadrimester(zonedDateTime);
 		return firstDayOfThirdQuadrimesterAtStartOfDay(zonedDateTime.getYear(), zonedDateTime.getZone());
 	}
 	
+	/**
+	 * Returns the {@code ZonedDateTime} representing the first day of the next quadrimester, starting at the third quadrimester.
+	 *
+	 * @param zonedDateTime The reference {@code ZonedDateTime} to determine the year and time zone.
+	 * @return A {@code ZonedDateTime} representing the first day of the next quadrimester, starting at the third quadrimester.
+	 * @throws IllegalArgumentException If the provided {@code ZonedDateTime} is not in the third quadrimester.
+	 */
 	private static final ZonedDateTime firstDayOfNextQuadrimesterStartingAtThirdQuadrimester(final ZonedDateTime zonedDateTime) {
 		throwExceptionIfIsNotTheThirdQuadrimester(zonedDateTime);
 		return firstDayOfFirstQuadrimesterAtStartOfDay(zonedDateTime.getYear() + 1, zonedDateTime.getZone());
 	}
 	
+	/**
+	 * Returns the {@code ZonedDateTime} representing the last day of the next quadrimester, starting at the first quadrimester.
+	 *
+	 * @param zonedDateTime The reference {@code ZonedDateTime} to determine the year and time zone.
+	 * @return A {@code ZonedDateTime} representing the last day of the next quadrimester, starting at the first quadrimester.
+	 * @throws IllegalArgumentException If the provided {@code ZonedDateTime} is not in the first quadrimester.
+	 */
 	private static final ZonedDateTime lastDayOfNextQuadrimesterStartingAtFirstQuadrimester(final ZonedDateTime zonedDateTime) {
 		throwExceptionIfIsNotTheFirstQuadrimester(zonedDateTime);
 		return lastDayOfSecondQuadrimesterAtStartOfDay(zonedDateTime.getYear(), zonedDateTime.getZone());
 	}
 	
+	/**
+	 * Returns the {@code ZonedDateTime} representing the last day of the next quadrimester, starting at the second quadrimester.
+	 *
+	 * @param zonedDateTime The reference {@code ZonedDateTime} to determine the year and time zone.
+	 * @return A {@code ZonedDateTime} representing the last day of the next quadrimester, starting at the second quadrimester.
+	 * @throws IllegalArgumentException If the provided {@code ZonedDateTime} is not in the second quadrimester.
+	 */
 	private static final ZonedDateTime lastDayOfNextQuadrimesterStartingAtSecondQuadrimester(final ZonedDateTime zonedDateTime) {
 		throwExceptionIfIsNotTheSecondQuadrimester(zonedDateTime);
 		return lastDayOfThirdQuadrimesterAtStartOfDay(zonedDateTime.getYear(), zonedDateTime.getZone());
 	}
 	
+	/**
+	 * Returns the {@code ZonedDateTime} representing the last day of the next quadrimester, starting at the third quadrimester.
+	 *
+	 * @param zonedDateTime The reference {@code ZonedDateTime} to determine the year and time zone.
+	 * @return A {@code ZonedDateTime} representing the last day of the next quadrimester, starting at the third quadrimester.
+	 * @throws IllegalArgumentException If the provided {@code ZonedDateTime} is not in the third quadrimester.
+	 */
 	private static final ZonedDateTime lastDayOfNextQuadrimesterStartingAtThirdQuadrimester(final ZonedDateTime zonedDateTime) {
 		throwExceptionIfIsNotTheThirdQuadrimester(zonedDateTime);
 		return lastDayOfFirstQuadrimesterAtStartOfDay(zonedDateTime.getYear() + 1, zonedDateTime.getZone());
@@ -332,58 +542,130 @@ public class ZonedDateTimeQuadrimesterUtils {
 	
 	// PREVIOUS QUADRIMESTER
 	
+	/**
+	 * Returns the {@code ZonedDateTime} representing the first day of the previous quadrimester, starting at the first quadrimester.
+	 *
+	 * @param zonedDateTime The reference {@code ZonedDateTime} to determine the year and time zone.
+	 * @return A {@code ZonedDateTime} representing the first day of the previous quadrimester, starting at the first quadrimester.
+	 * @throws IllegalArgumentException If the provided {@code ZonedDateTime} is not in the first quadrimester.
+	 */
 	private static final ZonedDateTime firstDayOfPreviousQuadrimesterStartingAtFirstQuadrimester(final ZonedDateTime zonedDateTime) {
 		throwExceptionIfIsNotTheFirstQuadrimester(zonedDateTime);
 		return firstDayOfThirdQuadrimesterAtStartOfDay(zonedDateTime.getYear() - 1, zonedDateTime.getZone());
 	}
-	
+
+	/**
+	 * Returns the {@code ZonedDateTime} representing the first day of the previous quadrimester, starting at the second quadrimester.
+	 *
+	 * @param zonedDateTime The reference {@code ZonedDateTime} to determine the year and time zone.
+	 * @return A {@code ZonedDateTime} representing the first day of the previous quadrimester, starting at the second quadrimester.
+	 * @throws IllegalArgumentException If the provided {@code ZonedDateTime} is not in the second quadrimester.
+	 */
 	private static final ZonedDateTime firstDayOfPreviousQuadrimesterStartingAtSecondQuadrimester(final ZonedDateTime zonedDateTime) {
 		throwExceptionIfIsNotTheSecondQuadrimester(zonedDateTime);
 		return firstDayOfFirstQuadrimesterAtStartOfDay(zonedDateTime.getYear(), zonedDateTime.getZone());
 	}
 	
+	/**
+	 * Returns the {@code ZonedDateTime} representing the first day of the previous quadrimester, starting at the third quadrimester.
+	 *
+	 * @param zonedDateTime The reference {@code ZonedDateTime} to determine the year and time zone.
+	 * @return A {@code ZonedDateTime} representing the first day of the previous quadrimester, starting at the third quadrimester.
+	 * @throws IllegalArgumentException If the provided {@code ZonedDateTime} is not in the third quadrimester.
+	 */
 	private static final ZonedDateTime firstDayOfPreviousQuadrimesterStartingAtThirdQuadrimester(final ZonedDateTime zonedDateTime) {
 		throwExceptionIfIsNotTheThirdQuadrimester(zonedDateTime);
 		return firstDayOfSecondQuadrimesterAtStartOfDay(zonedDateTime.getYear(), zonedDateTime.getZone());
 	}
 	
+	/**
+	 * Returns the {@code ZonedDateTime} representing the last day of the previous quadrimester, starting at the first quadrimester.
+	 *
+	 * @param zonedDateTime The reference {@code ZonedDateTime} to determine the year and time zone.
+	 * @return A {@code ZonedDateTime} representing the last day of the previous quadrimester, starting at the first quadrimester.
+	 * @throws IllegalArgumentException If the provided {@code ZonedDateTime} is not in the first quadrimester.
+	 */
 	private static final ZonedDateTime lastDayOfPreviousQuadrimesterStartingAtFirstQuadrimester(final ZonedDateTime zonedDateTime) {
 		throwExceptionIfIsNotTheFirstQuadrimester(zonedDateTime);
 		return lastDayOfThirdQuadrimesterAtStartOfDay(zonedDateTime.getYear() - 1, zonedDateTime.getZone());
 	}
 	
+	/**
+	 * Returns the {@code ZonedDateTime} representing the last day of the previous quadrimester, starting at the second quadrimester.
+	 *
+	 * @param zonedDateTime The reference {@code ZonedDateTime} to determine the year and time zone.
+	 * @return A {@code ZonedDateTime} representing the last day of the previous quadrimester, starting at the second quadrimester.
+	 * @throws IllegalArgumentException If the provided {@code ZonedDateTime} is not in the second quadrimester.
+	 */
 	private static final ZonedDateTime lastDayOfPreviousQuadrimesterStartingAtSecondQuadrimester(final ZonedDateTime zonedDateTime) {
 		throwExceptionIfIsNotTheSecondQuadrimester(zonedDateTime);
 		return lastDayOfFirstQuadrimesterAtStartOfDay(zonedDateTime.getYear(), zonedDateTime.getZone());
 	}
 	
+	/**
+	 * Returns the {@code ZonedDateTime} representing the last day of the previous quadrimester, starting at the third quadrimester.
+	 *
+	 * @param zonedDateTime The reference {@code ZonedDateTime} to determine the year and time zone.
+	 * @return A {@code ZonedDateTime} representing the last day of the previous quadrimester, starting at the third quadrimester.
+	 * @throws IllegalArgumentException If the provided {@code ZonedDateTime} is not in the third quadrimester.
+	 */
 	private static final ZonedDateTime lastDayOfPreviousQuadrimesterStartingAtThirdQuadrimester(final ZonedDateTime zonedDateTime) {
 		throwExceptionIfIsNotTheThirdQuadrimester(zonedDateTime);
 		return lastDayOfSecondQuadrimesterAtStartOfDay(zonedDateTime.getYear(), zonedDateTime.getZone());
 	}
 
+	/**
+	 * Returns a mapping of months to functions that calculate the first day of the current quadrimester based on the provided {@code ZonedDateTime}.
+	 *
+	 * @return A {@code Map} containing mappings from months to functions representing the first day of the current quadrimester.
+	 */
 	public static Map<Month, Function<ZonedDateTime, ZonedDateTime>> getFirstDayOfCurrentQuadrimester() {
-		return FIRST_DAY_OF_CURRENT_QUADRIMESTER;
+	    return FIRST_DAY_OF_CURRENT_QUADRIMESTER;
 	}
 
+	/**
+	 * Returns a mapping of months to functions that calculate the last day of the current quadrimester based on the provided {@code ZonedDateTime}.
+	 *
+	 * @return A {@code Map} containing mappings from months to functions representing the last day of the current quadrimester.
+	 */
 	public static Map<Month, Function<ZonedDateTime, ZonedDateTime>> getLastDayOfCurrentQuadrimester() {
-		return LAST_DAY_OF_CURRENT_QUADRIMESTER;
+	    return LAST_DAY_OF_CURRENT_QUADRIMESTER;
 	}
 
+	/**
+	 * Returns a mapping of months to functions that calculate the first day of the next quadrimester based on the provided {@code ZonedDateTime}.
+	 *
+	 * @return A {@code Map} containing mappings from months to functions representing the first day of the next quadrimester.
+	 */
 	public static Map<Month, Function<ZonedDateTime, ZonedDateTime>> getFirstDayOfNextQuadrimester() {
-		return FIRST_DAY_OF_NEXT_QUADRIMESTER;
+	    return FIRST_DAY_OF_NEXT_QUADRIMESTER;
 	}
 
+	/**
+	 * Returns a mapping of months to functions that calculate the last day of the next quadrimester based on the provided {@code ZonedDateTime}.
+	 *
+	 * @return A {@code Map} containing mappings from months to functions representing the last day of the next quadrimester.
+	 */
 	public static Map<Month, Function<ZonedDateTime, ZonedDateTime>> getLastDayOfNextQuadrimester() {
-		return LAST_DAY_OF_NEXT_QUADRIMESTER;
+	    return LAST_DAY_OF_NEXT_QUADRIMESTER;
 	}
 
+	/**
+	 * Returns a mapping of months to functions that calculate the first day of the previous quadrimester based on the provided {@code ZonedDateTime}.
+	 *
+	 * @return A {@code Map} containing mappings from months to functions representing the first day of the previous quadrimester.
+	 */
 	public static Map<Month, Function<ZonedDateTime, ZonedDateTime>> getFirstDayOfPreviousQuadrimester() {
-		return FIRST_DAY_OF_PREVIOUS_QUADRIMESTER;
+	    return FIRST_DAY_OF_PREVIOUS_QUADRIMESTER;
 	}
 
+	/**
+	 * Returns a mapping of months to functions that calculate the last day of the previous quadrimester based on the provided {@code ZonedDateTime}.
+	 *
+	 * @return A {@code Map} containing mappings from months to functions representing the last day of the previous quadrimester.
+	 */
 	public static Map<Month, Function<ZonedDateTime, ZonedDateTime>> getLastDayOfPreviousQuadrimester() {
-		return LAST_DAY_OF_PREVIOUS_QUADRIMESTER;
+	    return LAST_DAY_OF_PREVIOUS_QUADRIMESTER;
 	}
 	
 //	public enum QUADRIMESTER {

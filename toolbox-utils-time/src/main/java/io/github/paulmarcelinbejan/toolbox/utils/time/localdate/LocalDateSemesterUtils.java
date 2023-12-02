@@ -54,20 +54,47 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class LocalDateSemesterUtils {
 
-	private static final Map<Month, Function<LocalDate, LocalDate>> FIRST_DAY_OF_CURRENT_SEMESTER = initializeFirstDayOfCurrentSemesterMap();
-	
-	private static final Map<Month, Function<LocalDate, LocalDate>> LAST_DAY_OF_CURRENT_SEMESTER = initializeLastDayOfCurrentSemesterMap();
-	
-	private static final Map<Month, Function<LocalDate, LocalDate>> FIRST_DAY_OF_NEXT_SEMESTER = initializeFirstDayOfNextSemesterMap();
-	
-	private static final Map<Month, Function<LocalDate, LocalDate>> LAST_DAY_OF_NEXT_SEMESTER = initializeLastDayOfNextSemesterMap();
-	
-	private static final Map<Month, Function<LocalDate, LocalDate>> FIRST_DAY_OF_PREVIOUS_SEMESTER = initializeFirstDayOfPreviousSemesterMap();
-	
-	private static final Map<Month, Function<LocalDate, LocalDate>> LAST_DAY_OF_PREVIOUS_SEMESTER = initializeLastDayOfPreviousSemesterMap();
-	
+    /**
+     * Map containing functions to calculate the first day of the current semester for each month.
+     */
+    private static final Map<Month, Function<LocalDate, LocalDate>> FIRST_DAY_OF_CURRENT_SEMESTER = initializeFirstDayOfCurrentSemesterMap();
+
+    /**
+     * Map containing functions to calculate the last day of the current semester for each month.
+     */
+    private static final Map<Month, Function<LocalDate, LocalDate>> LAST_DAY_OF_CURRENT_SEMESTER = initializeLastDayOfCurrentSemesterMap();
+
+    /**
+     * Map containing functions to calculate the first day of the next semester for each month.
+     */
+    private static final Map<Month, Function<LocalDate, LocalDate>> FIRST_DAY_OF_NEXT_SEMESTER = initializeFirstDayOfNextSemesterMap();
+
+    /**
+     * Map containing functions to calculate the last day of the next semester for each month.
+     */
+    private static final Map<Month, Function<LocalDate, LocalDate>> LAST_DAY_OF_NEXT_SEMESTER = initializeLastDayOfNextSemesterMap();
+
+    /**
+     * Map containing functions to calculate the first day of the previous semester for each month.
+     */
+    private static final Map<Month, Function<LocalDate, LocalDate>> FIRST_DAY_OF_PREVIOUS_SEMESTER = initializeFirstDayOfPreviousSemesterMap();
+
+    /**
+     * Map containing functions to calculate the last day of the previous semester for each month.
+     */
+    private static final Map<Month, Function<LocalDate, LocalDate>> LAST_DAY_OF_PREVIOUS_SEMESTER = initializeLastDayOfPreviousSemesterMap();
+    
 	// FIRST DAY of CURRENT SEMESTER
 	
+    /**
+     * Initializes a map with functions to calculate the first day of the current semester for each month.
+     * <p>
+     * The returned map contains month-function pairs, where the function takes a {@code LocalDate} parameter
+     * and returns the corresponding first day of the current semester for the specified month.
+     * </p>
+     *
+     * @return The initialized map with month-function pairs for the first day of the current semester.
+     */
 	private static final Map<Month, Function<LocalDate, LocalDate>> initializeFirstDayOfCurrentSemesterMap() {
 		Map<Month, Function<LocalDate, LocalDate>> map = new EnumMap<>(Month.class);
 		
@@ -92,6 +119,15 @@ public class LocalDateSemesterUtils {
 	
 	// LAST DAY of CURRENT SEMESTER
 	
+	/**
+	 * Initializes a map with functions to calculate the last day of the current semester for each month.
+	 * <p>
+	 * The returned map contains month-function pairs, where the function takes a {@code LocalDate} parameter
+	 * and returns the corresponding last day of the current semester for the specified month.
+	 * </p>
+	 *
+	 * @return The initialized map with month-function pairs for the last day of the current semester.
+	 */
 	private static final Map<Month, Function<LocalDate, LocalDate>> initializeLastDayOfCurrentSemesterMap() {
 		Map<Month, Function<LocalDate, LocalDate>> map = new EnumMap<>(Month.class);
 		
@@ -116,6 +152,15 @@ public class LocalDateSemesterUtils {
 	
 	// FIRST DAY of NEXT SEMESTER
 	
+	/**
+	 * Initializes a map with functions to calculate the first day of the next semester for each month.
+	 * <p>
+	 * The returned map contains month-function pairs, where the function takes a {@code LocalDate} parameter
+	 * and returns the corresponding first day of the next semester for the specified month.
+	 * </p>
+	 *
+	 * @return The initialized map with month-function pairs for the first day of the next semester.
+	 */
 	private static final Map<Month, Function<LocalDate, LocalDate>> initializeFirstDayOfNextSemesterMap() {
 		Map<Month, Function<LocalDate, LocalDate>> map = new EnumMap<>(Month.class);
 		
@@ -140,6 +185,15 @@ public class LocalDateSemesterUtils {
 	
 	// LAST DAY of NEXT SEMESTER
 	
+	/**
+	 * Initializes a map with functions to calculate the last day of the next semester for each month.
+	 * <p>
+	 * The returned map contains month-function pairs, where the function takes a {@code LocalDate} parameter
+	 * and returns the corresponding last day of the next semester for the specified month.
+	 * </p>
+	 *
+	 * @return The initialized map with month-function pairs for the last day of the next semester.
+	 */
 	private static final Map<Month, Function<LocalDate, LocalDate>> initializeLastDayOfNextSemesterMap() {
 		Map<Month, Function<LocalDate, LocalDate>> map = new EnumMap<>(Month.class);
 		
@@ -164,6 +218,15 @@ public class LocalDateSemesterUtils {
 	
 	// FIRST DAY of PREVIOUS SEMESTER
 	
+	/**
+	 * Initializes a map with functions to calculate the first day of the previous semester for each month.
+	 * <p>
+	 * The returned map contains month-function pairs, where the function takes a {@code LocalDate} parameter
+	 * and returns the corresponding first day of the previous semester for the specified month.
+	 * </p>
+	 *
+	 * @return The initialized map with month-function pairs for the first day of the previous semester.
+	 */
 	private static final Map<Month, Function<LocalDate, LocalDate>> initializeFirstDayOfPreviousSemesterMap() {
 		Map<Month, Function<LocalDate, LocalDate>> map = new EnumMap<>(Month.class);
 		
@@ -188,6 +251,15 @@ public class LocalDateSemesterUtils {
 	
 	// LAST DAY of PREVIOUS SEMESTER
 	
+	/**
+	 * Initializes a map with functions to calculate the last day of the previous semester for each month.
+	 * <p>
+	 * The returned map contains month-function pairs, where the function takes a {@code LocalDate} parameter
+	 * and returns the corresponding last day of the previous semester for the specified month.
+	 * </p>
+	 *
+	 * @return The initialized map with month-function pairs for the last day of the previous semester.
+	 */
 	private static final Map<Month, Function<LocalDate, LocalDate>> initializeLastDayOfPreviousSemesterMap() {
 		Map<Month, Function<LocalDate, LocalDate>> map = new EnumMap<>(Month.class);
 		
@@ -210,47 +282,111 @@ public class LocalDateSemesterUtils {
 		return map;
 	}
 	
+	/**
+	 * Returns the first day of the first semester for the specified year.
+	 *
+	 * @param year The year for which to calculate the first day of the first semester.
+	 * @return The {@code LocalDate} representing the first day of the first semester.
+	 */
 	private static final LocalDate firstDayOfFirstSemester(final int year) {
 		return buildLocalDate(year, 1, 1);
 	}
 	
+	/**
+	 * Returns the first day of the second semester for the specified year.
+	 *
+	 * @param year The year for which to calculate the first day of the second semester.
+	 * @return The {@code LocalDate} representing the first day of the second semester.
+	 */
 	private static final LocalDate firstDayOfSecondSemester(final int year) {
 		return buildLocalDate(year, 7, 1);
 	}
 	
+	/**
+	 * Returns the last day of the first semester for the specified year.
+	 *
+	 * @param year The year for which to calculate the last day of the first semester.
+	 * @return The {@code LocalDate} representing the last day of the first semester.
+	 */
 	private static final LocalDate lastDayOfFirstSemester(final int year) {
 		return buildLocalDate(year, 6, 30);
 	}
 	
+	/**
+	 * Returns the last day of the second semester for the specified year.
+	 *
+	 * @param year The year for which to calculate the last day of the second semester.
+	 * @return The {@code LocalDate} representing the last day of the second semester.
+	 */
 	private static final LocalDate lastDayOfSecondSemester(final int year) {
 		return buildLocalDate(year, 12, 31);
 	}
 	
+	/**
+	 * Throws an {@code IllegalArgumentException} if the specified {@code LocalDate} is not in the first semester.
+	 *
+	 * @param localDate The {@code LocalDate} to check for being in the first semester.
+	 * @throws IllegalArgumentException If the specified {@code LocalDate} is not in the first semester.
+	 */
 	private static final void throwExceptionIfIsNotTheFirstSemester(final LocalDate localDate) {
 		if(!isFirstSemester(localDate)) throw new IllegalArgumentException("The localDate is not on first semester");
 	}
 	
+	/**
+	 * Throws an {@code IllegalArgumentException} if the specified {@code LocalDate} is not in the second semester.
+	 *
+	 * @param localDate The {@code LocalDate} to check for being in the second semester.
+	 * @throws IllegalArgumentException If the specified {@code LocalDate} is not in the second semester.
+	 */
 	private static final void throwExceptionIfIsNotTheSecondSemester(final LocalDate localDate) {
 		if(!isSecondSemester(localDate)) throw new IllegalArgumentException("The localDate is not on second semester");
 	}
 	
 	// CURRENT SEMESTER
 	
+	/**
+	 * Returns the first day of the current semester starting at the first semester for the specified {@code LocalDate}.
+	 *
+	 * @param localDate The {@code LocalDate} representing the current semester starting point.
+	 * @return The {@code LocalDate} representing the first day of the current semester.
+	 * @throws IllegalArgumentException If the specified {@code LocalDate} is not in the first semester.
+	 */
 	private static final LocalDate firstDayOfCurrentSemesterStartingAtFirstSemester(final LocalDate localDate) {
 		throwExceptionIfIsNotTheFirstSemester(localDate);
 		return firstDayOfFirstSemester(localDate.getYear());
 	}
 	
+	/**
+	 * Returns the first day of the current semester starting at the second semester for the specified {@code LocalDate}.
+	 *
+	 * @param localDate The {@code LocalDate} representing the current semester starting point.
+	 * @return The {@code LocalDate} representing the first day of the current semester.
+	 * @throws IllegalArgumentException If the specified {@code LocalDate} is not in the second semester.
+	 */
 	private static final LocalDate firstDayOfCurrentSemesterStartingAtSecondSemester(final LocalDate localDate) {
 		throwExceptionIfIsNotTheSecondSemester(localDate);
 		return firstDayOfSecondSemester(localDate.getYear());
 	}
 	
+	/**
+	 * Returns the last day of the current semester starting at the first semester for the specified {@code LocalDate}.
+	 *
+	 * @param localDate The {@code LocalDate} representing the current semester starting point.
+	 * @return The {@code LocalDate} representing the last day of the current semester.
+	 * @throws IllegalArgumentException If the specified {@code LocalDate} is not in the first semester.
+	 */
 	private static final LocalDate lastDayOfCurrentSemesterStartingAtFirstSemester(final LocalDate localDate) {
 		throwExceptionIfIsNotTheFirstSemester(localDate);
 		return lastDayOfFirstSemester(localDate.getYear());
 	}
 	
+	/**
+	 * Returns the last day of the current semester starting at the second semester for the specified {@code LocalDate}.
+	 *
+	 * @param localDate The {@code LocalDate} representing the current semester starting point.
+	 * @return The {@code LocalDate} representing the last day of the current semester.
+	 * @throws IllegalArgumentException If the specified {@code LocalDate} is not in the second semester.
+	 */
 	private static final LocalDate lastDayOfCurrentSemesterStartingAtSecondSemester(final LocalDate localDate) {
 		throwExceptionIfIsNotTheSecondSemester(localDate);
 		return lastDayOfSecondSemester(localDate.getYear());
@@ -258,21 +394,49 @@ public class LocalDateSemesterUtils {
 	
 	// NEXT SEMESTER
 	
+	/**
+	 * Returns the first day of the next semester starting at the first semester for the specified {@code LocalDate}.
+	 *
+	 * @param localDate The {@code LocalDate} representing the current semester starting point.
+	 * @return The {@code LocalDate} representing the first day of the next semester.
+	 * @throws IllegalArgumentException If the specified {@code LocalDate} is not in the first semester.
+	 */
 	private static final LocalDate firstDayOfNextSemesterStartingAtFirstSemester(final LocalDate localDate) {
 		throwExceptionIfIsNotTheFirstSemester(localDate);
 		return firstDayOfSecondSemester(localDate.getYear());
 	}
 	
+	/**
+	 * Returns the first day of the next semester starting at the second semester for the specified {@code LocalDate}.
+	 *
+	 * @param localDate The {@code LocalDate} representing the current semester starting point.
+	 * @return The {@code LocalDate} representing the first day of the next semester.
+	 * @throws IllegalArgumentException If the specified {@code LocalDate} is not in the second semester.
+	 */
 	private static final LocalDate firstDayOfNextSemesterStartingAtSecondSemester(final LocalDate localDate) {
 		throwExceptionIfIsNotTheSecondSemester(localDate);
 		return firstDayOfFirstSemester(localDate.getYear() + 1);
 	}
 	
+	/**
+	 * Returns the last day of the next semester starting at the first semester for the specified {@code LocalDate}.
+	 *
+	 * @param localDate The {@code LocalDate} representing the current semester starting point.
+	 * @return The {@code LocalDate} representing the last day of the next semester.
+	 * @throws IllegalArgumentException If the specified {@code LocalDate} is not in the first semester.
+	 */
 	private static final LocalDate lastDayOfNextSemesterStartingAtFirstSemester(final LocalDate localDate) {
 		throwExceptionIfIsNotTheFirstSemester(localDate);
 		return lastDayOfSecondSemester(localDate.getYear());
 	}
 	
+	/**
+	 * Returns the last day of the next semester starting at the second semester for the specified {@code LocalDate}.
+	 *
+	 * @param localDate The {@code LocalDate} representing the current semester starting point.
+	 * @return The {@code LocalDate} representing the last day of the next semester.
+	 * @throws IllegalArgumentException If the specified {@code LocalDate} is not in the second semester.
+	 */
 	private static final LocalDate lastDayOfNextSemesterStartingAtSecondSemester(final LocalDate localDate) {
 		throwExceptionIfIsNotTheSecondSemester(localDate);
 		return lastDayOfFirstSemester(localDate.getYear() + 1);
@@ -280,46 +444,104 @@ public class LocalDateSemesterUtils {
 	
 	// PREVIOUS SEMESTER
 	
+	/**
+	 * Returns the first day of the previous semester starting at the first semester for the specified {@code LocalDate}.
+	 *
+	 * @param localDate The {@code LocalDate} representing the current semester starting point.
+	 * @return The {@code LocalDate} representing the first day of the previous semester.
+	 * @throws IllegalArgumentException If the specified {@code LocalDate} is not in the first semester.
+	 */
 	private static final LocalDate firstDayOfPreviousSemesterStartingAtFirstSemester(final LocalDate localDate) {
 		throwExceptionIfIsNotTheFirstSemester(localDate);
 		return firstDayOfSecondSemester(localDate.getYear() - 1);
 	}
 	
+	/**
+	 * Returns the first day of the previous semester starting at the second semester for the specified {@code LocalDate}.
+	 *
+	 * @param localDate The {@code LocalDate} representing the current semester starting point.
+	 * @return The {@code LocalDate} representing the first day of the previous semester.
+	 * @throws IllegalArgumentException If the specified {@code LocalDate} is not in the second semester.
+	 */
 	private static final LocalDate firstDayOfPreviousSemesterStartingAtSecondSemester(final LocalDate localDate) {
 		throwExceptionIfIsNotTheSecondSemester(localDate);
 		return firstDayOfFirstSemester(localDate.getYear());
 	}
 	
+	/**
+	 * Returns the last day of the previous semester starting at the first semester for the specified {@code LocalDate}.
+	 *
+	 * @param localDate The {@code LocalDate} representing the current semester starting point.
+	 * @return The {@code LocalDate} representing the last day of the previous semester.
+	 * @throws IllegalArgumentException If the specified {@code LocalDate} is not in the first semester.
+	 */
 	private static final LocalDate lastDayOfPreviousSemesterStartingAtFirstSemester(final LocalDate localDate) {
 		throwExceptionIfIsNotTheFirstSemester(localDate);
 		return lastDayOfSecondSemester(localDate.getYear() - 1);
 	}
 	
+	/**
+	 * Returns the last day of the previous semester starting at the second semester for the specified {@code LocalDate}.
+	 *
+	 * @param localDate The {@code LocalDate} representing the current semester starting point.
+	 * @return The {@code LocalDate} representing the last day of the previous semester.
+	 * @throws IllegalArgumentException If the specified {@code LocalDate} is not in the second semester.
+	 */
 	private static final LocalDate lastDayOfPreviousSemesterStartingAtSecondSemester(final LocalDate localDate) {
 		throwExceptionIfIsNotTheSecondSemester(localDate);
 		return lastDayOfFirstSemester(localDate.getYear());
 	}
 
+	/**
+	 * Returns the map of functions to calculate the first day of the current semester for each month.
+	 *
+	 * @return The map containing month-function pairs for the first day of the current semester.
+	 */
 	public static Map<Month, Function<LocalDate, LocalDate>> getFirstDayOfCurrentSemester() {
 		return FIRST_DAY_OF_CURRENT_SEMESTER;
 	}
 
+	/**
+	 * Returns the map of functions to calculate the last day of the current semester for each month.
+	 *
+	 * @return The map containing month-function pairs for the last day of the current semester.
+	 */
 	public static Map<Month, Function<LocalDate, LocalDate>> getLastDayOfCurrentSemester() {
 		return LAST_DAY_OF_CURRENT_SEMESTER;
 	}
 
+	/**
+	 * Returns the map of functions to calculate the first day of the next semester for each month.
+	 *
+	 * @return The map containing month-function pairs for the first day of the next semester.
+	 */
 	public static Map<Month, Function<LocalDate, LocalDate>> getFirstDayOfNextSemester() {
 		return FIRST_DAY_OF_NEXT_SEMESTER;
 	}
 
+	/**
+	 * Returns the map of functions to calculate the last day of the next semester for each month.
+	 *
+	 * @return The map containing month-function pairs for the last day of the next semester.
+	 */
 	public static Map<Month, Function<LocalDate, LocalDate>> getLastDayOfNextSemester() {
 		return LAST_DAY_OF_NEXT_SEMESTER;
 	}
 
+	/**
+	 * Returns the map of functions to calculate the first day of the previous semester for each month.
+	 *
+	 * @return The map containing month-function pairs for the first day of the previous semester.
+	 */
 	public static Map<Month, Function<LocalDate, LocalDate>> getFirstDayOfPreviousSemester() {
 		return FIRST_DAY_OF_PREVIOUS_SEMESTER;
 	}
 
+	/**
+	 * Returns the map of functions to calculate the last day of the previous semester for each month.
+	 *
+	 * @return The map containing month-function pairs for the last day of the previous semester.
+	 */
 	public static Map<Month, Function<LocalDate, LocalDate>> getLastDayOfPreviousSemester() {
 		return LAST_DAY_OF_PREVIOUS_SEMESTER;
 	}

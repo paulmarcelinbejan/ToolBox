@@ -55,20 +55,57 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class ZonedDateTimeSemesterUtils {
 
+	/**
+	 * A map containing functions to get the first day of the current semester for each month.
+	 * The map associates each Month with a corresponding function that takes a ZonedDateTime
+	 * and returns the first day of the current semester.
+	 */
 	private static final Map<Month, Function<ZonedDateTime, ZonedDateTime>> FIRST_DAY_OF_CURRENT_SEMESTER = initializeFirstDayOfCurrentSemesterMap();
-	
+
+	/**
+	 * A map containing functions to get the last day of the current semester for each month.
+	 * The map associates each Month with a corresponding function that takes a ZonedDateTime
+	 * and returns the last day of the current semester.
+	 */
 	private static final Map<Month, Function<ZonedDateTime, ZonedDateTime>> LAST_DAY_OF_CURRENT_SEMESTER = initializeLastDayOfCurrentSemesterMap();
-	
+
+	/**
+	 * A map containing functions to get the first day of the next semester for each month.
+	 * The map associates each Month with a corresponding function that takes a ZonedDateTime
+	 * and returns the first day of the next semester.
+	 */
 	private static final Map<Month, Function<ZonedDateTime, ZonedDateTime>> FIRST_DAY_OF_NEXT_SEMESTER = initializeFirstDayOfNextSemesterMap();
-	
+
+	/**
+	 * A map containing functions to get the last day of the next semester for each month.
+	 * The map associates each Month with a corresponding function that takes a ZonedDateTime
+	 * and returns the last day of the next semester.
+	 */
 	private static final Map<Month, Function<ZonedDateTime, ZonedDateTime>> LAST_DAY_OF_NEXT_SEMESTER = initializeLastDayOfNextSemesterMap();
-	
+
+	/**
+	 * A map containing functions to get the first day of the previous semester for each month.
+	 * The map associates each Month with a corresponding function that takes a ZonedDateTime
+	 * and returns the first day of the previous semester.
+	 */
 	private static final Map<Month, Function<ZonedDateTime, ZonedDateTime>> FIRST_DAY_OF_PREVIOUS_SEMESTER = initializeFirstDayOfPreviousSemesterMap();
-	
+
+	/**
+	 * A map containing functions to get the last day of the previous semester for each month.
+	 * The map associates each Month with a corresponding function that takes a ZonedDateTime
+	 * and returns the last day of the previous semester.
+	 */
 	private static final Map<Month, Function<ZonedDateTime, ZonedDateTime>> LAST_DAY_OF_PREVIOUS_SEMESTER = initializeLastDayOfPreviousSemesterMap();
 	
 	// FIRST DAY of CURRENT SEMESTER
 	
+	/**
+	 * Initializes a map containing functions to calculate the first day of the current semester for each month.
+	 * The key is the month, and the value is a function taking a {@code ZonedDateTime} and returning
+	 * a {@code ZonedDateTime} representing the first day of the current semester in the same year and time zone.
+	 *
+	 * @return A map containing functions to calculate the first day of the current semester for each month.
+	 */
 	private static final Map<Month, Function<ZonedDateTime, ZonedDateTime>> initializeFirstDayOfCurrentSemesterMap() {
 		Map<Month, Function<ZonedDateTime, ZonedDateTime>> map = new EnumMap<>(Month.class);
 		
@@ -93,6 +130,13 @@ public class ZonedDateTimeSemesterUtils {
 	
 	// LAST DAY of CURRENT SEMESTER
 	
+	/**
+	 * Initializes a map containing functions to calculate the last day of the current semester for each month.
+	 * The key is the month, and the value is a function taking a {@code ZonedDateTime} and returning
+	 * a {@code ZonedDateTime} representing the last day of the current semester in the same year and time zone.
+	 *
+	 * @return A map containing functions to calculate the last day of the current semester for each month.
+	 */
 	private static final Map<Month, Function<ZonedDateTime, ZonedDateTime>> initializeLastDayOfCurrentSemesterMap() {
 		Map<Month, Function<ZonedDateTime, ZonedDateTime>> map = new EnumMap<>(Month.class);
 		
@@ -117,6 +161,13 @@ public class ZonedDateTimeSemesterUtils {
 	
 	// FIRST DAY of NEXT SEMESTER
 	
+	/**
+	 * Initializes a map containing functions to calculate the first day of the next semester for each month.
+	 * The key is the month, and the value is a function taking a {@code ZonedDateTime} and returning
+	 * a {@code ZonedDateTime} representing the first day of the next semester in the same year and time zone.
+	 *
+	 * @return A map containing functions to calculate the first day of the next semester for each month.
+	 */
 	private static final Map<Month, Function<ZonedDateTime, ZonedDateTime>> initializeFirstDayOfNextSemesterMap() {
 		Map<Month, Function<ZonedDateTime, ZonedDateTime>> map = new EnumMap<>(Month.class);
 		
@@ -141,6 +192,13 @@ public class ZonedDateTimeSemesterUtils {
 	
 	// LAST DAY of NEXT SEMESTER
 	
+	/**
+	 * Initializes a map containing functions to calculate the last day of the next semester for each month.
+	 * The key is the month, and the value is a function taking a {@code ZonedDateTime} and returning
+	 * a {@code ZonedDateTime} representing the last day of the next semester in the same year and time zone.
+	 *
+	 * @return A map containing functions to calculate the last day of the next semester for each month.
+	 */
 	private static final Map<Month, Function<ZonedDateTime, ZonedDateTime>> initializeLastDayOfNextSemesterMap() {
 		Map<Month, Function<ZonedDateTime, ZonedDateTime>> map = new EnumMap<>(Month.class);
 		
@@ -165,6 +223,13 @@ public class ZonedDateTimeSemesterUtils {
 	
 	// FIRST DAY of PREVIOUS SEMESTER
 	
+	/**
+	 * Initializes a map containing functions to calculate the first day of the previous semester for each month.
+	 * The key is the month, and the value is a function taking a {@code ZonedDateTime} and returning
+	 * a {@code ZonedDateTime} representing the first day of the previous semester in the same year and time zone.
+	 *
+	 * @return A map containing functions to calculate the first day of the previous semester for each month.
+	 */
 	private static final Map<Month, Function<ZonedDateTime, ZonedDateTime>> initializeFirstDayOfPreviousSemesterMap() {
 		Map<Month, Function<ZonedDateTime, ZonedDateTime>> map = new EnumMap<>(Month.class);
 		
@@ -189,6 +254,13 @@ public class ZonedDateTimeSemesterUtils {
 	
 	// LAST DAY of PREVIOUS SEMESTER
 	
+	/**
+	 * Initializes a map containing functions to calculate the last day of the previous semester for each month.
+	 * The key is the month, and the value is a function taking a {@code ZonedDateTime} and returning
+	 * a {@code ZonedDateTime} representing the last day of the previous semester in the same year and time zone.
+	 *
+	 * @return A map containing functions to calculate the last day of the previous semester for each month.
+	 */
 	private static final Map<Month, Function<ZonedDateTime, ZonedDateTime>> initializeLastDayOfPreviousSemesterMap() {
 		Map<Month, Function<ZonedDateTime, ZonedDateTime>> map = new EnumMap<>(Month.class);
 		
@@ -211,118 +283,272 @@ public class ZonedDateTimeSemesterUtils {
 		return map;
 	}
 	
+	/**
+	 * Returns the first day of the first semester at the start of the day for the specified year and time zone.
+	 *
+	 * @param year    The year for which to get the first day.
+	 * @param zoneId  The time zone to consider.
+	 * @return The {@code ZonedDateTime} representing the first day of the first semester at the start of the day.
+	 */
 	private static final ZonedDateTime firstDayOfFirstSemesterAtStartOfDay(final int year, final ZoneId zoneId) {
-		return buildZonedDateTime(year, 1, 1, zoneId);
+	    return buildZonedDateTime(year, 1, 1, zoneId);
 	}
-	
+
+	/**
+	 * Returns the first day of the second semester at the start of the day for the specified year and time zone.
+	 *
+	 * @param year    The year for which to get the first day.
+	 * @param zoneId  The time zone to consider.
+	 * @return The {@code ZonedDateTime} representing the first day of the second semester at the start of the day.
+	 */
 	private static final ZonedDateTime firstDayOfSecondSemesterAtStartOfDay(final int year, final ZoneId zoneId) {
-		return buildZonedDateTime(year, 7, 1, zoneId);
+	    return buildZonedDateTime(year, 7, 1, zoneId);
 	}
-	
+
+	/**
+	 * Returns the last day of the first semester at the start of the day for the specified year and time zone.
+	 *
+	 * @param year    The year for which to get the last day.
+	 * @param zoneId  The time zone to consider.
+	 * @return The {@code ZonedDateTime} representing the last day of the first semester at the start of the day.
+	 */
 	private static final ZonedDateTime lastDayOfFirstSemesterAtStartOfDay(final int year, final ZoneId zoneId) {
-		return buildZonedDateTime(year, 6, 30, zoneId);
+	    return buildZonedDateTime(year, 6, 30, zoneId);
 	}
-	
+
+	/**
+	 * Returns the last day of the second semester at the start of the day for the specified year and time zone.
+	 *
+	 * @param year    The year for which to get the last day.
+	 * @param zoneId  The time zone to consider.
+	 * @return The {@code ZonedDateTime} representing the last day of the second semester at the start of the day.
+	 */
 	private static final ZonedDateTime lastDayOfSecondSemesterAtStartOfDay(final int year, final ZoneId zoneId) {
-		return buildZonedDateTime(year, 12, 31, zoneId);
+	    return buildZonedDateTime(year, 12, 31, zoneId);
 	}
 	
+	/**
+	 * Throws an {@code IllegalArgumentException} if the provided {@code ZonedDateTime} is not in the first semester.
+	 *
+	 * @param zonedDateTime The {@code ZonedDateTime} to check.
+	 * @throws IllegalArgumentException If the provided {@code ZonedDateTime} is not in the first semester.
+	 */
 	private static final void throwExceptionIfIsNotTheFirstSemester(final ZonedDateTime zonedDateTime) {
 		if(!isFirstSemester(zonedDateTime)) throw new IllegalArgumentException("The zonedDateTime is not on first semester");
 	}
 	
+	/**
+	 * Throws an {@code IllegalArgumentException} if the provided {@code ZonedDateTime} is not in the second semester.
+	 *
+	 * @param zonedDateTime The {@code ZonedDateTime} to check.
+	 * @throws IllegalArgumentException If the provided {@code ZonedDateTime} is not in the second semester.
+	 */
 	private static final void throwExceptionIfIsNotTheSecondSemester(final ZonedDateTime zonedDateTime) {
 		if(!isSecondSemester(zonedDateTime)) throw new IllegalArgumentException("The zonedDateTime is not on second semester");
 	}
 	
 	// CURRENT SEMESTER
 	
+	/**
+	 * Returns the first day of the current semester, starting from the first semester, based on the provided {@code ZonedDateTime}.
+	 *
+	 * @param zonedDateTime The {@code ZonedDateTime} representing a date within the desired semester.
+	 * @return The {@code ZonedDateTime} representing the first day of the current semester starting from the first semester.
+	 * @throws IllegalArgumentException If the provided {@code ZonedDateTime} is not in the first semester.
+	 */
 	private static final ZonedDateTime firstDayOfCurrentSemesterStartingAtFirstSemester(final ZonedDateTime zonedDateTime) {
-		throwExceptionIfIsNotTheFirstSemester(zonedDateTime);
-		return firstDayOfFirstSemesterAtStartOfDay(zonedDateTime.getYear(), zonedDateTime.getZone());
+	    throwExceptionIfIsNotTheFirstSemester(zonedDateTime);
+	    return firstDayOfFirstSemesterAtStartOfDay(zonedDateTime.getYear(), zonedDateTime.getZone());
 	}
-	
+
+	/**
+	 * Returns the first day of the current semester, starting from the second semester, based on the provided {@code ZonedDateTime}.
+	 *
+	 * @param zonedDateTime The {@code ZonedDateTime} representing a date within the desired semester.
+	 * @return The {@code ZonedDateTime} representing the first day of the current semester starting from the second semester.
+	 * @throws IllegalArgumentException If the provided {@code ZonedDateTime} is not in the second semester.
+	 */
 	private static final ZonedDateTime firstDayOfCurrentSemesterStartingAtSecondSemester(final ZonedDateTime zonedDateTime) {
-		throwExceptionIfIsNotTheSecondSemester(zonedDateTime);
-		return firstDayOfSecondSemesterAtStartOfDay(zonedDateTime.getYear(), zonedDateTime.getZone());
+	    throwExceptionIfIsNotTheSecondSemester(zonedDateTime);
+	    return firstDayOfSecondSemesterAtStartOfDay(zonedDateTime.getYear(), zonedDateTime.getZone());
 	}
-	
+
+	/**
+	 * Returns the last day of the current semester, starting from the first semester, based on the provided {@code ZonedDateTime}.
+	 *
+	 * @param zonedDateTime The {@code ZonedDateTime} representing a date within the desired semester.
+	 * @return The {@code ZonedDateTime} representing the last day of the current semester starting from the first semester.
+	 * @throws IllegalArgumentException If the provided {@code ZonedDateTime} is not in the first semester.
+	 */
 	private static final ZonedDateTime lastDayOfCurrentSemesterStartingAtFirstSemester(final ZonedDateTime zonedDateTime) {
-		throwExceptionIfIsNotTheFirstSemester(zonedDateTime);
-		return lastDayOfFirstSemesterAtStartOfDay(zonedDateTime.getYear(), zonedDateTime.getZone());
+	    throwExceptionIfIsNotTheFirstSemester(zonedDateTime);
+	    return lastDayOfFirstSemesterAtStartOfDay(zonedDateTime.getYear(), zonedDateTime.getZone());
 	}
-	
+
+	/**
+	 * Returns the last day of the current semester, starting from the second semester, based on the provided {@code ZonedDateTime}.
+	 *
+	 * @param zonedDateTime The {@code ZonedDateTime} representing a date within the desired semester.
+	 * @return The {@code ZonedDateTime} representing the last day of the current semester starting from the second semester.
+	 * @throws IllegalArgumentException If the provided {@code ZonedDateTime} is not in the second semester.
+	 */
 	private static final ZonedDateTime lastDayOfCurrentSemesterStartingAtSecondSemester(final ZonedDateTime zonedDateTime) {
-		throwExceptionIfIsNotTheSecondSemester(zonedDateTime);
-		return lastDayOfSecondSemesterAtStartOfDay(zonedDateTime.getYear(), zonedDateTime.getZone());
+	    throwExceptionIfIsNotTheSecondSemester(zonedDateTime);
+	    return lastDayOfSecondSemesterAtStartOfDay(zonedDateTime.getYear(), zonedDateTime.getZone());
 	}
 	
 	// NEXT SEMESTER
 	
+	/**
+	 * Returns the first day of the next semester, starting from the first semester, based on the provided {@code ZonedDateTime}.
+	 *
+	 * @param zonedDateTime The {@code ZonedDateTime} representing a date within the desired semester.
+	 * @return The {@code ZonedDateTime} representing the first day of the next semester starting from the first semester.
+	 * @throws IllegalArgumentException If the provided {@code ZonedDateTime} is not in the first semester.
+	 */
 	private static final ZonedDateTime firstDayOfNextSemesterStartingAtFirstSemester(final ZonedDateTime zonedDateTime) {
-		throwExceptionIfIsNotTheFirstSemester(zonedDateTime);
-		return firstDayOfSecondSemesterAtStartOfDay(zonedDateTime.getYear(), zonedDateTime.getZone());
+	    throwExceptionIfIsNotTheFirstSemester(zonedDateTime);
+	    return firstDayOfSecondSemesterAtStartOfDay(zonedDateTime.getYear(), zonedDateTime.getZone());
 	}
-	
+
+	/**
+	 * Returns the first day of the next semester, starting from the second semester, based on the provided {@code ZonedDateTime}.
+	 *
+	 * @param zonedDateTime The {@code ZonedDateTime} representing a date within the desired semester.
+	 * @return The {@code ZonedDateTime} representing the first day of the next semester starting from the second semester.
+	 * @throws IllegalArgumentException If the provided {@code ZonedDateTime} is not in the second semester.
+	 */
 	private static final ZonedDateTime firstDayOfNextSemesterStartingAtSecondSemester(final ZonedDateTime zonedDateTime) {
-		throwExceptionIfIsNotTheSecondSemester(zonedDateTime);
-		return firstDayOfFirstSemesterAtStartOfDay(zonedDateTime.getYear() + 1, zonedDateTime.getZone());
+	    throwExceptionIfIsNotTheSecondSemester(zonedDateTime);
+	    return firstDayOfFirstSemesterAtStartOfDay(zonedDateTime.getYear() + 1, zonedDateTime.getZone());
 	}
-	
+
+	/**
+	 * Returns the last day of the next semester, starting from the first semester, based on the provided {@code ZonedDateTime}.
+	 *
+	 * @param zonedDateTime The {@code ZonedDateTime} representing a date within the desired semester.
+	 * @return The {@code ZonedDateTime} representing the last day of the next semester starting from the first semester.
+	 * @throws IllegalArgumentException If the provided {@code ZonedDateTime} is not in the first semester.
+	 */
 	private static final ZonedDateTime lastDayOfNextSemesterStartingAtFirstSemester(final ZonedDateTime zonedDateTime) {
-		throwExceptionIfIsNotTheFirstSemester(zonedDateTime);
-		return lastDayOfSecondSemesterAtStartOfDay(zonedDateTime.getYear(), zonedDateTime.getZone());
+	    throwExceptionIfIsNotTheFirstSemester(zonedDateTime);
+	    return lastDayOfSecondSemesterAtStartOfDay(zonedDateTime.getYear(), zonedDateTime.getZone());
 	}
-	
+
+	/**
+	 * Returns the last day of the next semester, starting from the second semester, based on the provided {@code ZonedDateTime}.
+	 *
+	 * @param zonedDateTime The {@code ZonedDateTime} representing a date within the desired semester.
+	 * @return The {@code ZonedDateTime} representing the last day of the next semester starting from the second semester.
+	 * @throws IllegalArgumentException If the provided {@code ZonedDateTime} is not in the second semester.
+	 */
 	private static final ZonedDateTime lastDayOfNextSemesterStartingAtSecondSemester(final ZonedDateTime zonedDateTime) {
-		throwExceptionIfIsNotTheSecondSemester(zonedDateTime);
-		return lastDayOfFirstSemesterAtStartOfDay(zonedDateTime.getYear() + 1, zonedDateTime.getZone());
+	    throwExceptionIfIsNotTheSecondSemester(zonedDateTime);
+	    return lastDayOfFirstSemesterAtStartOfDay(zonedDateTime.getYear() + 1, zonedDateTime.getZone());
 	}
 	
 	// PREVIOUS SEMESTER
 	
+	/**
+	 * Returns the first day of the previous semester, starting from the first semester, based on the provided {@code ZonedDateTime}.
+	 *
+	 * @param zonedDateTime The {@code ZonedDateTime} representing a date within the desired semester.
+	 * @return The {@code ZonedDateTime} representing the first day of the previous semester starting from the first semester.
+	 * @throws IllegalArgumentException If the provided {@code ZonedDateTime} is not in the first semester.
+	 */
 	private static final ZonedDateTime firstDayOfPreviousSemesterStartingAtFirstSemester(final ZonedDateTime zonedDateTime) {
-		throwExceptionIfIsNotTheFirstSemester(zonedDateTime);
-		return firstDayOfSecondSemesterAtStartOfDay(zonedDateTime.getYear() - 1, zonedDateTime.getZone());
+	    throwExceptionIfIsNotTheFirstSemester(zonedDateTime);
+	    return firstDayOfSecondSemesterAtStartOfDay(zonedDateTime.getYear() - 1, zonedDateTime.getZone());
 	}
-	
+
+	/**
+	 * Returns the first day of the previous semester, starting from the second semester, based on the provided {@code ZonedDateTime}.
+	 *
+	 * @param zonedDateTime The {@code ZonedDateTime} representing a date within the desired semester.
+	 * @return The {@code ZonedDateTime} representing the first day of the previous semester starting from the second semester.
+	 * @throws IllegalArgumentException If the provided {@code ZonedDateTime} is not in the second semester.
+	 */
 	private static final ZonedDateTime firstDayOfPreviousSemesterStartingAtSecondSemester(final ZonedDateTime zonedDateTime) {
-		throwExceptionIfIsNotTheSecondSemester(zonedDateTime);
-		return firstDayOfFirstSemesterAtStartOfDay(zonedDateTime.getYear(), zonedDateTime.getZone());
+	    throwExceptionIfIsNotTheSecondSemester(zonedDateTime);
+	    return firstDayOfFirstSemesterAtStartOfDay(zonedDateTime.getYear(), zonedDateTime.getZone());
 	}
-	
+
+	/**
+	 * Returns the last day of the previous semester, starting from the first semester, based on the provided {@code ZonedDateTime}.
+	 *
+	 * @param zonedDateTime The {@code ZonedDateTime} representing a date within the desired semester.
+	 * @return The {@code ZonedDateTime} representing the last day of the previous semester starting from the first semester.
+	 * @throws IllegalArgumentException If the provided {@code ZonedDateTime} is not in the first semester.
+	 */
 	private static final ZonedDateTime lastDayOfPreviousSemesterStartingAtFirstSemester(final ZonedDateTime zonedDateTime) {
-		throwExceptionIfIsNotTheFirstSemester(zonedDateTime);
-		return lastDayOfSecondSemesterAtStartOfDay(zonedDateTime.getYear() - 1, zonedDateTime.getZone());
+	    throwExceptionIfIsNotTheFirstSemester(zonedDateTime);
+	    return lastDayOfSecondSemesterAtStartOfDay(zonedDateTime.getYear() - 1, zonedDateTime.getZone());
 	}
-	
+
+	/**
+	 * Returns the last day of the previous semester, starting from the second semester, based on the provided {@code ZonedDateTime}.
+	 *
+	 * @param zonedDateTime The {@code ZonedDateTime} representing a date within the desired semester.
+	 * @return The {@code ZonedDateTime} representing the last day of the previous semester starting from the second semester.
+	 * @throws IllegalArgumentException If the provided {@code ZonedDateTime} is not in the second semester.
+	 */
 	private static final ZonedDateTime lastDayOfPreviousSemesterStartingAtSecondSemester(final ZonedDateTime zonedDateTime) {
-		throwExceptionIfIsNotTheSecondSemester(zonedDateTime);
-		return lastDayOfFirstSemesterAtStartOfDay(zonedDateTime.getYear(), zonedDateTime.getZone());
+	    throwExceptionIfIsNotTheSecondSemester(zonedDateTime);
+	    return lastDayOfFirstSemesterAtStartOfDay(zonedDateTime.getYear(), zonedDateTime.getZone());
 	}
 
+	/**
+	 * Returns a mapping of months to functions that calculate the first day of the current semester based on the provided {@code ZonedDateTime}.
+	 *
+	 * @return A {@code Map} containing mappings from months to functions representing the first day of the current semester.
+	 */
 	public static Map<Month, Function<ZonedDateTime, ZonedDateTime>> getFirstDayOfCurrentSemester() {
-		return FIRST_DAY_OF_CURRENT_SEMESTER;
+	    return FIRST_DAY_OF_CURRENT_SEMESTER;
 	}
 
+	/**
+	 * Returns a mapping of months to functions that calculate the last day of the current semester based on the provided {@code ZonedDateTime}.
+	 *
+	 * @return A {@code Map} containing mappings from months to functions representing the last day of the current semester.
+	 */
 	public static Map<Month, Function<ZonedDateTime, ZonedDateTime>> getLastDayOfCurrentSemester() {
-		return LAST_DAY_OF_CURRENT_SEMESTER;
+	    return LAST_DAY_OF_CURRENT_SEMESTER;
 	}
 
+	/**
+	 * Returns a mapping of months to functions that calculate the first day of the next semester based on the provided {@code ZonedDateTime}.
+	 *
+	 * @return A {@code Map} containing mappings from months to functions representing the first day of the next semester.
+	 */
 	public static Map<Month, Function<ZonedDateTime, ZonedDateTime>> getFirstDayOfNextSemester() {
-		return FIRST_DAY_OF_NEXT_SEMESTER;
+	    return FIRST_DAY_OF_NEXT_SEMESTER;
 	}
 
+	/**
+	 * Returns a mapping of months to functions that calculate the last day of the next semester based on the provided {@code ZonedDateTime}.
+	 *
+	 * @return A {@code Map} containing mappings from months to functions representing the last day of the next semester.
+	 */
 	public static Map<Month, Function<ZonedDateTime, ZonedDateTime>> getLastDayOfNextSemester() {
-		return LAST_DAY_OF_NEXT_SEMESTER;
+	    return LAST_DAY_OF_NEXT_SEMESTER;
 	}
 
+	/**
+	 * Returns a mapping of months to functions that calculate the first day of the previous semester based on the provided {@code ZonedDateTime}.
+	 *
+	 * @return A {@code Map} containing mappings from months to functions representing the first day of the previous semester.
+	 */
 	public static Map<Month, Function<ZonedDateTime, ZonedDateTime>> getFirstDayOfPreviousSemester() {
-		return FIRST_DAY_OF_PREVIOUS_SEMESTER;
+	    return FIRST_DAY_OF_PREVIOUS_SEMESTER;
 	}
 
+	/**
+	 * Returns a mapping of months to functions that calculate the last day of the previous semester based on the provided {@code ZonedDateTime}.
+	 *
+	 * @return A {@code Map} containing mappings from months to functions representing the last day of the previous semester.
+	 */
 	public static Map<Month, Function<ZonedDateTime, ZonedDateTime>> getLastDayOfPreviousSemester() {
-		return LAST_DAY_OF_PREVIOUS_SEMESTER;
+	    return LAST_DAY_OF_PREVIOUS_SEMESTER;
 	}
 	
 //	public enum SEMESTER {

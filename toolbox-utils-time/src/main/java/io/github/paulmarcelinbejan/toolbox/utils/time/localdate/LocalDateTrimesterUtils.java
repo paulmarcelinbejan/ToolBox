@@ -66,20 +66,47 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class LocalDateTrimesterUtils {
 
-	private static final Map<Month, Function<LocalDate, LocalDate>> FIRST_DAY_OF_CURRENT_TRIMESTER = initializeFirstDayOfCurrentTrimesterMap();
-	
-	private static final Map<Month, Function<LocalDate, LocalDate>> LAST_DAY_OF_CURRENT_TRIMESTER = initializeLastDayOfCurrentTrimesterMap();
-	
-	private static final Map<Month, Function<LocalDate, LocalDate>> FIRST_DAY_OF_NEXT_TRIMESTER = initializeFirstDayOfNextTrimesterMap();
-	
-	private static final Map<Month, Function<LocalDate, LocalDate>> LAST_DAY_OF_NEXT_TRIMESTER = initializeLastDayOfNextTrimesterMap();
-	
-	private static final Map<Month, Function<LocalDate, LocalDate>> FIRST_DAY_OF_PREVIOUS_TRIMESTER = initializeFirstDayOfPreviousTrimesterMap();
-	
-	private static final Map<Month, Function<LocalDate, LocalDate>> LAST_DAY_OF_PREVIOUS_TRIMESTER = initializeLastDayOfPreviousTrimesterMap();
-	
+	/**
+     * Map containing functions to calculate the first day of the current trimester for each month.
+     */
+    private static final Map<Month, Function<LocalDate, LocalDate>> FIRST_DAY_OF_CURRENT_TRIMESTER = initializeFirstDayOfCurrentTrimesterMap();
+
+    /**
+     * Map containing functions to calculate the last day of the current trimester for each month.
+     */
+    private static final Map<Month, Function<LocalDate, LocalDate>> LAST_DAY_OF_CURRENT_TRIMESTER = initializeLastDayOfCurrentTrimesterMap();
+
+    /**
+     * Map containing functions to calculate the first day of the next trimester for each month.
+     */
+    private static final Map<Month, Function<LocalDate, LocalDate>> FIRST_DAY_OF_NEXT_TRIMESTER = initializeFirstDayOfNextTrimesterMap();
+
+    /**
+     * Map containing functions to calculate the last day of the next trimester for each month.
+     */
+    private static final Map<Month, Function<LocalDate, LocalDate>> LAST_DAY_OF_NEXT_TRIMESTER = initializeLastDayOfNextTrimesterMap();
+
+    /**
+     * Map containing functions to calculate the first day of the previous trimester for each month.
+     */
+    private static final Map<Month, Function<LocalDate, LocalDate>> FIRST_DAY_OF_PREVIOUS_TRIMESTER = initializeFirstDayOfPreviousTrimesterMap();
+
+    /**
+     * Map containing functions to calculate the last day of the previous trimester for each month.
+     */
+    private static final Map<Month, Function<LocalDate, LocalDate>> LAST_DAY_OF_PREVIOUS_TRIMESTER = initializeLastDayOfPreviousTrimesterMap();
+    
 	// FIRST DAY of CURRENT TRIMESTER
 	
+    /**
+     * Initializes a map with functions to calculate the first day of the current trimester for each month.
+     * <p>
+     * The returned map contains month-function pairs, where the function takes a {@code LocalDate} parameter
+     * and returns the corresponding first day of the current trimester for the specified month.
+     * </p>
+     *
+     * @return The initialized map with month-function pairs for the first day of the current trimester.
+     */
 	private static final Map<Month, Function<LocalDate, LocalDate>> initializeFirstDayOfCurrentTrimesterMap() {
 		Map<Month, Function<LocalDate, LocalDate>> map = new EnumMap<>(Month.class);
 		
@@ -108,6 +135,15 @@ public class LocalDateTrimesterUtils {
 	
 	// LAST DAY of CURRENT TRIMESTER
 	
+	/**
+	 * Initializes a map with functions to calculate the last day of the current trimester for each month.
+	 * <p>
+	 * The returned map contains month-function pairs, where the function takes a {@code LocalDate} parameter
+	 * and returns the corresponding last day of the current trimester for the specified month.
+	 * </p>
+	 *
+	 * @return The initialized map with month-function pairs for the last day of the current trimester.
+	 */
 	private static final Map<Month, Function<LocalDate, LocalDate>> initializeLastDayOfCurrentTrimesterMap() {
 		Map<Month, Function<LocalDate, LocalDate>> map = new EnumMap<>(Month.class);
 		
@@ -136,6 +172,15 @@ public class LocalDateTrimesterUtils {
 	
 	// FIRST DAY of NEXT TRIMESTER
 	
+	/**
+	 * Initializes a map with functions to calculate the first day of the next trimester for each month.
+	 * <p>
+	 * The returned map contains month-function pairs, where the function takes a {@code LocalDate} parameter
+	 * and returns the corresponding first day of the next trimester for the specified month.
+	 * </p>
+	 *
+	 * @return The initialized map with month-function pairs for the first day of the next trimester.
+	 */
 	private static final Map<Month, Function<LocalDate, LocalDate>> initializeFirstDayOfNextTrimesterMap() {
 		Map<Month, Function<LocalDate, LocalDate>> map = new EnumMap<>(Month.class);
 		
@@ -164,6 +209,15 @@ public class LocalDateTrimesterUtils {
 	
 	// LAST DAY of NEXT TRIMESTER
 	
+	/**
+	 * Initializes a map with functions to calculate the last day of the next trimester for each month.
+	 * <p>
+	 * The returned map contains month-function pairs, where the function takes a {@code LocalDate} parameter
+	 * and returns the corresponding last day of the next trimester for the specified month.
+	 * </p>
+	 *
+	 * @return The initialized map with month-function pairs for the last day of the next trimester.
+	 */
 	private static final Map<Month, Function<LocalDate, LocalDate>> initializeLastDayOfNextTrimesterMap() {
 		Map<Month, Function<LocalDate, LocalDate>> map = new EnumMap<>(Month.class);
 		
@@ -192,6 +246,15 @@ public class LocalDateTrimesterUtils {
 	
 	// FIRST DAY of PREVIOUS TRIMESTER
 	
+	/**
+	 * Initializes a map with functions to calculate the first day of the previous trimester for each month.
+	 * <p>
+	 * The returned map contains month-function pairs, where the function takes a {@code LocalDate} parameter
+	 * and returns the corresponding first day of the previous trimester for the specified month.
+	 * </p>
+	 *
+	 * @return The initialized map with month-function pairs for the first day of the previous trimester.
+	 */
 	private static final Map<Month, Function<LocalDate, LocalDate>> initializeFirstDayOfPreviousTrimesterMap() {
 		Map<Month, Function<LocalDate, LocalDate>> map = new EnumMap<>(Month.class);
 		
@@ -220,6 +283,15 @@ public class LocalDateTrimesterUtils {
 	
 	// LAST DAY of PREVIOUS TRIMESTER
 	
+	/**
+	 * Initializes a map with functions to calculate the last day of the previous trimester for each month.
+	 * <p>
+	 * The returned map contains month-function pairs, where the function takes a {@code LocalDate} parameter
+	 * and returns the corresponding last day of the previous trimester for the specified month.
+	 * </p>
+	 *
+	 * @return The initialized map with month-function pairs for the last day of the previous trimester.
+	 */
 	private static final Map<Month, Function<LocalDate, LocalDate>> initializeLastDayOfPreviousTrimesterMap() {
 		Map<Month, Function<LocalDate, LocalDate>> map = new EnumMap<>(Month.class);
 		
@@ -246,202 +318,479 @@ public class LocalDateTrimesterUtils {
 		return map;
 	}
 	
+	/**
+	 * Returns the first day of the first trimester for the specified year.
+	 *
+	 * @param year The year for which to calculate the first day of the first trimester.
+	 * @return The {@code LocalDate} representing the first day of the first trimester.
+	 */
 	private static final LocalDate firstDayOfFirstTrimester(final int year) {
 		return buildLocalDate(year, 1, 1);
 	}
 	
+	/**
+	 * Returns the first day of the second trimester for the specified year.
+	 *
+	 * @param year The year for which to calculate the first day of the second trimester.
+	 * @return The {@code LocalDate} representing the first day of the second trimester.
+	 */
 	private static final LocalDate firstDayOfSecondTrimester(final int year) {
 		return buildLocalDate(year, 4, 1);
 	}
 	
+	/**
+	 * Returns the first day of the third trimester for the specified year.
+	 *
+	 * @param year The year for which to calculate the first day of the third trimester.
+	 * @return The {@code LocalDate} representing the first day of the third trimester.
+	 */
 	private static final LocalDate firstDayOfThirdTrimester(final int year) {
 		return buildLocalDate(year, 7, 1);
 	}
 	
+	/**
+	 * Returns the first day of the fourth trimester for the specified year.
+	 *
+	 * @param year The year for which to calculate the first day of the fourth trimester.
+	 * @return The {@code LocalDate} representing the first day of the fourth trimester.
+	 */
 	private static final LocalDate firstDayOfFourthTrimester(final int year) {
 		return buildLocalDate(year, 10, 1);
 	}
 	
+	/**
+	 * Returns the last day of the first trimester for the specified year.
+	 *
+	 * @param year The year for which to calculate the last day of the first trimester.
+	 * @return The {@code LocalDate} representing the last day of the first trimester.
+	 */
 	private static final LocalDate lastDayOfFirstTrimester(final int year) {
 		return buildLocalDate(year, 3, 31);
 	}
 	
+	/**
+	 * Returns the last day of the second trimester for the specified year.
+	 *
+	 * @param year The year for which to calculate the last day of the second trimester.
+	 * @return The {@code LocalDate} representing the last day of the second trimester.
+	 */
 	private static final LocalDate lastDayOfSecondTrimester(final int year) {
 		return buildLocalDate(year, 6, 30);
 	}
 	
+	/**
+	 * Returns the last day of the third trimester for the specified year.
+	 *
+	 * @param year The year for which to calculate the last day of the third trimester.
+	 * @return The {@code LocalDate} representing the last day of the third trimester.
+	 */
 	private static final LocalDate lastDayOfThirdTrimester(final int year) {
 		return buildLocalDate(year, 9, 30);
 	}
 	
+	/**
+	 * Returns the last day of the fourth trimester for the specified year.
+	 *
+	 * @param year The year for which to calculate the last day of the fourth trimester.
+	 * @return The {@code LocalDate} representing the last day of the fourth trimester.
+	 */
 	private static final LocalDate lastDayOfFourthTrimester(final int year) {
 		return buildLocalDate(year, 12, 31);
 	}
 	
+	/**
+	 * Throws an {@code IllegalArgumentException} if the specified {@code LocalDate} is not in the first trimester.
+	 *
+	 * @param localDate The {@code LocalDate} to check for the first trimester.
+	 * @throws IllegalArgumentException If the specified {@code LocalDate} is not in the first trimester.
+	 */
 	private static final void throwExceptionIfIsNotTheFirstTrimester(final LocalDate localDate) {
 		if(!isFirstTrimester(localDate)) throw new IllegalArgumentException("The localDate is not on first trimester");
 	}
 	
+	/**
+	 * Throws an {@code IllegalArgumentException} if the specified {@code LocalDate} is not in the second trimester.
+	 *
+	 * @param localDate The {@code LocalDate} to check for the second trimester.
+	 * @throws IllegalArgumentException If the specified {@code LocalDate} is not in the second trimester.
+	 */
 	private static final void throwExceptionIfIsNotTheSecondTrimester(final LocalDate localDate) {
 		if(!isSecondTrimester(localDate)) throw new IllegalArgumentException("The localDate is not on second trimester");
 	}
 	
+	/**
+	 * Throws an {@code IllegalArgumentException} if the specified {@code LocalDate} is not in the third trimester.
+	 *
+	 * @param localDate The {@code LocalDate} to check for the third trimester.
+	 * @throws IllegalArgumentException If the specified {@code LocalDate} is not in the third trimester.
+	 */
+
 	private static final void throwExceptionIfIsNotTheThirdTrimester(final LocalDate localDate) {
 		if(!isThirdTrimester(localDate)) throw new IllegalArgumentException("The localDate is not on third trimester");
 	}
 	
+	/**
+	 * Throws an {@code IllegalArgumentException} if the specified {@code LocalDate} is not in the fourth trimester.
+	 *
+	 * @param localDate The {@code LocalDate} to check for the fourth trimester.
+	 * @throws IllegalArgumentException If the specified {@code LocalDate} is not in the fourth trimester.
+	 */
 	private static final void throwExceptionIfIsNotTheFourthTrimester(final LocalDate localDate) {
 		if(!isFourthTrimester(localDate)) throw new IllegalArgumentException("The localDate is not on fourth trimester");
 	}
 	
 	// THIS TRIMESTER
 	
+	/**
+	 * Calculates and returns the first day of the current trimester starting at the first trimester for the given date.
+	 *
+	 * @param localDate The {@code LocalDate} for which to calculate the first day of the current trimester.
+	 * @return The {@code LocalDate} representing the first day of the current trimester.
+	 * @throws IllegalArgumentException If the specified {@code LocalDate} is not in the first trimester.
+	 */
 	private static final LocalDate firstDayOfCurrentTrimesterStartingAtFirstTrimester(final LocalDate localDate) {
-		throwExceptionIfIsNotTheFirstTrimester(localDate);
-		return firstDayOfFirstTrimester(localDate.getYear());
+	    throwExceptionIfIsNotTheFirstTrimester(localDate);
+	    return firstDayOfFirstTrimester(localDate.getYear());
 	}
 	
+	/**
+	 * Calculates and returns the first day of the current trimester starting at the second trimester for the given date.
+	 *
+	 * @param localDate The {@code LocalDate} for which to calculate the first day of the current trimester.
+	 * @return The {@code LocalDate} representing the first day of the current trimester.
+	 * @throws IllegalArgumentException If the specified {@code LocalDate} is not in the second trimester.
+	 */
 	private static final LocalDate firstDayOfCurrentTrimesterStartingAtSecondTrimester(final LocalDate localDate) {
-		throwExceptionIfIsNotTheSecondTrimester(localDate);
-		return firstDayOfSecondTrimester(localDate.getYear());
+	    throwExceptionIfIsNotTheSecondTrimester(localDate);
+	    return firstDayOfSecondTrimester(localDate.getYear());
 	}
 	
+	/**
+	 * Calculates and returns the first day of the current trimester starting at the third trimester for the given date.
+	 *
+	 * @param localDate The {@code LocalDate} for which to calculate the first day of the current trimester.
+	 * @return The {@code LocalDate} representing the first day of the current trimester.
+	 * @throws IllegalArgumentException If the specified {@code LocalDate} is not in the third trimester.
+	 */
 	private static final LocalDate firstDayOfCurrentTrimesterStartingAtThirdTrimester(final LocalDate localDate) {
-		throwExceptionIfIsNotTheThirdTrimester(localDate);
-		return firstDayOfThirdTrimester(localDate.getYear());
+	    throwExceptionIfIsNotTheThirdTrimester(localDate);
+	    return firstDayOfThirdTrimester(localDate.getYear());
 	}
 	
+	/**
+	 * Calculates and returns the first day of the current trimester starting at the fourth trimester for the given date.
+	 *
+	 * @param localDate The {@code LocalDate} for which to calculate the first day of the current trimester.
+	 * @return The {@code LocalDate} representing the first day of the current trimester.
+	 * @throws IllegalArgumentException If the specified {@code LocalDate} is not in the fourth trimester.
+	 */
 	private static final LocalDate firstDayOfCurrentTrimesterStartingAtFourthTrimester(final LocalDate localDate) {
-		throwExceptionIfIsNotTheFourthTrimester(localDate);
-		return firstDayOfFourthTrimester(localDate.getYear());
+	    throwExceptionIfIsNotTheFourthTrimester(localDate);
+	    return firstDayOfFourthTrimester(localDate.getYear());
 	}
 	
+	/**
+	 * Calculates and returns the last day of the current trimester starting at the first trimester for the given date.
+	 *
+	 * @param localDate The {@code LocalDate} for which to calculate the last day of the current trimester.
+	 * @return The {@code LocalDate} representing the last day of the current trimester.
+	 * @throws IllegalArgumentException If the specified {@code LocalDate} is not in the first trimester.
+	 */
 	private static final LocalDate lastDayOfCurrentTrimesterStartingAtFirstTrimester(final LocalDate localDate) {
-		throwExceptionIfIsNotTheFirstTrimester(localDate);
-		return lastDayOfFirstTrimester(localDate.getYear());
+	    throwExceptionIfIsNotTheFirstTrimester(localDate);
+	    return lastDayOfFirstTrimester(localDate.getYear());
 	}
 	
+	/**
+	 * Calculates and returns the last day of the current trimester starting at the second trimester for the given date.
+	 *
+	 * @param localDate The {@code LocalDate} for which to calculate the last day of the current trimester.
+	 * @return The {@code LocalDate} representing the last day of the current trimester.
+	 * @throws IllegalArgumentException If the specified {@code LocalDate} is not in the second trimester.
+	 */
 	private static final LocalDate lastDayOfCurrentTrimesterStartingAtSecondTrimester(final LocalDate localDate) {
-		throwExceptionIfIsNotTheSecondTrimester(localDate);
-		return lastDayOfSecondTrimester(localDate.getYear());
+	    throwExceptionIfIsNotTheSecondTrimester(localDate);
+	    return lastDayOfSecondTrimester(localDate.getYear());
 	}
 	
+	/**
+	 * Calculates and returns the last day of the current trimester starting at the third trimester for the given date.
+	 *
+	 * @param localDate The {@code LocalDate} for which to calculate the last day of the current trimester.
+	 * @return The {@code LocalDate} representing the last day of the current trimester.
+	 * @throws IllegalArgumentException If the specified {@code LocalDate} is not in the third trimester.
+	 */
 	private static final LocalDate lastDayOfCurrentTrimesterStartingAtThirdTrimester(final LocalDate localDate) {
-		throwExceptionIfIsNotTheThirdTrimester(localDate);
-		return lastDayOfThirdTrimester(localDate.getYear());
+	    throwExceptionIfIsNotTheThirdTrimester(localDate);
+	    return lastDayOfThirdTrimester(localDate.getYear());
 	}
 	
+	/**
+	 * Calculates and returns the last day of the current trimester starting at the fourth trimester for the given date.
+	 *
+	 * @param localDate The {@code LocalDate} for which to calculate the last day of the current trimester.
+	 * @return The {@code LocalDate} representing the last day of the current trimester.
+	 * @throws IllegalArgumentException If the specified {@code LocalDate} is not in the fourth trimester.
+	 */
 	private static final LocalDate lastDayOfCurrentTrimesterStartingAtFourthTrimester(final LocalDate localDate) {
-		throwExceptionIfIsNotTheFourthTrimester(localDate);
-		return lastDayOfFourthTrimester(localDate.getYear());
+	    throwExceptionIfIsNotTheFourthTrimester(localDate);
+	    return lastDayOfFourthTrimester(localDate.getYear());
 	}
 	
 	// NEXT TRIMESTER
 	
+	/**
+	 * Calculates and returns the first day of the next trimester starting at the first trimester for the given date.
+	 *
+	 * @param localDate The {@code LocalDate} for which to calculate the first day of the next trimester.
+	 * @return The {@code LocalDate} representing the first day of the next trimester.
+	 * @throws IllegalArgumentException If the specified {@code LocalDate} is not in the first trimester.
+	 */
 	private static final LocalDate firstDayOfNextTrimesterStartingAtFirstTrimester(final LocalDate localDate) {
-		throwExceptionIfIsNotTheFirstTrimester(localDate);
-		return firstDayOfSecondTrimester(localDate.getYear());
+	    throwExceptionIfIsNotTheFirstTrimester(localDate);
+	    return firstDayOfSecondTrimester(localDate.getYear());
 	}
-	
+
+	/**
+	 * Calculates and returns the first day of the next trimester starting at the second trimester for the given date.
+	 *
+	 * @param localDate The {@code LocalDate} for which to calculate the first day of the next trimester.
+	 * @return The {@code LocalDate} representing the first day of the next trimester.
+	 * @throws IllegalArgumentException If the specified {@code LocalDate} is not in the second trimester.
+	 */
 	private static final LocalDate firstDayOfNextTrimesterStartingAtSecondTrimester(final LocalDate localDate) {
-		throwExceptionIfIsNotTheSecondTrimester(localDate);
-		return firstDayOfThirdTrimester(localDate.getYear());
+	    throwExceptionIfIsNotTheSecondTrimester(localDate);
+	    return firstDayOfThirdTrimester(localDate.getYear());
 	}
-	
+
+	/**
+	 * Calculates and returns the first day of the next trimester starting at the third trimester for the given date.
+	 *
+	 * @param localDate The {@code LocalDate} for which to calculate the first day of the next trimester.
+	 * @return The {@code LocalDate} representing the first day of the next trimester.
+	 * @throws IllegalArgumentException If the specified {@code LocalDate} is not in the third trimester.
+	 */
 	private static final LocalDate firstDayOfNextTrimesterStartingAtThirdTrimester(final LocalDate localDate) {
-		throwExceptionIfIsNotTheThirdTrimester(localDate);
-		return firstDayOfFourthTrimester(localDate.getYear());
+	    throwExceptionIfIsNotTheThirdTrimester(localDate);
+	    return firstDayOfFourthTrimester(localDate.getYear());
 	}
-	
+
+	/**
+	 * Calculates and returns the first day of the next trimester starting at the fourth trimester for the given date.
+	 *
+	 * @param localDate The {@code LocalDate} for which to calculate the first day of the next trimester.
+	 * @return The {@code LocalDate} representing the first day of the next trimester.
+	 * @throws IllegalArgumentException If the specified {@code LocalDate} is not in the fourth trimester.
+	 */
 	private static final LocalDate firstDayOfNextTrimesterStartingAtFourthTrimester(final LocalDate localDate) {
-		throwExceptionIfIsNotTheFourthTrimester(localDate);
-		return firstDayOfFirstTrimester(localDate.getYear() + 1);
+	    throwExceptionIfIsNotTheFourthTrimester(localDate);
+	    return firstDayOfFirstTrimester(localDate.getYear() + 1);
 	}
-	
+
+	/**
+	 * Calculates and returns the last day of the next trimester starting at the first trimester for the given date.
+	 *
+	 * @param localDate The {@code LocalDate} for which to calculate the last day of the next trimester.
+	 * @return The {@code LocalDate} representing the last day of the next trimester.
+	 * @throws IllegalArgumentException If the specified {@code LocalDate} is not in the first trimester.
+	 */
 	private static final LocalDate lastDayOfNextTrimesterStartingAtFirstTrimester(final LocalDate localDate) {
-		throwExceptionIfIsNotTheFirstTrimester(localDate);
-		return lastDayOfSecondTrimester(localDate.getYear());
+	    throwExceptionIfIsNotTheFirstTrimester(localDate);
+	    return lastDayOfSecondTrimester(localDate.getYear());
 	}
-	
+
+	/**
+	 * Calculates and returns the last day of the next trimester starting at the second trimester for the given date.
+	 *
+	 * @param localDate The {@code LocalDate} for which to calculate the last day of the next trimester.
+	 * @return The {@code LocalDate} representing the last day of the next trimester.
+	 * @throws IllegalArgumentException If the specified {@code LocalDate} is not in the second trimester.
+	 */
 	private static final LocalDate lastDayOfNextTrimesterStartingAtSecondTrimester(final LocalDate localDate) {
-		throwExceptionIfIsNotTheSecondTrimester(localDate);
-		return lastDayOfThirdTrimester(localDate.getYear());
+	    throwExceptionIfIsNotTheSecondTrimester(localDate);
+	    return lastDayOfThirdTrimester(localDate.getYear());
 	}
-	
+
+	/**
+	 * Calculates and returns the last day of the next trimester starting at the third trimester for the given date.
+	 *
+	 * @param localDate The {@code LocalDate} for which to calculate the last day of the next trimester.
+	 * @return The {@code LocalDate} representing the last day of the next trimester.
+	 * @throws IllegalArgumentException If the specified {@code LocalDate} is not in the third trimester.
+	 */
 	private static final LocalDate lastDayOfNextTrimesterStartingAtThirdTrimester(final LocalDate localDate) {
-		throwExceptionIfIsNotTheThirdTrimester(localDate);
-		return lastDayOfFourthTrimester(localDate.getYear());
+	    throwExceptionIfIsNotTheThirdTrimester(localDate);
+	    return lastDayOfFourthTrimester(localDate.getYear());
 	}
-	
+
+	/**
+	 * Calculates and returns the last day of the next trimester starting at the fourth trimester for the given date.
+	 *
+	 * @param localDate The {@code LocalDate} for which to calculate the last day of the next trimester.
+	 * @return The {@code LocalDate} representing the last day of the next trimester.
+	 * @throws IllegalArgumentException If the specified {@code LocalDate} is not in the fourth trimester.
+	 */
 	private static final LocalDate lastDayOfNextTrimesterStartingAtFourthTrimester(final LocalDate localDate) {
-		throwExceptionIfIsNotTheFourthTrimester(localDate);
-		return lastDayOfFirstTrimester(localDate.getYear() + 1);
+	    throwExceptionIfIsNotTheFourthTrimester(localDate);
+	    return lastDayOfFirstTrimester(localDate.getYear() + 1);
 	}
 	
 	// PREVIOUS TRIMESTER
 	
+	/**
+	 * Calculates and returns the first day of the previous trimester starting at the first trimester for the given date.
+	 *
+	 * @param localDate The {@code LocalDate} for which to calculate the first day of the previous trimester.
+	 * @return The {@code LocalDate} representing the first day of the previous trimester.
+	 * @throws IllegalArgumentException If the specified {@code LocalDate} is not in the first trimester.
+	 */
 	private static final LocalDate firstDayOfPreviousTrimesterStartingAtFirstTrimester(final LocalDate localDate) {
-		throwExceptionIfIsNotTheFirstTrimester(localDate);
-		return firstDayOfFourthTrimester(localDate.getYear() - 1);
+	    throwExceptionIfIsNotTheFirstTrimester(localDate);
+	    return firstDayOfFourthTrimester(localDate.getYear() - 1);
 	}
-	
+
+	/**
+	 * Calculates and returns the first day of the previous trimester starting at the second trimester for the given date.
+	 *
+	 * @param localDate The {@code LocalDate} for which to calculate the first day of the previous trimester.
+	 * @return The {@code LocalDate} representing the first day of the previous trimester.
+	 * @throws IllegalArgumentException If the specified {@code LocalDate} is not in the second trimester.
+	 */
 	private static final LocalDate firstDayOfPreviousTrimesterStartingAtSecondTrimester(final LocalDate localDate) {
-		throwExceptionIfIsNotTheSecondTrimester(localDate);
-		return firstDayOfFirstTrimester(localDate.getYear());
+	    throwExceptionIfIsNotTheSecondTrimester(localDate);
+	    return firstDayOfFirstTrimester(localDate.getYear());
 	}
-	
+
+	/**
+	 * Calculates and returns the first day of the previous trimester starting at the third trimester for the given date.
+	 *
+	 * @param localDate The {@code LocalDate} for which to calculate the first day of the previous trimester.
+	 * @return The {@code LocalDate} representing the first day of the previous trimester.
+	 * @throws IllegalArgumentException If the specified {@code LocalDate} is not in the third trimester.
+	 */
 	private static final LocalDate firstDayOfPreviousTrimesterStartingAtThirdTrimester(final LocalDate localDate) {
-		throwExceptionIfIsNotTheThirdTrimester(localDate);
-		return firstDayOfSecondTrimester(localDate.getYear());
+	    throwExceptionIfIsNotTheThirdTrimester(localDate);
+	    return firstDayOfSecondTrimester(localDate.getYear());
 	}
-	
+
+	/**
+	 * Calculates and returns the first day of the previous trimester starting at the fourth trimester for the given date.
+	 *
+	 * @param localDate The {@code LocalDate} for which to calculate the first day of the previous trimester.
+	 * @return The {@code LocalDate} representing the first day of the previous trimester.
+	 * @throws IllegalArgumentException If the specified {@code LocalDate} is not in the fourth trimester.
+	 */
 	private static final LocalDate firstDayOfPreviousTrimesterStartingAtFourthTrimester(final LocalDate localDate) {
-		throwExceptionIfIsNotTheFourthTrimester(localDate);
-		return firstDayOfThirdTrimester(localDate.getYear());
+	    throwExceptionIfIsNotTheFourthTrimester(localDate);
+	    return firstDayOfThirdTrimester(localDate.getYear());
 	}
-	
+
+	/**
+	 * Calculates and returns the last day of the previous trimester starting at the first trimester for the given date.
+	 *
+	 * @param localDate The {@code LocalDate} for which to calculate the last day of the previous trimester.
+	 * @return The {@code LocalDate} representing the last day of the previous trimester.
+	 * @throws IllegalArgumentException If the specified {@code LocalDate} is not in the first trimester.
+	 */
 	private static final LocalDate lastDayOfPreviousTrimesterStartingAtFirstTrimester(final LocalDate localDate) {
-		throwExceptionIfIsNotTheFirstTrimester(localDate);
-		return lastDayOfFourthTrimester(localDate.getYear() - 1);
+	    throwExceptionIfIsNotTheFirstTrimester(localDate);
+	    return lastDayOfFourthTrimester(localDate.getYear() - 1);
 	}
-	
+
+	/**
+	 * Calculates and returns the last day of the previous trimester starting at the second trimester for the given date.
+	 *
+	 * @param localDate The {@code LocalDate} for which to calculate the last day of the previous trimester.
+	 * @return The {@code LocalDate} representing the last day of the previous trimester.
+	 * @throws IllegalArgumentException If the specified {@code LocalDate} is not in the second trimester.
+	 */
 	private static final LocalDate lastDayOfPreviousTrimesterStartingAtSecondTrimester(final LocalDate localDate) {
-		throwExceptionIfIsNotTheSecondTrimester(localDate);
-		return lastDayOfFirstTrimester(localDate.getYear());
+	    throwExceptionIfIsNotTheSecondTrimester(localDate);
+	    return lastDayOfFirstTrimester(localDate.getYear());
 	}
-	
+
+	/**
+	 * Calculates and returns the last day of the previous trimester starting at the third trimester for the given date.
+	 *
+	 * @param localDate The {@code LocalDate} for which to calculate the last day of the previous trimester.
+	 * @return The {@code LocalDate} representing the last day of the previous trimester.
+	 * @throws IllegalArgumentException If the specified {@code LocalDate} is not in the third trimester.
+	 */
 	private static final LocalDate lastDayOfPreviousTrimesterStartingAtThirdTrimester(final LocalDate localDate) {
-		throwExceptionIfIsNotTheThirdTrimester(localDate);
-		return lastDayOfSecondTrimester(localDate.getYear());
+	    throwExceptionIfIsNotTheThirdTrimester(localDate);
+	    return lastDayOfSecondTrimester(localDate.getYear());
 	}
-	
+
+	/**
+	 * Calculates and returns the last day of the previous trimester starting at the fourth trimester for the given date.
+	 *
+	 * @param localDate The {@code LocalDate} for which to calculate the last day of the previous trimester.
+	 * @return The {@code LocalDate} representing the last day of the previous trimester.
+	 * @throws IllegalArgumentException If the specified {@code LocalDate} is not in the fourth trimester.
+	 */
 	private static final LocalDate lastDayOfPreviousTrimesterStartingAtFourthTrimester(final LocalDate localDate) {
-		throwExceptionIfIsNotTheFourthTrimester(localDate);
-		return lastDayOfThirdTrimester(localDate.getYear());
+	    throwExceptionIfIsNotTheFourthTrimester(localDate);
+	    return lastDayOfThirdTrimester(localDate.getYear());
 	}
 
+	/**
+	 * Gets the mapping of the first day of the current trimester for each month in a {@code Map}.
+	 *
+	 * @return A {@code Map} where the keys are {@code Month} objects, and the values are functions
+	 *         mapping a {@code LocalDate} to the first day of the current trimester for the respective month.
+	 */
 	public static Map<Month, Function<LocalDate, LocalDate>> getFirstDayOfCurrentTrimester() {
-		return FIRST_DAY_OF_CURRENT_TRIMESTER;
+	    return FIRST_DAY_OF_CURRENT_TRIMESTER;
 	}
 
+	/**
+	 * Gets the mapping of the last day of the current trimester for each month in a {@code Map}.
+	 *
+	 * @return A {@code Map} where the keys are {@code Month} objects, and the values are functions
+	 *         mapping a {@code LocalDate} to the last day of the current trimester for the respective month.
+	 */
 	public static Map<Month, Function<LocalDate, LocalDate>> getLastDayOfCurrentTrimester() {
-		return LAST_DAY_OF_CURRENT_TRIMESTER;
+	    return LAST_DAY_OF_CURRENT_TRIMESTER;
 	}
 
+	/**
+	 * Gets the mapping of the first day of the next trimester for each month in a {@code Map}.
+	 *
+	 * @return A {@code Map} where the keys are {@code Month} objects, and the values are functions
+	 *         mapping a {@code LocalDate} to the first day of the next trimester for the respective month.
+	 */
 	public static Map<Month, Function<LocalDate, LocalDate>> getFirstDayOfNextTrimester() {
-		return FIRST_DAY_OF_NEXT_TRIMESTER;
+	    return FIRST_DAY_OF_NEXT_TRIMESTER;
 	}
 
+	/**
+	 * Gets the mapping of the last day of the next trimester for each month in a {@code Map}.
+	 *
+	 * @return A {@code Map} where the keys are {@code Month} objects, and the values are functions
+	 *         mapping a {@code LocalDate} to the last day of the next trimester for the respective month.
+	 */
 	public static Map<Month, Function<LocalDate, LocalDate>> getLastDayOfNextTrimester() {
-		return LAST_DAY_OF_NEXT_TRIMESTER;
+	    return LAST_DAY_OF_NEXT_TRIMESTER;
 	}
 
+	/**
+	 * Gets the mapping of the first day of the previous trimester for each month in a {@code Map}.
+	 *
+	 * @return A {@code Map} where the keys are {@code Month} objects, and the values are functions
+	 *         mapping a {@code LocalDate} to the first day of the previous trimester for the respective month.
+	 */
 	public static Map<Month, Function<LocalDate, LocalDate>> getFirstDayOfPreviousTrimester() {
-		return FIRST_DAY_OF_PREVIOUS_TRIMESTER;
+	    return FIRST_DAY_OF_PREVIOUS_TRIMESTER;
 	}
 
+	/**
+	 * Gets the mapping of the last day of the previous trimester for each month in a {@code Map}.
+	 *
+	 * @return A {@code Map} where the keys are {@code Month} objects, and the values are functions
+	 *         mapping a {@code LocalDate} to the last day of the previous trimester for the respective month.
+	 */
 	public static Map<Month, Function<LocalDate, LocalDate>> getLastDayOfPreviousTrimester() {
-		return LAST_DAY_OF_PREVIOUS_TRIMESTER;
+	    return LAST_DAY_OF_PREVIOUS_TRIMESTER;
 	}
 	
 //	public enum TRIMESTER {

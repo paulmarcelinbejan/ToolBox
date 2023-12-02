@@ -16,6 +16,10 @@ import io.github.paulmarcelinbejan.toolbox.utils.time.localdatetime.LocalDateTim
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
+/**
+ * Utility class for working with Java Instant objects.
+ * This class provides various static methods for common operations involving Instant.
+ */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class InstantUtils {
 

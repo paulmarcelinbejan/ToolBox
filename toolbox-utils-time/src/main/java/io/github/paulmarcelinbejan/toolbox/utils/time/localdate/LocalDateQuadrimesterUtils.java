@@ -61,20 +61,44 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class LocalDateQuadrimesterUtils {
 
-	private static final Map<Month, Function<LocalDate, LocalDate>> FIRST_DAY_OF_CURRENT_QUADRIMESTER = initializeFirstDayOfCurrentQuadrimesterMap();
-	
-	private static final Map<Month, Function<LocalDate, LocalDate>> LAST_DAY_OF_CURRENT_QUADRIMESTER = initializeLastDayOfCurrentQuadrimesterMap();
-	
-	private static final Map<Month, Function<LocalDate, LocalDate>> FIRST_DAY_OF_NEXT_QUADRIMESTER = initializeFirstDayOfNextQuadrimesterMap();
-	
-	private static final Map<Month, Function<LocalDate, LocalDate>> LAST_DAY_OF_NEXT_QUADRIMESTER = initializeLastDayOfNextQuadrimesterMap();
-	
-	private static final Map<Month, Function<LocalDate, LocalDate>> FIRST_DAY_OF_PREVIOUS_QUADRIMESTER = initializeFirstDayOfPreviousQuadrimesterMap();
-	
-	private static final Map<Month, Function<LocalDate, LocalDate>> LAST_DAY_OF_PREVIOUS_QUADRIMESTER = initializeLastDayOfPreviousQuadrimesterMap();
-	
+    /**
+     * A map of months to functions that return the first day of the current quadrimester.
+     */
+    private static final Map<Month, Function<LocalDate, LocalDate>> FIRST_DAY_OF_CURRENT_QUADRIMESTER = initializeFirstDayOfCurrentQuadrimesterMap();
+
+    /**
+     * A map of months to functions that return the last day of the current quadrimester.
+     */
+    private static final Map<Month, Function<LocalDate, LocalDate>> LAST_DAY_OF_CURRENT_QUADRIMESTER = initializeLastDayOfCurrentQuadrimesterMap();
+
+    /**
+     * A map of months to functions that return the first day of the next quadrimester.
+     */
+    private static final Map<Month, Function<LocalDate, LocalDate>> FIRST_DAY_OF_NEXT_QUADRIMESTER = initializeFirstDayOfNextQuadrimesterMap();
+
+    /**
+     * A map of months to functions that return the last day of the next quadrimester.
+     */
+    private static final Map<Month, Function<LocalDate, LocalDate>> LAST_DAY_OF_NEXT_QUADRIMESTER = initializeLastDayOfNextQuadrimesterMap();
+
+    /**
+     * A map of months to functions that return the first day of the previous quadrimester.
+     */
+    private static final Map<Month, Function<LocalDate, LocalDate>> FIRST_DAY_OF_PREVIOUS_QUADRIMESTER = initializeFirstDayOfPreviousQuadrimesterMap();
+
+    /**
+     * A map of months to functions that return the last day of the previous quadrimester.
+     */
+    private static final Map<Month, Function<LocalDate, LocalDate>> LAST_DAY_OF_PREVIOUS_QUADRIMESTER = initializeLastDayOfPreviousQuadrimesterMap();
+    
 	// FIRST DAY of CURRENT QUADRIMESTER
 	
+    /**
+     * Initializes a map containing functions to calculate the first day of the current quadrimester for each month.
+     *
+     * @return A map where each entry represents a month and its corresponding function to calculate the first day
+     *         of the current quadrimester.
+     */
 	private static final Map<Month, Function<LocalDate, LocalDate>> initializeFirstDayOfCurrentQuadrimesterMap() {
 		Map<Month, Function<LocalDate, LocalDate>> map = new EnumMap<>(Month.class);
 		
@@ -101,6 +125,12 @@ public class LocalDateQuadrimesterUtils {
 	
 	// LAST DAY of CURRENT QUADRIMESTER
 	
+	/**
+	 * Initializes a map containing functions to calculate the last day of the current quadrimester for each month.
+	 *
+	 * @return A map where each entry represents a month and its corresponding function to calculate the last day
+	 *         of the current quadrimester.
+	 */
 	private static final Map<Month, Function<LocalDate, LocalDate>> initializeLastDayOfCurrentQuadrimesterMap() {
 		Map<Month, Function<LocalDate, LocalDate>> map = new EnumMap<>(Month.class);
 		
@@ -127,6 +157,12 @@ public class LocalDateQuadrimesterUtils {
 	
 	// FIRST DAY of NEXT QUADRIMESTER
 	
+	/**
+	 * Initializes a map containing functions to calculate the first day of the next quadrimester for each month.
+	 *
+	 * @return A map where each entry represents a month and its corresponding function to calculate the first day
+	 *         of the next quadrimester.
+	 */
 	private static final Map<Month, Function<LocalDate, LocalDate>> initializeFirstDayOfNextQuadrimesterMap() {
 		Map<Month, Function<LocalDate, LocalDate>> map = new EnumMap<>(Month.class);
 		
@@ -153,6 +189,12 @@ public class LocalDateQuadrimesterUtils {
 	
 	// LAST DAY of NEXT QUADRIMESTER
 	
+	/**
+	 * Initializes a map containing functions to calculate the last day of the next quadrimester for each month.
+	 *
+	 * @return A map where each entry represents a month and its corresponding function to calculate the last day
+	 *         of the next quadrimester.
+	 */
 	private static final Map<Month, Function<LocalDate, LocalDate>> initializeLastDayOfNextQuadrimesterMap() {
 		Map<Month, Function<LocalDate, LocalDate>> map = new EnumMap<>(Month.class);
 		
@@ -179,6 +221,12 @@ public class LocalDateQuadrimesterUtils {
 	
 	// FIRST DAY of PREVIOUS QUADRIMESTER
 	
+	/**
+	 * Initializes a map containing functions to calculate the first day of the previous quadrimester for each month.
+	 *
+	 * @return A map where each entry represents a month and its corresponding function to calculate the first day
+	 *         of the previous quadrimester.
+	 */
 	private static final Map<Month, Function<LocalDate, LocalDate>> initializeFirstDayOfPreviousQuadrimesterMap() {
 		Map<Month, Function<LocalDate, LocalDate>> map = new EnumMap<>(Month.class);
 		
@@ -205,6 +253,13 @@ public class LocalDateQuadrimesterUtils {
 	
 	// LAST DAY of PREVIOUS QUADRIMESTER
 	
+	/**
+	 * Initializes a map containing functions to calculate the last day of the previous quadrimester for each month.
+	 *
+	 * @return A map where each entry represents a month and its corresponding function to calculate the last day
+	 *         of the previous quadrimester.
+	 */
+
 	private static final Map<Month, Function<LocalDate, LocalDate>> initializeLastDayOfPreviousQuadrimesterMap() {
 		Map<Month, Function<LocalDate, LocalDate>> map = new EnumMap<>(Month.class);
 		
@@ -229,160 +284,376 @@ public class LocalDateQuadrimesterUtils {
 		return map;
 	}
 	
+	/**
+	 * Calculates the first day of the first quadrimester for a given year.
+	 *
+	 * @param year The year for which to calculate the first day.
+	 * @return The first day of the first quadrimester.
+	 */
 	private static final LocalDate firstDayOfFirstQuadrimester(final int year) {
-		return buildLocalDate(year, 1, 1);
+	    return buildLocalDate(year, 1, 1);
 	}
-	
+
+	/**
+	 * Calculates the first day of the second quadrimester for a given year.
+	 *
+	 * @param year The year for which to calculate the first day.
+	 * @return The first day of the second quadrimester.
+	 */
 	private static final LocalDate firstDayOfSecondQuadrimester(final int year) {
-		return buildLocalDate(year, 5, 1);
+	    return buildLocalDate(year, 5, 1);
 	}
-	
+
+	/**
+	 * Calculates the first day of the third quadrimester for a given year.
+	 *
+	 * @param year The year for which to calculate the first day.
+	 * @return The first day of the third quadrimester.
+	 */
 	private static final LocalDate firstDayOfThirdQuadrimester(final int year) {
-		return buildLocalDate(year, 9, 1);
+	    return buildLocalDate(year, 9, 1);
 	}
-	
+
+	/**
+	 * Calculates the last day of the first quadrimester for a given year.
+	 *
+	 * @param year The year for which to calculate the last day.
+	 * @return The last day of the first quadrimester.
+	 */
 	private static final LocalDate lastDayOfFirstQuadrimester(final int year) {
-		return buildLocalDate(year, 4, 30);
+	    return buildLocalDate(year, 4, 30);
 	}
-	
+
+	/**
+	 * Calculates the last day of the second quadrimester for a given year.
+	 *
+	 * @param year The year for which to calculate the last day.
+	 * @return The last day of the second quadrimester.
+	 */
 	private static final LocalDate lastDayOfSecondQuadrimester(final int year) {
-		return buildLocalDate(year, 8, 31);
+	    return buildLocalDate(year, 8, 31);
 	}
-	
+
+	/**
+	 * Calculates the last day of the third quadrimester for a given year.
+	 *
+	 * @param year The year for which to calculate the last day.
+	 * @return The last day of the third quadrimester.
+	 */
 	private static final LocalDate lastDayOfThirdQuadrimester(final int year) {
-		return buildLocalDate(year, 12, 31);
+	    return buildLocalDate(year, 12, 31);
 	}
-	
+
+	/**
+	 * Throws an exception if the given date is not in the first quadrimester.
+	 *
+	 * @param localDate The date to check.
+	 * @throws IllegalArgumentException If the date is not in the first quadrimester.
+	 */
 	private static final void throwExceptionIfIsNotTheFirstQuadrimester(final LocalDate localDate) {
-		if(!isFirstQuadrimester(localDate)) throw new IllegalArgumentException("The localDate is not on first quadrimester");
+	    if (!isFirstQuadrimester(localDate)) throw new IllegalArgumentException("The localDate is not in the first quadrimester");
 	}
-	
+
+	/**
+	 * Throws an exception if the given date is not in the second quadrimester.
+	 *
+	 * @param localDate The date to check.
+	 * @throws IllegalArgumentException If the date is not in the second quadrimester.
+	 */
 	private static final void throwExceptionIfIsNotTheSecondQuadrimester(final LocalDate localDate) {
-		if(!isSecondQuadrimester(localDate)) throw new IllegalArgumentException("The localDate is not on second quadrimester");
+	    if (!isSecondQuadrimester(localDate)) throw new IllegalArgumentException("The localDate is not in the second quadrimester");
 	}
-	
+
+	/**
+	 * Throws an exception if the given date is not in the third quadrimester.
+	 *
+	 * @param localDate The date to check.
+	 * @throws IllegalArgumentException If the date is not in the third quadrimester.
+	 */
 	private static final void throwExceptionIfIsNotTheThirdQuadrimester(final LocalDate localDate) {
-		if(!isThirdQuadrimester(localDate)) throw new IllegalArgumentException("The localDate is not on third quadrimester");
+	    if (!isThirdQuadrimester(localDate)) throw new IllegalArgumentException("The localDate is not in the third quadrimester");
 	}
-	
+
 	// CURRENT QUADRIMESTER
-	
+
+	/**
+	 * Calculates the first day of the current quadrimester, starting in the first quadrimester, for a given date.
+	 *
+	 * @param localDate The date for which to calculate the first day.
+	 * @return The first day of the current quadrimester.
+	 * @throws IllegalArgumentException If the date is not in the first quadrimester.
+	 */
 	private static final LocalDate firstDayOfCurrentQuadrimesterStartingAtFirstQuadrimester(final LocalDate localDate) {
-		throwExceptionIfIsNotTheFirstQuadrimester(localDate);
-		return firstDayOfFirstQuadrimester(localDate.getYear());
+	    throwExceptionIfIsNotTheFirstQuadrimester(localDate);
+	    return firstDayOfFirstQuadrimester(localDate.getYear());
 	}
-	
+
+	/**
+	 * Calculates the first day of the current quadrimester, starting in the second quadrimester, for a given date.
+	 *
+	 * @param localDate The date for which to calculate the first day.
+	 * @return The first day of the current quadrimester.
+	 * @throws IllegalArgumentException If the date is not in the second quadrimester.
+	 */
 	private static final LocalDate firstDayOfCurrentQuadrimesterStartingAtSecondQuadrimester(final LocalDate localDate) {
-		throwExceptionIfIsNotTheSecondQuadrimester(localDate);
-		return firstDayOfSecondQuadrimester(localDate.getYear());
+	    throwExceptionIfIsNotTheSecondQuadrimester(localDate);
+	    return firstDayOfSecondQuadrimester(localDate.getYear());
 	}
-	
+
+	/**
+	 * Calculates the first day of the current quadrimester, starting in the third quadrimester, for a given date.
+	 *
+	 * @param localDate The date for which to calculate the first day.
+	 * @return The first day of the current quadrimester.
+	 * @throws IllegalArgumentException If the date is not in the third quadrimester.
+	 */
 	private static final LocalDate firstDayOfCurrentQuadrimesterStartingAtThirdQuadrimester(final LocalDate localDate) {
-		throwExceptionIfIsNotTheThirdQuadrimester(localDate);
-		return firstDayOfThirdQuadrimester(localDate.getYear());
+	    throwExceptionIfIsNotTheThirdQuadrimester(localDate);
+	    return firstDayOfThirdQuadrimester(localDate.getYear());
 	}
-	
+
+	/**
+	 * Calculates the last day of the current quadrimester, starting in the first quadrimester, for a given date.
+	 *
+	 * @param localDate The date for which to calculate the last day.
+	 * @return The last day of the current quadrimester.
+	 * @throws IllegalArgumentException If the date is not in the first quadrimester.
+	 */
 	private static final LocalDate lastDayOfCurrentQuadrimesterStartingAtFirstQuadrimester(final LocalDate localDate) {
-		throwExceptionIfIsNotTheFirstQuadrimester(localDate);
-		return lastDayOfFirstQuadrimester(localDate.getYear());
+	    throwExceptionIfIsNotTheFirstQuadrimester(localDate);
+	    return lastDayOfFirstQuadrimester(localDate.getYear());
 	}
-	
+
+	/**
+	 * Calculates the last day of the current quadrimester, starting in the second quadrimester, for a given date.
+	 *
+	 * @param localDate The date for which to calculate the last day.
+	 * @return The last day of the current quadrimester.
+	 * @throws IllegalArgumentException If the date is not in the second quadrimester.
+	 */
 	private static final LocalDate lastDayOfCurrentQuadrimesterStartingAtSecondQuadrimester(final LocalDate localDate) {
-		throwExceptionIfIsNotTheSecondQuadrimester(localDate);
-		return lastDayOfSecondQuadrimester(localDate.getYear());
+	    throwExceptionIfIsNotTheSecondQuadrimester(localDate);
+	    return lastDayOfSecondQuadrimester(localDate.getYear());
 	}
-	
+
+	/**
+	 * Calculates the last day of the current quadrimester, starting in the third quadrimester, for a given date.
+	 *
+	 * @param localDate The date for which to calculate the last day.
+	 * @return The last day of the current quadrimester.
+	 * @throws IllegalArgumentException If the date is not in the third quadrimester.
+	 */
 	private static final LocalDate lastDayOfCurrentQuadrimesterStartingAtThirdQuadrimester(final LocalDate localDate) {
-		throwExceptionIfIsNotTheThirdQuadrimester(localDate);
-		return lastDayOfThirdQuadrimester(localDate.getYear());
+	    throwExceptionIfIsNotTheThirdQuadrimester(localDate);
+	    return lastDayOfThirdQuadrimester(localDate.getYear());
 	}
-	
+
 	// NEXT QUADRIMESTER
-	
+
+	/**
+	 * Calculates the first day of the next quadrimester, starting in the first quadrimester, for a given date.
+	 *
+	 * @param localDate The date for which to calculate the first day.
+	 * @return The first day of the next quadrimester.
+	 * @throws IllegalArgumentException If the date is not in the first quadrimester.
+	 */
 	private static final LocalDate firstDayOfNextQuadrimesterStartingAtFirstQuadrimester(final LocalDate localDate) {
-		throwExceptionIfIsNotTheFirstQuadrimester(localDate);
-		return firstDayOfSecondQuadrimester(localDate.getYear());
+	    throwExceptionIfIsNotTheFirstQuadrimester(localDate);
+	    return firstDayOfSecondQuadrimester(localDate.getYear());
 	}
-	
+
+	/**
+	 * Calculates the first day of the next quadrimester, starting in the second quadrimester, for a given date.
+	 *
+	 * @param localDate The date for which to calculate the first day.
+	 * @return The first day of the next quadrimester.
+	 * @throws IllegalArgumentException If the date is not in the second quadrimester.
+	 */
 	private static final LocalDate firstDayOfNextQuadrimesterStartingAtSecondQuadrimester(final LocalDate localDate) {
-		throwExceptionIfIsNotTheSecondQuadrimester(localDate);
-		return firstDayOfThirdQuadrimester(localDate.getYear());
+	    throwExceptionIfIsNotTheSecondQuadrimester(localDate);
+	    return firstDayOfThirdQuadrimester(localDate.getYear());
 	}
-	
+
+	/**
+	 * Calculates the first day of the next quadrimester, starting in the third quadrimester, for a given date.
+	 *
+	 * @param localDate The date for which to calculate the first day.
+	 * @return The first day of the next quadrimester.
+	 * @throws IllegalArgumentException If the date is not in the third quadrimester.
+	 */
 	private static final LocalDate firstDayOfNextQuadrimesterStartingAtThirdQuadrimester(final LocalDate localDate) {
-		throwExceptionIfIsNotTheThirdQuadrimester(localDate);
-		return firstDayOfFirstQuadrimester(localDate.getYear() + 1);
+	    throwExceptionIfIsNotTheThirdQuadrimester(localDate);
+	    return firstDayOfFirstQuadrimester(localDate.getYear() + 1);
 	}
-	
+
+	/**
+	 * Calculates the last day of the next quadrimester, starting in the first quadrimester, for a given date.
+	 *
+	 * @param localDate The date for which to calculate the last day.
+	 * @return The last day of the next quadrimester.
+	 * @throws IllegalArgumentException If the date is not in the first quadrimester.
+	 */
 	private static final LocalDate lastDayOfNextQuadrimesterStartingAtFirstQuadrimester(final LocalDate localDate) {
-		throwExceptionIfIsNotTheFirstQuadrimester(localDate);
-		return lastDayOfSecondQuadrimester(localDate.getYear());
+	    throwExceptionIfIsNotTheFirstQuadrimester(localDate);
+	    return lastDayOfSecondQuadrimester(localDate.getYear());
 	}
-	
+
+	/**
+	 * Calculates the last day of the next quadrimester, starting in the second quadrimester, for a given date.
+	 *
+	 * @param localDate The date for which to calculate the last day.
+	 * @return The last day of the next quadrimester.
+	 * @throws IllegalArgumentException If the date is not in the second quadrimester.
+	 */
 	private static final LocalDate lastDayOfNextQuadrimesterStartingAtSecondQuadrimester(final LocalDate localDate) {
-		throwExceptionIfIsNotTheSecondQuadrimester(localDate);
-		return lastDayOfThirdQuadrimester(localDate.getYear());
+	    throwExceptionIfIsNotTheSecondQuadrimester(localDate);
+	    return lastDayOfThirdQuadrimester(localDate.getYear());
 	}
-	
+
+	/**
+	 * Calculates the last day of the next quadrimester, starting in the third quadrimester, for a given date.
+	 *
+	 * @param localDate The date for which to calculate the last day.
+	 * @return The last day of the next quadrimester.
+	 * @throws IllegalArgumentException If the date is not in the third quadrimester.
+	 */
 	private static final LocalDate lastDayOfNextQuadrimesterStartingAtThirdQuadrimester(final LocalDate localDate) {
-		throwExceptionIfIsNotTheThirdQuadrimester(localDate);
-		return lastDayOfFirstQuadrimester(localDate.getYear() + 1);
+	    throwExceptionIfIsNotTheThirdQuadrimester(localDate);
+	    return lastDayOfFirstQuadrimester(localDate.getYear() + 1);
 	}
-	
+
 	// PREVIOUS QUADRIMESTER
-	
+
+	/**
+	 * Calculates the first day of the previous quadrimester, starting in the first quadrimester, for a given date.
+	 *
+	 * @param localDate The date for which to calculate the first day.
+	 * @return The first day of the previous quadrimester.
+	 * @throws IllegalArgumentException If the date is not in the first quadrimester.
+	 */
 	private static final LocalDate firstDayOfPreviousQuadrimesterStartingAtFirstQuadrimester(final LocalDate localDate) {
-		throwExceptionIfIsNotTheFirstQuadrimester(localDate);
-		return firstDayOfThirdQuadrimester(localDate.getYear() - 1);
+	    throwExceptionIfIsNotTheFirstQuadrimester(localDate);
+	    return firstDayOfThirdQuadrimester(localDate.getYear() - 1);
 	}
-	
+
+	/**
+	 * Calculates the first day of the previous quadrimester, starting in the second quadrimester, for a given date.
+	 *
+	 * @param localDate The date for which to calculate the first day.
+	 * @return The first day of the previous quadrimester.
+	 * @throws IllegalArgumentException If the date is not in the second quadrimester.
+	 */
 	private static final LocalDate firstDayOfPreviousQuadrimesterStartingAtSecondQuadrimester(final LocalDate localDate) {
-		throwExceptionIfIsNotTheSecondQuadrimester(localDate);
-		return firstDayOfFirstQuadrimester(localDate.getYear());
+	    throwExceptionIfIsNotTheSecondQuadrimester(localDate);
+	    return firstDayOfFirstQuadrimester(localDate.getYear());
 	}
-	
+
+	/**
+	 * Calculates the first day of the previous quadrimester, starting in the third quadrimester, for a given date.
+	 *
+	 * @param localDate The date for which to calculate the first day.
+	 * @return The first day of the previous quadrimester.
+	 * @throws IllegalArgumentException If the date is not in the third quadrimester.
+	 */
 	private static final LocalDate firstDayOfPreviousQuadrimesterStartingAtThirdQuadrimester(final LocalDate localDate) {
-		throwExceptionIfIsNotTheThirdQuadrimester(localDate);
-		return firstDayOfSecondQuadrimester(localDate.getYear());
+	    throwExceptionIfIsNotTheThirdQuadrimester(localDate);
+	    return firstDayOfSecondQuadrimester(localDate.getYear());
 	}
-	
+
+	/**
+	 * Calculates the last day of the previous quadrimester, starting in the first quadrimester, for a given date.
+	 *
+	 * @param localDate The date for which to calculate the last day.
+	 * @return The last day of the previous quadrimester.
+	 * @throws IllegalArgumentException If the date is not in the first quadrimester.
+	 */
 	private static final LocalDate lastDayOfPreviousQuadrimesterStartingAtFirstQuadrimester(final LocalDate localDate) {
-		throwExceptionIfIsNotTheFirstQuadrimester(localDate);
-		return lastDayOfThirdQuadrimester(localDate.getYear() - 1);
+	    throwExceptionIfIsNotTheFirstQuadrimester(localDate);
+	    return lastDayOfThirdQuadrimester(localDate.getYear() - 1);
 	}
-	
+
+	/**
+	 * Calculates the last day of the previous quadrimester, starting in the second quadrimester, for a given date.
+	 *
+	 * @param localDate The date for which to calculate the last day.
+	 * @return The last day of the previous quadrimester.
+	 * @throws IllegalArgumentException If the date is not in the second quadrimester.
+	 */
 	private static final LocalDate lastDayOfPreviousQuadrimesterStartingAtSecondQuadrimester(final LocalDate localDate) {
-		throwExceptionIfIsNotTheSecondQuadrimester(localDate);
-		return lastDayOfFirstQuadrimester(localDate.getYear());
+	    throwExceptionIfIsNotTheSecondQuadrimester(localDate);
+	    return lastDayOfFirstQuadrimester(localDate.getYear());
 	}
 	
+	/**
+	 * Calculates the last day of the previous quadrimester, starting in the third quadrimester, for a given date.
+	 *
+	 * @param localDate The date for which to calculate the last day.
+	 * @return The last day of the previous quadrimester.
+	 * @throws IllegalArgumentException If the date is not in the third quadrimester.
+	 */
 	private static final LocalDate lastDayOfPreviousQuadrimesterStartingAtThirdQuadrimester(final LocalDate localDate) {
-		throwExceptionIfIsNotTheThirdQuadrimester(localDate);
-		return lastDayOfSecondQuadrimester(localDate.getYear());
+	    throwExceptionIfIsNotTheThirdQuadrimester(localDate);
+	    return lastDayOfSecondQuadrimester(localDate.getYear());
 	}
 
+	/**
+	 * Retrieves a map containing functions to calculate the first day of the current quadrimester for each month.
+	 *
+	 * @return A map where each entry represents a month and its corresponding function to calculate the first day
+	 *         of the current quadrimester.
+	 */
 	public static Map<Month, Function<LocalDate, LocalDate>> getFirstDayOfCurrentQuadrimester() {
-		return FIRST_DAY_OF_CURRENT_QUADRIMESTER;
+	    return FIRST_DAY_OF_CURRENT_QUADRIMESTER;
 	}
 
+	/**
+	 * Retrieves a map containing functions to calculate the last day of the current quadrimester for each month.
+	 *
+	 * @return A map where each entry represents a month and its corresponding function to calculate the last day
+	 *         of the current quadrimester.
+	 */
 	public static Map<Month, Function<LocalDate, LocalDate>> getLastDayOfCurrentQuadrimester() {
-		return LAST_DAY_OF_CURRENT_QUADRIMESTER;
+	    return LAST_DAY_OF_CURRENT_QUADRIMESTER;
 	}
 
+	/**
+	 * Retrieves a map containing functions to calculate the first day of the next quadrimester for each month.
+	 *
+	 * @return A map where each entry represents a month and its corresponding function to calculate the first day
+	 *         of the next quadrimester.
+	 */
 	public static Map<Month, Function<LocalDate, LocalDate>> getFirstDayOfNextQuadrimester() {
-		return FIRST_DAY_OF_NEXT_QUADRIMESTER;
+	    return FIRST_DAY_OF_NEXT_QUADRIMESTER;
 	}
 
+	/**
+	 * Retrieves a map containing functions to calculate the last day of the next quadrimester for each month.
+	 *
+	 * @return A map where each entry represents a month and its corresponding function to calculate the last day
+	 *         of the next quadrimester.
+	 */
 	public static Map<Month, Function<LocalDate, LocalDate>> getLastDayOfNextQuadrimester() {
-		return LAST_DAY_OF_NEXT_QUADRIMESTER;
+	    return LAST_DAY_OF_NEXT_QUADRIMESTER;
 	}
 
+	/**
+	 * Retrieves a map containing functions to calculate the first day of the previous quadrimester for each month.
+	 *
+	 * @return A map where each entry represents a month and its corresponding function to calculate the first day
+	 *         of the previous quadrimester.
+	 */
 	public static Map<Month, Function<LocalDate, LocalDate>> getFirstDayOfPreviousQuadrimester() {
-		return FIRST_DAY_OF_PREVIOUS_QUADRIMESTER;
+	    return FIRST_DAY_OF_PREVIOUS_QUADRIMESTER;
 	}
 
+	/**
+	 * Retrieves a map containing functions to calculate the last day of the previous quadrimester for each month.
+	 *
+	 * @return A map where each entry represents a month and its corresponding function to calculate the last day
+	 *         of the previous quadrimester.
+	 */
 	public static Map<Month, Function<LocalDate, LocalDate>> getLastDayOfPreviousQuadrimester() {
-		return LAST_DAY_OF_PREVIOUS_QUADRIMESTER;
+	    return LAST_DAY_OF_PREVIOUS_QUADRIMESTER;
 	}
 	
 //	public enum QUADRIMESTER {

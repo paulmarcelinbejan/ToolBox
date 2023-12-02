@@ -2,16 +2,18 @@ package io.github.paulmarcelinbejan.toolbox.utils.time.pattern.datetime;
 
 import java.time.format.DateTimeFormatter;
 
-import io.github.paulmarcelinbejan.toolbox.utils.time.format.LocalDateTimeFormatUtils;
 import io.github.paulmarcelinbejan.toolbox.utils.time.pattern.DateTimePatternBase;
+import io.github.paulmarcelinbejan.toolbox.utils.time.pattern.date.DatePattern;
+import io.github.paulmarcelinbejan.toolbox.utils.time.pattern.time.TimePattern;
 import lombok.Getter;
 
 /**
  * DateTimePattern
  * <p>
  * Represents various date and time patterns. You can build a large number of DateTimePattern instances
- * by combining a DatePattern with a TimePattern. Use {@link LocalDateTimeFormatUtils#buildPattern()} to
- * create patterns with date and time.
+ * by combining a DatePattern with a TimePattern. Use the {@link DateTimePattern#buildPattern(DatePattern, String, TimePattern)} method
+ * to create patterns with date and time.
+ * </p>
  */
 public enum DateTimePattern implements DateTimePatternBase {
 
@@ -61,5 +63,5 @@ public enum DateTimePattern implements DateTimePatternBase {
         this.value = value;
         this.formatter = DateTimeFormatter.ofPattern(value);
     }
-
+    
 }
