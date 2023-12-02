@@ -2,7 +2,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	
 	<parent>
-		<groupId>com.paulmarcelinbejan.toolbox</groupId>
+		<groupId>io.github.paulmarcelinbejan.toolbox</groupId>
 		<artifactId>toolbox</artifactId>
 		<version>1.0.0</version>
 	</parent>
@@ -26,28 +26,28 @@
 			<artifactId>swagger-annotations</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>com.paulmarcelinbejan.toolbox</groupId>
+			<groupId>io.github.paulmarcelinbejan.toolbox</groupId>
 			<artifactId>toolbox-base</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>com.paulmarcelinbejan.toolbox</groupId>
+			<groupId>io.github.paulmarcelinbejan.toolbox</groupId>
 			<artifactId>toolbox-exception</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>com.paulmarcelinbejan.toolbox</groupId>
+			<groupId>io.github.paulmarcelinbejan.toolbox</groupId>
 			<artifactId>toolbox-utils-jackson</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>com.paulmarcelinbejan.toolbox</groupId>
+			<groupId>io.github.paulmarcelinbejan.toolbox</groupId>
 			<artifactId>toolbox-utils-reflection</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>com.paulmarcelinbejan.toolbox</groupId>
+			<groupId>io.github.paulmarcelinbejan.toolbox</groupId>
 			<artifactId>toolbox-utils-mapping</artifactId>
 		</dependency>
 		<!-- don't know if it is a good idea -->
 		<dependency>
-			<groupId>com.paulmarcelinbejan.toolbox</groupId>
+			<groupId>io.github.paulmarcelinbejan.toolbox</groupId>
 			<artifactId>toolbox-sql</artifactId>
 		</dependency>
 	</dependencies>

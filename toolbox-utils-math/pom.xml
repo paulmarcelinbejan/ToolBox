@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     
     <parent>
-        <groupId>com.paulmarcelinbejan.toolbox</groupId>
+        <groupId>io.github.paulmarcelinbejan.toolbox</groupId>
         <artifactId>toolbox</artifactId>
         <version>1.0.0</version>
     </parent>
@@ -16,11 +16,11 @@
     <dependencies>
 	  
 	    <dependency>
-      	    <groupId>com.paulmarcelinbejan.toolbox</groupId>
+      	    <groupId>io.github.paulmarcelinbejan.toolbox</groupId>
       	    <artifactId>toolbox-base</artifactId>
         </dependency>
         <dependency>
-        	<groupId>com.paulmarcelinbejan.toolbox</groupId>
+        	<groupId>io.github.paulmarcelinbejan.toolbox</groupId>
         	<artifactId>toolbox-constants</artifactId>
         </dependency>
 	    

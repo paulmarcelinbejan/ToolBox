@@ -13,7 +13,7 @@
     <name>ToolBox</name>
     <description>ToolBox for Java</description>
 
-    <groupId>com.paulmarcelinbejan.toolbox</groupId>
+    <groupId>io.github.paulmarcelinbejan.toolbox</groupId>
     <artifactId>toolbox</artifactId>
     <version>1.0.0</version>
     <packaging>pom</packaging>
@@ -127,98 +127,98 @@
 			
             <!-- ToolBox dependencies -->
             <dependency>
-                <groupId>com.paulmarcelinbejan.toolbox</groupId>
+                <groupId>io.github.paulmarcelinbejan.toolbox</groupId>
                 <artifactId>toolbox-base</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.paulmarcelinbejan.toolbox</groupId>
+                <groupId>io.github.paulmarcelinbejan.toolbox</groupId>
                 <artifactId>toolbox-constants</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.paulmarcelinbejan.toolbox</groupId>
+                <groupId>io.github.paulmarcelinbejan.toolbox</groupId>
                 <artifactId>toolbox-exception</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-				<groupId>com.paulmarcelinbejan.toolbox</groupId>
+				<groupId>io.github.paulmarcelinbejan.toolbox</groupId>
 				<artifactId>toolbox-service-helper</artifactId>
 				<version>${project.version}</version>
 			</dependency>
             <dependency>
-                <groupId>com.paulmarcelinbejan.toolbox</groupId>
+                <groupId>io.github.paulmarcelinbejan.toolbox</groupId>
                 <artifactId>toolbox-sql</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.paulmarcelinbejan.toolbox</groupId>
+                <groupId>io.github.paulmarcelinbejan.toolbox</groupId>
                 <artifactId>toolbox-test</artifactId>
                 <version>${project.version}</version>
                 <scope>test</scope>
             </dependency>
             <dependency>
-                <groupId>com.paulmarcelinbejan.toolbox</groupId>
+                <groupId>io.github.paulmarcelinbejan.toolbox</groupId>
                 <artifactId>toolbox-utils-csv</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.paulmarcelinbejan.toolbox</groupId>
+                <groupId>io.github.paulmarcelinbejan.toolbox</groupId>
                 <artifactId>toolbox-utils-io</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.paulmarcelinbejan.toolbox</groupId>
+                <groupId>io.github.paulmarcelinbejan.toolbox</groupId>
                 <artifactId>toolbox-utils-jackson</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.paulmarcelinbejan.toolbox</groupId>
+                <groupId>io.github.paulmarcelinbejan.toolbox</groupId>
                 <artifactId>toolbox-utils-json</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.paulmarcelinbejan.toolbox</groupId>
+                <groupId>io.github.paulmarcelinbejan.toolbox</groupId>
                 <artifactId>toolbox-utils-mapping</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.paulmarcelinbejan.toolbox</groupId>
+                <groupId>io.github.paulmarcelinbejan.toolbox</groupId>
                 <artifactId>toolbox-utils-math</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.paulmarcelinbejan.toolbox</groupId>
+                <groupId>io.github.paulmarcelinbejan.toolbox</groupId>
                 <artifactId>toolbox-utils-pdf</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.paulmarcelinbejan.toolbox</groupId>
+                <groupId>io.github.paulmarcelinbejan.toolbox</groupId>
                 <artifactId>toolbox-utils-reflection</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.paulmarcelinbejan.toolbox</groupId>
+                <groupId>io.github.paulmarcelinbejan.toolbox</groupId>
                 <artifactId>toolbox-utils-text</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.paulmarcelinbejan.toolbox</groupId>
+                <groupId>io.github.paulmarcelinbejan.toolbox</groupId>
                 <artifactId>toolbox-utils-time</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.paulmarcelinbejan.toolbox</groupId>
+                <groupId>io.github.paulmarcelinbejan.toolbox</groupId>
                 <artifactId>toolbox-utils-validation</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.paulmarcelinbejan.toolbox</groupId>
+                <groupId>io.github.paulmarcelinbejan.toolbox</groupId>
                 <artifactId>toolbox-utils-yaml</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.paulmarcelinbejan.toolbox</groupId>
+                <groupId>io.github.paulmarcelinbejan.toolbox</groupId>
                 <artifactId>toolbox-web</artifactId>
                 <version>${project.version}</version>
             </dependency>

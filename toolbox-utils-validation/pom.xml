@@ -2,7 +2,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	
 	<parent>
-		<groupId>com.paulmarcelinbejan.toolbox</groupId>
+		<groupId>io.github.paulmarcelinbejan.toolbox</groupId>
 		<artifactId>toolbox</artifactId>
 		<version>1.0.0</version>
 	</parent>
@@ -18,11 +18,11 @@
 			<artifactId>jakarta.validation-api</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>com.paulmarcelinbejan.toolbox</groupId>
+			<groupId>io.github.paulmarcelinbejan.toolbox</groupId>
 			<artifactId>toolbox-utils-reflection</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>com.paulmarcelinbejan.toolbox</groupId>
+			<groupId>io.github.paulmarcelinbejan.toolbox</groupId>
 			<artifactId>toolbox-utils-time</artifactId>
 		</dependency>
 	</dependencies>
