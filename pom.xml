@@ -3,10 +3,21 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
+	<url>https://github.com/paulmarcelinbejan/ToolBox</url>
+
+	<licenses>
+	    <license>
+	        <name>MIT License</name>
+	        <url>http://www.opensource.org/licenses/mit-license.php</url>
+	    </license>
+	</licenses>
+	
     <developers>
         <developer>
             <name>Paul Marcelin Bejan</name>
             <email>paulmarcelinbejan.developer@gmail.com</email>
+            <organization>Paul Marcelin Bejan</organization>
+            <organizationUrl>https://github.com/paulmarcelinbejan</organizationUrl>
         </developer>
     </developers>
 
@@ -40,12 +51,35 @@
         <module>toolbox-utils-yaml</module>
         <module>toolbox-web</module>
     </modules>
+    
+    <distributionManagement>
+	    <snapshotRepository>
+	        <id>ossrh</id>
+	        <url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>
+	    </snapshotRepository>
+	    <repository>
+	        <id>ossrh</id>
+	        <url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+	    </repository>
+	</distributionManagement>
 
+	<scm>
+	    <connection>scm:git:git://github.com/paulmarcelinbejan/ToolBox.git</connection>
+	    <developerConnection>scm:git:ssh://github.com:paulmarcelinbejan/ToolBox.git</developerConnection>
+	    <url>https://github.com/paulmarcelinbejan/ToolBox</url>
+	</scm>
+	
     <properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<!-- JAVA -->
         <java.version>17</java.version>
         <!-- MAVEN -->
         <maven-compiler-plugin.version>3.11.0</maven-compiler-plugin.version>
+        <maven-source-plugin.version>3.3.0</maven-source-plugin.version>
+        <maven-javadoc-plugin.version>3.6.0</maven-javadoc-plugin.version>
+        <maven-gpg-plugin.version>3.1.0</maven-gpg-plugin.version>
+        <nexus-staging-maven-plugin.version>1.6.13</nexus-staging-maven-plugin.version>
         <!-- SPRING -->
         <spring-boot.version>3.1.2</spring-boot.version>
         <spring-cloud.version>2022.0.4</spring-cloud.version>
@@ -332,10 +366,6 @@
 			<artifactId>slf4j-api</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-simple</artifactId>
-		</dependency>
-		<dependency>
 			<groupId>org.apache.logging.log4j</groupId>
 			<artifactId>log4j-slf4j-impl</artifactId>
 		</dependency>
@@ -365,6 +395,7 @@
 		            <configuration>
 		                <source>${java.version}</source> <!-- depending on your project -->
 		                <target>${java.version}</target> <!-- depending on your project -->
+		                <encoding>${project.build.sourceEncoding}</encoding>
 		                <annotationProcessorPaths>
 		                    <path>
 		                        <groupId>org.mapstruct</groupId>
@@ -395,6 +426,57 @@
             <plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 		        <artifactId>maven-compiler-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-source-plugin</artifactId>
+				<version>${maven-source-plugin.version}</version>
+				<executions>
+					<execution>
+						<id>attach-sources</id>
+						<goals>
+							<goal>jar-no-fork</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>${maven-javadoc-plugin.version}</version>
+				<executions>
+					<execution>
+						<id>attach-javadocs</id>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-gpg-plugin</artifactId>
+				<version>${maven-gpg-plugin.version}</version>
+				<executions>
+					<execution>
+						<id>sign-artifacts</id>
+						<phase>verify</phase>
+						<goals>
+							<goal>sign</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.sonatype.plugins</groupId>
+				<artifactId>nexus-staging-maven-plugin</artifactId>
+				<version>${nexus-staging-maven-plugin.version}</version>
+				<extensions>true</extensions>
+				<configuration>
+					<serverId>ossrh</serverId>
+					<nexusUrl>https://s01.oss.sonatype.org/</nexusUrl>
+					<autoReleaseAfterClose>true</autoReleaseAfterClose>
+				</configuration>
 			</plugin>
         </plugins>
     </build>
