@@ -34,7 +34,6 @@
         <module>toolbox-constants</module>
         <module>toolbox-exception</module>
         <module>toolbox-service-helper</module>
-        <module>toolbox-spring</module>
         <module>toolbox-sql</module>
         <module>toolbox-test</module>
         <module>toolbox-utils-csv</module>

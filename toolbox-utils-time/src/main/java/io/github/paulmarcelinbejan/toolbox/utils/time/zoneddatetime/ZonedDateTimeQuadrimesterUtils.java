@@ -35,6 +35,7 @@ import lombok.NoArgsConstructor;
  * 
  * A year can be divided into three QUADRIMESTER: <br>
  * 
+ * <pre>
  * <table>
  * 	<tr>
  * 		<th></th>
@@ -57,6 +58,7 @@ import lombok.NoArgsConstructor;
  *  	<td>31st December</td>
  *  </tr>
  * </table>
+ * </pre>
  */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class ZonedDateTimeQuadrimesterUtils {
