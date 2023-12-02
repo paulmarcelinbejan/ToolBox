@@ -4,8 +4,16 @@ import java.time.format.DateTimeFormatter;
 
 import io.github.paulmarcelinbejan.toolbox.base.enums.EnumBase;
 
+/**
+ * A base interface for time patterns.
+ */
 public interface TimePatternBase extends EnumBase {
-	
-	public DateTimeFormatter getFormatter();
-	
+
+    /**
+     * Gets the DateTimeFormatter associated with the time pattern.
+     *
+     * @return The DateTimeFormatter for the time pattern.
+     */
+    public DateTimeFormatter getFormatter();
+
 }

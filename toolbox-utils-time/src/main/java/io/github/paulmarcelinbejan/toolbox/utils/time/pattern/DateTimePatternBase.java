@@ -18,4 +18,3 @@ public interface DateTimePatternBase extends EnumBase {
     DateTimeFormatter getFormatter();
     
 }
-
