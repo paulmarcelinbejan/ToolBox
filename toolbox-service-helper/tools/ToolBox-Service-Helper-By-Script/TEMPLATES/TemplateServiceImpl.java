@@ -9,17 +9,17 @@ import ${PACKAGE}.${ENTITY_LOWERCASE}.entity.${ENTITY};
 import ${PACKAGE}.${ENTITY_LOWERCASE}.mapper.${ENTITY}Mapper;
 import ${PACKAGE}.${ENTITY_LOWERCASE}.repository.${ENTITY}Repository;
 import ${PACKAGE}.${ENTITY_LOWERCASE}.service.${ENTITY}Service;
-import com.paulmarcelinbejan.toolbox.exception.functional.FunctionalException;
-import com.paulmarcelinbejan.toolbox.exception.technical.TechnicalException;
-import com.paulmarcelinbejan.toolbox.service.helper.CreateServiceHelper;
-import com.paulmarcelinbejan.toolbox.service.helper.DeleteServiceHelper;
-import com.paulmarcelinbejan.toolbox.service.helper.ReadServiceHelper;
-import com.paulmarcelinbejan.toolbox.service.helper.UpdateServiceHelper;
-import com.paulmarcelinbejan.toolbox.service.helper.impl.CreateServiceHelperImpl;
-import com.paulmarcelinbejan.toolbox.service.helper.impl.DeleteServiceHelperImpl;
-import com.paulmarcelinbejan.toolbox.service.helper.impl.ReadServiceHelperImpl;
-import com.paulmarcelinbejan.toolbox.service.helper.impl.UpdateServiceHelperImpl;
-import com.paulmarcelinbejan.toolbox.service.helper.utils.ServiceHelperUtils;
+import io.github.paulmarcelinbejan.toolbox.exception.functional.FunctionalException;
+import io.github.paulmarcelinbejan.toolbox.exception.technical.TechnicalException;
+import io.github.paulmarcelinbejan.toolbox.service.helper.CreateServiceHelper;
+import io.github.paulmarcelinbejan.toolbox.service.helper.DeleteServiceHelper;
+import io.github.paulmarcelinbejan.toolbox.service.helper.ReadServiceHelper;
+import io.github.paulmarcelinbejan.toolbox.service.helper.UpdateServiceHelper;
+import io.github.paulmarcelinbejan.toolbox.service.helper.impl.CreateServiceHelperImpl;
+import io.github.paulmarcelinbejan.toolbox.service.helper.impl.DeleteServiceHelperImpl;
+import io.github.paulmarcelinbejan.toolbox.service.helper.impl.ReadServiceHelperImpl;
+import io.github.paulmarcelinbejan.toolbox.service.helper.impl.UpdateServiceHelperImpl;
+import io.github.paulmarcelinbejan.toolbox.service.helper.utils.ServiceHelperUtils;
 
 @Service
 @Transactional(rollbackFor = { FunctionalException.class, TechnicalException.class })

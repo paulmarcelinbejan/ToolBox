@@ -4,6 +4,8 @@ import java.util.List;
 
 import ${PACKAGE}.${ENTITY_LOWERCASE}.entity.${ENTITY};
 
+import io.github.paulmarcelinbejan.toolbox.exception.functional.FunctionalException;
+
 public interface ${ENTITY}Service {
 
 	// CREATE 
