@@ -26,7 +26,7 @@
 
     <groupId>io.github.paulmarcelinbejan.toolbox</groupId>
     <artifactId>toolbox</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <modules>
