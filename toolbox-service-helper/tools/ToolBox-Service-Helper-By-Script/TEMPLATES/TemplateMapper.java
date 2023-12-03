@@ -15,7 +15,7 @@ import ${PACKAGE}.${ENTITY_LOWERCASE}.dto.${ENTITY}SaveRequest;
 import ${PACKAGE}.${ENTITY_LOWERCASE}.dto.${ENTITY}UpdateRequest;
 import ${PACKAGE}.${ENTITY_LOWERCASE}.entity.${ENTITY};
 
-import com.paulmarcelinbejan.toolbox.service.helper.mapping.FullMapper;
+import io.github.paulmarcelinbejan.toolbox.service.helper.mapping.FullMapper;
 
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
 public abstract class ${ENTITY}Mapper implements FullMapper<${ENTITY}, ${ENTITY}SaveRequest, ${ENTITY}UpdateRequest, ${ENTITY}Response> {
