@@ -260,6 +260,10 @@ public class MathUtils {
 	 * RoundingMode.DOWN -> -1
 	 * RoundingMode.FLOOR -> -2
      * </pre>
+     * 
+	 * @param value 			The BigDecimal value to truncate.
+	 * @param decimalPlaces		The number of decimal places to round to.
+	 * @return 					The truncated BigDecimal value.
 	 */
 	public static BigDecimal truncateDown(BigDecimal value, int decimalPlaces) {
 		return value.setScale(decimalPlaces, RoundingMode.DOWN);
@@ -281,6 +285,10 @@ public class MathUtils {
 	 * RoundingMode.DOWN -> -1
 	 * RoundingMode.FLOOR -> -2
      * </pre>
+	 *
+	 * @param value 			The BigDecimal value to truncate.
+	 * @param decimalPlaces		The number of decimal places to round to.
+	 * @return 					The truncated BigDecimal value.
 	 */
 	public static BigDecimal truncateFloor(BigDecimal value, int decimalPlaces) {
 		return value.setScale(decimalPlaces, RoundingMode.FLOOR);
@@ -325,8 +333,8 @@ public class MathUtils {
 	}
 
 	/**
-	 * Rounds the given BigDecimal value to the nearest whole number using the HALF_UP rounding mode.
-	 * This method is an adaptation of {@link Math#round()} for BigDecimal.
+	 * Rounds the given BigDecimal value to the nearest whole number.
+	 * This method is an adaptation of {@link Math#round(double)} for BigDecimal.
 	 *
 	 * @param value The BigDecimal value to be rounded.
 	 * @return The rounded long value.
@@ -340,7 +348,7 @@ public class MathUtils {
 	/**
 	 * Rounds the given BigDecimal value to the specified number of decimal places using the HALF_UP
 	 * rounding mode if the value is positive, and the HALF_DOWN rounding mode if the value is negative.
-	 * This method is an adaptation of {@link Math#round()} for BigDecimal.
+	 * This method is an adaptation of {@link Math#round(double)} for BigDecimal.
 	 *
 	 * @param value The BigDecimal value to be rounded.
 	 * @param decimalPlaces The number of decimal places to round to.
