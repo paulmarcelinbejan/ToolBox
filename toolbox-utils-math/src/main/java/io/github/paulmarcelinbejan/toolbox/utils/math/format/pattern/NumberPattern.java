@@ -1,5 +1,8 @@
 package io.github.paulmarcelinbejan.toolbox.utils.math.format.pattern;
 
+/**
+ * Enumeration representing different number formatting patterns based on decimal places.
+ */
 public enum NumberPattern {
 
 	/**
