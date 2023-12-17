@@ -61,7 +61,7 @@ public class YamlFileUtils {
 	 */
     public <T> T read(FileInfo fileInfo, Class<T> clazz, String prefix, YamlPrefixType yamlPrefixType) throws IOException {
     	try (InputStream fileInputStream = FileUtils.createFileInputStream(fileInfo)) {
-    		return readValueWithPrefix(mapperReader, FileUtils.createFileInputStream(fileInfo), clazz, prefix, yamlPrefixType);
+    		return readValueWithPrefix(mapperReader, fileInputStream, clazz, prefix, yamlPrefixType);
 		}
 	}
     
