@@ -11,14 +11,19 @@ import java.util.concurrent.TimeUnit;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
+/**
+ * Utility class for working with durations and time units.
+ * Provides methods to split durations into time units with ascending or descending order.
+ */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class DurationUtils {
 
-	/**
-	 * 
-	 * @param durationInNanos
-	 * @return
-	 */
+    /**
+     * Splits the given duration in nanoseconds into time units with ascending order.
+     *
+     * @param durationInNanos the duration in nanoseconds to be split
+     * @return an {@code EnumMap} containing time units and their corresponding values
+     */
     public static EnumMap<TimeUnit, Long> splitNanosIntoTimeUnitsWithAscOrder(long durationInNanos) {
     	EnumMap<TimeUnit, Long> result = new EnumMap<>(TimeUnit.class);
 
@@ -51,11 +56,23 @@ public class DurationUtils {
         return result;
     }
     
+    /**
+     * Splits the given duration into time units with ascending order.
+     *
+     * @param duration the duration to be split
+     * @return an {@code EnumMap} containing time units and their corresponding values
+     */
     public static EnumMap<TimeUnit, Long> splitDurationIntoTimeUnitsWithAscOrder(Duration duration) {
         long durationInNanos = duration.toNanos();
         return splitNanosIntoTimeUnitsWithAscOrder(durationInNanos);
     }
     
+    /**
+     * Splits the given duration in nanoseconds into time units with descending order.
+     *
+     * @param durationInNanos the duration in nanoseconds to be split
+     * @return a {@code LinkedHashMap} containing time units and their corresponding values in descending order
+     */
     public static LinkedHashMap<TimeUnit, Long> splitNanosIntoTimeUnitsWithDescOrder(long durationInNanos) {
     	List<TimeUnit> timeUnitDescOrder = timeUnitsDescOrder();
     	LinkedHashMap<TimeUnit, Long> timeUnitValueMapDescOrder = new LinkedHashMap<>();
@@ -66,17 +83,32 @@ public class DurationUtils {
 		return timeUnitValueMapDescOrder;
     }
     
+    /**
+     * Splits the given duration into time units with descending order.
+     *
+     * @param duration the duration to be split
+     * @return a {@code LinkedHashMap} containing time units and their corresponding values in descending order
+     */
     public static LinkedHashMap<TimeUnit, Long> splitDurationIntoTimeUnitsWithDescOrder(Duration duration) {
         long durationInNanos = duration.toNanos();
         return splitNanosIntoTimeUnitsWithDescOrder(durationInNanos);
     }
     
+    /**
+     * Splits the given duration into time units with descending order.
+     *
+     * @param duration the duration to be split
+     * @return a {@code LinkedHashMap} containing time units and their corresponding values in descending order
+     */
     private static List<TimeUnit> timeUnitsDescOrder() {
     	List<TimeUnit> timeUnitsDescOrder = timeUnitsAscOrder();
     	Collections.reverse(timeUnitsDescOrder);
     	return timeUnitsDescOrder;
     }
     
+    /**
+     * @return a list of time units in ascending order
+     */
     private static List<TimeUnit> timeUnitsAscOrder() {
     	return Arrays.asList(TimeUnit.values());
     }
