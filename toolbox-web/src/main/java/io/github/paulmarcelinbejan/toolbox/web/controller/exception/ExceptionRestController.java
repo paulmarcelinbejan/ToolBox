@@ -16,7 +16,7 @@ import io.github.paulmarcelinbejan.toolbox.web.response.ExceptionResponse.Except
 import jakarta.validation.ConstraintViolationException;
 import jakarta.validation.ValidationException;
 
-public abstract class ExceptionRestController {
+public class ExceptionRestController {
 	
 	@ResponseBody
 	@ResponseStatus(HttpStatus.BAD_REQUEST)

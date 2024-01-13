@@ -73,12 +73,17 @@ public class ExceptionResponse {
 	public ExceptionResponse(Exception exception, String uniqueIdentifier, Instant timestamp, String status, String error,
 			String exceptionType, String message) {
 		this(uniqueIdentifier, timestamp, status, error, exceptionType, message);
-		log.error("Exception Stack Trace", exception);
+		log.error("Exception Stack Trace of " + uniqueIdentifier, exception);
 	}
 	
 	@JsonCreator
-	public ExceptionResponse(String uniqueIdentifier, Instant timestamp, String status, String error,
-			String exceptionType, String message) {
+	public ExceptionResponse(
+			String uniqueIdentifier, 
+			Instant timestamp, 
+			String status, 
+			String error,
+			String exceptionType, 
+			String message) {
 		
 		this.uniqueIdentifier = uniqueIdentifier;
 		this.timestampUTC = timestamp;
@@ -87,21 +92,6 @@ public class ExceptionResponse {
 		this.exceptionType = exceptionType;
 		this.message = message;
 
-		try {
-			String json = "\n"+JSON_WRITER.writeValueAsString(this);
-			log.error(json);
-		} catch (JsonProcessingException e) {
-			log.info("\nExceptionType: {} \nMessage: {} \nUniqueIdentifier: {}", exceptionType, message, uniqueIdentifier);
-		}
-	}
-	
-	private static final ObjectWriter JSON_WRITER = objectWriter();
-	
-	private static final ObjectWriter objectWriter() {
-		ObjectMapper mapper = new ObjectMapper();
-		ObjectMapperUtils.registerJavaTimeModule(mapper);
-		ObjectWriter objectWriter = ObjectMapperUtils.getWriterWithPrettyPrinter(mapper);
-		return objectWriter;
 	}
 	
 	public enum ExceptionField {
