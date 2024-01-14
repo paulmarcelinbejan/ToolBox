@@ -29,11 +29,8 @@ public class TimeExecutionHandler {
 		String className = joinPoint.getTarget().getClass().getSimpleName();
 		MethodSignature signature = (MethodSignature) joinPoint.getSignature();
 		Method method = signature.getMethod();
-		TimeExecution annotation = method.getAnnotation(TimeExecution.class);
-
-		if (annotation != null) {
-			printExecutionTime(className, method.getName(), executionTimeNanos);
-		}
+		
+		printExecutionTime(className, method.getName(), executionTimeNanos);
 
 		return result;
 	}
