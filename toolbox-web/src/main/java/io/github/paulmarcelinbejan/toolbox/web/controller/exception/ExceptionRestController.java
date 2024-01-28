@@ -16,7 +16,7 @@ import io.github.paulmarcelinbejan.toolbox.web.response.ExceptionResponse.Except
 import jakarta.validation.ConstraintViolationException;
 import jakarta.validation.ValidationException;
 
-public class ExceptionRestController {
+public abstract class ExceptionRestController {
 	
 	@ResponseBody
 	@ResponseStatus(HttpStatus.BAD_REQUEST)
@@ -57,10 +57,12 @@ public class ExceptionRestController {
 	}
 	
 	@ResponseBody
-	@ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+	@ResponseStatus(HttpStatus.CONFLICT)
 	@ExceptionHandler(value = { FunctionalException.class })
 	public ExceptionResponse handleFunctionalException(FunctionalException exception) {
-		return new ExceptionResponse(exception);
+		return new ExceptionResponse(exception, 
+				Map.of(ExceptionField.STATUS, String.valueOf(HttpStatus.CONFLICT.value()), 
+					   ExceptionField.ERROR, HttpStatus.CONFLICT.getReasonPhrase()));
 	}
 
 	@ResponseBody

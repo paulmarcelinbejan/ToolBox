@@ -8,12 +8,8 @@ import org.springframework.http.HttpStatus;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.ObjectWriter;
 
 import io.github.paulmarcelinbejan.toolbox.exception.utils.ExceptionUtils;
-import io.github.paulmarcelinbejan.toolbox.utils.jackson.ObjectMapperUtils;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 
