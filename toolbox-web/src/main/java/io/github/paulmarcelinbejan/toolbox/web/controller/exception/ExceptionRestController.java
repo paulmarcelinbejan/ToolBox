@@ -46,6 +46,16 @@ public abstract class ExceptionRestController {
 					   ExceptionField.ERROR, HttpStatus.BAD_REQUEST.getReasonPhrase(),
 			   	   	   ExceptionField.MESSAGE, getValidExceptionMessage(exception)));
 	}
+	
+	@ResponseBody
+	@ResponseStatus(value = HttpStatus.BAD_REQUEST)
+	@ExceptionHandler(value = { IllegalArgumentException.class })
+	public ExceptionResponse handleIllegalArgumentException(IllegalArgumentException exception) {
+		return new ExceptionResponse(exception, 
+				Map.of(ExceptionField.STATUS, String.valueOf(HttpStatus.BAD_REQUEST.value()), 
+						   ExceptionField.ERROR, HttpStatus.BAD_REQUEST.getReasonPhrase(),
+				   	   	   ExceptionField.MESSAGE, exception.toString()));
+	}
 
 	@ResponseBody
 	@ResponseStatus(value = HttpStatus.NOT_FOUND)
