@@ -1,11 +1,10 @@
 package io.github.paulmarcelinbejan.toolbox.utils.log.audit;
 
-import java.util.Arrays;
-import java.util.stream.Collectors;
-
 import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.Signature;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.reflect.CodeSignature;
 import org.springframework.stereotype.Component;
 
 import lombok.extern.slf4j.Slf4j;
@@ -17,11 +16,12 @@ public class AuditHandler {
 
 	@Around("execution(@io.github.paulmarcelinbejan.toolbox.utils.log.audit.Audit * *(..))")
     public Object logMethodInfo(ProceedingJoinPoint joinPoint) throws Throwable {
-        String methodName = joinPoint.getSignature().getName();
-        String className = joinPoint.getTarget().getClass().getSimpleName();
-
+        Signature signature = joinPoint.getSignature();
+		String methodName = signature.getName();
+        String className = signature.getDeclaringTypeName();
+		
         // Log method name and parameters before execution
-        logBeforeExecution(methodName, className, joinPoint.getArgs());
+        logBeforeExecution(methodName, className, joinPoint);
 
         // Proceed with the method execution
         Object result = joinPoint.proceed();
@@ -32,19 +32,38 @@ public class AuditHandler {
         return result;
     }
 
-    private static void logBeforeExecution(String methodName, String className, Object[] args) {
-        String parameters = args != null && args.length > 0 ? argsToString(args) : "NO PARAMETERS";
-		log.debug("Method '{}' of Class '{}' is about to be executed with following parameters: '{}'", methodName, className, parameters);
-    }
-
-    private static void logAfterExecution(String methodName, String className, Object result) {
-		log.debug("Method '{}' of Class '{}' executed successfully. Result: '{}'", methodName, className, result);
+	private static void logBeforeExecution(String methodName, String className, ProceedingJoinPoint joinPoint) {
+		String parameters = extractParameters(joinPoint);
+		log.debug("Method '{}' of Class '{}' is about to be executed with following parameters: {}", methodName, className, parameters);
     }
     
-    private static String argsToString(Object[] args) {
-    	return Arrays.stream(args)
-    			.map(String::valueOf)
-                .collect(Collectors.joining(", "));
+    private static void logAfterExecution(String methodName, String className, Object result) {
+		log.debug("Method '{}' of Class '{}' executed successfully. Return value: '{}'", methodName, className, result);
     }
+    
+	private static String extractParameters(ProceedingJoinPoint joinPoint) {
+		String parameters;
+		CodeSignature codeSignature = (CodeSignature) joinPoint.getSignature();
+    	String[] names = codeSignature.getParameterNames();
+    	if(names != null && names.length > 0) {
+    		Object[] values = joinPoint.getArgs();
+    		
+    		StringBuilder parametersBuilder = new StringBuilder();
+    		for (int i = 0; i < names.length; i++) {
+    			parametersBuilder.append("'")
+    					  .append(names[i])
+    					  .append(" : ")
+    					  .append(String.valueOf(values[i]))
+    					  .append("'")
+    					  .append(", ");
+    		}
+    		parametersBuilder.delete(parametersBuilder.length() - 2, parametersBuilder.length()); // Remove the trailing comma and space
+    		
+    		parameters = parametersBuilder.toString();
+    	} else {
+    		parameters = "NO PARAMETERS";
+    	}
+		return parameters;
+	}
 	
 }

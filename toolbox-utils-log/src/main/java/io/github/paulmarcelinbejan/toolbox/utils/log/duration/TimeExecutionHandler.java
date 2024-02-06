@@ -27,8 +27,8 @@ public class TimeExecutionHandler {
 		long endTime = System.nanoTime();
 		long executionTimeNanos = endTime - startTime;
 
-		String className = joinPoint.getTarget().getClass().getSimpleName();
 		MethodSignature signature = (MethodSignature) joinPoint.getSignature();
+		String className = signature.getDeclaringTypeName();
 		Method method = signature.getMethod();
 		
 		printExecutionTime(className, method.getName(), executionTimeNanos);
