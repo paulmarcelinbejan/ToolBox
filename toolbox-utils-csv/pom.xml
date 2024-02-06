@@ -4,12 +4,12 @@
     <parent>
         <groupId>io.github.paulmarcelinbejan.toolbox</groupId>
         <artifactId>toolbox</artifactId>
-        <version>1.0.0</version>
+        <version>1.0.1-SNAPSHOT</version>
     </parent>
   
     <artifactId>toolbox-utils-csv</artifactId>
     <name>ToolBox Utils CSV</name>
-    <version>1.0.0</version>
+    <version>1.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
     
     <dependencies>

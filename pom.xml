@@ -26,7 +26,7 @@
 
     <groupId>io.github.paulmarcelinbejan.toolbox</groupId>
     <artifactId>toolbox</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <modules>
@@ -40,6 +40,8 @@
         <module>toolbox-utils-io</module>
         <module>toolbox-utils-jackson</module>
         <module>toolbox-utils-json</module>
+        <module>toolbox-utils-log</module>
+        <module>toolbox-utils-log-json</module>
         <module>toolbox-utils-mapping</module>
         <module>toolbox-utils-math</module>
         <module>toolbox-utils-pdf</module>
@@ -76,7 +78,7 @@
         <!-- MAVEN -->
         <maven-compiler-plugin.version>3.11.0</maven-compiler-plugin.version>
         <maven-source-plugin.version>3.3.0</maven-source-plugin.version>
-        <maven-javadoc-plugin.version>3.6.0</maven-javadoc-plugin.version>
+        <maven-javadoc-plugin.version>3.6.3</maven-javadoc-plugin.version>
         <maven-gpg-plugin.version>3.1.0</maven-gpg-plugin.version>
         <nexus-staging-maven-plugin.version>1.6.13</nexus-staging-maven-plugin.version>
         <!-- SPRING -->
@@ -208,6 +210,16 @@
             <dependency>
                 <groupId>io.github.paulmarcelinbejan.toolbox</groupId>
                 <artifactId>toolbox-utils-json</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.github.paulmarcelinbejan.toolbox</groupId>
+                <artifactId>toolbox-utils-log</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.github.paulmarcelinbejan.toolbox</groupId>
+                <artifactId>toolbox-utils-log-json</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
@@ -351,6 +363,12 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 	        <artifactId>spring-boot-starter-test</artifactId>
+		    <exclusions>
+	            <exclusion> 
+		            <groupId>org.springframework.boot</groupId>
+		            <artifactId>spring-boot-starter-logging</artifactId>
+		        </exclusion>
+		    </exclusions>        
 		</dependency>
 		
 		<!-- Lombok -->
@@ -363,10 +381,6 @@
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.logging.log4j</groupId>
-			<artifactId>log4j-slf4j-impl</artifactId>
 		</dependency>
 		
 	</dependencies>
