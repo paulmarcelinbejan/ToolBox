@@ -10,6 +10,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import io.github.paulmarcelinbejan.toolbox.exception.utils.ExceptionUtils;
+
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 
@@ -75,14 +76,14 @@ public class ExceptionResponse {
 	@JsonCreator
 	public ExceptionResponse(
 			String uniqueIdentifier, 
-			Instant timestamp, 
+			Instant timestampUTC,
 			String status, 
 			String error,
 			String exceptionType, 
 			String message) {
 		
 		this.uniqueIdentifier = uniqueIdentifier;
-		this.timestampUTC = timestamp;
+		this.timestampUTC = timestampUTC;
 		this.status = status;
 		this.error = error;
 		this.exceptionType = exceptionType;

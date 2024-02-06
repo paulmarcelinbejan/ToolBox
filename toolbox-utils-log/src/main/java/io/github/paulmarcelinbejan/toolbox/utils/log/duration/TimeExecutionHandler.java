@@ -12,6 +12,7 @@ import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.stereotype.Component;
 
 import io.github.paulmarcelinbejan.toolbox.utils.time.duration.DurationUtils;
+
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -36,7 +37,7 @@ public class TimeExecutionHandler {
 	}
 
 	private static void printExecutionTime(String className, String methodName, long executionTimeNanos) {
-		log.info("Method '{}' of Class '{}' executed in {}",
+		log.trace("Method '{}' of Class '{}' executed in {}",
 				methodName,
 				className,
 				durationToTimeUnits(executionTimeNanos));

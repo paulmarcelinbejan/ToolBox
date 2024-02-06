@@ -34,11 +34,11 @@ public class AuditHandler {
 
     private static void logBeforeExecution(String methodName, String className, Object[] args) {
         String parameters = args != null && args.length > 0 ? argsToString(args) : "NO PARAMETERS";
-        log.info("Method '{}' of Class '{}' is about to be executed with following parameters: '{}'", methodName, className, parameters);
+		log.trace("Method '{}' of Class '{}' is about to be executed with following parameters: '{}'", methodName, className, parameters);
     }
 
     private static void logAfterExecution(String methodName, String className, Object result) {
-    	log.info("Method '{}' of Class '{}' executed successfully. Result: '{}'", methodName, className, result);
+		log.trace("Method '{}' of Class '{}' executed successfully. Result: '{}'", methodName, className, result);
     }
     
     private static String argsToString(Object[] args) {
