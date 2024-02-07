@@ -18,12 +18,8 @@
 			<artifactId>jakarta.validation-api</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>io.github.paulmarcelinbejan.toolbox</groupId>
-			<artifactId>toolbox-utils-reflection</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>io.github.paulmarcelinbejan.toolbox</groupId>
-			<artifactId>toolbox-utils-time</artifactId>
+		    <groupId>commons-beanutils</groupId>
+		    <artifactId>commons-beanutils</artifactId>
 		</dependency>
 	</dependencies>
 	
