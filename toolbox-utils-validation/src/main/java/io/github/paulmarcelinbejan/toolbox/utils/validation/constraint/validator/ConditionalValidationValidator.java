@@ -10,6 +10,20 @@ import jakarta.validation.ConstraintValidatorContext;
 
 import io.github.paulmarcelinbejan.toolbox.utils.validation.constraint.ConditionalValidation;
 
+/**
+ * Validator for the {@link ConditionalValidation} annotation.
+ * This validator checks whether the validation for a specified property should be executed based on the value of a conditional property.
+ *
+ * <p>The conditional property value is checked against a set of conditional values.
+ * If the conditional property value matches any of the conditional values, the validation for the property to be validated is executed.</p>
+ *
+ * <p>The {@link #initialize(ConditionalValidation)} method initializes the validator with the attributes of the {@link ConditionalValidation} annotation.</p>
+ *
+ * <p>The {@link #isValid(Object, ConstraintValidatorContext)} method performs the actual validation logic.
+ * It checks if the object is not null, retrieves the value of the conditional property using reflection,
+ * and then determines whether the conditional property value matches any of the conditional values.
+ * If it matches, it executes the validation for the property to be validated based on the {@link #required} attribute.</p>
+ */
 public class ConditionalValidationValidator implements ConstraintValidator<ConditionalValidation, Object> {
 
 	private String conditionalProperty;
