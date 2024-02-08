@@ -28,7 +28,7 @@
     <artifactId>toolbox</artifactId>
     <version>1.0.2</version>
     <packaging>pom</packaging>
-
+ 
     <modules>
         <module>toolbox-base</module>
         <module>toolbox-constants</module>
