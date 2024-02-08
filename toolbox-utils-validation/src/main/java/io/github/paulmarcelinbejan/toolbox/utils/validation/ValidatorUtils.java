@@ -11,11 +11,21 @@ import jakarta.validation.Validator;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
+/**
+ * Utility class for validating objects using Bean Validation API.
+ */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class ValidatorUtils {
 
 	private static final Validator VALIDATOR = Validation.buildDefaultValidatorFactory().getValidator();
 	
+	/**
+     * Validates the given object.
+     *
+     * @param toValidate the object to validate
+     * @param <T>        the type of the object
+     * @throws ConstraintViolationException if the object is not valid
+     */
 	public static <T> void validate(T toValidate) {
 		Set<ConstraintViolation<T>> violations = VALIDATOR.validate(toValidate);
 		if (!violations.isEmpty()) {
@@ -24,8 +34,12 @@ public class ValidatorUtils {
 	}
 
 	/**
-	 * Throws ConstraintViolationException with the first violation encountered as soon as one of the element to be validated is not valid.
-	 */
+     * Validates each object in the given collection.
+     *
+     * @param collectionToValidate the collection of objects to validate
+     * @param <T>                  the type of objects in the collection
+     * @throws ConstraintViolationException if any object in the collection is not valid
+     */
 	public static <T> void validate(Collection<T> collectionToValidate) {
 		for (T toValidate : collectionToValidate) {
 			Set<ConstraintViolation<T>> violations = VALIDATOR.validate(toValidate);
@@ -36,8 +50,12 @@ public class ValidatorUtils {
 	}
 	
 	/**
-	 * Validate all the elements of the collection, then if at least one was not valid, a ConstraintViolationException is thrown with all the violations encountered.
-	 */
+     * Validates all objects in the given collection, throwing an exception with all violations encountered.
+     *
+     * @param collectionToValidate the collection of objects to validate
+     * @param <T>                  the type of objects in the collection
+     * @throws ConstraintViolationException if any object in the collection is not valid
+     */
 	public static <T> void validateAll(Collection<T> collectionToValidate) {
 		Set<ConstraintViolation<T>> allViolations = new HashSet<>();
 		for (T toValidate : collectionToValidate) {
@@ -49,6 +67,14 @@ public class ValidatorUtils {
 		}
 	}
 
+	/**
+     * Validates the given object using the specified validation groups.
+     *
+     * @param toValidate the object to validate
+     * @param groups     the validation groups
+     * @param <T>        the type of the object
+     * @throws ConstraintViolationException if the object is not valid
+     */
 	public static <T> void validateByGroups(T toValidate, Class<?>... groups) {
 		Set<ConstraintViolation<T>> violations = VALIDATOR.validate(toValidate, groups);
 		if (!violations.isEmpty()) {
@@ -57,8 +83,13 @@ public class ValidatorUtils {
 	}
 
 	/**
-	 * Throws ConstraintViolationException with the first violation encountered as soon as one of the element to be validated is not valid.
-	 */
+     * Validates each object in the given collection using the specified validation groups.
+     *
+     * @param collectionToValidate the collection of objects to validate
+     * @param groups               the validation groups
+     * @param <T>                  the type of objects in the collection
+     * @throws ConstraintViolationException if any object in the collection is not valid
+     */
 	public static <T> void validateByGroups(Collection<T> collectionToValidate, Class<?>... groups) {
 		for (T toValidate : collectionToValidate) {
 			Set<ConstraintViolation<T>> violations = VALIDATOR.validate(toValidate, groups);
@@ -69,8 +100,14 @@ public class ValidatorUtils {
 	}
 	
 	/**
-	 * Validate all the elements of the collection, then if at least one was not valid, a ConstraintViolationException is thrown with all the violations encountered.
-	 */
+     * Validates all objects in the given collection using the specified validation groups,
+     * throwing an exception with all violations encountered.
+     *
+     * @param collectionToValidate the collection of objects to validate
+     * @param groups               the validation groups
+     * @param <T>                  the type of objects in the collection
+     * @throws ConstraintViolationException if any object in the collection is not valid
+     */
 	public static <T> void validateAllByGroups(Collection<T> collectionToValidate, Class<?>... groups) {
 		Set<ConstraintViolation<T>> allViolations = new HashSet<>();
 		for (T toValidate : collectionToValidate) {

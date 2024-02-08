@@ -26,11 +26,31 @@ import io.github.paulmarcelinbejan.toolbox.utils.validation.constraint.Condition
  */
 public class ConditionalValidationValidator implements ConstraintValidator<ConditionalValidation, Object> {
 
+	/**
+	 * The name of the property used for conditional validation.
+	 */
 	private String conditionalProperty;
-    private String[] conditionalValues;
-    private String propertyToValidate;
+
+	/**
+	 * The array of values that trigger the conditional validation.
+	 */
+	private String[] conditionalValues;
+
+	/**
+	 * The name of the property to validate conditionally.
+	 */
+	private String propertyToValidate;
+
+	/**
+	 * Flag indicating whether the property to validate is required when the condition is met.
+	 */
 	private boolean required;
 
+	/**
+     * Initializes the validator with the constraint annotation attributes.
+     *
+     * @param constraintAnnotation the {@link ConditionalValidation} annotation instance
+     */
     @Override
     public void initialize(ConditionalValidation constraintAnnotation) {
         conditionalProperty = constraintAnnotation.conditionalProperty();
@@ -39,6 +59,13 @@ public class ConditionalValidationValidator implements ConstraintValidator<Condi
 		required = constraintAnnotation.required();
     }
 
+    /**
+     * Validates the specified object.
+     *
+     * @param object  the object to validate
+     * @param context the validation context
+     * @return {@code true} if the object is valid according to the specified conditions, {@code false} otherwise
+     */
     @Override
     public boolean isValid(Object object, ConstraintValidatorContext context) {
         if (object == null) {
@@ -57,10 +84,25 @@ public class ConditionalValidationValidator implements ConstraintValidator<Condi
         return true;
     }
     
+    /**
+     * Checks if the value of the conditional property is within the specified conditional values.
+     *
+     * @param conditionalPropertyValue the value of the conditional property
+     * @return {@code true} if the value is within the conditional values, {@code false} otherwise
+     */
     private boolean isConditionalPropertyInConditionalValues(Object conditionalPropertyValue) {
         return Arrays.asList(conditionalValues).contains(conditionalPropertyValue);
     }
     
+    /**
+     * Executes the conditional validation based on the specified conditions.
+     *
+     * @param object the object to validate
+     * @return {@code true} if the property to validate meets the conditions, {@code false} otherwise
+     * @throws IllegalAccessException    if access to the property is not allowed
+     * @throws InvocationTargetException if the property accessor method throws an exception
+     * @throws NoSuchMethodException     if the property accessor method is not found
+     */
     private boolean executeConditionalValidation(Object object) throws IllegalAccessException, InvocationTargetException, NoSuchMethodException {
 		boolean isValid = true;
 

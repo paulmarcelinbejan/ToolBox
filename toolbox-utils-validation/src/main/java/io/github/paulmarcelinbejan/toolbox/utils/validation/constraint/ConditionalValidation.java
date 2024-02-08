@@ -52,10 +52,21 @@ import io.github.paulmarcelinbejan.toolbox.utils.validation.constraint.validator
 @Documented
 public @interface ConditionalValidation {
 
+	/**
+	 * Defines a custom error message for validation failures. If not specified, the default message
+	 * "Validation failed for ConditionalValidation" is used.
+	 */
 	String message() default "Validation failed for ConditionalValidation";
 
+	/**
+	 * Specifies the validation groups targeted for this constraint. By default, no groups are targeted.
+	 */
 	Class<?>[] groups() default {};
 
+	/**
+	 * Defines custom payloads that can be attached to a constraint. This can be used to carry metadata
+	 * or information about the error. By default, no payloads are defined.
+	 */
 	Class<? extends Payload>[] payload() default {};
 
 	/**
