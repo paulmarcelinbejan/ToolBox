@@ -5,12 +5,12 @@
     <parent>
         <groupId>io.github.paulmarcelinbejan.toolbox</groupId>
         <artifactId>toolbox</artifactId>
-        <version>1.0.2</version>
+        <version>1.0.3-SNAPSHOT</version>
     </parent>
     
     <artifactId>toolbox-utils-time</artifactId>
     <name>ToolBox Utils Time</name>
-    <version>1.0.2</version>
+    <version>1.0.3-SNAPSHOT</version>
     <packaging>jar</packaging>
     
 	<dependencies>
