@@ -53,41 +53,57 @@ import io.github.paulmarcelinbejan.toolbox.utils.validation.constraint.validator
 public @interface ConditionalValidation {
 
 	/**
-	 * Defines a custom error message for validation failures. If not specified, the default message
-	 * "Validation failed for ConditionalValidation" is used.
-	 */
-	String message() default "Validation failed for ConditionalValidation";
+     * Defines a custom error message for validation failures.
+     * If not specified, the default message "Validation failed for ConditionalValidation" is used.
+     *
+     * @return the custom error message for validation failures
+     */
+    String message() default "Validation failed for ConditionalValidation";
 
-	/**
-	 * Specifies the validation groups targeted for this constraint. By default, no groups are targeted.
-	 */
+    /**
+     * Specifies the validation groups targeted for this constraint.
+     * By default, no groups are targeted.
+     *
+     * @return the validation groups targeted for this constraint
+     */
 	Class<?>[] groups() default {};
 
 	/**
-	 * Defines custom payloads that can be attached to a constraint. This can be used to carry metadata
-	 * or information about the error. By default, no payloads are defined.
-	 */
+     * Defines custom payloads that can be attached to a constraint.
+     * This can be used to carry metadata or information about the error.
+     * By default, no payloads are defined.
+     *
+     * @return custom payloads that can be attached to a constraint
+     */
 	Class<? extends Payload>[] payload() default {};
 
 	/**
-     * Name of the property whose value is checked for applying the validation.
+     * Specifies the name of the property whose value is checked for applying the validation.
+     *
+     * @return the name of the property whose value is checked for applying the validation
      */
 	String conditionalProperty();
 
 	/**
-     * Possible values of the conditional property for which the validation should be applied.
+     * Specifies the possible values of the conditional property for which the validation should be applied.
+     *
+     * @return the possible values of the conditional property for which the validation should be applied
      */
 	String[] conditionalValues();
 
 	/**
-     * Name of the property to be validated.
+     * Specifies the name of the property to be validated.
+     *
+     * @return the name of the property to be validated
      */
 	String propertyToValidate();
 
 	/**
      * Indicates whether the property to validate is required or not.
-     * If true, the property to validate must not be null; if false, the property
-     * to validate must be null for the validation to pass.
+     * If {@code true}, the property to validate must not be {@code null};
+     * if {@code false}, the property to validate must be {@code null} for the validation to pass.
+     *
+     * @return {@code true} if the property to validate is required, {@code false} otherwise
      */
 	boolean required();
 
