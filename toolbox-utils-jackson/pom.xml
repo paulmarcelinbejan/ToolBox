@@ -3,11 +3,11 @@
   <parent>
     <groupId>io.github.paulmarcelinbejan.toolbox</groupId>
     <artifactId>toolbox</artifactId>
-    <version>1.0.2-SNAPSHOT</version>
+    <version>1.0.2</version>
   </parent>
   <artifactId>toolbox-utils-jackson</artifactId>
   <name>ToolBox Utils Jackson</name>
-  <version>1.0.2-SNAPSHOT</version>
+  <version>1.0.2</version>
   <packaging>jar</packaging>
   <dependencies>
 	  	<!-- Jackson -->

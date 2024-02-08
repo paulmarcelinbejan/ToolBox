@@ -7,12 +7,12 @@
     <parent>
         <groupId>io.github.paulmarcelinbejan.toolbox</groupId>
         <artifactId>toolbox</artifactId>
-        <version>1.0.2-SNAPSHOT</version>
+        <version>1.0.2</version>
     </parent>
 
     <artifactId>toolbox-constants</artifactId>
     <name>ToolBox Constants</name>
-    <version>1.0.2-SNAPSHOT</version>
+    <version>1.0.2</version>
     <packaging>jar</packaging>
 
 </project>
