@@ -31,19 +31,6 @@ import io.github.paulmarcelinbejan.toolbox.utils.validation.constraint.validator
  *
  * <p>This annotation can be repeated using the {@link ConditionalValidations} annotation
  * for specifying multiple conditional validation rules.</p>
- *
- * <p>Example usage:</p>
- * <pre>
- * @ConditionalValidation(
- *     conditionalProperty = "type", conditionalValues = {"A", "B"},
- *     propertyToValidate = "value", required = true,
- *     message = "When type is A or B, value is REQUIRED"
- * )
- * public class MyClass {
- *     private String type;
- *     private String value;
- * }
- * </pre>
  */
 @Repeatable(ConditionalValidations.class)
 @Target({ ElementType.TYPE })
