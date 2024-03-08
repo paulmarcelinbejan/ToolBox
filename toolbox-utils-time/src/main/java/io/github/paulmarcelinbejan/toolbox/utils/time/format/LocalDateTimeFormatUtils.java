@@ -10,6 +10,7 @@ import java.util.Locale;
 import io.github.paulmarcelinbejan.toolbox.utils.time.pattern.DatePatternBase;
 import io.github.paulmarcelinbejan.toolbox.utils.time.pattern.DateTimePatternBase;
 import io.github.paulmarcelinbejan.toolbox.utils.time.pattern.TimePatternBase;
+
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
@@ -37,6 +38,8 @@ public class LocalDateTimeFormatUtils {
 	            .append(timePattern.getValue())
 	            .toString();
 	}
+
+	// TO String
 
 	/**
 	 * Converts a LocalDateTime to a formatted String using the specified DatePattern, dateTimeConcatenation, and TimePattern.
@@ -159,8 +162,8 @@ public class LocalDateTimeFormatUtils {
 	 * @throws IllegalArgumentException if the pattern is invalid.
 	 * @throws DateTimeParseException if the text cannot be parsed.
 	 */
-	public static final LocalDateTime toLocalDateTime(String date, String dateTimePattern) {
-	    return LocalDateTime.parse(date, formatter(dateTimePattern));
+	public static final LocalDateTime toLocalDateTime(String dateTime, String dateTimePattern) {
+		return LocalDateTime.parse(dateTime, formatter(dateTimePattern));
 	}
 
 	/**
@@ -173,8 +176,8 @@ public class LocalDateTimeFormatUtils {
 	 * @throws IllegalArgumentException if the pattern is invalid.
 	 * @throws DateTimeParseException if the text cannot be parsed.
 	 */
-	public static final LocalDateTime toLocalDateTime(String date, String dateTimePattern, Locale locale) {
-	    return LocalDateTime.parse(date, formatterLocalized(dateTimePattern, locale));
+	public static final LocalDateTime toLocalDateTime(String dateTime, String dateTimePattern, Locale locale) {
+		return LocalDateTime.parse(dateTime, formatterLocalized(dateTimePattern, locale));
 	}
 	
 }

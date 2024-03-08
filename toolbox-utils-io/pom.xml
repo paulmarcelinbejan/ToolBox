@@ -12,18 +12,5 @@
     <name>ToolBox Utils IO</name>
     <version>1.0.3-SNAPSHOT</version>
     <packaging>jar</packaging>
-    
-    <dependencies>
-		
-	    <dependency>
-      	    <groupId>io.github.paulmarcelinbejan.toolbox</groupId>
-      	    <artifactId>toolbox-base</artifactId>
-        </dependency>
-        <dependency>
-        	<groupId>io.github.paulmarcelinbejan.toolbox</groupId>
-        	<artifactId>toolbox-constants</artifactId>
-        </dependency>
-        
-    </dependencies>
   
 </project>

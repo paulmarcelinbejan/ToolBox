@@ -9,10 +9,14 @@
 	<name>ToolBox Utils Text</name>
 	<version>1.0.3-SNAPSHOT</version>
     <packaging>jar</packaging>
+	
 	<dependencies>
+		
 		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-text</artifactId>
 		</dependency>
+		
 	</dependencies>
+	
 </project>

@@ -14,6 +14,6 @@ public interface DatePatternBase extends EnumBase {
      *
      * @return The DateTimeFormatter for the date pattern.
      */
-    public DateTimeFormatter getFormatter();
+	DateTimeFormatter getFormatter();
 
 }

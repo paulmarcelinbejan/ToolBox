@@ -13,10 +13,12 @@
     <packaging>jar</packaging>
     
     <dependencies>
+		
 		<dependency>
 			<groupId>io.github.paulmarcelinbejan.toolbox</groupId>
 			<artifactId>toolbox-utils-io</artifactId>
 		</dependency>
+		
 	</dependencies>
 	
 </project>

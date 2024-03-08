@@ -13,6 +13,7 @@ import java.time.temporal.ChronoUnit;
 import java.time.temporal.TemporalAdjusters;
 
 import io.github.paulmarcelinbejan.toolbox.utils.time.localdatetime.LocalDateTimeUtils;
+
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
@@ -803,7 +804,7 @@ public class InstantUtils {
 	}
 
 	/**
-	 * Converts the given {@link LocalDateTime} to {@link Instant} at UTC.
+	 * Converts the given {@link LocalDateTime} at UTC to {@link Instant}.
 	 *
 	 * @param localDateTime The {@link LocalDateTime} to convert.
 	 * @return The {@link Instant} at UTC.
@@ -813,7 +814,7 @@ public class InstantUtils {
 	}
 
 	/**
-	 * Converts the given {@link LocalDateTime} to {@link Instant} at the specified {@link ZoneOffset}.
+	 * Converts the given {@link LocalDateTime} at the specified {@link ZoneOffset} to {@link Instant}.
 	 *
 	 * @param localDateTime The {@link LocalDateTime} to convert.
 	 * @param zoneOffset    The {@link ZoneOffset}.

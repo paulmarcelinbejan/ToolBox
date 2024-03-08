@@ -22,15 +22,15 @@ import lombok.NoArgsConstructor;
 public class ObjectMapperUtils {
 
 	@SuppressWarnings("unchecked")
-	public static <X> void addSerializers(final SimpleModule module, final Map<Class<?>, JsonSerializer<?>> serializers) {
+	public static <T> void addSerializers(final SimpleModule module, final Map<Class<?>, JsonSerializer<?>> serializers) {
 		serializers.forEach((type, serializer) -> 
-				module.addSerializer((Class<? extends X>) type, (JsonSerializer<X>) serializer));
+				module.addSerializer((Class<? extends T>) type, (JsonSerializer<T>) serializer));
 	}
 
 	@SuppressWarnings("unchecked")
-	public static <X> void addDeserializers(final SimpleModule module, final Map<Class<?>, JsonDeserializer<?>> deserializers) {
+	public static <T> void addDeserializers(final SimpleModule module, final Map<Class<?>, JsonDeserializer<?>> deserializers) {
 		deserializers.forEach((type, deserializer) -> 
-				module.addDeserializer((Class<X>) type, (JsonDeserializer<? extends X>) deserializer));
+				module.addDeserializer((Class<T>) type, (JsonDeserializer<? extends T>) deserializer));
 	}
 	
 	public static <Mapper extends ObjectMapper> void registerSerializers(Mapper mapper, Map<Class<?>, JsonSerializer<?>> serializers) {
@@ -90,8 +90,7 @@ public class ObjectMapperUtils {
 	}
     
     public static ObjectWriter getWriterWithPrettyPrinter(ObjectMapper mapper) {
-    	ObjectWriter objectWriter = mapper.writer().with(prettyPrinter());
-    	return objectWriter;
+		return mapper.writer().with(prettyPrinter());
     }
     
     public static DefaultPrettyPrinter prettyPrinter() {

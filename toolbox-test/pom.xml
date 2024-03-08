@@ -1,51 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
 
-    <parent>
-        <groupId>io.github.paulmarcelinbejan.toolbox</groupId>
-        <artifactId>toolbox</artifactId>
-        <version>1.0.3-SNAPSHOT</version>
-    </parent>
+	<parent>
+		<groupId>io.github.paulmarcelinbejan.toolbox</groupId>
+		<artifactId>toolbox</artifactId>
+		<version>1.0.3-SNAPSHOT</version>
+	</parent>
 
-    <artifactId>toolbox-test</artifactId>
-    <name>ToolBox Test</name>
-    <version>1.0.3-SNAPSHOT</version>
-    <packaging>jar</packaging>
-    
+	<artifactId>toolbox-test</artifactId>
+	<name>ToolBox Test</name>
+	<version>1.0.3-SNAPSHOT</version>
+	<packaging>jar</packaging>
+
 	<properties>
 		<toolbox-validator.version>3.2.0</toolbox-validator.version>
 		<easyrandom.version>5.0.0</easyrandom.version>
 	</properties>
-	
-    <dependencies>
 
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
-        </dependency>
-        
-        <dependency>
+	<dependencies>
+
+		<!-- Unit Test -->
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-api</artifactId>
+		</dependency>
+
+		<dependency>
 			<groupId>io.github.paulmarcelinbejan.toolbox</groupId>
 			<artifactId>validathor-bfs</artifactId>
-            <version>${toolbox-validator.version}</version>
+			<version>${toolbox-validator.version}</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>io.github.paulmarcelinbejan.toolbox</groupId>
 			<artifactId>validathor-dfs</artifactId>
-            <version>${toolbox-validator.version}</version>
+			<version>${toolbox-validator.version}</version>
 		</dependency>
-			
-        <dependency>
-            <groupId>org.jeasy</groupId>
-            <artifactId>easy-random-core</artifactId>
-            <version>${easyrandom.version}</version>
-        </dependency>
 
-    </dependencies>
+		<dependency>
+			<groupId>org.jeasy</groupId>
+			<artifactId>easy-random-core</artifactId>
+			<version>${easyrandom.version}</version>
+		</dependency>
+
+	</dependencies>
 
 </project>

@@ -2,12 +2,14 @@ package io.github.paulmarcelinbejan.toolbox.utils.json;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.Reader;
+import java.io.Writer;
 import java.util.List;
 
 import com.fasterxml.jackson.core.util.DefaultIndenter;
 import com.fasterxml.jackson.core.util.DefaultPrettyPrinter;
 import com.fasterxml.jackson.databind.MappingIterator;
+import com.fasterxml.jackson.databind.SequenceWriter;
 import com.fasterxml.jackson.databind.json.JsonMapper;
 
 import io.github.paulmarcelinbejan.toolbox.utils.io.FileUtils;
@@ -22,18 +24,18 @@ public class JsonFileUtils {
 	 * This constructor will use default configuration. 
 	 */
     public JsonFileUtils() {
-		this.mapperReader = JsonFileUtilsConfig.DEFAULT.getReaderConfig().getJsonMapper();
-		this.mapperWriter = JsonFileUtilsConfig.DEFAULT.getWriterConfig().getJsonMapper();
+		mapperReader = JsonFileUtilsConfig.DEFAULT.getReaderConfig().getJsonMapper();
+		mapperWriter = JsonFileUtilsConfig.DEFAULT.getWriterConfig().getJsonMapper();
 	}
     
     public JsonFileUtils(JsonFileUtilsConfig jsonFileUtilsConfig) {
-		this.mapperReader = jsonFileUtilsConfig.getReaderConfig().getJsonMapper();
-		this.mapperWriter = jsonFileUtilsConfig.getWriterConfig().getJsonMapper();
+		mapperReader = jsonFileUtilsConfig.getReaderConfig().getJsonMapper();
+		mapperWriter = jsonFileUtilsConfig.getWriterConfig().getJsonMapper();
 	}
     
     public JsonFileUtils(JsonReaderConfig readerConfig, JsonWriterConfig writerConfig) {
-		this.mapperReader = readerConfig.getJsonMapper();
-		this.mapperWriter = writerConfig.getJsonMapper();
+		mapperReader = readerConfig.getJsonMapper();
+		mapperWriter = writerConfig.getJsonMapper();
 	}
     
 	private final JsonMapper mapperReader;
@@ -43,8 +45,8 @@ public class JsonFileUtils {
      * JSON file starts with curly brackets
      */
 	public <T> T read(FileInfo fileInfo, Class<T> clazz) throws IOException {
-    	try (InputStream fileInputStream = FileUtils.createFileInputStream(fileInfo)) {
-    		return mapperReader.readValue(fileInputStream, clazz);
+		try (Reader fileReader = FileUtils.createFileReader(fileInfo);) {
+			return mapperReader.readValue(fileReader, clazz);
 		}
     }
 	
@@ -52,7 +54,7 @@ public class JsonFileUtils {
      * JSON file starts with square brackets
      */
 	public <T> List<T> readList(FileInfo fileInfo, Class<T> clazz) throws IOException {
-    	try (MappingIterator<T> iterator = iterator(fileInfo, clazz)) {
+		try (MappingIterator<T> iterator = readerIterator(fileInfo, clazz)) {
     		return iterator.readAll();
 		}
 	}
@@ -62,20 +64,28 @@ public class JsonFileUtils {
      * 
      * Remember to close the Reader usign <b>iterator.close()</b> in order to release any resources associated with it.
      */
-	public <T> MappingIterator<T> iterator(FileInfo fileInfo, Class<T> clazz) throws IOException {
+	public <T> MappingIterator<T> readerIterator(FileInfo fileInfo, Class<T> clazz) throws IOException {
 		InputStream fileInputStream = FileUtils.createFileInputStream(fileInfo);
         return mapperReader.readerFor(clazz)
         			 	   .readValues(fileInputStream);
     }
 	
+
+	public SequenceWriter writerIterator(FileInfo fileInfo) throws IOException {
+		Writer fileWriter = FileUtils.createFileWriter(fileInfo);
+		return mapperWriter.writer()
+				.with(PRETTY_PRINTER)
+				.writeValues(fileWriter);
+	}
+
     /**
      * JSON file starts with curly brackets
      */
     public <T> void write(FileInfo fileInfo, T object) throws IOException {
-    	try (OutputStream fileOutputStream = FileUtils.createFileOutputStream(fileInfo)) {
+		try (Writer fileWriter = FileUtils.createFileWriter(fileInfo);) {
 			mapperWriter.writer()
-						.with(prettyPrinter())
-						.writeValue(fileOutputStream, object);
+				.with(PRETTY_PRINTER)
+				.writeValue(fileWriter, object);
 		}
     }
     
@@ -83,12 +93,14 @@ public class JsonFileUtils {
      * JSON file starts with square brackets
      */
     public <T> void writeList(FileInfo fileInfo, List<T> objects) throws IOException {
-    	try (OutputStream fileOutputStream = FileUtils.createFileOutputStream(fileInfo)) {
+		try (Writer fileWriter = FileUtils.createFileWriter(fileInfo);) {
 			mapperWriter.writer()
-						.with(prettyPrinter())
-						.writeValue(fileOutputStream, objects);
+				.with(PRETTY_PRINTER)
+				.writeValue(fileWriter, objects);
 		}
     }
+    
+	private static final DefaultPrettyPrinter PRETTY_PRINTER = prettyPrinter();
     
     private static DefaultPrettyPrinter prettyPrinter() {
     	DefaultPrettyPrinter prettyPrinter = new DefaultPrettyPrinter();        

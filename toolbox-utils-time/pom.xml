@@ -19,6 +19,7 @@
 			<groupId>io.github.paulmarcelinbejan.toolbox</groupId>
 			<artifactId>toolbox-base</artifactId>
 		</dependency>
+		
 		<dependency>
 			<groupId>io.github.paulmarcelinbejan.toolbox</groupId>
 			<artifactId>toolbox-test</artifactId>

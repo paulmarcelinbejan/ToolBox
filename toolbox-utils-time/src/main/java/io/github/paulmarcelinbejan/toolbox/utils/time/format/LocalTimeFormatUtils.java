@@ -10,16 +10,19 @@ import java.time.format.DateTimeParseException;
 import java.util.Locale;
 
 import io.github.paulmarcelinbejan.toolbox.utils.time.pattern.TimePatternBase;
+
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
 /**
- * Utility class for formatting and parsing LocalTime and LocalDateTime instances.
+ * Utility class for formatting and parsing LocalTime.
  * Provides methods to format instances using custom time patterns or strings,
  * and parse strings into LocalTime instances with specified patterns.
  */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class LocalTimeFormatUtils {
+
+	// TO String
 
     /**
      * Formats a LocalTime instance into a string using the specified time pattern.
@@ -93,31 +96,6 @@ public class LocalTimeFormatUtils {
      * @throws IllegalArgumentException if the pattern is invalid.
      */
     public static final String toString(LocalTime localTime, String timePattern, Locale locale) {
-        return DateTimeFormatter.ofPattern(timePattern).localizedBy(locale).format(localTime);
-    }
-
-    /**
-     * Formats a LocalDateTime instance into a string using the specified time pattern as a string.
-     *
-     * @param localTime    The LocalDateTime instance to be formatted.
-     * @param timePattern  The custom time pattern as a string to be used for formatting.
-     * @return A formatted string representing the provided LocalDateTime.
-     * @throws IllegalArgumentException if the pattern is invalid.
-     */
-    public static final String toString(LocalDateTime localTime, String timePattern) {
-        return DateTimeFormatter.ofPattern(timePattern).format(localTime);
-    }
-
-    /**
-     * Formats a LocalDateTime instance into a string using the specified time pattern as a string and locale.
-     *
-     * @param localTime    The LocalDateTime instance to be formatted.
-     * @param timePattern  The custom time pattern as a string to be used for formatting.
-     * @param locale       The locale to be applied to the formatter.
-     * @return A localized and formatted string representing the provided LocalDateTime.
-     * @throws IllegalArgumentException if the pattern is invalid.
-     */
-    public static final String toString(LocalDateTime localTime, String timePattern, Locale locale) {
         return DateTimeFormatter.ofPattern(timePattern).localizedBy(locale).format(localTime);
     }
 

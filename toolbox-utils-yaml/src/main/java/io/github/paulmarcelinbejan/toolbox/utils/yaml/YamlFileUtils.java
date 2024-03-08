@@ -19,6 +19,7 @@ import io.github.paulmarcelinbejan.toolbox.utils.yaml.config.YamlFileUtilsConfig
 import io.github.paulmarcelinbejan.toolbox.utils.yaml.config.YamlPrefixType;
 import io.github.paulmarcelinbejan.toolbox.utils.yaml.config.YamlReaderConfig;
 import io.github.paulmarcelinbejan.toolbox.utils.yaml.config.YamlWriterConfig;
+
 import lombok.NonNull;
 
 public class YamlFileUtils {
@@ -27,18 +28,18 @@ public class YamlFileUtils {
 	 * This constructor will use default configuration. 
 	 */
 	public YamlFileUtils() {
-		this.mapperReader = YamlFileUtilsConfig.DEFAULT.getReaderConfig().getYamlMapper();
-		this.mapperWriter = YamlFileUtilsConfig.DEFAULT.getWriterConfig().getYamlMapper();
+		mapperReader = YamlFileUtilsConfig.DEFAULT.getReaderConfig().getYamlMapper();
+		mapperWriter = YamlFileUtilsConfig.DEFAULT.getWriterConfig().getYamlMapper();
 	}
 	
 	public YamlFileUtils(@NonNull final YamlFileUtilsConfig yamlFileUtilsConfig) {
-		this.mapperReader = yamlFileUtilsConfig.getReaderConfig().getYamlMapper();
-		this.mapperWriter = yamlFileUtilsConfig.getWriterConfig().getYamlMapper();
+		mapperReader = yamlFileUtilsConfig.getReaderConfig().getYamlMapper();
+		mapperWriter = yamlFileUtilsConfig.getWriterConfig().getYamlMapper();
 	}
 	
     public YamlFileUtils(YamlReaderConfig readerConfig, YamlWriterConfig writerConfig) {
-		this.mapperReader = readerConfig.getYamlMapper();
-		this.mapperWriter = writerConfig.getYamlMapper();
+		mapperReader = readerConfig.getYamlMapper();
+		mapperWriter = writerConfig.getYamlMapper();
 	}
 	
 	private final YAMLMapper mapperReader;
@@ -83,7 +84,7 @@ public class YamlFileUtils {
     
     private static <T> T readValueWithPrefix(YAMLMapper mapper, InputStream inputStream, Class<T> clazz, String prefix, YamlPrefixType yamlPrefixType) throws IOException {
         return mapper.readerFor(clazz)
-                     .at(fixPrefix(prefix, yamlPrefixType))
+				     .at(convertPrefix(prefix, yamlPrefixType))
                      .readValue(inputStream);
     }
     
@@ -94,7 +95,7 @@ public class YamlFileUtils {
     
     private static <T> void writeValueWithPrefix(YAMLMapper mapper, OutputStream outputStream, Class<T> clazz, T value, String prefix, YamlPrefixType yamlPrefixType) throws IOException {
         mapper.writerFor(clazz)
-        	  .withRootName(fixPrefix(prefix, yamlPrefixType))
+			  .withRootName(convertPrefix(prefix, yamlPrefixType))
               .writeValue(outputStream, value);
     }
     
@@ -102,7 +103,7 @@ public class YamlFileUtils {
      * convert prefix used for @ConfigurationProperties
      * into prefix used by @YAMLMapper
      */
-    private static String fixPrefix(String prefix, YamlPrefixType yamlPrefixType) {
+	private static String convertPrefix(String prefix, YamlPrefixType yamlPrefixType) {
     	return PREFIX_MAP.get(yamlPrefixType).apply(prefix);
     }
     

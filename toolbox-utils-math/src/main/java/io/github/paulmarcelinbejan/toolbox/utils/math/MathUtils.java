@@ -905,6 +905,57 @@ public class MathUtils {
 	}
 
 	/**
+	 * Checks if the given int is equal to any of the provided options.
+	 *
+	 * @param value   The int to compare.
+	 * @param options The options to compare against.
+	 * @return {@code true} if the int is equal to any of the options, {@code false}
+	 *         otherwise.
+	 */
+	public static boolean isEqualToAny(int value, int... options) {
+		for (int option : options) {
+			if (value == option) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	/**
+	 * Checks if the given long is equal to any of the provided options.
+	 *
+	 * @param value   The long to compare.
+	 * @param options The options to compare against.
+	 * @return {@code true} if the long is equal to any of the options,
+	 *         {@code false} otherwise.
+	 */
+	public static boolean isEqualToAny(long value, long... options) {
+		for (long option : options) {
+			if (value == option) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	/**
+	 * Checks if the given BigDecimal is equal to any of the provided options.
+	 *
+	 * @param value   The BigDecimal to compare.
+	 * @param options The options to compare against.
+	 * @return {@code true} if the BigDecimal is equal to any of the options,
+	 *         {@code false} otherwise.
+	 */
+	public static boolean isEqualToAny(BigDecimal value, BigDecimal... options) {
+		for (BigDecimal option : options) {
+			if (isEqualTo(value, option)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	/**
 	 * Checks if two BigDecimal values are not equal.
 	 *
 	 * @param left   The first BigDecimal value.
@@ -957,6 +1008,57 @@ public class MathUtils {
 	 */
 	public static boolean isNotEqualTo(long left, BigDecimal right) {
 	    return compareTo(left, right) != 0;
+	}
+
+	/**
+	 * Checks if the given int is not equal to any of the provided options.
+	 *
+	 * @param value   The int to compare.
+	 * @param options The options to compare against.
+	 * @return {@code true} if the int is not equal to any of the options,
+	 *         {@code false} otherwise.
+	 */
+	public static boolean isNotEqualToAny(int value, int... options) {
+		for (int option : options) {
+			if (value == option) {
+				return false;
+			}
+		}
+		return true;
+	}
+
+	/**
+	 * Checks if the given long is not equal to any of the provided options.
+	 *
+	 * @param value   The long to compare.
+	 * @param options The options to compare against.
+	 * @return {@code true} if the long is not equal to any of the options,
+	 *         {@code false} otherwise.
+	 */
+	public static boolean isNotEqualToAny(long value, long... options) {
+		for (long option : options) {
+			if (value == option) {
+				return false;
+			}
+		}
+		return true;
+	}
+
+	/**
+	 * Checks if the given BigDecimal is not equal to any of the provided options.
+	 *
+	 * @param value   The BigDecimal to compare.
+	 * @param options The options to compare against.
+	 * @return {@code true} if the BigDecimal is not equal to any of the options,
+	 *         {@code false} otherwise.
+	 */
+	public static boolean isNotEqualToAny(BigDecimal value, BigDecimal... options) {
+		for (BigDecimal option : options) {
+			if (isEqualTo(value, option)) {
+				return false;
+			}
+		}
+		return true;
 	}
 
 	/**
@@ -1241,6 +1343,78 @@ public class MathUtils {
 	    return isLessThanOrEqualTo(value, ZERO);
 	}
 
+	/**
+	 * Checks if a value is between a specified range (inclusive).
+	 *
+	 * @param min     The minimum value of the range.
+	 * @param between The value to check if it's within the range.
+	 * @param max     The maximum value of the range.
+	 * @return True if the value is within the specified range (inclusive), false otherwise.
+	 */
+	public static boolean isBetweenInclusive(int min, int between, int max) {
+	    return min <= between && between <= max;
+	}
+	
+	/**
+	 * Checks if a value is between a specified range (inclusive).
+	 *
+	 * @param min     The minimum value of the range.
+	 * @param between The value to check if it's within the range.
+	 * @param max     The maximum value of the range.
+	 * @return True if the value is within the specified range (inclusive), false otherwise.
+	 */
+	public static boolean isBetweenInclusive(long min, long between, long max) {
+	    return min <= between && between <= max;
+	}
+	
+	/**
+	 * Checks if a value is between a specified range (inclusive).
+	 *
+	 * @param min     The minimum value of the range.
+	 * @param between The value to check if it's within the range.
+	 * @param max     The maximum value of the range.
+	 * @return True if the value is within the specified range (inclusive), false otherwise.
+	 */
+	public static boolean isBetweenInclusive(BigDecimal min, BigDecimal between, BigDecimal max) {
+	    return isLessThanOrEqualTo(min, between) && isLessThanOrEqualTo(between, max);
+	}
+	
+	/**
+	 * Checks if a value is between a specified range (exclusive).
+	 *
+	 * @param min     The minimum value of the range.
+	 * @param between The value to check if it's within the range.
+	 * @param max     The maximum value of the range.
+	 * @return True if the value is within the specified range (exclusive), false otherwise.
+	 */
+	public static boolean isBetweenExclusive(int min, int between, int max) {
+	    return min < between && between < max;
+	}
+	
+	/**
+	 * Checks if a value is between a specified range (exclusive).
+	 *
+	 * @param min     The minimum value of the range.
+	 * @param between The value to check if it's within the range.
+	 * @param max     The maximum value of the range.
+	 * @return True if the value is within the specified range (exclusive), false otherwise.
+	 */
+	public static boolean isBetweenExclusive(long min, long between, long max) {
+	    return min < between && between < max;
+	}
+	
+	/**
+	 * Checks if a value is between a specified range (exclusive).
+	 *
+	 * @param min     The minimum value of the range.
+	 * @param between The value to check if it's within the range.
+	 * @param max     The maximum value of the range.
+	 * @return True if the value is within the specified range (exclusive), false otherwise.
+	 */
+	public static boolean isBetweenExclusive(BigDecimal min, BigDecimal between, BigDecimal max) {
+	    return isLessThan(min, between) && isLessThan(between, max);
+	}
+	
 	// COMPARE TO
 
 	/**

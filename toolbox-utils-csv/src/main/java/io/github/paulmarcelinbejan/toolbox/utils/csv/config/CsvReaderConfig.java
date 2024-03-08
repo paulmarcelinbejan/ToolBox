@@ -13,10 +13,13 @@ import com.fasterxml.jackson.dataformat.csv.CsvMapper;
 import com.fasterxml.jackson.dataformat.csv.CsvParser;
 
 import io.github.paulmarcelinbejan.toolbox.utils.jackson.ObjectMapperUtils;
+
+import lombok.Builder;
 import lombok.Getter;
 
 public class CsvReaderConfig {
 
+	@Builder
 	public CsvReaderConfig(
 			List<CsvParser.Feature> enableCsvParserFeatures,
 			List<CsvParser.Feature> disableCsvParserFeatures,

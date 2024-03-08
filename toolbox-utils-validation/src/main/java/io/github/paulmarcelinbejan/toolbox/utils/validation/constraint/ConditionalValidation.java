@@ -25,7 +25,7 @@ import io.github.paulmarcelinbejan.toolbox.utils.validation.constraint.validator
  *
  * <p>The {@link #propertyToValidate()} attribute specifies the name of the property to be validated.</p>
  *
- * <p>The {@link #required()} attribute indicates whether the property to validate is required or not.
+ * <p>The {@link #required()} attribute indicates whether the propertyToValidate is required or not.
  * If {@code true}, the property to validate must not be {@code null}; if {@code false}, the property
  * to validate must be {@code null} for the validation to pass.</p>
  *

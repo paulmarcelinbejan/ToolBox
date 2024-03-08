@@ -1,12 +1,17 @@
 package io.github.paulmarcelinbejan.toolbox.utils.csv.config;
 
-import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 
 @Getter
-@AllArgsConstructor
 public class CsvFileUtilsConfig {
 	
+	@Builder
+	public CsvFileUtilsConfig(CsvReaderConfig readerConfig, CsvWriterConfig writerConfig) {
+		this.readerConfig = readerConfig != null ? readerConfig : CsvReaderConfig.DEFAULT;
+		this.writerConfig = writerConfig != null ? writerConfig : CsvWriterConfig.DEFAULT;
+	}
+
 	public static final CsvFileUtilsConfig DEFAULT = new CsvFileUtilsConfig(CsvReaderConfig.DEFAULT, CsvWriterConfig.DEFAULT);
 	
 	private final CsvReaderConfig readerConfig;

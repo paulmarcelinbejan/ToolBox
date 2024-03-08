@@ -14,11 +14,7 @@
     <packaging>jar</packaging>
     
     <dependencies>
-	  
-	    <dependency>
-      	    <groupId>io.github.paulmarcelinbejan.toolbox</groupId>
-      	    <artifactId>toolbox-base</artifactId>
-        </dependency>
+		
         <dependency>
         	<groupId>io.github.paulmarcelinbejan.toolbox</groupId>
         	<artifactId>toolbox-constants</artifactId>

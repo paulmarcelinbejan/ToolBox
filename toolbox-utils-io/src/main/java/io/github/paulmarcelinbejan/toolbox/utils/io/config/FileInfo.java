@@ -1,7 +1,5 @@
 package io.github.paulmarcelinbejan.toolbox.utils.io.config;
 
-import static io.github.paulmarcelinbejan.toolbox.constants.Symbols.UNDERSCORE;
-
 import lombok.NonNull;
 
 public class FileInfo {
@@ -42,7 +40,7 @@ public class FileInfo {
 	public final void appendCurrentTimeMillisToFileName() {
 		this.fileNameWithoutExtension = new StringBuilder()
 				.append(fileNameWithoutExtension)
-				.append(UNDERSCORE)
+				.append("_")
 				.append(System.currentTimeMillis())
 				.toString();
 	}

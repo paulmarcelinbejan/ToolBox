@@ -4,7 +4,7 @@ import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-public class Numbers {
+public class NumbersAsString {
 
 	public static final String _0_ = "0";
 	public static final String _1_ = "1";

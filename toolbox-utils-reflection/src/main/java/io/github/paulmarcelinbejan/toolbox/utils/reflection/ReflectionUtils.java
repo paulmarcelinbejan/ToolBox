@@ -14,6 +14,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import io.github.paulmarcelinbejan.toolbox.utils.reflection.exception.ReflectionException;
 import io.github.paulmarcelinbejan.toolbox.utils.text.TextUtils;
+
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
@@ -101,8 +102,9 @@ public class ReflectionUtils {
 
 	public static <T> Method getPublicGetterOfFieldName(Class<T> clazz, String fieldName) {
 		String getterNameOfField = GETTER_PREFIX + TextUtils.firstLetterUppercase(fieldName);
+		String getterNameOfBooleanField = GETTER_BOOLEAN_PREFIX + TextUtils.firstLetterUppercase(fieldName);
 		return getPublicGetters(clazz)
-				.filter(getter -> getter.getName().contentEquals(getterNameOfField))
+				.filter(getter -> TextUtils.isEqualToAny(getter.getName(), getterNameOfBooleanField, getterNameOfBooleanField))
 				.findFirst()
 				.orElseThrow(() -> new ReflectionException(MessageFormat.format("Class {} doesn't have a getter method named {} for field {}.", clazz.getCanonicalName(), getterNameOfField, fieldName)));
 	}
@@ -128,21 +130,23 @@ public class ReflectionUtils {
 		}
 	}
 	
-    public static String getterName(String fieldName) {
-        StringBuilder builder = new StringBuilder(GETTER_PREFIX);
-        builder.append(Character.toUpperCase(fieldName.charAt(0)));
-        builder.append(fieldName.substring(1));
-        return builder.toString();
+    public static String buildGetterName(String fieldName, boolean isBooleanField) {
+        return new StringBuilder(isBooleanField ? GETTER_BOOLEAN_PREFIX : GETTER_PREFIX)
+        		.append(TextUtils.firstLetterUppercase(fieldName))
+        		.toString();
     }
     
 	private static <T> Stream<Method> getPublicGetters(Class<T> clazz) {
 		return Stream
 				.of(clazz.getDeclaredMethods())
-				.filter(method -> StringUtils.startsWith(method.getName(), GETTER_PREFIX))
+				.filter(method -> Modifier.isPublic(method.getModifiers()))
 				.filter(method -> method.getParameters().length == 0)
-				.filter(method -> Modifier.isPublic(method.getModifiers()));
+				.filter(method -> StringUtils.startsWith(method.getName(), GETTER_PREFIX)
+						|| StringUtils.startsWith(method.getName(), GETTER_BOOLEAN_PREFIX));
 	}
     
-	private static final String GETTER_PREFIX = "get";	
+	private static final String GETTER_PREFIX = "get";
+
+	private static final String GETTER_BOOLEAN_PREFIX = "is";
 
 }

@@ -2,8 +2,8 @@ package io.github.paulmarcelinbejan.toolbox.exception.functional;
 
 public class FunctionalException extends Exception {
 
-	private static final long serialVersionUID = 7539736532128095750L;
-	
+	private static final long serialVersionUID = 4172013162798023865L;
+
 	public FunctionalException(String message) {
 		super(message);
 	}

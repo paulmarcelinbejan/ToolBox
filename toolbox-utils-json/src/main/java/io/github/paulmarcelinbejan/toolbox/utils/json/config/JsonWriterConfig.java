@@ -10,10 +10,13 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.databind.json.JsonMapper;
 
 import io.github.paulmarcelinbejan.toolbox.utils.jackson.ObjectMapperUtils;
+
+import lombok.Builder;
 import lombok.Getter;
 
 public class JsonWriterConfig {
 
+	@Builder
 	public JsonWriterConfig(
 			List<SerializationFeature> enableSerializationFeatures,
 			List<SerializationFeature> disableSerializationFeatures,

@@ -10,10 +10,13 @@ import com.fasterxml.jackson.databind.Module;
 import com.fasterxml.jackson.databind.json.JsonMapper;
 
 import io.github.paulmarcelinbejan.toolbox.utils.jackson.ObjectMapperUtils;
+
+import lombok.Builder;
 import lombok.Getter;
 
 public class JsonReaderConfig {
 	
+	@Builder
 	public JsonReaderConfig(
 			List<DeserializationFeature> enableDeserializationFeatures,
 			List<DeserializationFeature> disableDeserializationFeatures,
