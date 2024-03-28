@@ -41,6 +41,7 @@
         <module>toolbox-utils-jackson</module>
         <module>toolbox-utils-json</module>
         <module>toolbox-utils-log</module>
+        <module>toolbox-utils-log-application</module>
         <module>toolbox-utils-log-json</module>
         <module>toolbox-utils-mapping</module>
         <module>toolbox-utils-math</module>
@@ -216,6 +217,11 @@
             <dependency>
                 <groupId>io.github.paulmarcelinbejan.toolbox</groupId>
                 <artifactId>toolbox-utils-log</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.github.paulmarcelinbejan.toolbox</groupId>
+                <artifactId>toolbox-utils-log-application</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
