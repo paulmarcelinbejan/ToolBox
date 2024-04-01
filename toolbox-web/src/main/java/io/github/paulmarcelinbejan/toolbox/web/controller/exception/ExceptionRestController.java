@@ -4,17 +4,19 @@ import java.util.Map;
 import java.util.NoSuchElementException;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
+import jakarta.validation.ConstraintViolationException;
+import jakarta.validation.ValidationException;
+
 import io.github.paulmarcelinbejan.toolbox.exception.functional.FunctionalException;
 import io.github.paulmarcelinbejan.toolbox.exception.technical.TechnicalException;
 import io.github.paulmarcelinbejan.toolbox.web.response.ExceptionResponse;
 import io.github.paulmarcelinbejan.toolbox.web.response.ExceptionResponse.ExceptionField;
-import jakarta.validation.ConstraintViolationException;
-import jakarta.validation.ValidationException;
 
 public abstract class ExceptionRestController {
 	
@@ -92,7 +94,7 @@ public abstract class ExceptionRestController {
 	private String getValidExceptionMessage(MethodArgumentNotValidException exception) {
 		return exception.getAllErrors()
 				 .stream()
-				 .map(e -> e.getDefaultMessage())
+				 .map(ObjectError::getDefaultMessage)
 				 .toList()
 				 .toString();
 	}
