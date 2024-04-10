@@ -19,4 +19,6 @@ public class PagedResponse {
 	
 	private int totalPages;
 	
+	private int currentPage;
+
 }
