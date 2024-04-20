@@ -22,6 +22,15 @@ public abstract class ExceptionRestController {
 	
 	@ResponseBody
 	@ResponseStatus(HttpStatus.BAD_REQUEST)
+	@ExceptionHandler(value = { io.github.paulmarcelinbejan.toolbox.exception.validation.ValidationException.class })
+	public ExceptionResponse handleValidationException(io.github.paulmarcelinbejan.toolbox.exception.validation.ValidationException exception) {
+		return new ExceptionResponse(exception,
+				Map.of(ExceptionField.STATUS, String.valueOf(HttpStatus.BAD_REQUEST.value()), 
+					   ExceptionField.ERROR, HttpStatus.BAD_REQUEST.getReasonPhrase()));
+	}
+	
+	@ResponseBody
+	@ResponseStatus(HttpStatus.BAD_REQUEST)
 	@ExceptionHandler(value = { ValidationException.class })
 	public ExceptionResponse handleValidationException(ValidationException exception) {
 		return new ExceptionResponse(exception,
