@@ -21,6 +21,10 @@
 		    <groupId>commons-beanutils</groupId>
 		    <artifactId>commons-beanutils</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>io.github.paulmarcelinbejan.toolbox</groupId>
+			<artifactId>toolbox-utils-text</artifactId>
+		</dependency>
 	</dependencies>
 	
 </project>
