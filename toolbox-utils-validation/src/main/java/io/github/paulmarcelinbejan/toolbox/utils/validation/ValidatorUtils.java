@@ -8,6 +8,9 @@ import jakarta.validation.ConstraintViolation;
 import jakarta.validation.ConstraintViolationException;
 import jakarta.validation.Validation;
 import jakarta.validation.Validator;
+
+import io.github.paulmarcelinbejan.toolbox.utils.validation.exception.ValidationException;
+
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
@@ -29,7 +32,8 @@ public class ValidatorUtils {
 	public static <T> void validate(T toValidate) {
 		Set<ConstraintViolation<T>> violations = VALIDATOR.validate(toValidate);
 		if (!violations.isEmpty()) {
-			throw new ConstraintViolationException(violations);
+			ConstraintViolationException cause = new ConstraintViolationException(violations);
+			throw new ValidationException(cause.getMessage(), cause);
 		}
 	}
 
@@ -44,7 +48,8 @@ public class ValidatorUtils {
 		for (T toValidate : collectionToValidate) {
 			Set<ConstraintViolation<T>> violations = VALIDATOR.validate(toValidate);
 			if (!violations.isEmpty()) {
-				throw new ConstraintViolationException(violations);
+				ConstraintViolationException cause = new ConstraintViolationException(violations);
+				throw new ValidationException(cause.getMessage(), cause);
 			}
 		}
 	}
@@ -63,7 +68,8 @@ public class ValidatorUtils {
 			allViolations.addAll(violations);
 		}
 		if (!allViolations.isEmpty()) {
-			throw new ConstraintViolationException(allViolations);
+			ConstraintViolationException cause = new ConstraintViolationException(allViolations);
+			throw new ValidationException(cause.getMessage(), cause);
 		}
 	}
 
@@ -78,7 +84,8 @@ public class ValidatorUtils {
 	public static <T> void validateByGroups(T toValidate, Class<?>... groups) {
 		Set<ConstraintViolation<T>> violations = VALIDATOR.validate(toValidate, groups);
 		if (!violations.isEmpty()) {
-			throw new ConstraintViolationException(violations);
+			ConstraintViolationException cause = new ConstraintViolationException(violations);
+			throw new ValidationException(cause.getMessage(), cause);
 		}
 	}
 
@@ -94,7 +101,8 @@ public class ValidatorUtils {
 		for (T toValidate : collectionToValidate) {
 			Set<ConstraintViolation<T>> violations = VALIDATOR.validate(toValidate, groups);
 			if (!violations.isEmpty()) {
-				throw new ConstraintViolationException(violations);
+				ConstraintViolationException cause = new ConstraintViolationException(violations);
+				throw new ValidationException(cause.getMessage(), cause);
 			}
 		}
 	}
@@ -115,7 +123,8 @@ public class ValidatorUtils {
 			allViolations.addAll(violations);
 		}
 		if (!allViolations.isEmpty()) {
-			throw new ConstraintViolationException(allViolations);
+			ConstraintViolationException cause = new ConstraintViolationException(allViolations);
+			throw new ValidationException(cause.getMessage(), cause);
 		}
 	}
 
