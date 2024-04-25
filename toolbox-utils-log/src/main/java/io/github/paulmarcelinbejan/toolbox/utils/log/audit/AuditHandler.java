@@ -57,7 +57,8 @@ public class AuditHandler {
     					  .append("'")
     					  .append(", ");
     		}
-    		parametersBuilder.delete(parametersBuilder.length() - 2, parametersBuilder.length()); // Remove the trailing comma and space
+			// Remove the trailing comma and space
+			parametersBuilder.delete(parametersBuilder.length() - 2, parametersBuilder.length());
     		
     		parameters = parametersBuilder.toString();
     	} else {
