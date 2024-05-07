@@ -31,6 +31,7 @@
  
     <modules>
         <module>toolbox-base</module>
+        <module>toolbox-configuration</module>
         <module>toolbox-constants</module>
         <module>toolbox-exception</module>
         <module>toolbox-service-helper</module>
@@ -174,6 +175,11 @@
             <dependency>
                 <groupId>io.github.paulmarcelinbejan.toolbox</groupId>
                 <artifactId>toolbox-base</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.github.paulmarcelinbejan.toolbox</groupId>
+                <artifactId>toolbox-configuration</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
