@@ -121,7 +121,7 @@ public class TextUtils {
 	}
 	
 	/**
-     * Converts the first letter of the given string to uppercase.
+     * Return the given string with the first letter converted into uppercase.
      *
      * @param text The input string.
      * @return The input string with the first letter converted to uppercase.
