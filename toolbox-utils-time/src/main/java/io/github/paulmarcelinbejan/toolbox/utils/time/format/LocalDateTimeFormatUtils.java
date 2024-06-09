@@ -156,7 +156,7 @@ public class LocalDateTimeFormatUtils {
 	/**
 	 * Parses a String to obtain a LocalDateTime using the specified pattern.
 	 *
-	 * @param date The String to be parsed.
+	 * @param dateTime The String to be parsed.
 	 * @param dateTimePattern The pattern to be used.
 	 * @return A LocalDateTime parsed from the input String.
 	 * @throws IllegalArgumentException if the pattern is invalid.
@@ -169,7 +169,7 @@ public class LocalDateTimeFormatUtils {
 	/**
 	 * Parses a String to obtain a LocalDateTime using the specified pattern and Locale.
 	 *
-	 * @param date The String to be parsed.
+	 * @param dateTime The String to be parsed.
 	 * @param dateTimePattern The pattern to be used.
 	 * @param locale        The Locale to be applied.
 	 * @return A LocalDateTime parsed from the input String with the specified Locale.

@@ -97,7 +97,6 @@ public class DurationUtils {
     /**
      * Splits the given duration into time units with descending order.
      *
-     * @param duration the duration to be split
      * @return a {@code LinkedHashMap} containing time units and their corresponding values in descending order
      */
     private static List<TimeUnit> timeUnitsDescOrder() {
@@ -110,7 +109,7 @@ public class DurationUtils {
      * @return a list of time units in ascending order
      */
     private static List<TimeUnit> timeUnitsAscOrder() {
-    	return Arrays.asList(TimeUnit.values());
+        return Arrays.asList(TimeUnit.values());
     }
     
 }

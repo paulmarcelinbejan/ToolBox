@@ -14,7 +14,7 @@ public class TextUtils {
     /**
      * Checks if the given string is equal to any of the provided options.
      *
-     * @param str     The string to compare.
+     * @param text     The string to compare.
      * @param options The options to compare against.
      * @return {@code true} if the string is equal to any of the options, {@code false} otherwise.
      */
@@ -30,7 +30,7 @@ public class TextUtils {
     /**
      * Checks if the given string is not equal to any of the provided options.
      *
-     * @param str     The string to compare.
+     * @param text     The string to compare.
      * @param options The options to compare against.
      * @return {@code true} if the string is not equal to any of the options, {@code false} otherwise.
      */
