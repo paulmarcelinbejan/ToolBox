@@ -7,9 +7,8 @@ import java.util.Set;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.ConstraintViolationException;
 import jakarta.validation.Validation;
+import jakarta.validation.ValidationException;
 import jakarta.validation.Validator;
-
-import io.github.paulmarcelinbejan.toolbox.utils.validation.exception.ValidationException;
 
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;

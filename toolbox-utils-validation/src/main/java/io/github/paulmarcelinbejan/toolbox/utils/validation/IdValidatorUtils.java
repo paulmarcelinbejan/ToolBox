@@ -3,8 +3,7 @@ package io.github.paulmarcelinbejan.toolbox.utils.validation;
 import java.math.BigInteger;
 import java.util.List;
 
-import io.github.paulmarcelinbejan.toolbox.utils.validation.exception.ValidationException;
-
+import jakarta.validation.ValidationException;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
