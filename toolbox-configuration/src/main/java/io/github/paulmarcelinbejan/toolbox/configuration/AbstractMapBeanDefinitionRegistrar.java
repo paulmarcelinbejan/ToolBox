@@ -37,10 +37,21 @@ public abstract class AbstractMapBeanDefinitionRegistrar<Configuration> implemen
 		registry.registerBeanDefinition(getBeanName(entry), beanDefinition);
 	}
 
+	/**
+	 * @return the Class of the Bean to instance
+	 */
 	protected abstract Class<?> getBeanClass();
 	
+	/**
+	 * @param configuration element
+	 * @return a Supplier used to create the instance of the bean
+	 */
 	protected abstract Supplier<?> getBeanInstanceSupplier(Entry<String, Configuration> entry);
 
+	/**
+	 * @param configuration element
+	 * @return the name to apply to the bean
+	 */
 	protected abstract String getBeanName(Entry<String, Configuration> entry);
 
 }
