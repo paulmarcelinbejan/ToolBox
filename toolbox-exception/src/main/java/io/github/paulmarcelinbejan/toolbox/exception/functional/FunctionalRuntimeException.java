@@ -1,19 +1,42 @@
 package io.github.paulmarcelinbejan.toolbox.exception.functional;
 
-public class FunctionalRuntimeException extends RuntimeException {
+import java.util.HashMap;
+import java.util.Map;
 
-	private static final long serialVersionUID = -1243460268245173580L;
+import io.github.paulmarcelinbejan.toolbox.exception.aware.DetailedException;
+import lombok.Getter;
 
-	public FunctionalRuntimeException(String message) {
+@Getter
+public class FunctionalRuntimeException extends RuntimeException implements DetailedException {
+
+	private static final long serialVersionUID = 4996438458335182240L;
+
+	private final String messageCode;
+	
+	private final Map<String, String> messageParams;
+
+	public FunctionalRuntimeException(String message, String messageCode) {
 		super(message);
+		this.messageCode = messageCode;
+		this.messageParams = new HashMap<>();
 	}
-
-	public FunctionalRuntimeException(String message, Throwable cause) {
+	
+	public FunctionalRuntimeException(String message, String messageCode, Throwable cause) {
 		super(message, cause);
+		this.messageCode = messageCode;
+		this.messageParams = new HashMap<>();
 	}
-
-	public FunctionalRuntimeException(Throwable cause) {
-		super(cause);
+	
+	public FunctionalRuntimeException(String message, String messageCode, Map<String, String> messageParams) {
+		super(message);
+		this.messageCode = messageCode;
+		this.messageParams = messageParams;
+	}
+	
+	public FunctionalRuntimeException(String message, String messageCode, Map<String, String> messageParams, Throwable cause) {
+		super(message, cause);
+		this.messageCode = messageCode;
+		this.messageParams = messageParams;
 	}
 
 }

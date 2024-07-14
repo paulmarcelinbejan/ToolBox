@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class ExceptionUtils {
 
-	public static String getUniqueIdentifier() {
+	public static String getExceptionId() {
 		return UUID.randomUUID().toString();
 	}
 	

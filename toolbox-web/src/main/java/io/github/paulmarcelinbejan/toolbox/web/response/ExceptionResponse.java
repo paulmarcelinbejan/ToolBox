@@ -39,7 +39,7 @@ public class ExceptionResponse {
 	
 	public ExceptionResponse(Exception exception) {
 		this(exception,
-			 ExceptionUtils.getUniqueIdentifier(), 
+			 ExceptionUtils.getExceptionId(), 
 			 Instant.now(), 
 			 String.valueOf(HttpStatus.INTERNAL_SERVER_ERROR.value()), 
 			 HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase(), 
@@ -49,7 +49,7 @@ public class ExceptionResponse {
 
 	public ExceptionResponse(Exception exception, String message) {
 		this(exception,
-			 ExceptionUtils.getUniqueIdentifier(), 
+			 ExceptionUtils.getExceptionId(), 
 		     Instant.now(), 
 		     String.valueOf(HttpStatus.INTERNAL_SERVER_ERROR.value()), 
 			 HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase(), 
@@ -59,7 +59,7 @@ public class ExceptionResponse {
 	
 	public ExceptionResponse(Exception exception, Map<ExceptionField, String> fieldValue) {
 		this(exception,
-			 fieldValue.getOrDefault(ExceptionField.UNIQUEIDENTIFIER, ExceptionUtils.getUniqueIdentifier()), 
+			 fieldValue.getOrDefault(ExceptionField.UNIQUEIDENTIFIER, ExceptionUtils.getExceptionId()), 
 		     Instant.now(), 
 		     fieldValue.getOrDefault(ExceptionField.STATUS, String.valueOf(HttpStatus.INTERNAL_SERVER_ERROR.value())), 
 		     fieldValue.getOrDefault(ExceptionField.ERROR, HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase()), 
