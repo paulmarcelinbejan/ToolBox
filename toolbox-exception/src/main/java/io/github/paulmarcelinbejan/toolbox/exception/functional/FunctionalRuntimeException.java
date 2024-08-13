@@ -15,6 +15,18 @@ public class FunctionalRuntimeException extends RuntimeException implements Deta
 	
 	private final Map<String, String> messageParams;
 
+	public FunctionalRuntimeException(Throwable cause) {
+		super(cause);
+		this.messageCode = "";
+		this.messageParams = new HashMap<>();
+	}
+	
+	public FunctionalRuntimeException(String message) {
+		super(message);
+		this.messageCode = "";
+		this.messageParams = new HashMap<>();
+	}
+	
 	public FunctionalRuntimeException(String message, String messageCode) {
 		super(message);
 		this.messageCode = messageCode;
