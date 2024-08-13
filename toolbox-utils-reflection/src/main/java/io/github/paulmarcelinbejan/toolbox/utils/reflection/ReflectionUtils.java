@@ -5,6 +5,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
+import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.TypeVariable;
 import java.text.MessageFormat;
 import java.util.Arrays;
@@ -14,7 +15,6 @@ import org.apache.commons.lang3.StringUtils;
 
 import io.github.paulmarcelinbejan.toolbox.utils.reflection.exception.ReflectionException;
 import io.github.paulmarcelinbejan.toolbox.utils.text.TextUtils;
-
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
@@ -46,6 +46,11 @@ public class ReflectionUtils {
 		TypeVariable<?>[] genericTypes = clazz.getTypeParameters();
 		return genericTypes.length > 0;
     }
+	
+	public static Class<?> getGenericClass(Class<?> clazz, int index) {
+	    ParameterizedType genericSuperclass = (ParameterizedType) clazz.getGenericSuperclass();
+	    return (Class<?>) genericSuperclass.getActualTypeArguments()[index];
+	}
 
 	public static boolean isFieldAccessible(final Object instance, final Field field) {
 		return field.canAccess(instance);
