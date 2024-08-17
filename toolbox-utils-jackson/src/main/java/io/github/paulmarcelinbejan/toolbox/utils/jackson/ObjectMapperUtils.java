@@ -1,5 +1,6 @@
 package io.github.paulmarcelinbejan.toolbox.utils.jackson;
 
+import java.time.Instant;
 import java.util.List;
 import java.util.Map;
 
@@ -13,13 +14,19 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.databind.module.SimpleModule;
+import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import com.fasterxml.jackson.datatype.jsr310.deser.InstantDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.InstantSerializer;
 
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class ObjectMapperUtils {
+	
+	public static final ObjectMapper SIMPLE_OBJECT_MAPPER = new ObjectMapper();
+	public static final ObjectMapper DEFAULT_OBJECT_MAPPER = defaultObjectMapper();
 
 	@SuppressWarnings("unchecked")
 	public static <T> void addSerializers(final SimpleModule module, final Map<Class<?>, JsonSerializer<?>> serializers) {
@@ -97,6 +104,25 @@ public class ObjectMapperUtils {
     	DefaultPrettyPrinter prettyPrinter = new DefaultPrettyPrinter();        
         prettyPrinter.indentArraysWith(DefaultIndenter.SYSTEM_LINEFEED_INSTANCE);
         return prettyPrinter;
+    }
+    
+    private static ObjectMapper defaultObjectMapper() {
+        ObjectMapper objectMapper = new ObjectMapper();
+
+        final JavaTimeModule javaTimeModule = new JavaTimeModule();
+        
+        // Register serializers/deserializers for Instant
+        javaTimeModule.addSerializer(Instant.class, InstantSerializer.INSTANCE);
+        javaTimeModule.addDeserializer(Instant.class, InstantDeserializer.INSTANT);
+
+
+        // Register commonly used modules
+        objectMapper.registerModule(new Jdk8Module());
+		objectMapper.registerModule(javaTimeModule);
+        
+        objectMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
+
+        return objectMapper;
     }
 	
 }
