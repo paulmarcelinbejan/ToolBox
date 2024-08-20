@@ -1,6 +1,6 @@
 package io.github.paulmarcelinbejan.toolbox.base.functional_interfaces.consumer;
 
-public interface ConsumerUtilsExceptionable {
+public interface ConsumerWithExceptionUtils {
 
 	@FunctionalInterface
 	public interface ConsumerWithException<P1, E extends Exception> {

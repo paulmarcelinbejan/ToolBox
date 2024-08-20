@@ -1,6 +1,6 @@
 package io.github.paulmarcelinbejan.toolbox.base.functional_interfaces.function;
 
-public final class FunctionUtilsExceptionable {
+public final class FunctionWithExceptionUtils {
 
 	@FunctionalInterface
 	public interface FunctionWithException<P1, R, E extends Exception> {
