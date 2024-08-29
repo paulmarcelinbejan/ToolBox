@@ -115,7 +115,6 @@ public class ObjectMapperUtils {
         javaTimeModule.addSerializer(Instant.class, InstantSerializer.INSTANCE);
         javaTimeModule.addDeserializer(Instant.class, InstantDeserializer.INSTANT);
 
-
         // Register commonly used modules
         objectMapper.registerModule(new Jdk8Module());
 		objectMapper.registerModule(javaTimeModule);
