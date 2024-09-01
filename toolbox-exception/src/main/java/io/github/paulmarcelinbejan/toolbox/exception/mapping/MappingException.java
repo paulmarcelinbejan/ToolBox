@@ -1,4 +1,4 @@
-package io.github.paulmarcelinbejan.toolbox.exception.validation;
+package io.github.paulmarcelinbejan.toolbox.exception.mapping;
 
 public class MappingException extends RuntimeException {
 
