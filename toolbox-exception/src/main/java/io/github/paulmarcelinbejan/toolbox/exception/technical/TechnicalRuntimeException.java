@@ -27,6 +27,12 @@ public class TechnicalRuntimeException extends RuntimeException implements Detai
 		this.messageParams = new HashMap<>();
 	}
 	
+	public TechnicalRuntimeException(String message, Throwable cause) {
+		super(message, cause);
+		this.messageCode = "";
+		this.messageParams = new HashMap<>();
+	}
+	
 	public TechnicalRuntimeException(String message, String messageCode) {
 		super(message);
 		this.messageCode = messageCode;

@@ -27,6 +27,12 @@ public class FunctionalException extends Exception implements DetailedException 
 		this.messageParams = new HashMap<>();
 	}
 	
+	public FunctionalException(String message, Throwable cause) {
+		super(message, cause);
+		this.messageCode = "";
+		this.messageParams = new HashMap<>();
+	}
+	
 	public FunctionalException(String message, String messageCode) {
 		super(message);
 		this.messageCode = messageCode;

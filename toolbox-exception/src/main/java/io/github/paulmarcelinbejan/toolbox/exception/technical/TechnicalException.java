@@ -27,6 +27,12 @@ public class TechnicalException extends Exception implements DetailedException {
 		this.messageParams = new HashMap<>();
 	}
 	
+	public TechnicalException(String message, Throwable cause) {
+		super(message, cause);
+		this.messageCode = "";
+		this.messageParams = new HashMap<>();
+	}
+	
 	public TechnicalException(String message, String messageCode) {
 		super(message);
 		this.messageCode = messageCode;
