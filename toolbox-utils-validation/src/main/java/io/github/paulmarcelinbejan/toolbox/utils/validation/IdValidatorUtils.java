@@ -3,6 +3,7 @@ package io.github.paulmarcelinbejan.toolbox.utils.validation;
 import java.math.BigInteger;
 import java.util.List;
 
+import io.github.paulmarcelinbejan.toolbox.utils.text.TextUtils;
 import jakarta.validation.ValidationException;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
@@ -49,6 +50,18 @@ public class IdValidatorUtils {
 	public static void validateIdBigInteger(BigInteger id) {
 		validateId(id, BigInteger.ZERO);
 	}
+	
+	/**
+	 * Validates the given ID.
+	 *
+	 * @param id the ID to validate
+	 * @throws ValidationException if the ID is not valid
+	 */
+	public static void validateIdString(String id) {
+		if(TextUtils.isBlank(id)) {
+			throw new ValidationException("Id can not be null.");
+		}
+	}
 
 	/**
 	 * Validates the given IDs.
@@ -89,12 +102,26 @@ public class IdValidatorUtils {
 	public static void validateIdsBigInteger(List<BigInteger> ids) {
 		validateIds(ids, BigInteger.ZERO);
 	}
+	
+	/**
+	 * Validates the given IDs.
+	 *
+	 * @param ids the ID to validate
+	 * @throws ValidationException if one of the ID is not valid
+	 */
+	public static void validateIdsString(List<String> ids) {
+		if (ids == null) {
+			throw new ValidationException("ids can not be null.");
+		}
+		for (String id : ids) {
+			validateIdString(id);
+		}
+	}
 
 	private static <ID extends Number & Comparable<? super ID>> void validateId(ID id, ID zero) {
 		if (id == null) {
 			throw new ValidationException("Id can not be null.");
 		}
-
 		if (id.compareTo(zero) <= 0) {
 			throw new ValidationException("Id must be greater than 0.");
 		}
