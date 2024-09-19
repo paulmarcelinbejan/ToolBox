@@ -2,6 +2,8 @@ package io.github.paulmarcelinbejan.toolbox.utils.text;
 
 import java.security.InvalidParameterException;
 
+import org.apache.commons.lang3.StringUtils;
+
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
@@ -11,6 +13,24 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class TextUtils {
 
+    /**
+     * Checks if a String is null, empty ("") or whitespace only.
+     *
+     * <pre>
+     * TextUtils.isBlank(null)      = true
+     * TextUtils.isBlank("")        = true
+     * TextUtils.isBlank(" ")       = true
+     * TextUtils.isBlank("text")     = false
+     * TextUtils.isBlank("  text  ") = false
+     * </pre>
+     *
+     * @param text  the String to check
+     * @return {@code true} if the String is null, empty or whitespace only
+     */
+	public static boolean isBlank(final String text) {
+        return StringUtils.isBlank(text);
+    }
+	
     /**
      * Checks if the given string is equal to any of the provided options.
      *
