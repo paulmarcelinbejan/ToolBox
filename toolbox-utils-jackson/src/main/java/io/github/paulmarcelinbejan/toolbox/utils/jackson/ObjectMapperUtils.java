@@ -4,6 +4,7 @@ import java.time.Instant;
 import java.util.List;
 import java.util.Map;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.core.util.DefaultIndenter;
 import com.fasterxml.jackson.core.util.DefaultPrettyPrinter;
 import com.fasterxml.jackson.databind.DeserializationFeature;
@@ -28,6 +29,8 @@ public class ObjectMapperUtils {
 	public static final ObjectMapper SIMPLE_OBJECT_MAPPER = new ObjectMapper();
 	public static final ObjectMapper DEFAULT_OBJECT_MAPPER = defaultObjectMapper();
 
+	public static final TypeReference<List<String>> LIST_OF_STRING_TYPE_REFERENCE = new TypeReference<List<String>>() {};
+	
 	@SuppressWarnings("unchecked")
 	public static <T> void addSerializers(final SimpleModule module, final Map<Class<?>, JsonSerializer<?>> serializers) {
 		serializers.forEach((type, serializer) -> 
