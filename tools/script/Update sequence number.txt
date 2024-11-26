@@ -1,0 +1,17 @@
+DECLARE
+    max_id_in_table           NUMBER;
+    current_sequence_value    NUMBER;
+BEGIN
+    -- Select the highest ID currently in the table
+    SELECT MAX(REPLACE_with_table_column_id) INTO max_id_in_table FROM REPLACE_with_table_name;
+
+    LOOP
+        -- Generate the next sequence value until it matches or exceeds the highest ID in the table
+        SELECT REPLACE_with_sequence_name.NEXTVAL INTO current_sequence_value FROM dual;
+        
+        -- Exit the loop once the sequence reaches or surpasses the max ID
+        IF current_sequence_value >= max_id_in_table THEN 
+            EXIT;
+        END IF;
+    END LOOP;
+END;
