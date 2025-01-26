@@ -1,7 +1,7 @@
 package io.github.paulmarcelinbejan.toolbox.utils.yaml;
 
-import static io.github.paulmarcelinbejan.toolbox.constants.Symbols.DOT;
-import static io.github.paulmarcelinbejan.toolbox.constants.Symbols.SLASH;
+import static io.github.paulmarcelinbejan.toolbox.constants.Symbols.AsString.DOT;
+import static io.github.paulmarcelinbejan.toolbox.constants.Symbols.AsString.SLASH;
 import static io.github.paulmarcelinbejan.toolbox.utils.yaml.config.YamlPrefixType.CONDENSED;
 import static io.github.paulmarcelinbejan.toolbox.utils.yaml.config.YamlPrefixType.NESTED;
 

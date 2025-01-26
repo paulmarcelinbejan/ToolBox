@@ -1,7 +1,7 @@
 package io.github.paulmarcelinbejan.toolbox.utils.math.format;
 
-import static io.github.paulmarcelinbejan.toolbox.constants.Symbols.DOT;
-import static io.github.paulmarcelinbejan.toolbox.constants.Symbols.EMPTY;
+import static io.github.paulmarcelinbejan.toolbox.constants.Symbols.AsString.DOT;
+import static io.github.paulmarcelinbejan.toolbox.constants.Symbols.AsString.EMPTY;
 import static io.github.paulmarcelinbejan.toolbox.utils.math.format.pattern.NumberPattern.DECIMALS_FIRST_PART_ALWAYS_SECOND_PART_IF_PRESENT;
 
 import java.math.BigDecimal;
@@ -9,7 +9,7 @@ import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 
-import io.github.paulmarcelinbejan.toolbox.constants.SymbolsAsChar;
+import io.github.paulmarcelinbejan.toolbox.constants.Symbols;
 import io.github.paulmarcelinbejan.toolbox.utils.math.MathUtils;
 import io.github.paulmarcelinbejan.toolbox.utils.math.format.pattern.NumberPattern;
 import lombok.AccessLevel;
@@ -98,7 +98,7 @@ public class NumberFormatUtils {
 	public static String toString(BigDecimal numberToFormat, int decimalPlaces, NumberPattern numberFormatPattern) {
 	    validateDecimalPlaces(decimalPlaces);
 	    
-	    return toString(numberToFormat, decimalPlaces, SymbolsAsChar.DOT, numberFormatPattern);
+	    return toString(numberToFormat, decimalPlaces, Symbols.AsChar.DOT, numberFormatPattern);
 	}
 
 	/**
@@ -154,7 +154,7 @@ public class NumberFormatUtils {
 	    validate_toString_for_DECIMALS_FIRST_PART_ALWAYS_SECOND_PART_IF_PRESENT(decimalPlacesTot, decimalPlacesToShowAlways, numberFormatPattern);
 
 	    String pattern = getPattern(decimalPlacesTot, decimalPlacesToShowAlways, DECIMALS_FIRST_PART_ALWAYS_SECOND_PART_IF_PRESENT);
-	    return format(numberToFormat, pattern, SymbolsAsChar.DOT);
+	    return format(numberToFormat, pattern, Symbols.AsChar.DOT);
 	}
 
 	/**
