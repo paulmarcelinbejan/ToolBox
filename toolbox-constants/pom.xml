@@ -12,7 +12,6 @@
 
     <artifactId>toolbox-constants</artifactId>
     <name>ToolBox Constants</name>
-    <version>1.0.3-SNAPSHOT</version>
     <packaging>jar</packaging>
 
 </project>

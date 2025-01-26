@@ -9,7 +9,6 @@
 	
 	<artifactId>toolbox-utils-validation</artifactId>
     <name>ToolBox Utils Validation</name>
-    <version>1.0.3-SNAPSHOT</version>
     <packaging>jar</packaging>
 	
 	<dependencies>

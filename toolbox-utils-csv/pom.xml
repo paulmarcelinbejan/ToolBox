@@ -9,7 +9,6 @@
   
     <artifactId>toolbox-utils-csv</artifactId>
     <name>ToolBox Utils CSV</name>
-    <version>1.0.3-SNAPSHOT</version>
     <packaging>jar</packaging>
     
     <dependencies>

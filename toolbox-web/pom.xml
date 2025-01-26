@@ -9,7 +9,6 @@
 	
 	<artifactId>toolbox-web</artifactId>
 	<name>ToolBox Web</name>
-	<version>1.0.3-SNAPSHOT</version>
 	<packaging>jar</packaging>
 	
 	<dependencies>

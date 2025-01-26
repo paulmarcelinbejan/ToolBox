@@ -7,7 +7,6 @@
 	</parent>
 	<artifactId>toolbox-utils-reflection</artifactId>
 	<name>ToolBox Utils Reflection</name>
-	<version>1.0.3-SNAPSHOT</version>
 	<packaging>jar</packaging>
 	
 	<dependencies>
