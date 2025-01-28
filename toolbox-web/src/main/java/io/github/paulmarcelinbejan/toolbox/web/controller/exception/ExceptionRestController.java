@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 import jakarta.validation.ConstraintViolationException;
 import jakarta.validation.ValidationException;
-
 import io.github.paulmarcelinbejan.toolbox.exception.functional.FunctionalException;
 import io.github.paulmarcelinbejan.toolbox.exception.technical.TechnicalException;
 import io.github.paulmarcelinbejan.toolbox.web.response.ExceptionResponse;
