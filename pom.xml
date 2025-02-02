@@ -34,8 +34,9 @@
         <module>toolbox-configuration</module>
         <module>toolbox-constants</module>
         <module>toolbox-exception</module>
-        <module>toolbox-sql</module>
-        <module>toolbox-test</module>
+        <module>toolbox-utils-test</module>
+        <module>toolbox-utils-jdbc</module>
+        <module>toolbox-utils-jpa</module>
         <module>toolbox-utils-csv</module>
         <module>toolbox-utils-io</module>
         <module>toolbox-utils-jackson</module>
@@ -193,14 +194,19 @@
             </dependency>
             <dependency>
                 <groupId>io.github.paulmarcelinbejan.toolbox</groupId>
-                <artifactId>toolbox-sql</artifactId>
+                <artifactId>toolbox-utils-test</artifactId>
+                <version>${project.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>io.github.paulmarcelinbejan.toolbox</groupId>
+                <artifactId>toolbox-utils-jdbc</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>io.github.paulmarcelinbejan.toolbox</groupId>
-                <artifactId>toolbox-test</artifactId>
+                <artifactId>toolbox-utils-jpa</artifactId>
                 <version>${project.version}</version>
-                <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>io.github.paulmarcelinbejan.toolbox</groupId>

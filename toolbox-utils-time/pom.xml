@@ -21,7 +21,7 @@
 		
 		<dependency>
 			<groupId>io.github.paulmarcelinbejan.toolbox</groupId>
-			<artifactId>toolbox-test</artifactId>
+			<artifactId>toolbox-utils-test</artifactId>
 			<scope>test</scope>
 		</dependency>
 		
