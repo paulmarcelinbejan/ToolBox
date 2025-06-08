@@ -2,7 +2,7 @@ package io.github.paulmarcelinbejan.toolbox.utils.jpa.repository;
 
 import org.springframework.stereotype.Repository;
 
-import io.github.paulmarcelinbejan.toolbox.utils.jpa.entities.ExceptionEntity;
+import io.github.paulmarcelinbejan.toolbox.utils.jpa.entity.ExceptionEntity;
 import jakarta.persistence.EntityManager;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;

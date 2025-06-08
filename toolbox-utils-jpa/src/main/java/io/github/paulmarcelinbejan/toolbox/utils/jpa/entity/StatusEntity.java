@@ -1,4 +1,4 @@
-package io.github.paulmarcelinbejan.toolbox.utils.jpa.entities;
+package io.github.paulmarcelinbejan.toolbox.utils.jpa.entity;
 
 import jakarta.persistence.MappedSuperclass;
 
@@ -15,10 +15,11 @@ import lombok.experimental.SuperBuilder;
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 @MappedSuperclass
-public abstract class TypeEntity extends CategorizationEntity {
+public abstract class StatusEntity extends CategorizationEntity {
 
-	protected TypeEntity(Integer id, String code, String description) {
+	protected StatusEntity(Integer id, String code, String description) {
 		super(id, code, description);
 	}
 
 }
+

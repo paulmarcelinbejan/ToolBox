@@ -1,4 +1,4 @@
-package io.github.paulmarcelinbejan.toolbox.utils.jpa.entities;
+package io.github.paulmarcelinbejan.toolbox.utils.jpa.entity;
 
 import java.time.Instant;
 
