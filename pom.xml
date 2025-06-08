@@ -37,10 +37,11 @@
         <module>toolbox-utils-test</module>
         <module>toolbox-utils-jdbc</module>
         <module>toolbox-utils-jpa</module>
-        <module>toolbox-utils-csv</module>
+        <module>toolbox-utils-mongo</module>
         <module>toolbox-utils-io</module>
-        <module>toolbox-utils-jackson</module>
+        <module>toolbox-utils-csv</module>
         <module>toolbox-utils-json</module>
+        <module>toolbox-utils-jackson</module>
         <module>toolbox-utils-log</module>
         <module>toolbox-utils-log-application</module>
         <module>toolbox-utils-log-json</module>
@@ -206,6 +207,11 @@
             <dependency>
                 <groupId>io.github.paulmarcelinbejan.toolbox</groupId>
                 <artifactId>toolbox-utils-jpa</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.github.paulmarcelinbejan.toolbox</groupId>
+                <artifactId>toolbox-utils-mongo</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
