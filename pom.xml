@@ -32,7 +32,6 @@
     <modules>
         <module>toolbox-base</module>
         <module>toolbox-configuration</module>
-        <module>toolbox-constants</module>
         <module>toolbox-exception</module>
         <module>toolbox-utils-test</module>
         <module>toolbox-utils-jdbc</module>
@@ -181,11 +180,6 @@
             <dependency>
                 <groupId>io.github.paulmarcelinbejan.toolbox</groupId>
                 <artifactId>toolbox-configuration</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>io.github.paulmarcelinbejan.toolbox</groupId>
-                <artifactId>toolbox-constants</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>

@@ -1,4 +1,4 @@
-package io.github.paulmarcelinbejan.toolbox.constants;
+package io.github.paulmarcelinbejan.toolbox.base.constants;
 
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;

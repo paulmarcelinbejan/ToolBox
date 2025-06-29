@@ -16,7 +16,7 @@
 		
         <dependency>
         	<groupId>io.github.paulmarcelinbejan.toolbox</groupId>
-        	<artifactId>toolbox-constants</artifactId>
+        	<artifactId>toolbox-base</artifactId>
         </dependency>
 	    
     </dependencies>
