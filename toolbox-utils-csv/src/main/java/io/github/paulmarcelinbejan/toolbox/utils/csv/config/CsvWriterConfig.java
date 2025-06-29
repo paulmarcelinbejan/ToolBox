@@ -13,6 +13,7 @@ import com.fasterxml.jackson.dataformat.csv.CsvFactoryBuilder;
 import com.fasterxml.jackson.dataformat.csv.CsvMapper;
 import com.fasterxml.jackson.dataformat.csv.CsvParser;
 
+import io.github.paulmarcelinbejan.toolbox.base.constants.Symbols;
 import io.github.paulmarcelinbejan.toolbox.utils.jackson.ObjectMapperUtils;
 
 import lombok.Builder;
@@ -20,6 +21,25 @@ import lombok.Getter;
 
 public class CsvWriterConfig {
 
+	@Getter
+	private final CsvMapper csvMapper;
+	
+	@Getter
+	private final char separator;
+	
+	@Getter
+	private final boolean withHeader;
+	
+	public static final CsvWriterConfig DEFAULT = new CsvWriterConfig(
+			Collections.emptyList(), 
+			Collections.emptyList(), 
+			Collections.emptyList(), 
+			Collections.emptyList(), 
+			Collections.emptyList(), 
+			Collections.emptyMap(), 
+			Symbols.AsChar.COMMA, 
+			Boolean.TRUE);
+	
 	@Builder
 	public CsvWriterConfig(
 			List<CsvParser.Feature> enableCsvParserFeatures,
@@ -27,7 +47,9 @@ public class CsvWriterConfig {
 			List<SerializationFeature> enableSerializationFeatures,
 			List<SerializationFeature> disableSerializationFeatures,
 			List<Module> modules, 
-			Map<Class<?>, JsonSerializer<?>> serializers) {
+			Map<Class<?>, JsonSerializer<?>> serializers,
+			char separator,
+			boolean withHeader) {
 		
 		boolean createCsvFactory = createCsvFactory(enableCsvParserFeatures, disableCsvParserFeatures);
 		
@@ -38,18 +60,9 @@ public class CsvWriterConfig {
 			this.csvMapper = buildCsvMapper(enableSerializationFeatures, disableSerializationFeatures, modules, serializers);
 		}
 		
+		this.separator = separator;
+		this.withHeader = withHeader;
 	}
-	
-	public static final CsvWriterConfig DEFAULT = new CsvWriterConfig(
-			Collections.emptyList(), 
-			Collections.emptyList(), 
-			Collections.emptyList(), 
-			Collections.emptyList(), 
-			Collections.emptyList(), 
-			Collections.emptyMap());
-	
-	@Getter
-	private final CsvMapper csvMapper;
 	
 	private static CsvMapper buildCsvMapper(
 			List<SerializationFeature> enableSerializationFeatures,

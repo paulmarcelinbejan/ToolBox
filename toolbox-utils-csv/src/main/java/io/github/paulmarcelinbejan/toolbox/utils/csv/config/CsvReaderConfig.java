@@ -12,6 +12,7 @@ import com.fasterxml.jackson.dataformat.csv.CsvFactoryBuilder;
 import com.fasterxml.jackson.dataformat.csv.CsvMapper;
 import com.fasterxml.jackson.dataformat.csv.CsvParser;
 
+import io.github.paulmarcelinbejan.toolbox.base.constants.Symbols;
 import io.github.paulmarcelinbejan.toolbox.utils.jackson.ObjectMapperUtils;
 
 import lombok.Builder;
@@ -19,6 +20,25 @@ import lombok.Getter;
 
 public class CsvReaderConfig {
 
+	@Getter
+	private final CsvMapper csvMapper;
+	
+	@Getter
+	private final char separator;
+	
+	@Getter
+	private final boolean withHeader;
+	
+	public static final CsvReaderConfig DEFAULT = new CsvReaderConfig(
+			Collections.emptyList(), 
+			Collections.emptyList(), 
+			Collections.emptyList(), 
+			Collections.emptyList(), 
+			Collections.emptyList(), 
+			Collections.emptyMap(), 
+			Symbols.AsChar.COMMA, 
+			Boolean.TRUE);
+	
 	@Builder
 	public CsvReaderConfig(
 			List<CsvParser.Feature> enableCsvParserFeatures,
@@ -26,7 +46,9 @@ public class CsvReaderConfig {
 			List<DeserializationFeature> enableDeserializationFeatures,
 			List<DeserializationFeature> disableDeserializationFeatures,
 			List<Module> modules, 
-			Map<Class<?>, JsonDeserializer<?>> deserializers) {
+			Map<Class<?>, JsonDeserializer<?>> deserializers, 
+			char separator,
+			boolean withHeader) {
 		
 		boolean createCsvFactory = createCsvFactory(enableCsvParserFeatures, disableCsvParserFeatures);
 		
@@ -37,18 +59,9 @@ public class CsvReaderConfig {
 			this.csvMapper = buildCsvMapper(enableDeserializationFeatures, disableDeserializationFeatures, modules, deserializers);
 		}
 		
+		this.separator = separator;
+		this.withHeader = withHeader;
 	}
-	
-	public static final CsvReaderConfig DEFAULT = new CsvReaderConfig(
-			Collections.emptyList(), 
-			Collections.emptyList(), 
-			Collections.emptyList(), 
-			Collections.emptyList(), 
-			Collections.emptyList(), 
-			Collections.emptyMap());
-	
-	@Getter
-	private final CsvMapper csvMapper;
 	
 	private static CsvMapper buildCsvMapper(
 			List<DeserializationFeature> enableDeserializationFeatures,

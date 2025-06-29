@@ -1,6 +1,6 @@
 package io.github.paulmarcelinbejan.toolbox.utils.io.config;
 
-public enum FileType {
+public enum FileExtension {
 
     // Image Files
     PNG(".png"),
@@ -44,7 +44,7 @@ public enum FileType {
 	
 	public final String extension;
 	
-	FileType(final String extension) {
+	FileExtension(final String extension) {
 		this.extension = extension;
 	}
 	

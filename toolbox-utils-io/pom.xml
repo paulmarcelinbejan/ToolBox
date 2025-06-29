@@ -11,5 +11,14 @@
     <artifactId>toolbox-utils-io</artifactId>
     <name>ToolBox Utils IO</name>
     <packaging>jar</packaging>
-  
+
+	<dependencies>
+		
+		<dependency>
+			<groupId>io.github.paulmarcelinbejan.toolbox</groupId>
+			<artifactId>toolbox-base</artifactId>
+		</dependency>
+		
+	</dependencies>
+
 </project>

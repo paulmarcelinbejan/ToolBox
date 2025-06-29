@@ -1,7 +1,7 @@
 package io.github.paulmarcelinbejan.toolbox.utils.math.format;
 
-import static io.github.paulmarcelinbejan.toolbox.constants.Symbols.AsString.DOT;
-import static io.github.paulmarcelinbejan.toolbox.constants.Symbols.AsString.EMPTY;
+import static io.github.paulmarcelinbejan.toolbox.base.constants.Symbols.AsString.DOT;
+import static io.github.paulmarcelinbejan.toolbox.base.constants.Symbols.AsString.EMPTY;
 import static io.github.paulmarcelinbejan.toolbox.utils.math.format.pattern.NumberPattern.DECIMALS_FIRST_PART_ALWAYS_SECOND_PART_IF_PRESENT;
 
 import java.math.BigDecimal;
@@ -9,7 +9,7 @@ import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 
-import io.github.paulmarcelinbejan.toolbox.constants.Symbols;
+import io.github.paulmarcelinbejan.toolbox.base.constants.Symbols;
 import io.github.paulmarcelinbejan.toolbox.utils.math.MathUtils;
 import io.github.paulmarcelinbejan.toolbox.utils.math.format.pattern.NumberPattern;
 import lombok.AccessLevel;
