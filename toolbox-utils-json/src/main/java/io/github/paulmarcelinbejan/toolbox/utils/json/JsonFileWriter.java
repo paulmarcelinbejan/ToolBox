@@ -18,21 +18,21 @@ public class JsonFileWriter {
 	 * This constructor will use default configuration. 
 	 */
     public JsonFileWriter() {
-		mapperWriter = JsonWriterConfig.DEFAULT.getJsonMapper();
+		mapper = JsonWriterConfig.DEFAULT.getJsonMapper();
 	}
     
     public JsonFileWriter(JsonWriterConfig writerConfig) {
-		mapperWriter = writerConfig.getJsonMapper();
+		mapper = writerConfig.getJsonMapper();
 	}
     
-	private final JsonMapper mapperWriter;
+	private final JsonMapper mapper;
 
     /**
      * JSON file starts with curly brackets
      */
     public <T> void write(OutputFileResource outputFileResource, T object) throws IOException {
 		try (OutputStream outputStream = outputFileResource.getOutputStream()) {
-			mapperWriter.writer()
+			mapper.writer()
 				.with(PRETTY_PRINTER)
 				.writeValue(outputStream, object);
 		}
@@ -43,7 +43,7 @@ public class JsonFileWriter {
      */
     public <T> void writeList(OutputFileResource outputFileResource, List<T> objects) throws IOException {
 		try (OutputStream outputStream = outputFileResource.getOutputStream()) {
-			mapperWriter.writer()
+			mapper.writer()
 				.with(PRETTY_PRINTER)
 				.writeValue(outputStream, objects);
 		}
@@ -56,7 +56,7 @@ public class JsonFileWriter {
 	 */
 	public SequenceWriter writerIterator(OutputFileResource outputFileResource) throws IOException {
 		OutputStream outputStream = outputFileResource.getOutputStream();
-		return mapperWriter.writer()
+		return mapper.writer()
 				.with(PRETTY_PRINTER)
 				.writeValues(outputStream);
 	}

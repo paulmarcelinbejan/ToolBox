@@ -10,7 +10,9 @@ import com.fasterxml.jackson.dataformat.csv.CsvSchema;
 
 import io.github.paulmarcelinbejan.toolbox.utils.csv.config.CsvReaderConfig;
 import io.github.paulmarcelinbejan.toolbox.utils.io.resource.InputFileResource;
+import lombok.Getter;
 
+@Getter
 public class CsvFileReader {
 	
     private final CsvMapper mapper;

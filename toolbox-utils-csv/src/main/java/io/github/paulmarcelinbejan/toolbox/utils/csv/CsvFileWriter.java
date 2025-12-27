@@ -105,9 +105,35 @@ public class CsvFileWriter {
 	 * 
 	 * @throws IOException if the file can not be found, or if the data can not be parsed correctly.
 	 */
+	public <T> SequenceWriter writerIterator(OutputStream outputStream, Class<T> clazz) throws IOException {
+		CsvSchema csvSchema = buildWriterCsvSchema(clazz);
+		
+		return mapper.writerFor(clazz)
+				.with(csvSchema)
+                .writeValues(outputStream);
+	}
+	
+	/**
+	 * Remember to close the sequenceWriter usign <b>sequenceWriter.close()</b> in order to release any resources associated with it.
+	 * 
+	 * @throws IOException if the file can not be found, or if the data can not be parsed correctly.
+	 */
 	public <T> SequenceWriter writerIterator(OutputFileResource outputFileResource, Class<T> clazz, List<String> columns) throws IOException {
 		OutputStream outputStream = outputFileResource.getOutputStream();
 		
+		CsvSchema csvSchema = buildWriterCsvSchema(columns);
+		
+		return mapper.writerFor(clazz)
+				.with(csvSchema)
+                .writeValues(outputStream);
+	}
+	
+	/**
+	 * Remember to close the sequenceWriter usign <b>sequenceWriter.close()</b> in order to release any resources associated with it.
+	 * 
+	 * @throws IOException if the file can not be found, or if the data can not be parsed correctly.
+	 */
+	public <T> SequenceWriter writerIterator(OutputStream outputStream, Class<T> clazz, List<String> columns) throws IOException {
 		CsvSchema csvSchema = buildWriterCsvSchema(columns);
 		
 		return mapper.writerFor(clazz)

@@ -32,7 +32,6 @@ public class JDBCRepository {
 	 *
 	 * @param jdbcTemplate the JdbcTemplate.
 	 * @param namedParameterJdbcTemplate the NamedParameterJdbcTemplate.
-	 * @param resultClass the class of the entity.
 	 */
 	protected JDBCRepository(JdbcTemplate jdbcTemplate, NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
 		this.jdbcTemplate = jdbcTemplate;
@@ -66,6 +65,7 @@ public class JDBCRepository {
      * Executes a query and returns a single result as an Optional.
      *
      * @param sql the SQL query to execute.
+     * @param resultClass the class of the entity.
      *
      * @return an Optional containing the result, or an empty Optional if no result is found.
      */
@@ -84,6 +84,7 @@ public class JDBCRepository {
      *
      * @param sql         the SQL query to execute.
      * @param paramSource a pojo containing the parameters for the query.
+     * @param resultClass the class of the entity.
      *
      * @return an Optional containing the result, or an empty Optional if no result is found.
      */
@@ -103,6 +104,7 @@ public class JDBCRepository {
      *
      * @param sql         the SQL query to execute.
      * @param paramSource the Map of source containing the parameters for SQL statement.
+     * @param resultClass the class of the entity.
      *
      * @return an Optional containing the result, or an empty Optional if no result is found.
      */
@@ -121,6 +123,7 @@ public class JDBCRepository {
      * Executes a query and returns a list of results.
      *
      * @param sql the SQL query to execute.
+     * @param resultClass the class of the entity.
      *
      * @return a list of results.
      */
@@ -134,6 +137,7 @@ public class JDBCRepository {
      *
      * @param sql         the SQL query to execute.
      * @param paramSource the source containing the parameters for SQL statement.
+     * @param resultClass the class of the entity.
      *
      * @return a list of results.
      */
@@ -148,6 +152,7 @@ public class JDBCRepository {
      *
      * @param sql         the SQL query to execute.
      * @param paramSource the Map of source containing the parameters for SQL statement.
+     * @param resultClass the class of the entity.
      *
      * @return a list of results.
      */
@@ -161,6 +166,7 @@ public class JDBCRepository {
      * Executes a query and returns a list of results.
      *
      * @param sql the SQL query to execute.
+     * @param resultClass the class of the entity.
      *
      * @return a set of results.
      */
@@ -174,6 +180,7 @@ public class JDBCRepository {
      *
      * @param sql         the SQL query to execute.
      * @param paramSource the source containing the parameters for SQL statement.
+     * @param resultClass the class of the entity.
      *
      * @return a set of results.
      */
@@ -188,6 +195,7 @@ public class JDBCRepository {
      *
      * @param sql         the SQL query to execute.
      * @param paramSource the Map of source containing the parameters for SQL statement.
+     * @param resultClass the class of the entity.
      *
      * @return a set of results.
      */
