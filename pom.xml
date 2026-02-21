@@ -100,7 +100,7 @@
         <!-- GUAVA -->
         <guava.version>33.2.1-jre</guava.version>
         <!-- APACHE -->
-        <apache-commons-lang3.version>3.14.0</apache-commons-lang3.version>
+        <apache-commons-lang3.version>3.18.0</apache-commons-lang3.version>
         <apache-commons-text.version>1.12.0</apache-commons-text.version>
         <apache-commons-collections4.version>4.4</apache-commons-collections4.version>
         <apache-commons-beanutils.version>1.9.4</apache-commons-beanutils.version>
