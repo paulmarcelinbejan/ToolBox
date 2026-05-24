@@ -84,37 +84,39 @@
         <maven-gpg-plugin.version>3.2.4</maven-gpg-plugin.version>
         <nexus-staging-maven-plugin.version>1.7.0</nexus-staging-maven-plugin.version>
         <!-- SPRING -->
-        <spring-boot.version>4.0.1</spring-boot.version>
-        <spring-cloud.version>2023.0.0</spring-cloud.version>
-        <spring-cloud-starter-loadbalancer.version>4.1.3</spring-cloud-starter-loadbalancer.version>
+        <spring-boot.version>4.1.0-RC1</spring-boot.version>
+        <spring-cloud.version>2025.1.1</spring-cloud.version>
+        <spring-cloud-starter-loadbalancer.version>5.0.1</spring-cloud-starter-loadbalancer.version>
         <!-- LOGGERS -->
-        <slf4j-api.version>2.0.13</slf4j-api.version>
-        <log4j-slf4j-impl.version>2.23.1</log4j-slf4j-impl.version>
+        <slf4j-api.version>2.0.18</slf4j-api.version>
+        <log4j-slf4j-impl.version>2.26.0</log4j-slf4j-impl.version>
         <!-- UNIT TEST -->
+        <!--
         <junit.version>5.10.0</junit.version>
         <mockito.version>5.5.0</mockito.version>
+        -->
         <!-- LOMBOK -->
-        <lombok.version>1.18.42</lombok.version>
+        <lombok.version>1.18.46</lombok.version>
         <!-- JACKSON -->
-        <jackson.version>2.17.1</jackson.version>
+        <jackson.version>3.1.3</jackson.version>
         <!-- GUAVA -->
-        <guava.version>33.2.1-jre</guava.version>
+        <guava.version>33.6.0-jre</guava.version>
         <!-- APACHE -->
-        <apache-commons-lang3.version>3.18.0</apache-commons-lang3.version>
-        <apache-commons-text.version>1.12.0</apache-commons-text.version>
-        <apache-commons-collections4.version>4.4</apache-commons-collections4.version>
+        <apache-commons-lang3.version>3.20.0</apache-commons-lang3.version>
+        <apache-commons-text.version>1.15.0</apache-commons-text.version>
+        <apache-commons-collections4.version>4.5.0</apache-commons-collections4.version>
         <apache-commons-beanutils.version>1.11.0</apache-commons-beanutils.version>
         <!-- Jakarta Validator -->
         <hibernate-validator.version>8.0.1.Final</hibernate-validator.version>
         <!-- MAPSTRUCT -->
-        <mapstruct.version>1.6.0.Beta2</mapstruct.version>
+        <mapstruct.version>1.6.3</mapstruct.version>
 	    <lombok-mapstruct-binding.version>0.2.0</lombok-mapstruct-binding.version>
 	    <!-- SWAGGER -->
-	    <swagger-annotations.version>2.2.15</swagger-annotations.version>
-		<springdoc-openapi-starter.version>2.1.0</springdoc-openapi-starter.version>
+	    <swagger-annotations.version>2.2.49</swagger-annotations.version>
+		<springdoc-openapi-starter.version>3.0.3</springdoc-openapi-starter.version>
 	    <!-- FEIGN -->
-	    <github-feign.version>12.4</github-feign.version>
-        <spring-openfeign.version>4.0.3</spring-openfeign.version>
+	    <github-feign.version>13.12</github-feign.version>
+        <spring-openfeign.version>5.0.1</spring-openfeign.version>
     </properties>
 
     <dependencyManagement>
@@ -152,6 +154,7 @@
             </dependency>
 
 			<!-- Unit Test -->
+			<!--
 			<dependency>
 			    <groupId>org.junit.jupiter</groupId>
 			    <artifactId>junit-jupiter-api</artifactId>
@@ -164,6 +167,7 @@
 			    <version>${mockito.version}</version>
 			    <scope>test</scope>
 			</dependency>
+			-->
 			
 			<dependency>
 			    <groupId>org.hibernate.validator</groupId>
@@ -320,7 +324,7 @@
 
             <!-- Jackson -->
             <dependency>
-                <groupId>com.fasterxml.jackson</groupId>
+                <groupId>tools.jackson</groupId>
                 <artifactId>jackson-bom</artifactId>
                 <version>${jackson.version}</version>
                 <type>pom</type>
